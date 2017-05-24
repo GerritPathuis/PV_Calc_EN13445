@@ -20,4 +20,13 @@ Public Class Form1
         "http://www.steelconstruction.info/Stiffeners"
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown18.ValueChanged, NumericUpDown15.ValueChanged, NumericUpDown14.ValueChanged, NumericUpDown13.ValueChanged
+        Dim shell_wall, nozzle_wall As Double
+
+        shell_wall = (NumericUpDown15.Value - NumericUpDown18.Value) / 2
+        nozzle_wall = (NumericUpDown14.Value - NumericUpDown13.Value) / 2
+
+        NumericUpDown16.Value = shell_wall
+        NumericUpDown12.Value = nozzle_wall
+    End Sub
 End Class
