@@ -57,10 +57,10 @@ Public Class Form1
         Dim Afs, Afw As Double
         Dim lso, eas, ris As Double   'Max length shell contibuting to reinforcement
         Dim lbo, eab, rib As Double   'Max length nozzle contibuting to reinforcement
-        Dim nozzle_OD, nozzle_ID As Double
-        Dim Shell_OD, Shell_ID As Double
+        Dim nozzle_OD, nozzle_ID, Shell_OD, Shell_ID As Double
         Dim Aps, Apb, Afb, Afp, Ap_phi As Double
-        Dim eq_left, eq_right As Double
+        Dim eq_left, eq_right, eq_ratio As Double
+        Dim Ln, Ln1, Ln2 As Double
 
         Shell_OD = NumericUpDown15.Value
         Shell_ID = NumericUpDown18.Value
@@ -93,32 +93,39 @@ Public Class Form1
         lbo = Sqrt((2 * rib + eab) + eab)
 
         '-------- formula 9.5-7---------------
-        Afw = 0                                 'Weld area in neglected
-        Afs = lso * shell_wall                  'Shell area
-        Aps = Shell_ID * (lso + nozzle_OD / 2)
-        Apb = nozzle_ID * lbo
-        Afb = shell_wall * (lbo + shell_wall)
-        Afp = 0                                 'reinforcement ring NOT present
-        Ap_phi = 0                              'Oblique nozzles
+        Afw = 0                                     'Weld area in neglected
+        Afb = nozzle_wall * (lbo + shell_wall)      'Nozzle wall
+        Afp = 0                                     'reinforcement ring NOT present
+        Afs = lso * shell_wall                      'Shell wall area
+        Aps = Shell_ID / 2 * (lso + nozzle_OD / 2)  'Shell area
+        Apb = nozzle_ID / 2 * (lbo + shell_wall)    'Nozzle
+        Ap_phi = 0                                  'Oblique nozzles
 
         eq_left = (Afs + Afw) * (_fs - 0.5 * _P)
         eq_left += Afp * (fop - 0.5 * _P)
         eq_left += Afb * (fob - 0.5 * _P)
 
         eq_right = _P * (Aps + Apb + 0.5 * Ap_phi)
+        eq_ratio = eq_left / eq_right
+
+        Ln1 = 0.5 * nozzle_OD + 2 * nozzle_wall  'Equation 9.4-4
+        Ln2 = 0.5 * nozzle_OD + 40
+        Ln = IIf(Ln1 > Ln2, Ln1, Ln2)
 
         '----- present--------
-        TextBox9.Text = Afs.ToString("0.0")     'Shell area
-        TextBox10.Text = Afw.ToString("0.0")   'Weld area
-        TextBox11.Text = Afb.ToString("0.0")
-        TextBox12.Text = Aps.ToString("0.0")
-        TextBox13.Text = Apb.ToString("0.0")
+        TextBox9.Text = Afs.ToString("0")     'Shell area
+        TextBox10.Text = Afw.ToString("0")    'Weld area
+        TextBox11.Text = Afb.ToString("0")
+        TextBox12.Text = Aps.ToString("0")
+        TextBox13.Text = Apb.ToString("0")
         TextBox14.Text = lso.ToString("0.0")
         TextBox15.Text = lbo.ToString("0.0")
 
         TextBox16.Text = eq_left.ToString("0")
         TextBox17.Text = eq_right.ToString("0")
-
+        TextBox18.Text = eq_ratio.ToString("0.00")
+        TextBox19.Text = Ln.ToString("0")
+        TextBox20.Text = (Ln - nozzle_OD / 2).ToString("0")
         '----------- check--------
         TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
     End Sub
@@ -126,7 +133,7 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged
         Dim sf As Double
 
-        _P = NumericUpDown4.Value       'Calculation pressure [MPa]
+        _P = NumericUpDown4.Value                       'Calculation pressure [MPa]
         If (ComboBox1.SelectedIndex > -1) Then          'Prevent exceptions
             Dim words() As String = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
