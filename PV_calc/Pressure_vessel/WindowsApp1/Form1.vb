@@ -6,8 +6,8 @@ Imports System.Threading
 
 Public Class Form1
     Public _P As Double         'Calculation pressure [Mpa]
-    Public _fs As Double        'Allowable stress [N/mm2]
-
+    Public _fs As Double        'Allowable stress shell [N/mm2]
+    Public _fp As Double        'Allowable stress reinforcement [N/mm2]
 
     Dim separators() As String = {";"}
 
@@ -47,18 +47,80 @@ Public Class Form1
 
         '----------------- prevent out of bounds------------------
         ComboBox1.SelectedIndex = CInt(IIf(ComboBox1.Items.Count > 0, 1, -1)) 'Select ..
-        ComboBox2.SelectedIndex = CInt(IIf(ComboBox2.Items.Count > 0, 1, -1)) 'Select ..
+        ComboBox2.SelectedIndex = CInt(IIf(ComboBox2.Items.Count > 0, 0, -1)) 'Select ..
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, NumericUpDown13.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged
         Dim shell_wall, nozzle_wall As Double
+        Dim fob, fop As Double
+        Dim Afs, Afw As Double
+        Dim lso, eas, ris As Double   'Max length shell contibuting to reinforcement
+        Dim lbo, eab, rib As Double   'Max length nozzle contibuting to reinforcement
+        Dim nozzle_OD, nozzle_ID As Double
+        Dim Shell_OD, Shell_ID As Double
+        Dim Aps, Apb, Afb, Afp, Ap_phi As Double
+        Dim eq_left, eq_right As Double
 
-        shell_wall = (NumericUpDown15.Value - NumericUpDown18.Value) / 2
-        nozzle_wall = (NumericUpDown14.Value - NumericUpDown13.Value) / 2
+        Shell_OD = NumericUpDown15.Value
+        Shell_ID = NumericUpDown18.Value
+        shell_wall = NumericUpDown16.Value
 
-        NumericUpDown16.Value = shell_wall
-        NumericUpDown12.Value = nozzle_wall
+        nozzle_OD = NumericUpDown14.Value
+        If nozzle_OD >= Shell_OD Then 'Nozzle can not be bigger then shell
+            nozzle_OD = Shell_OD
+            NumericUpDown14.Value = nozzle_OD
+        End If
+
+
+        nozzle_wall = NumericUpDown12.Value
+        nozzle_ID = nozzle_OD - 2 * nozzle_wall
+        If nozzle_ID < 10 Then nozzle_ID = 10
+        NumericUpDown13.Value = nozzle_ID
+
+        '------- reinforment materials is identical to shell material----
+        fob = _fs
+        fop = _fs
+
+        '---------formula 9.5-2 Shell-----
+        eas = shell_wall
+        ris = Shell_ID / 2
+        lso = Sqrt((2 * ris + eas) + eas)
+
+        '---------formula 9.5-2 Nozzle-----
+        eab = nozzle_wall
+        rib = nozzle_ID / 2
+        lbo = Sqrt((2 * rib + eab) + eab)
+
+        '-------- formula 9.5-7---------------
+        Afw = 0                                 'Weld area in neglected
+        Afs = lso * shell_wall                  'Shell area
+        Aps = Shell_ID * (lso + nozzle_OD / 2)
+        Apb = nozzle_ID * lbo
+        Afb = shell_wall * (lbo + shell_wall)
+        Afp = 0                                 'reinforcement ring NOT present
+        Ap_phi = 0                              'Oblique nozzles
+
+        eq_left = (Afs + Afw) * (_fs - 0.5 * _P)
+        eq_left += Afp * (fop - 0.5 * _P)
+        eq_left += Afb * (fob - 0.5 * _P)
+
+        eq_right = _P * (Aps + Apb + 0.5 * Ap_phi)
+
+        '----- present--------
+        TextBox9.Text = Afs.ToString("0.0")     'Shell area
+        TextBox10.Text = Afw.ToString("0.0")   'Weld area
+        TextBox11.Text = Afb.ToString("0.0")
+        TextBox12.Text = Aps.ToString("0.0")
+        TextBox13.Text = Apb.ToString("0.0")
+        TextBox14.Text = lso.ToString("0.0")
+        TextBox15.Text = lbo.ToString("0.0")
+
+        TextBox16.Text = eq_left.ToString("0")
+        TextBox17.Text = eq_right.ToString("0")
+
+        '----------- check--------
+        TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged
@@ -75,30 +137,33 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown18.ValueChanged, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged
-        Dim De, Di, Dm, ea, z_joint, e_wall, Pmax As Double
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged, NumericUpDown16.ValueChanged
+        Dim De, Di, Dm, ea, z_joint, e_wall, Pmax, valid_check As Double
 
         If (ComboBox2.SelectedIndex > -1) Then          'Prevent exceptions
             Double.TryParse(joint_eff(ComboBox2.SelectedIndex), z_joint)      'Joint efficiency
         End If
 
         De = NumericUpDown15.Value  'OD
-        Di = NumericUpDown18.Value  'ID
-        Dm = (De + Di) / 2          'Average Dia
-        ea = (De - Di) / 2          'Wall thicknes
-        NumericUpDown16.Value = ea
+        ea = NumericUpDown16.Value  'Wall thicknes
+        Di = De - 2 * ea            'ID
+        NumericUpDown18.Value = Di
 
+        Dm = (De + Di) / 2          'Average Dia
         Pmax = 2 * _fs * z_joint * ea / Dm               'Max pressure equation 7.4.3 
 
-
         e_wall = _P * De / (2 * _fs * z_joint + _P)     'equation 7.4.2 Required wall thickness
+        valid_check = Round(e_wall / De, 4)
 
-
-
+        '--------- present results--------
         TextBox2.Text = Round(e_wall, 4).ToString  'required wall [mm]
+        TextBox5.Text = valid_check.ToString
         TextBox6.Text = _P.ToString
         TextBox7.Text = _fs.ToString
         TextBox8.Text = Round(Pmax, 2).ToString
+
+        '---------- Check-----
+        TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
