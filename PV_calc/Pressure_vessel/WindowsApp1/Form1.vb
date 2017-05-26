@@ -61,6 +61,8 @@ Public Class Form1
         Dim Aps, Apb, Afb, Afp, Ap_phi As Double
         Dim eq_left, eq_right, eq_ratio As Double
         Dim Ln, Ln1, Ln2 As Double
+        Dim D_small_opening As Double
+        Dim small_opening As Boolean
 
         Shell_OD = NumericUpDown15.Value
         Shell_ID = NumericUpDown18.Value
@@ -72,11 +74,14 @@ Public Class Form1
             NumericUpDown14.Value = nozzle_OD
         End If
 
-
         nozzle_wall = NumericUpDown12.Value
         nozzle_ID = nozzle_OD - 2 * nozzle_wall
         If nozzle_ID < 10 Then nozzle_ID = 10
         NumericUpDown13.Value = nozzle_ID
+
+        '--------- Small opening 9.5.2.2
+        D_small_opening = 0.15 * Sqrt((Shell_ID + shell_wall) * shell_wall)
+        Label77.Text = "D= " & D_small_opening.ToString("0.0") & " [mm]"
 
         '------- reinforment materials is identical to shell material----
         fob = _fs
@@ -173,7 +178,5 @@ Public Class Form1
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
 
-    Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
 
-    End Sub
 End Class
