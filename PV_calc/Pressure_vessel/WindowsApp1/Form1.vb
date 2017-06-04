@@ -62,7 +62,7 @@ Public Class Form1
         Dim eq_left, eq_right, eq_ratio As Double
         Dim Ln, Ln1, Ln2 As Double
         Dim D_small_opening As Double
-        Dim small_opening As Boolean
+
 
         Shell_OD = NumericUpDown15.Value
         Shell_ID = NumericUpDown18.Value
