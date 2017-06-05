@@ -12,10 +12,14 @@ Public Class Form1
     Public _P As Double         'Calculation pressure [Mpa]
     Public _fs As Double        'Allowable stress shell [N/mm2]
     Public _fp As Double        'Allowable stress reinforcement [N/mm2]
+
     Public _De As Double        'Outside diameter shell
     Public _Di As Double        'Inside diameter shell
+    Public _ecs As Double       'Shell thickness
+
     Public _deb As Double       'Outside diameter nozzle fitted in shell
     Public _dib As Double       'Inside diameter nozzle fitted in shell
+    Public _eb As Double        'Effective thickness nozzle thickness
 
     Dim separators() As String = {";"}
 
@@ -68,7 +72,7 @@ Public Class Form1
         Calc_nozzle_fig949()
     End Sub
     Private Sub Calc_nozzle_fig949()
-        Dim shell_wall, nozzle_wall As Double
+        Dim nozzle_wall As Double
         Dim fob, fop As Double
         Dim Afs, Afw As Double
         Dim ls As Double
@@ -79,14 +83,16 @@ Public Class Form1
         Dim eq_left, eq_right, eq_ratio As Double
         Dim Ln, Ln1, Ln2 As Double
         Dim D_small_opening As Double
+        Dim W_min, W_min1, W_min2 As Double
 
         ls = NumericUpDown1.Value           'Distance shell-edge-opening to discontinuity
-        _De = NumericUpDown15.Value         'OD shell
-        _Di = NumericUpDown18.Value         'ID shell
-        shell_wall = NumericUpDown16.Value  'Wall shell
+        _De = NumericUpDown15.Value         'Shell OD 
+        _Di = NumericUpDown18.Value         'Shell ID 
+        _eb = NumericUpDown16.Value         'Shell Wall 
+        _deb = NumericUpDown14.Value        'Outside diameter nozzle fitted in shell
+        eas = _eb                           'Shell Analysis thickness of shell wall 
 
-        _deb = NumericUpDown14.Value
-        If _deb >= _De Then       'Nozzle can not be bigger then shell
+        If _deb >= _De Then       'Nozzle dia can not be bigger then shell
             _deb = _De
             NumericUpDown14.Value = _deb
         End If
@@ -97,7 +103,7 @@ Public Class Form1
         NumericUpDown13.Value = _dib
 
         '--------- Small opening 9.5.2.2
-        D_small_opening = 0.15 * Sqrt((_Di + shell_wall) * shell_wall)
+        D_small_opening = 0.15 * Sqrt((_Di + _eb) * _eb)
         Label77.Text = "D= " & D_small_opening.ToString("0.0") & " [mm]"
 
         '------- reinforment materials is identical to shell material----
@@ -111,23 +117,22 @@ Public Class Form1
 
         '----Chapter 9.5.2.4.4.3 Nozzle in cylindrical shell
         Dim a, ls_min, ecs As Double
-        ecs = eas                                   'assumed shell thicknes for calculation
+        ecs = eas                                   'assumed shell thickness for calculation
         a = _deb / 2                                'equation 9.5-90
         ris = (_De / 2) - eas                       'equation 9.5-91
         lso = Sqrt(((_De - 2 * eas) + ecs) * ecs)   'equation 9.5-92
         ls_min = IIf(lso < ls, lso, ls)             'equation 9.5-93
         Aps = ris * (ls_min + a)                    'equation 9.5-94
 
-        TextBox21.Text = ls_min.ToString
-
-        '-------- formula 9.5-7---------------
+        '----------------------- formula 9.5-7 -----------------------
+        'Af = Stress loaded cross-sectional area effective as reinforcement
         Afw = 0                                     'Weld area in neglected
-        Afb = nozzle_wall * (lbo + shell_wall)      'Nozzle wall
+        Afb = nozzle_wall * (lbo + _eb)      'Nozzle wall
         Afp = 0                                     'reinforcement ring NOT present
-        Afs = lso * shell_wall                      'Shell wall area
+        Afs = lso * _eb                      'Shell wall area
 
-
-        Apb = _dib / 2 * (lbo + shell_wall)    'Nozzle
+        'Ap = Pressure loaded area. 
+        Apb = _dib / 2 * (lbo + _eb)         'Nozzle Pressure loaded area
         Ap_phi = 0                                  'Oblique nozzles
 
         eq_left = (Afs + Afw) * (_fs - 0.5 * _P)
@@ -137,23 +142,29 @@ Public Class Form1
         eq_right = _P * (Aps + Apb + 0.5 * Ap_phi)
         eq_ratio = eq_left / eq_right
 
-        Ln1 = 0.5 * _deb + 2 * nozzle_wall  'Equation 9.4-4
+        '9.4.8 Minimum Distance between nozle and shell butt-weld
+        Ln1 = 0.5 * _deb + 2 * nozzle_wall       'Equation 9.4-4
         Ln2 = 0.5 * _deb + 40
         Ln = IIf(Ln1 > Ln2, Ln1, Ln2)
 
+        'Figure 9.7-5          
+        W_min1 = 0.2 * Sqrt((2 * _Di * 0.5 + ecs) * ecs)    'equation 9.7-5
+        W_min2 = 3 * eas                                    'equation 9.7-5
+        W_min = IIf(W_min1 > W_min2, W_min1, W_min2)        'Find biggest
+
         '----- present--------
-        TextBox9.Text = Afs.ToString("0")     'Shell area
-        TextBox10.Text = Afw.ToString("0")    'Weld area
-        TextBox11.Text = Afb.ToString("0")
-        TextBox12.Text = Aps.ToString("0.0")
-        TextBox13.Text = Apb.ToString("0")
+        TextBox9.Text = Afs.ToString("0")       'Shell area reinforcement [mm2]
+        TextBox10.Text = Afw.ToString("0")      'Weld area reinforcement [mm2]
+        TextBox11.Text = Afb.ToString("0")      'reinforcement [mm2]
+        TextBox12.Text = Aps.ToString("0")    'Pressure loaded area [mm2]
+        TextBox13.Text = Apb.ToString("0")      'Pressure loaded area [mm2]
         TextBox14.Text = lso.ToString("0.0")
         TextBox15.Text = lbo.ToString("0.0")
 
         TextBox16.Text = eq_left.ToString("0")
         TextBox17.Text = eq_right.ToString("0")
         TextBox18.Text = eq_ratio.ToString("0.00")
-        TextBox19.Text = Ln.ToString("0")
+        TextBox19.Text = W_min.ToString("0")
         TextBox20.Text = (Ln - _deb / 2).ToString("0")
         '----------- check--------
         TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
