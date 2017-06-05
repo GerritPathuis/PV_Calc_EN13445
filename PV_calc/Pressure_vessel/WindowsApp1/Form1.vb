@@ -40,6 +40,13 @@ Public Class Form1
         "Unfired pressure vessels" & vbCrLf &
         "Part 3 Design (issue 3:2016)"
 
+        TextBox22.Text =
+        "Important note" & vbCrLf &
+        "The yield strength is detremined from the mill certificate" & vbCrLf &
+        "given at the operating temperature. Different for piping and sheet steel" & vbCrLf &
+        "Safety factors follow the Eurocode"
+
+
         ComboBox1.Items.Clear()
         For hh = 0 To (chap6.Length - 1)  'Fill combobox1 materials
             words = chap6(hh).Split(separators, StringSplitOptions.None)
