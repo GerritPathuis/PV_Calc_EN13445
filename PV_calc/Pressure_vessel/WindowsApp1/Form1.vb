@@ -216,5 +216,24 @@ Public Class Form1
         '---------- Check-----
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
+    'Chapter 15 rectangle shell
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim P, a, ee, L, L1, σmc, σmd, σmb As Double
 
+        P = NumericUpDown15.Value
+        a = NumericUpDown15.Value
+        ee = NumericUpDown15.Value
+        L = NumericUpDown15.Value
+        L1 = NumericUpDown15.Value
+
+        'At C
+        σmc = P * (a + L) / ee                '(15.5.1.2-1) 
+
+        'At D
+        σmd = σmc
+
+        'At B
+        σmb = P / ee * (a + Sqrt(L ^ 2 + L1 ^ 2))   '(15.5.1.2-3) 
+
+    End Sub
 End Class
