@@ -173,7 +173,7 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged
         Dim sf As Double
 
-        _P = NumericUpDown4.Value                       'Calculation pressure [MPa]
+        _P = NumericUpDown4.Value                       'Calculation pressure [MPa=N/mm2]
         If (ComboBox1.SelectedIndex > -1) Then          'Prevent exceptions
             Dim words() As String = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
@@ -217,23 +217,23 @@ Public Class Form1
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
     'Chapter 15 rectangle shell
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim P, a, ee, L, L1, σmc, σmd, σmb As Double
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged
+        Dim a, ee, L, L1, σmD, σmC, σmB, σmA As Double
 
-        P = NumericUpDown15.Value
-        a = NumericUpDown15.Value
-        ee = NumericUpDown15.Value
-        L = NumericUpDown15.Value
-        L1 = NumericUpDown15.Value
+        a = NumericUpDown17.Value   'Inside corner radius
+        ee = NumericUpDown11.Value  'wall thickness
+        L = NumericUpDown8.Value   'Lenght
+        L1 = NumericUpDown9.Value  'Lenght
 
-        'At C
-        σmc = P * (a + L) / ee                '(15.5.1.2-1) 
+        σmC = _P * (a + L) / ee                     'At C (eq 15.5.1.2-1) 
+        σmD = σmC                                   'At D
+        σmB = _P * (a + L1) / ee                    'At B (eq 15.5.1.2-2) 
+        σmA = _P / ee * (a + Sqrt(L ^ 2 + L1 ^ 2))  'At A (eq 15.5.1.2-3) 
 
-        'At D
-        σmd = σmc
-
-        'At B
-        σmb = P / ee * (a + Sqrt(L ^ 2 + L1 ^ 2))   '(15.5.1.2-3) 
-
+        TextBox25.Text = _P.ToString
+        TextBox23.Text = σmA.ToString("0.0")
+        TextBox24.Text = σmB.ToString("0.0")
+        TextBox28.Text = σmC.ToString("0.0")
+        TextBox29.Text = σmB.ToString("0.0")
     End Sub
 End Class
