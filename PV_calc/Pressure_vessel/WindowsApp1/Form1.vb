@@ -217,23 +217,101 @@ Public Class Form1
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
     'Chapter 15 rectangle shell
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged
-        Dim a, ee, L, L1, σmD, σmC, σmB, σmA As Double
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
+        Dim a, ee, L, l1, I1 As Double
+        Dim σmD, σmC, σmB, σmA, σmBC As Double  'membrane stress
+        Dim σbD, σbC, σbB, σbA, σbBC As Double  'bending stress
+        Dim σTD, σTC, σTB, σTA, σTBC As Double  'Total stress
+        Dim α3, φ, θ, K3, Ma As Double
 
         a = NumericUpDown17.Value   'Inside corner radius
         ee = NumericUpDown11.Value  'wall thickness
-        L = NumericUpDown8.Value   'Lenght
-        L1 = NumericUpDown9.Value  'Lenght
+        L = NumericUpDown8.Value    'Lenght
+        l1 = NumericUpDown9.Value   'Lenght
+        _P = NumericUpDown4.Value   'Pressure
 
+        '-------- membrane stress----------------
         σmC = _P * (a + L) / ee                     'At C (eq 15.5.1.2-1) 
         σmD = σmC                                   'At D
-        σmB = _P * (a + L1) / ee                    'At B (eq 15.5.1.2-2) 
-        σmA = _P / ee * (a + Sqrt(L ^ 2 + L1 ^ 2))  'At A (eq 15.5.1.2-3) 
+        σmB = _P * (a + l1) / ee                    'At B (eq 15.5.1.2-2) 
+        σmA = σmB                                   'At A
+        σmBC = (_P / ee) * (a + Sqrt(L ^ 2 + l1 ^ 2)) 'At corner (eq 15.5.1.2-3) 
 
+        '------- bending stress----------------
+        I1 = ee ^ 3 / 12    'second moment of area
+        α3 = L / l1         'factor
+        φ = a / l1          'angular indication
+
+        K3 = 6 * φ ^ 2 * α3                 '(eq 15.5.1.2-12)
+        K3 -= 3 * PI * φ ^ 2
+        K3 += 6 * φ ^ 2
+        K3 += α3 ^ 3
+        K3 += 3 * α3 ^ 2
+        K3 -= 6 * φ
+        K3 -= 2
+        K3 += 1.5 * PI * α3 ^ 2 * φ
+        K3 += 6 * φ * α3
+        K3 *= l1 ^ 2
+        K3 /= 3 * (2 * α3 + PI * φ + 2)     'factor unreinforced vessel
+        Ma = _P * K3 * -1                   'bending moment middle of side
+
+        TextBox39.Text = K3.ToString
+
+        '------- at C -------
+        σbC = _P * (2 * a * L - 2 * a * l1 + L ^ 2)
+        σbC += 2 * Ma
+        σbC *= ee / (4 * I1)       '(eq 15.5.1.2-5)
+
+        '------- at D -------
+        σbD = _P * (2 * a * L - 2 * a * l1 + L ^ 2 - l1 ^ 2)
+        σbD += 2 * Ma
+        σbD *= ee / (4 * I1)       '(eq 15.5.1.2-6)
+
+        '------- at A -------
+        σbA += Ma * ee / (2 * I1)    '(eq 15.5.1.2-7)
+
+        '------- at B -------
+        σbB += (ee / (4 * I1)) * (2 * Ma + _P * L ^ 2)    '(eq 15.5.1.2-8)
+
+        '------- in the corner -----
+        θ = Atan(l1 / L)            '(eq 15.5.1.2-10)
+        σbBC = 2 * a * (L * Cos(θ) - l1 * (1 - Sin(θ)))
+        σbBC += L ^ 2
+        σbBC *= _P
+        σbBC += 2 * Ma
+        σbBC *= ee / (4 * I1)       '(eq 15.5.1.2-9)
+
+        '----- total stress---
+        σTA = Abs(σmA) + Abs(σbA)
+        σTB = Abs(σmB) + Abs(σbB)
+        σTC = Abs(σmC) + Abs(σbC)
+        σTD = Abs(σmD) + Abs(σbD)
+        σTBC = Abs(σmBC) + Abs(σbBC)
+
+        '----- pressure -----
         TextBox25.Text = _P.ToString
+        '---- membrane stress ---
         TextBox23.Text = σmA.ToString("0.0")
         TextBox24.Text = σmB.ToString("0.0")
         TextBox28.Text = σmC.ToString("0.0")
-        TextBox29.Text = σmB.ToString("0.0")
+        TextBox29.Text = σmD.ToString("0.0")
+        TextBox30.Text = σmBC.ToString("0.0")   'Bend
+        '---- bending stress ---
+        TextBox31.Text = σbA.ToString("0.0")
+        TextBox32.Text = σbB.ToString("0.0")
+        TextBox33.Text = σbC.ToString("0.0")
+        TextBox34.Text = σbD.ToString("0.0")
+        TextBox35.Text = σbBC.ToString("0.0")   'Bend
+
+        '---- total stress ---
+        TextBox26.Text = σTA.ToString("0.0")
+        TextBox27.Text = σTB.ToString("0.0")
+        TextBox36.Text = σTC.ToString("0.0")
+        TextBox37.Text = σTD.ToString("0.0")
+        TextBox38.Text = σTBC.ToString("0.0")   'Bend
+
+
     End Sub
+
+
 End Class
