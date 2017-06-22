@@ -156,7 +156,7 @@ Public Class Form1
         TextBox9.Text = Afs.ToString("0")       'Shell area reinforcement [mm2]
         TextBox10.Text = Afw.ToString("0")      'Weld area reinforcement [mm2]
         TextBox11.Text = Afb.ToString("0")      'reinforcement [mm2]
-        TextBox12.Text = Aps.ToString("0")    'Pressure loaded area [mm2]
+        TextBox12.Text = Aps.ToString("0")      'Pressure loaded area [mm2]
         TextBox13.Text = Apb.ToString("0")      'Pressure loaded area [mm2]
         TextBox14.Text = lso.ToString("0.0")
         TextBox15.Text = lbo.ToString("0.0")
@@ -224,11 +224,12 @@ Public Class Form1
         Dim σTD, σTC, σTB, σTA, σTBC As Double  'Total stress
         Dim α3, φ, θ, K3, Ma As Double
 
+        _P = NumericUpDown4.Value   'Pressure
         a = NumericUpDown17.Value   'Inside corner radius
         ee = NumericUpDown11.Value  'wall thickness
         L = NumericUpDown8.Value    'Lenght
         l1 = NumericUpDown9.Value   'Lenght
-        _P = NumericUpDown4.Value   'Pressure
+
 
         '-------- membrane stress----------------
         σmC = _P * (a + L) / ee                     'At C (eq 15.5.1.2-1) 
@@ -238,9 +239,9 @@ Public Class Form1
         σmBC = (_P / ee) * (a + Sqrt(L ^ 2 + l1 ^ 2)) 'At corner (eq 15.5.1.2-3) 
 
         '------- bending stress----------------
-        I1 = ee ^ 3 / 12    'second moment of area
-        α3 = L / l1         'factor
-        φ = a / l1          'angular indication
+        I1 = ee ^ 3 / 12    '(eq 15.5.1.2-4) second moment of area
+        α3 = L / l1         '(eq 15.5.1.2-14) factor
+        φ = a / l1          '(eq 15.5.1.2-15) angular indication
 
         K3 = 6 * φ ^ 2 * α3                 '(eq 15.5.1.2-12)
         K3 -= 3 * PI * φ ^ 2
@@ -253,33 +254,34 @@ Public Class Form1
         K3 += 6 * φ * α3
         K3 *= l1 ^ 2
         K3 /= 3 * (2 * α3 + PI * φ + 2)     'factor unreinforced vessel
-        Ma = _P * K3 * -1                   'bending moment middle of side
 
-        TextBox39.Text = K3.ToString
+        Ma = _P * K3                   'bending moment middle of side
 
-        '------- at C -------
-        σbC = _P * (2 * a * L - 2 * a * l1 + L ^ 2)
-        σbC += 2 * Ma
-        σbC *= ee / (4 * I1)       '(eq 15.5.1.2-5)
 
-        '------- at D -------
-        σbD = _P * (2 * a * L - 2 * a * l1 + L ^ 2 - l1 ^ 2)
-        σbD += 2 * Ma
-        σbD *= ee / (4 * I1)       '(eq 15.5.1.2-6)
+        '------- bend in the corner -----
+        θ = Atan(l1 / L)                    '(eq 15.5.1.2-10) max value
 
-        '------- at A -------
-        σbA += Ma * ee / (2 * I1)    '(eq 15.5.1.2-7)
-
-        '------- at B -------
-        σbB += (ee / (4 * I1)) * (2 * Ma + _P * L ^ 2)    '(eq 15.5.1.2-8)
-
-        '------- in the corner -----
-        θ = Atan(l1 / L)            '(eq 15.5.1.2-10)
         σbBC = 2 * a * (L * Cos(θ) - l1 * (1 - Sin(θ)))
         σbBC += L ^ 2
         σbBC *= _P
         σbBC += 2 * Ma
-        σbBC *= ee / (4 * I1)       '(eq 15.5.1.2-9)
+        σbBC *= ee / (4 * I1)               '(eq 15.5.1.2-9)
+
+        '------- bend at B -------
+        σbB += (ee / (4 * I1)) * (2 * Ma + _P * L ^ 2)    '(eq 15.5.1.2-8)
+
+        '------- bend at A -------
+        σbA += Ma * ee / (2 * I1)           '(eq 15.5.1.2-7)
+
+        '------- bend at D -------
+        σbD = _P * (2 * a * L - 2 * a * l1 + L ^ 2 - l1 ^ 2)
+        σbD += 2 * Ma
+        σbD *= ee / (4 * I1)                '(eq 15.5.1.2-6)
+
+        '------- bend at C -------
+        σbC = _P * (2 * a * L - 2 * a * l1 + L ^ 2)
+        σbC += 2 * Ma
+        σbC *= ee / (4 * I1)                '(eq 15.5.1.2-5)
 
         '----- total stress---
         σTA = Abs(σmA) + Abs(σbA)
@@ -310,6 +312,16 @@ Public Class Form1
         TextBox37.Text = σTD.ToString("0.0")
         TextBox38.Text = σTBC.ToString("0.0")   'Bend
 
+        '---- check '(eq 15.5.3-2)---
+        TextBox26.BackColor = IIf(σTA > 1.5 * _fs, Color.Red, Color.LightGreen)
+        TextBox27.BackColor = IIf(σTB > 1.5 * _fs, Color.Red, Color.LightGreen)
+        TextBox36.BackColor = IIf(σTC > 1.5 * _fs, Color.Red, Color.LightGreen)
+        TextBox37.BackColor = IIf(σTD > 1.5 * _fs, Color.Red, Color.LightGreen)
+        TextBox38.BackColor = IIf(σTBC > 1.5 * _fs, Color.Red, Color.LightGreen)
+
+        '----- vessel size
+        TextBox40.Text = (L + a) * 2.ToString("0.0")
+        TextBox41.Text = (l1 + a) * 2.ToString("0.0")
 
     End Sub
 
