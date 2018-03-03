@@ -214,6 +214,7 @@ Public Class Form1
         TextBox2.Text = Round(e_wall, 4).ToString   'required wall [mm]
         TextBox5.Text = valid_check.ToString
         TextBox6.Text = _P.ToString
+        TextBox53.Text = (_P * 10).ToString
         TextBox7.Text = _fs.ToString
         TextBox8.Text = Round(Pmax, 2).ToString
 
@@ -358,12 +359,8 @@ Public Class Form1
         Es = _P * R_central / (2 * _fs * z_joint - 0.5 * _P)
 
         'Wall knuckle to avoid axisymmetric yielding
-        'β = NumericUpDown20.Value
         β = Calc_kloepper_beta()
         Ey = β * _P * (0.75 * R_central + 0.2 * Di) / _fs
-
-
-
 
         'Wall thickness  knuckle to avoid plastic buckling
         Eb = (Di / r_knuckle) ^ 0.825
@@ -390,6 +387,10 @@ Public Class Form1
         TextBox47.Text = Eb.ToString("0.0")
         TextBox48.Text = E_kloepper.ToString("0.0")
         TextBox52.Text = β.ToString("0.0")
+
+        'Checks
+        TextBox48.BackColor = IIf(E_kloepper > Wall, Color.Red, Color.LightGreen)
+
     End Sub
     Private Function Calc_kloepper_beta()
         '7.5.3.5 Formulae for calculation of factor E
@@ -401,7 +402,6 @@ Public Class Form1
         Double.TryParse(TextBox44.Text, k_Di)   'Inside diamter
         Double.TryParse(TextBox42.Text, k_R)    'Radius central part
         Double.TryParse(TextBox49.Text, k_rr)   'Radius knuckle
-
 
         Y = k_e / k_R                           '(7.5-9) 
         If Y > 0.04 Then Y = 0.04
@@ -423,4 +423,138 @@ Public Class Form1
         End Select
         Return (β)
     End Function
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, GroupBox12.Enter
+        Calc_flat_end()
+    End Sub
+    Private Sub Calc_flat_end()
+        'Flat ends welded  directly to the shell 10.4.4 
+        Dim De, Di As Double
+        Dim E_flat1 As Double       'End plate thicknes
+        Dim E_flat2 As Double       'End plate thicknes
+        Dim E_flat As Double        'Required end plate thicknes
+        Dim es As Double            'Wall shell
+        Dim A1, B1 As Double
+        Dim C1a, C1b, C1 As Double  ' Equation (10.4-4) 
+        Dim C2 As Double            ' Equation (10.4-6)
+        Dim C2_temp1, C2_temp2 As Double
+        Dim g, H, J, U, f1 As Double
+        Dim A, B, F, G_capital As Double
+        Dim aa, bb, cc, N, Q, K, S As Double
+        Dim ν As Double = 0.303     'Poisson 's ratio mild steel 
+
+        De = NumericUpDown3.Value   'Outside dia shell
+        es = NumericUpDown2.Value   'Wall shell
+        Di = De - 2 * es            'Inside dia shell
+
+        '------------- Calc C1 ---------------------
+        A1 = B1 * (1 - B1 * es / (2 * (Di + es)))   '(10.4-5) 
+
+        B1 = 1 - (3 * _fs / _P) * (es / (Di + es))  '(10.4-6) 
+        B1 += 3 / 16 * (Di / (Di + es)) ^ 4 * (_P / _fs)
+        B1 -= 3 * ((2 * Di + es) * es ^ 2) / (4 * (Di + es ^ 3))
+
+        C1a = 0.40825 * A1 * (Di + es) / Di          '(10.4-4) 
+        C1b = 0.299 * (1 + 1.7 * es / Di)
+
+        C1 = IIf(C1a > C1b, C1a, C1b)   'Find biggest
+
+        '-----------Calc C2 method 10.4.6 ---------- 
+
+        g = Di / (Di + es)                  '(10.4-16) 
+        H = (12 * (1 - ν ^ 2)) ^ 0.25       '(10.4-17) 
+        H *= Sqrt(es / (Di + es))
+
+        J = 3 * _fs / _P                     '(10.4-18) 
+        J -= Di ^ 2 / (4 * (Di + es) * es)
+        J -= 1
+
+        U = 2 * (2 - ν * g)
+        U /= Sqrt(3 * (1 - ν ^ 2))              '(10.4-19) 
+
+        f1 = 2 * g ^ 2 - g ^ 4                  '(10.4-20) 
+
+        A = 3 * U * Di / (4 * es) - 2 * J       '(10.4-21) 
+        A *= (1 + ν)
+        A *= 1 + (1 + ν) * es / (Di + es)
+
+        B = (3 * U * Di / (8 * es)) - J         '(10.4 - 22)
+        B *= H ^ 2
+        B -= 3 / 2 * (2 - ν * g) * g
+        B *= H
+
+        F = 3 / 8 * U * g                       '(10.4-23) 
+        F += 3 / 16 * f1 * (Di + es) / es
+        F -= 2 * J * es / (Di + es)
+        F *= H ^ 2
+        F -= 3 * (2 - ν * g) * g * es / (Di + es)
+
+        G_capital = 3 / 8 * f1                 '(10.4-24) 
+        G_capital -= (2 * J * (es / (Di + es))) ^ 2
+        G_capital *= H
+
+        aa = B / A                              '(10.4-25) 
+
+        bb = F / A                              '(10.4-26) 
+
+        cc = g / A                              '(10.4-27) 
+
+        N = bb / 3 - aa ^ 2 / 9                 '(10.4-28) 
+
+        Q = cc / 2 - aa * bb / 6 + aa ^ 3 / 27  '(10.4-29)
+
+        K = N ^ 3 / Q ^ 2                       '(10.4-30)
+
+
+        If Q >= 0 Then
+            S = (Q * (1 + (1 + K) ^ 0.5)) ^ (1 / 3)
+        Else
+            S = -(Abs(Q) * (1 + (1 + K) ^ 0.5)) ^ (1 / 3)
+        End If
+
+        C2_temp1 = (Di + es) * (N / S - S - aa / 3)
+        C2_temp2 = Di * Sqrt(_P / _fs)
+        C2 = C2_temp1 / C2_temp2
+        '-------------------------------------------------
+
+        E_flat1 = C1 * Di * Sqrt(_P / _fs)
+        E_flat2 = C2 * Di * Sqrt(_P / _fs)
+        E_flat = IIf(E_flat1 > E_flat2, E_flat1, E_flat2)   'The biggest
+
+
+        TextBox56.Text = _P.ToString("0.00")
+        TextBox55.Text = (_P * 10).ToString("0.0")
+        TextBox60.Text = Di.ToString("0")
+
+        TextBox57.Text = C1.ToString("0.000")
+        TextBox54.Text = C2.ToString("0.000")
+
+
+        TextBox65.Text = E_flat1.ToString("0")
+        TextBox64.Text = E_flat2.ToString("0")
+        TextBox58.Text = E_flat.ToString("0")
+
+        TextBox59.Text = g.ToString("0.000")
+        TextBox61.Text = H.ToString("0.000")
+        TextBox62.Text = J.ToString("0.000")
+        TextBox63.Text = U.ToString("0.000")
+        TextBox66.Text = f1.ToString("0.000")
+        TextBox67.Text = A.ToString("0.00000")
+        TextBox68.Text = B.ToString("0.00000")
+        TextBox69.Text = F.ToString("0.00000")
+
+
+        TextBox70.Text = G_capital.ToString("0.000")
+        TextBox71.Text = aa.ToString("0.000")
+        TextBox72.Text = bb.ToString("0.000")
+        TextBox73.Text = cc.ToString("0.000")
+        TextBox74.Text = N.ToString("0.000")
+        TextBox75.Text = Q.ToString("0.00000")
+        TextBox76.Text = K.ToString("0.00000")
+        'TextBox77.Text = F.ToString("0.00000")
+
+        ''Checks
+        'TextBox48.BackColor = IIf(E_flat > Wall, Color.Red, Color.LightGreen)
+
+    End Sub
 End Class
