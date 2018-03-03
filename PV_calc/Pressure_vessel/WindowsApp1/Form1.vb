@@ -325,5 +325,22 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter
+        Calc_kloepper()
+    End Sub
 
+    Private Sub Calc_kloepper()
+        Dim De, Di, Dm, Wall, r As Double
+
+        De = NumericUpDown3.Value   'Outside dia shell
+        Wall = NumericUpDown2.Value   'Wall shell
+        Di = De - 2 * Wall      'Insode dia shell
+        Dm = De - Wall           'Mean dia shell
+        r = 0.1 * De            'Minimum radius
+
+
+        TextBox44.Text = Di.ToString("0.0")
+        TextBox50.Text = Dm.ToString("0.0")
+        TextBox49.Text = r.ToString("0.0")
+    End Sub
 End Class

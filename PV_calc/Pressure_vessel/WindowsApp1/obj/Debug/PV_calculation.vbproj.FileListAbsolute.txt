@@ -9,3 +9,4 @@ C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calcula
 C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.exe
 C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.xml
 C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.pdb
+C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calculation.vbproj.CoreCompileInputs.cache
