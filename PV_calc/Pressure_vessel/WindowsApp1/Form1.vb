@@ -331,7 +331,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
-        Design_stress()
+        ' Design_stress()
         Calc_kloepper()
     End Sub
 
@@ -424,7 +424,8 @@ Public Class Form1
         Return (β)
     End Function
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, GroupBox12.Enter
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, GroupBox12.Enter, TabPage7.Enter
+        'Design_stress()
         Calc_flat_end()
     End Sub
     Private Sub Calc_flat_end()
@@ -439,8 +440,8 @@ Public Class Form1
         Dim C2 As Double            ' Equation (10.4-6)
         Dim C2_temp1, C2_temp2 As Double
         Dim g, H, J, U, f1 As Double
-        Dim A, B, F, G_capital As Double
-        Dim aa, bb, cc, N, Q, K, S As Double
+        Dim A, B, F, G_ As Double
+        Dim a_, b_, c_, N, Q, K, S As Double
         Dim ν As Double = 0.303     'Poisson 's ratio mild steel 
 
         De = NumericUpDown3.Value   'Outside dia shell
@@ -466,8 +467,11 @@ Public Class Form1
         H *= Sqrt(es / (Di + es))
 
         J = 3 * _fs / _P                     '(10.4-18) 
+        ' MessageBox.Show("J= " & J.ToString)
         J -= Di ^ 2 / (4 * (Di + es) * es)
+        ' MessageBox.Show(J.ToString)
         J -= 1
+        ' MessageBox.Show(J.ToString)
 
         U = 2 * (2 - ν * g)
         U /= Sqrt(3 * (1 - ν ^ 2))              '(10.4-19) 
@@ -489,19 +493,19 @@ Public Class Form1
         F *= H ^ 2
         F -= 3 * (2 - ν * g) * g * es / (Di + es)
 
-        G_capital = 3 / 8 * f1                 '(10.4-24) 
-        G_capital -= (2 * J * (es / (Di + es))) ^ 2
-        G_capital *= H
+        G_ = 3 / 8 * f1                 '(10.4-24) 
+        G_ -= (2 * J * (es / (Di + es))) ^ 2
+        G_ *= H
 
-        aa = B / A                              '(10.4-25) 
+        a_ = B / A                              '(10.4-25) 
 
-        bb = F / A                              '(10.4-26) 
+        b_ = F / A                              '(10.4-26) 
 
-        cc = g / A                              '(10.4-27) 
+        c_ = G_ / A                              '(10.4-27) 
 
-        N = bb / 3 - aa ^ 2 / 9                 '(10.4-28) 
+        N = b_ / 3 - a_ ^ 2 / 9                 '(10.4-28) 
 
-        Q = cc / 2 - aa * bb / 6 + aa ^ 3 / 27  '(10.4-29)
+        Q = c_ / 2 - a_ * b_ / 6 + a_ ^ 3 / 27  '(10.4-29)
 
         K = N ^ 3 / Q ^ 2                       '(10.4-30)
 
@@ -512,7 +516,7 @@ Public Class Form1
             S = -(Abs(Q) * (1 + (1 + K) ^ 0.5)) ^ (1 / 3)
         End If
 
-        C2_temp1 = (Di + es) * (N / S - S - aa / 3)
+        C2_temp1 = (Di + es) * (N / S - S - a_ / 3)
         C2_temp2 = Di * Sqrt(_P / _fs)
         C2 = C2_temp1 / C2_temp2
         '-------------------------------------------------
@@ -526,8 +530,8 @@ Public Class Form1
         TextBox55.Text = (_P * 10).ToString("0.0")
         TextBox60.Text = Di.ToString("0")
 
-        TextBox57.Text = C1.ToString("0.000")
-        TextBox54.Text = C2.ToString("0.000")
+        TextBox57.Text = C1.ToString("0.00000")
+        TextBox54.Text = C2.ToString("0.00000")
 
 
         TextBox65.Text = E_flat1.ToString("0")
@@ -544,17 +548,14 @@ Public Class Form1
         TextBox69.Text = F.ToString("0.00000")
 
 
-        TextBox70.Text = G_capital.ToString("0.000")
-        TextBox71.Text = aa.ToString("0.000")
-        TextBox72.Text = bb.ToString("0.000")
-        TextBox73.Text = cc.ToString("0.000")
-        TextBox74.Text = N.ToString("0.000")
-        TextBox75.Text = Q.ToString("0.00000")
+        TextBox70.Text = G_.ToString("0.00000")
+        TextBox71.Text = a_.ToString("0.00000")
+        TextBox72.Text = b_.ToString("0.00000")
+        TextBox73.Text = c_.ToString("0.00000")
+        TextBox74.Text = N.ToString("0.00000")
+        TextBox75.Text = Q.ToString("0.0000000")
         TextBox76.Text = K.ToString("0.00000")
-        'TextBox77.Text = F.ToString("0.00000")
-
-        ''Checks
-        'TextBox48.BackColor = IIf(E_flat > Wall, Color.Red, Color.LightGreen)
+        TextBox77.Text = S.ToString("0.00000")
 
     End Sub
 End Class
