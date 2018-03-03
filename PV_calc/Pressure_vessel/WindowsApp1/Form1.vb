@@ -60,12 +60,13 @@ Public Class Form1
         ComboBox2.Items.Clear()
         For hh = 0 To (joint_eff.Length - 1)   'Fill combobox2 joint efficiency
             ComboBox2.Items.Add(joint_eff(hh))
+            ComboBox3.Items.Add(joint_eff(hh))
         Next hh
 
         '----------------- prevent out of bounds------------------
         ComboBox1.SelectedIndex = CInt(IIf(ComboBox1.Items.Count > 0, 1, -1)) 'Select ..
         ComboBox2.SelectedIndex = CInt(IIf(ComboBox2.Items.Count > 0, 0, -1)) 'Select ..
-
+        ComboBox3.SelectedIndex = CInt(IIf(ComboBox3.Items.Count > 0, 0, -1)) 'Select ..
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown1.ValueChanged
@@ -171,6 +172,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged
+        Design_stress()
+    End Sub
+    Private Sub Design_stress()
         Dim sf As Double
 
         _P = NumericUpDown4.Value                       'Calculation pressure [MPa=N/mm2]
@@ -325,22 +329,61 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged, NumericUpDown20.ValueChanged
+        Design_stress()
         Calc_kloepper()
     End Sub
 
     Private Sub Calc_kloepper()
-        Dim De, Di, Dm, Wall, r As Double
+        Dim De, Di, Dm, Wall, r_knuckle As Double
+        Dim Es, Ey, Eb As Double    'Wall thicknes
+        Dim E_kloepper As Double    'Required Wall thicknes
+        Dim R_central As Double     'is inside spherical radius of central part kloepper
+        Dim z_joint As Double
+        Dim β As Double 'Figure 7.5-1 or 7.5.3.5, replacing e by ey
 
         De = NumericUpDown3.Value   'Outside dia shell
-        Wall = NumericUpDown2.Value   'Wall shell
-        Di = De - 2 * Wall      'Insode dia shell
-        Dm = De - Wall           'Mean dia shell
-        r = 0.1 * De            'Minimum radius
+        Wall = NumericUpDown2.Value 'Wall shell
+        Di = De - 2 * Wall          'Inside dia shell
+        Dm = De - Wall              'Mean dia shell
+        r_knuckle = 0.1 * De        'radius knuckle
+        R_central = De              'radius central part head
 
 
-        TextBox44.Text = Di.ToString("0.0")
-        TextBox50.Text = Dm.ToString("0.0")
-        TextBox49.Text = r.ToString("0.0")
+        If (ComboBox3.SelectedIndex > -1) Then          'Prevent exceptions
+            Double.TryParse(joint_eff(ComboBox3.SelectedIndex), z_joint)  'Joint efficiency
+        End If
+
+        'Wall thickness  membrane stress in central part
+        Es = _P * R_central / (2 * _fs * z_joint - 0.5 * _P)
+
+        'Wall knuckle to avoid axisymmetric yielding
+        β = NumericUpDown20.Value
+        Ey = β * _P * (0.75 * R_central + 0.2 * Di) / _fs
+
+        'Wall thickness  knuckle to avoid plastic buckling
+        Eb = (Di / r_knuckle) ^ 0.825
+        Eb *= (_P / (111 * _fs))
+        Eb = Eb ^ (1 / 1.5)
+        Eb *= (0.75 * R_central + 0.2 * Di)
+
+        'Find the thickest wall
+        E_kloepper = 0
+        If Es > E_kloepper Then E_kloepper = Es
+        If Ey > E_kloepper Then E_kloepper = Ey
+        If Eb > E_kloepper Then E_kloepper = Eb
+
+        TextBox45.Text = _P.ToString("0.00")
+        TextBox51.Text = (_P * 10).ToString("0.0")
+        TextBox44.Text = Di.ToString("0")
+        TextBox50.Text = Dm.ToString("0")
+        TextBox49.Text = r_knuckle.ToString("0")
+        TextBox42.Text = R_central.ToString("0")
+        TextBox43.Text = _fs.ToString("0")
+
+        TextBox39.Text = Es.ToString("0.0")
+        TextBox46.Text = Ey.ToString("0.0")
+        TextBox47.Text = Eb.ToString("0.0")
+        TextBox48.Text = E_kloepper.ToString("0.0")
     End Sub
 End Class
