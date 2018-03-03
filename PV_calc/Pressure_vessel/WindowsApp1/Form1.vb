@@ -329,7 +329,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged, NumericUpDown20.ValueChanged
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
         Design_stress()
         Calc_kloepper()
     End Sub
@@ -358,8 +358,12 @@ Public Class Form1
         Es = _P * R_central / (2 * _fs * z_joint - 0.5 * _P)
 
         'Wall knuckle to avoid axisymmetric yielding
-        β = NumericUpDown20.Value
+        'β = NumericUpDown20.Value
+        β = Calc_kloepper_beta()
         Ey = β * _P * (0.75 * R_central + 0.2 * Di) / _fs
+
+
+
 
         'Wall thickness  knuckle to avoid plastic buckling
         Eb = (Di / r_knuckle) ^ 0.825
@@ -385,5 +389,38 @@ Public Class Form1
         TextBox46.Text = Ey.ToString("0.0")
         TextBox47.Text = Eb.ToString("0.0")
         TextBox48.Text = E_kloepper.ToString("0.0")
+        TextBox52.Text = β.ToString("0.0")
     End Sub
+    Private Function Calc_kloepper_beta()
+        '7.5.3.5 Formulae for calculation of factor E
+        Dim k_e, k_Di, k_De, k_R, k_rr, k_N As Double
+        Dim X, Y, Z, β, β006, β01, β02 As Double
+
+        k_e = NumericUpDown2.Value              'Wall tckickness
+        k_De = NumericUpDown3.Value             'Outside doameter
+        Double.TryParse(TextBox44.Text, k_Di)   'Inside diamter
+        Double.TryParse(TextBox42.Text, k_R)    'Radius central part
+        Double.TryParse(TextBox49.Text, k_rr)   'Radius knuckle
+
+
+        Y = k_e / k_R                           '(7.5-9) 
+        If Y > 0.04 Then Y = 0.04
+
+        Z = Log10(1 / Y)                        '(7.5-10) 
+        X = k_rr / k_Di                         '(7.5-11) 
+        k_N = 1.006 - (1 / (6.2 + (90 * Y) ^ 4)) '(7.5-12) 
+
+        β006 = k_N * (-0.3635 * Z ^ 3 + 2.2124 * Z ^ 2 - 3.2937 * Z + 1.8873)   '(7.5-13) 
+        β01 = k_N * (-0.1833 * Z ^ 3 + 1.0383 * Z ^ 2 - 1.2943 * Z + 0.837)     '(7.5-15) 
+        β02 = 0.95 * (0.56 - 1.94 * Y - 82.5 * Y ^ 2)     '(7.5-17) 
+        If β02 < 0.5 Then β02 = 0.5
+
+        Select Case (X)
+            Case < 0.1
+                β = 25 * ((0.1 - X) * β006 + (X - 0.06) * β01)
+            Case < 0.2
+                β = 10 * ((0.2 - X) * β01 + (X - 0.1) * β02)
+        End Select
+        Return (β)
+    End Function
 End Class
