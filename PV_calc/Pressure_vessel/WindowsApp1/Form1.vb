@@ -467,22 +467,21 @@ Public Class Form1
         H *= Sqrt(es / (Di + es))
 
         J = 3 * _fs / _P                     '(10.4-18) 
-        ' MessageBox.Show("J= " & J.ToString)
         J -= Di ^ 2 / (4 * (Di + es) * es)
-        ' MessageBox.Show(J.ToString)
         J -= 1
-        ' MessageBox.Show(J.ToString)
 
         U = 2 * (2 - ν * g)
         U /= Sqrt(3 * (1 - ν ^ 2))              '(10.4-19) 
 
         f1 = 2 * g ^ 2 - g ^ 4                  '(10.4-20) 
 
-        A = 3 * U * Di / (4 * es) - 2 * J       '(10.4-21) 
+        A = 3 * U * Di / (4 * es)               '(10.4-21) 
+        A -= 2 * J
         A *= (1 + ν)
-        A *= 1 + (1 + ν) * es / (Di + es)
+        A *= 1 + (1 - ν) * es / (Di + es)
 
-        B = (3 * U * Di / (8 * es)) - J         '(10.4 - 22)
+        B = 3 * U * Di / (8 * es)               '(10.4 - 22)
+        B -= J
         B *= H ^ 2
         B -= 3 / 2 * (2 - ν * g) * g
         B *= H
@@ -493,27 +492,25 @@ Public Class Form1
         F *= H ^ 2
         F -= 3 * (2 - ν * g) * g * es / (Di + es)
 
-        G_ = 3 / 8 * f1                 '(10.4-24) 
-        G_ -= (2 * J * (es / (Di + es))) ^ 2
+        G_ = 3 / 8 * f1                         '(10.4-24) 
+        G_ -= 2 * J * (es / (Di + es)) ^ 2
         G_ *= H
 
         a_ = B / A                              '(10.4-25) 
-
         b_ = F / A                              '(10.4-26) 
-
-        c_ = G_ / A                              '(10.4-27) 
-
-        N = b_ / 3 - a_ ^ 2 / 9                 '(10.4-28) 
-
-        Q = c_ / 2 - a_ * b_ / 6 + a_ ^ 3 / 27  '(10.4-29)
+        c_ = G_ / A                             '(10.4-27) 
+        N = b_ / 3                              '(10.4-28) 
+        N -= (a_ ^ 2 / 9)
+        Q = c_ / 2                              '(10.4-29)
+        Q -= a_ * b_ / 6
+        Q += a_ ^ 3 / 27
 
         K = N ^ 3 / Q ^ 2                       '(10.4-30)
 
-
         If Q >= 0 Then
-            S = (Q * (1 + (1 + K) ^ 0.5)) ^ (1 / 3)
+            S = (Q * (1 + Sqrt(1 + K))) ^ (1 / 3)
         Else
-            S = -(Abs(Q) * (1 + (1 + K) ^ 0.5)) ^ (1 / 3)
+            S = -(Abs(Q) * (1 + Sqrt(1 + K))) ^ (1 / 3)
         End If
 
         C2_temp1 = (Di + es) * (N / S - S - a_ / 3)
@@ -547,7 +544,6 @@ Public Class Form1
         TextBox68.Text = B.ToString("0.00000")
         TextBox69.Text = F.ToString("0.00000")
 
-
         TextBox70.Text = G_.ToString("0.00000")
         TextBox71.Text = a_.ToString("0.00000")
         TextBox72.Text = b_.ToString("0.00000")
@@ -556,6 +552,12 @@ Public Class Form1
         TextBox75.Text = Q.ToString("0.0000000")
         TextBox76.Text = K.ToString("0.00000")
         TextBox77.Text = S.ToString("0.00000")
+
+        'Checks
+        TextBox57.BackColor = IIf(C1 > 0.3 And C1 < 0.42, Color.LightGreen, Color.Red)
+        TextBox54.BackColor = IIf(C2 > 0.3 And C2 < 1.0, Color.LightGreen, Color.Red)
+
+
 
     End Sub
 End Class

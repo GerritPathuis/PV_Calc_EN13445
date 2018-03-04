@@ -793,7 +793,7 @@ Partial Class Form1
         Me.NumericUpDown7.Size = New System.Drawing.Size(85, 22)
         Me.NumericUpDown7.TabIndex = 78
         Me.NumericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown7.Value = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NumericUpDown7.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'NumericUpDown19
         '
@@ -3553,9 +3553,9 @@ Partial Class Form1
         Me.Label153.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label153.Location = New System.Drawing.Point(450, 182)
         Me.Label153.Name = "Label153"
-        Me.Label153.Size = New System.Drawing.Size(20, 16)
+        Me.Label153.Size = New System.Drawing.Size(84, 16)
         Me.Label153.TabIndex = 216
-        Me.Label153.Text = "[-]"
+        Me.Label153.Text = "Figure 10.4-5"
         '
         'TextBox54
         '
@@ -3657,9 +3657,9 @@ Partial Class Form1
         Me.Label163.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label163.Location = New System.Drawing.Point(450, 156)
         Me.Label163.Name = "Label163"
-        Me.Label163.Size = New System.Drawing.Size(20, 16)
+        Me.Label163.Size = New System.Drawing.Size(84, 16)
         Me.Label163.TabIndex = 196
-        Me.Label163.Text = "[-]"
+        Me.Label163.Text = "Figure 10.4-4"
         '
         'TextBox57
         '
