@@ -171,7 +171,7 @@ Public Class Form1
         TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown6.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged
         Design_stress()
     End Sub
     Private Sub Design_stress()
@@ -424,7 +424,7 @@ Public Class Form1
         Return (β)
     End Function
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, NumericUpDown21.ValueChanged, NumericUpDown20.ValueChanged, GroupBox12.Enter, TabPage7.Enter
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click, NumericUpDown20.ValueChanged, GroupBox12.Enter, TabPage7.Enter, NumericUpDown21.ValueChanged
         'Design_stress()
         Calc_flat_end()
     End Sub
@@ -444,25 +444,29 @@ Public Class Form1
         Dim a_, b_, c_, N, Q, K, S As Double
         Dim ν As Double = 0.303     'Poisson 's ratio mild steel 
 
-        De = NumericUpDown3.Value   'Outside dia shell
-        es = NumericUpDown2.Value   'Wall shell
+        De = NumericUpDown20.Value   'Outside dia shell
+        es = NumericUpDown21.Value  'Shell Thickness
         Di = De - 2 * es            'Inside dia shell
 
-        '------------- Calc C1 ---------------------
+        '------------- Calc C1 (10.4-4)---------------------
+
+        B1 = 1                          '(10.4-6)
+        B1 -= (3 * _fs / _P) * (es / (Di + es)) ^ 2
+        B1 += 3 / 16 * (Di / (Di + es)) ^ 4 * (_P / _fs)
+        B1 -= 3 * ((2 * Di + es) * es ^ 2) / (4 * (Di + es) ^ 3)
+
         A1 = B1 * (1 - B1 * es / (2 * (Di + es)))   '(10.4-5) 
 
-        B1 = 1 - (3 * _fs / _P) * (es / (Di + es))  '(10.4-6) 
-        B1 += 3 / 16 * (Di / (Di + es)) ^ 4 * (_P / _fs)
-        B1 -= 3 * ((2 * Di + es) * es ^ 2) / (4 * (Di + es ^ 3))
 
         C1a = 0.40825 * A1 * (Di + es) / Di          '(10.4-4) 
         C1b = 0.299 * (1 + 1.7 * es / Di)
 
         C1 = IIf(C1a > C1b, C1a, C1b)   'Find biggest
 
-        '-----------Calc C2 method 10.4.6 ---------- 
+        '-----------Calc C2 method 10.4-5 ---------- 
 
-        g = Di / (Di + es)                  '(10.4-16) 
+        g = Di / (Di + es)                  '(10.4-16)
+
         H = (12 * (1 - ν ^ 2)) ^ 0.25       '(10.4-17) 
         H *= Sqrt(es / (Di + es))
 
@@ -478,19 +482,19 @@ Public Class Form1
         A = 3 * U * Di / (4 * es)               '(10.4-21) 
         A -= 2 * J
         A *= (1 + ν)
-        A *= 1 + (1 - ν) * es / (Di + es)
+        A *= (1 + (1 - ν) * es / (Di + es))
 
         B = 3 * U * Di / (8 * es)               '(10.4 - 22)
         B -= J
         B *= H ^ 2
-        B -= 3 / 2 * (2 - ν * g) * g
+        B -= (3 / 2 * (2 - ν * g) * g)
         B *= H
 
         F = 3 / 8 * U * g                       '(10.4-23) 
         F += 3 / 16 * f1 * (Di + es) / es
-        F -= 2 * J * es / (Di + es)
+        F -= (2 * J * es / (Di + es))
         F *= H ^ 2
-        F -= 3 * (2 - ν * g) * g * es / (Di + es)
+        F -= (3 * (2 - ν * g) * g * es / (Di + es))
 
         G_ = 3 / 8 * f1                         '(10.4-24) 
         G_ -= 2 * J * (es / (Di + es)) ^ 2
@@ -499,11 +503,13 @@ Public Class Form1
         a_ = B / A                              '(10.4-25) 
         b_ = F / A                              '(10.4-26) 
         c_ = G_ / A                             '(10.4-27) 
+
         N = b_ / 3                              '(10.4-28) 
         N -= (a_ ^ 2 / 9)
+
         Q = c_ / 2                              '(10.4-29)
-        Q -= a_ * b_ / 6
-        Q += a_ ^ 3 / 27
+        Q -= (a_ * b_ / 6)
+        Q += (a_ ^ 3 / 27)
 
         K = N ^ 3 / Q ^ 2                       '(10.4-30)
 
@@ -516,48 +522,50 @@ Public Class Form1
         C2_temp1 = (Di + es) * (N / S - S - a_ / 3)
         C2_temp2 = Di * Sqrt(_P / _fs)
         C2 = C2_temp1 / C2_temp2
+        If C2 <= 0.3 Then C2 = 0.3
         '-------------------------------------------------
 
         E_flat1 = C1 * Di * Sqrt(_P / _fs)
         E_flat2 = C2 * Di * Sqrt(_P / _fs)
         E_flat = IIf(E_flat1 > E_flat2, E_flat1, E_flat2)   'The biggest
 
-
         TextBox56.Text = _P.ToString("0.00")
         TextBox55.Text = (_P * 10).ToString("0.0")
         TextBox60.Text = Di.ToString("0")
 
-        TextBox57.Text = C1.ToString("0.00000")
-        TextBox54.Text = C2.ToString("0.00000")
-
+        TextBox57.Text = C1.ToString("0.000")
+        TextBox54.Text = C2.ToString("0.000")
 
         TextBox65.Text = E_flat1.ToString("0")
         TextBox64.Text = E_flat2.ToString("0")
         TextBox58.Text = E_flat.ToString("0")
+        TextBox62.Text = _fs.ToString("0")
 
-        TextBox59.Text = g.ToString("0.000")
-        TextBox61.Text = H.ToString("0.000")
-        TextBox62.Text = J.ToString("0.000")
-        TextBox63.Text = U.ToString("0.000")
-        TextBox66.Text = f1.ToString("0.000")
-        TextBox67.Text = A.ToString("0.00000")
-        TextBox68.Text = B.ToString("0.00000")
-        TextBox69.Text = F.ToString("0.00000")
+        '----Chart determine C1 (10.4-4)
+        TextBox59.Text = (es / Di).ToString("0.000")
+        TextBox61.Text = (_P / _fs).ToString("0.000")
 
-        TextBox70.Text = G_.ToString("0.00000")
-        TextBox71.Text = a_.ToString("0.00000")
-        TextBox72.Text = b_.ToString("0.00000")
-        TextBox73.Text = c_.ToString("0.00000")
-        TextBox74.Text = N.ToString("0.00000")
-        TextBox75.Text = Q.ToString("0.0000000")
-        TextBox76.Text = K.ToString("0.00000")
-        TextBox77.Text = S.ToString("0.00000")
+        '----Chart determine C2 (10.4-5)
+        TextBox59.Text = (es / Di).ToString("0.000")
+        TextBox61.Text = (_P / _fs).ToString("0.000")
 
         'Checks
-        TextBox57.BackColor = IIf(C1 > 0.3 And C1 < 0.42, Color.LightGreen, Color.Red)
-        TextBox54.BackColor = IIf(C2 > 0.3 And C2 < 1.0, Color.LightGreen, Color.Red)
+        TextBox57.BackColor = IIf(C1 > 0.29 And C1 < 0.42, Color.LightGreen, Color.Red)
+        TextBox54.BackColor = IIf(C2 >= 0.3 And C2 < 1.0, Color.LightGreen, Color.Red)
 
+    End Sub
 
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click, TabPage8.Enter, NumericUpDown22.ValueChanged
+        '10.5.3 Flat end with a full-face gasket 
+        Dim e_flange, dia_bolt As Double
 
+        dia_bolt = NumericUpDown22.Value
+        e_flange = 0.41 * dia_bolt * Sqrt(_P / _fs)
+
+        TextBox68.Text = _P.ToString("0.0")
+        TextBox67.Text = (_P * 10).ToString("0.0")
+        TextBox63.Text = _fs.ToString("0.0")
+        TextBox71.Text = e_flange.ToString("0.0")
+        TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
 End Class
