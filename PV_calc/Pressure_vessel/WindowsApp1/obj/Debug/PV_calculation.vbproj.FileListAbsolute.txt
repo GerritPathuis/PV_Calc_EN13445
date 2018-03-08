@@ -10,3 +10,15 @@ C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp
 C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.xml
 C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.pdb
 C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calculation.vbproj.CoreCompileInputs.cache
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\bin\Debug\WindowsApp1.exe.config
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\bin\Debug\WindowsApp1.exe
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\bin\Debug\WindowsApp1.pdb
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\bin\Debug\WindowsApp1.xml
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calculation.vbprojResolveAssemblyReference.cache
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form1.resources
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Resources.resources
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calculation.vbproj.GenerateResource.Cache
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calculation.vbproj.CoreCompileInputs.cache
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.exe
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.xml
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.pdb

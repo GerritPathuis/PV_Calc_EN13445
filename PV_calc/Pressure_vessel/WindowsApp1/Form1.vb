@@ -568,4 +568,24 @@ Public Class Form1
         TextBox71.Text = e_flange.ToString("0.0")
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged
+        Calc_flange_Moments()
+    End Sub
+
+    Sub Calc_flange_Moments()
+        Dim HD, HT, H, B As Double
+
+        B = NumericUpDown23.Value           'ID Flange
+
+        HD = Math.PI / 4 * (B ^ 2 * _P)
+        H = 1
+        HT = 1
+
+        TextBox77.Text = (_P * 10).ToString("0.0")
+        TextBox78.Text = _P.ToString("0.0")
+        TextBox79.Text = HD.ToString("0.0")
+
+    End Sub
+
 End Class
