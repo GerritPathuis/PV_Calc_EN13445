@@ -574,11 +574,11 @@ Public Class Form1
     End Sub
 
     Sub Calc_flange_Moments()
-        Dim G, gt, Hg, H, B As Double
+        Dim G, gt, Hg, H, B, C As Double
         Dim w, b_gasket, b0_gasket, m As Double
         Dim y, Wa, Wop As Double
 
-
+        C = NumericUpDown28.Value           'Bolt circle
         w = NumericUpDown24.Value           'Width gasket
         B = NumericUpDown23.Value           'ID Flange
         gt = NumericUpDown29.Value          'OD Gasket
@@ -604,9 +604,19 @@ Public Class Form1
         '------------- Stepped Flange moment (11.5.3)------------
         Dim Hd, Ht As Double
         Dim hd_, hg_, ht_ As Double
+        Dim Ma, Mop As Double
 
         Hd = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
         Ht = H - Hd                 'Hydrostatic force via flange face
+
+
+        hd_ = (C - B) / 2                   '(11.5-13)
+        hg_ = (C - G) / 2                   '(11.5-14)
+        ht_ = (2 * C - B - G) / 4           '(11.5-15)
+
+
+        Ma = 1
+        Mop = 1
 
 
         TextBox77.Text = (_P * 10).ToString("0.0")
