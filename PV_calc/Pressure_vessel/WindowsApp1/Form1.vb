@@ -574,8 +574,10 @@ Public Class Form1
     End Sub
 
     Sub Calc_flange_Moments()
-        Dim G, gt, Hg, H, B, C As Double
-        Dim w, b_gasket, b0_gasket, m As Double
+        Dim G, gt, HG, H, B, C As Double
+        Dim db, dn As Double
+        Dim fB As Double
+        Dim W, b_gasket, b0_gasket, m As Double
         Dim y, Wa, Wop As Double
 
         C = NumericUpDown28.Value           'Bolt circle
@@ -584,10 +586,14 @@ Public Class Form1
         gt = NumericUpDown29.Value          'OD Gasket
         y = NumericUpDown31.Value           'Min seat stress
         m = NumericUpDown30.Value           'Gasket factor
+        db = NumericUpDown30.Value          'Dia bolt
+        dn = db                             'Dia bolt nominal (niet af)
+        fB = NumericUpDown27.Value          'Bolt design stress at oper-temp (Rp02/3)
 
         '------------- bolting (11.5.2)------------
         b0_gasket = w / 2
 
+        '------b_gasket = effective gasket width---------
         If b0_gasket <= 6.3 Then
             b_gasket = b0_gasket
             G = gt
@@ -596,40 +602,51 @@ Public Class Form1
             G = gt - 2 * b_gasket
         End If
 
-        H = Math.PI / 4 * (G ^ 2 * _P)              '(11.5-5)
-        Hg = 2 * Math.PI * G * b_gasket * m * _P    '(11.5-6)
-        Wa = Math.PI * B * G * y                    '(11.5-7)
-        Wop = H + Hg                                '(11.5-8)
+        H = PI / 4 * (G ^ 2 * _P)              '(11.5-5)
+        HG = 2 * PI * G * b_gasket * m * _P    '(11.5-6)
+        Wa = PI * b0_gasket * G * y                    '(11.5-7)
+        Wop = H + HG                           '(11.5-8)
 
         '------------- Stepped Flange moment (11.5.3)------------
-        Dim Hd, Ht As Double
+        Dim HD, HT As Double
         Dim hd_, hg_, ht_ As Double
         Dim Ma, Mop As Double
 
-        Hd = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
-        Ht = H - Hd                 'Hydrostatic force via flange face
+        HD = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
+        HT = H - HD                 'Hydrostatic force via flange face
 
 
         hd_ = (C - B) / 2                   '(11.5-13)
         hg_ = (C - G) / 2                   '(11.5-14)
         ht_ = (2 * C - B - G) / 4           '(11.5-15)
 
+        W = 0.5 * (db + dn) * fB
 
-        Ma = 1
-        Mop = 1
+        Ma = W * hg_                        '(11.5-17)
+        Mop = Hd * hd_ + Ht * ht_ + Hg * hg_ '(11.5-18)
 
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.0")
         TextBox79.Text = H.ToString("0.0")
-        TextBox81.Text = b0_gasket.ToString("0.0")
+        TextBox81.Text = b_gasket.ToString("0.0")
+        TextBox84.Text = dn.ToString("0.0")         '[mm]
+
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
         TextBox87.Text = (Hg / 1000).ToString("0.0")     '[kN]
         TextBox82.Text = (Wa / 1000).ToString("0.0")     '[kN]
         TextBox83.Text = (Wop / 1000).ToString("0.0")    '[kN]
 
-        TextBox79.Text = (Hd / 1000).ToString("0.0")     '[kN]
-        TextBox75.Text = (Ht / 1000).ToString("0.0")     '[kN]
+        TextBox79.Text = (HD / 1000).ToString("0.0")     '[kN]
+        TextBox75.Text = (HT / 1000).ToString("0.0")     '[kN]
+
+        TextBox80.Text = hd_.ToString("0.0")        '[mm]
+        TextBox86.Text = hg_.ToString("0.0")        '[mm]
+        TextBox88.Text = ht_.ToString("0.0")        '[mm]
+        TextBox89.Text = W.ToString("0.0")          '[mm]
+
+        TextBox91.Text = Ma.ToString("0.0")         '[mm]
+        TextBox90.Text = Mop.ToString("0.0")        '[mm]
 
     End Sub
 
