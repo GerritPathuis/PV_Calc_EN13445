@@ -569,23 +569,59 @@ Public Class Form1
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged
         Calc_flange_Moments()
     End Sub
 
     Sub Calc_flange_Moments()
-        Dim HD, HT, H, B As Double
+        Dim G, gt, Hg, H, B As Double
+        Dim w, b_gasket, b0_gasket, m As Double
+        Dim y, Wa, Wop As Double
 
+
+        w = NumericUpDown24.Value           'Width gasket
         B = NumericUpDown23.Value           'ID Flange
+        gt = NumericUpDown29.Value          'OD Gasket
+        y = NumericUpDown31.Value           'Min seat stress
+        m = NumericUpDown30.Value           'Gasket factor
 
-        HD = Math.PI / 4 * (B ^ 2 * _P)
-        H = 1
-        HT = 1
+        '------------- bolting (11.5.2)------------
+        b0_gasket = w / 2
+
+        If b0_gasket <= 6.3 Then
+            b_gasket = b0_gasket
+            G = gt
+        Else
+            b_gasket = 2.52 * Sqrt(b0_gasket)       '(11.5-4)
+            G = gt - 2 * b_gasket
+        End If
+
+        H = Math.PI / 4 * (G ^ 2 * _P)              '(11.5-5)
+        Hg = 2 * Math.PI * G * b_gasket * m * _P    '(11.5-6)
+        Wa = Math.PI * B * G * y                    '(11.5-7)
+        Wop = H + Hg                                '(11.5-8)
+
+        '------------- Stepped Flange moment (11.5.3)------------
+        Dim Hd, Ht As Double
+        Dim hd_, hg_, ht_ As Double
+
+        Hd = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
+        Ht = H - Hd                 'Hydrostatic force via flange face
+
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.0")
-        TextBox79.Text = HD.ToString("0.0")
+        TextBox79.Text = H.ToString("0.0")
+        TextBox81.Text = b0_gasket.ToString("0.0")
+        TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
+        TextBox87.Text = (Hg / 1000).ToString("0.0")     '[kN]
+        TextBox82.Text = (Wa / 1000).ToString("0.0")     '[kN]
+        TextBox83.Text = (Wop / 1000).ToString("0.0")    '[kN]
+
+        TextBox79.Text = (Hd / 1000).ToString("0.0")     '[kN]
+        TextBox75.Text = (Ht / 1000).ToString("0.0")     '[kN]
 
     End Sub
+
 
 End Class
