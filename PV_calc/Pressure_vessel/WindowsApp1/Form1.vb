@@ -574,15 +574,17 @@ Public Class Form1
     End Sub
 
     Sub Calc_flange_Moments()
-        Dim e, G, gt, HG, H, B, C As Double
-        Dim db, dn As Double
+        Dim e, G, gt, HG, H, B, C, A As Double
+        Dim db, dn, n As Double
         Dim fB As Double
         Dim W, b_gasket, b0_gasket, m As Double
         Dim y, Wa, Wop As Double
-        Dim AB_min1, AB_min2, AB_min As Double
+        Dim AB_min1, AB_min2, AB_min, Dia_bolt As Double
 
+        A = NumericUpDown34.Value           'OD Flange 
+        n = NumericUpDown25.Value           'Is No Bolts  
         C = NumericUpDown28.Value           'Bolt circle
-        w = NumericUpDown24.Value           'Width gasket
+        W = NumericUpDown24.Value           'Width gasket
         B = NumericUpDown23.Value           'ID Flange
         gt = NumericUpDown29.Value          'OD Gasket
         y = NumericUpDown31.Value           'Min seat stress
@@ -612,16 +614,17 @@ Public Class Form1
         AB_min1 = Wa / fB
         AB_min2 = Wop / fB
         AB_min = IIf(AB_min1 < AB_min2, AB_min2, AB_min1)   'Take biggest
+        '---- dia bolt---
+        Dia_bolt = Sqrt((AB_min / n) * 4 / PI)
 
         '------------- Stepped Flange moment (11.5.3)------------
         Dim HD, HT As Double
         Dim hd_, hg_, ht_ As Double
         Dim Ma, Mop As Double
-
-
+        Dim G0 As Double
+        Dim βT, βU, βY As Double
         HD = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
         HT = H - HD                 'Hydrostatic force via flange face
-
 
         hd_ = (C - B) / 2                   '(11.5-13)
         hg_ = (C - G) / 2                   '(11.5-14)
@@ -633,12 +636,22 @@ Public Class Form1
         Mop = Hd * hd_ + Ht * ht_ + Hg * hg_ '(11.5-18)
 
         '------------- Flange stresses and stress limit (11.5.4)------------
-        Dim CF, δb, K As Double
+        Dim CF, δb, K, I0 As Double
 
         δb = NumericUpDown33.Value           'Distance adjacent bolts
         CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
-        'K = Abs() / B                       '(11.5-20)
+        K = A / B                               '(11.5-21)
+        G0 = e
+        I0 = Sqrt(B * G0)                       '(11.5-22)
 
+        βT = K ^ 2 * (1 + 8.55246 * Log10(K)) - 1
+        βT /= (1.0472 + 1.9448 * K ^ 2) * (K - 1)
+
+        βU = K ^ 2 * (1 + 8.55246 * Log10(K)) - 1
+        βU /= 1.36136 * (K ^ 2 - 1) * (K - 1)
+
+        βY = 0.66845 + 5.7169 * (K ^ 2 * Log10(K)) / (K ^ 2 - 1)
+        βY *= 1 / (K - 1)
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.0")
@@ -647,6 +660,7 @@ Public Class Form1
         TextBox93.Text = G.ToString("0.0")
         TextBox84.Text = dn.ToString("0.0")             '[mm]
         TextBox94.Text = AB_min.ToString("0.0")         '[mm2] required bolt area
+        TextBox95.Text = Dia_bolt.ToString("0.0")       '[mm] calculated req. dia bolt
 
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
         TextBox87.Text = (Hg / 1000).ToString("0.0")     '[kN]
@@ -663,8 +677,10 @@ Public Class Form1
 
         TextBox91.Text = Ma.ToString("0.0")         '[mm]
         TextBox90.Text = Mop.ToString("0.0")        '[mm]
-
         TextBox92.Text = CF.ToString("0.0")         '[-]
+        TextBox98.Text = βT.ToString("0.00")        '[-]
+        TextBox97.Text = βU.ToString("0.00")        '[-]
+        TextBox96.Text = βY.ToString("0.00")        '[-]
     End Sub
 
 
