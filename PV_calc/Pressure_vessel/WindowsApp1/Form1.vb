@@ -569,16 +569,17 @@ Public Class Form1
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown33.ValueChanged
         Calc_flange_Moments()
     End Sub
 
     Sub Calc_flange_Moments()
-        Dim G, gt, HG, H, B, C As Double
+        Dim e, G, gt, HG, H, B, C As Double
         Dim db, dn As Double
         Dim fB As Double
         Dim W, b_gasket, b0_gasket, m As Double
         Dim y, Wa, Wop As Double
+        Dim AB_min1, AB_min2, AB_min As Double
 
         C = NumericUpDown28.Value           'Bolt circle
         w = NumericUpDown24.Value           'Width gasket
@@ -589,6 +590,7 @@ Public Class Form1
         db = NumericUpDown30.Value          'Dia bolt
         dn = db                             'Dia bolt nominal (niet af)
         fB = NumericUpDown27.Value          'Bolt design stress at oper-temp (Rp02/3)
+        e = NumericUpDown32.Value           'Slip on flangethickness
 
         '------------- bolting (11.5.2)------------
         b0_gasket = w / 2
@@ -602,15 +604,20 @@ Public Class Form1
             G = gt - 2 * b_gasket
         End If
 
-        H = PI / 4 * (G ^ 2 * _P)              '(11.5-5)
+        H = PI / 4 * (G ^ 2 * _P)              '(11.5-5) Hydrostatic end force
         HG = 2 * PI * G * b_gasket * m * _P    '(11.5-6)
-        Wa = PI * b0_gasket * G * y                    '(11.5-7)
+        Wa = PI * b0_gasket * G * y            '(11.5-7) Min req. bolt load
         Wop = H + HG                           '(11.5-8)
+
+        AB_min1 = Wa / fB
+        AB_min2 = Wop / fB
+        AB_min = IIf(AB_min1 < AB_min2, AB_min2, AB_min1)   'Take biggest
 
         '------------- Stepped Flange moment (11.5.3)------------
         Dim HD, HT As Double
         Dim hd_, hg_, ht_ As Double
         Dim Ma, Mop As Double
+
 
         HD = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
         HT = H - HD                 'Hydrostatic force via flange face
@@ -625,12 +632,21 @@ Public Class Form1
         Ma = W * hg_                        '(11.5-17)
         Mop = Hd * hd_ + Ht * ht_ + Hg * hg_ '(11.5-18)
 
+        '------------- Flange stresses and stress limit (11.5.4)------------
+        Dim CF, δb, K As Double
+
+        δb = NumericUpDown33.Value           'Distance adjacent bolts
+        CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
+        'K = Abs() / B                       '(11.5-20)
+
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.0")
         TextBox79.Text = H.ToString("0.0")
         TextBox81.Text = b_gasket.ToString("0.0")
-        TextBox84.Text = dn.ToString("0.0")         '[mm]
+        TextBox93.Text = G.ToString("0.0")
+        TextBox84.Text = dn.ToString("0.0")             '[mm]
+        TextBox94.Text = AB_min.ToString("0.0")         '[mm2] required bolt area
 
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
         TextBox87.Text = (Hg / 1000).ToString("0.0")     '[kN]
@@ -648,6 +664,7 @@ Public Class Form1
         TextBox91.Text = Ma.ToString("0.0")         '[mm]
         TextBox90.Text = Mop.ToString("0.0")        '[mm]
 
+        TextBox92.Text = CF.ToString("0.0")         '[-]
     End Sub
 
 
