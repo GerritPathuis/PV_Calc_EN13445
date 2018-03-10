@@ -30,6 +30,18 @@ Public Class Form1
    "Chap 6.5, Austenitic steel, rupture >35%; 3.0",
    "Chap 6.6, Cast steel; 1.9"}
 
+    'EN13455-3 ANNEX H
+    Public Shared gaskets() As String = {
+   "Rubber without fabric < 75 IRH;0.50;0000;0",
+   "Rubber without fabric > 75 IRH;1.00;1.40;0",
+   "Asbestor with binder 3.2mm    ;2.00;11.0;0",
+   "Asbestor with binder 1.6mm    ;2.75;25.5;0",
+   "Asbestor with binder 0.8mm    ;3.50;44.8;0",
+   "Spiral wound asbestos filled  ;2.50;69.0;0",
+   "Currogated copper or brass    ;3.00;31.0;0",
+   "Grooved aluminium             ;3.25;37.9;0"}
+
+
     Public Shared joint_eff() As String = {"  0.7", "  0.85", "  1.0"}
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -63,10 +75,17 @@ Public Class Form1
             ComboBox3.Items.Add(joint_eff(hh))
         Next hh
 
+        ComboBox4.Items.Clear()
+        For hh = 0 To (gaskets.Length - 1)  'Fill combobox4 materials
+            words = gaskets(hh).Split(separators, StringSplitOptions.None)
+            ComboBox4.Items.Add(words(0))
+        Next hh
+
         '----------------- prevent out of bounds------------------
         ComboBox1.SelectedIndex = CInt(IIf(ComboBox1.Items.Count > 0, 1, -1)) 'Select ..
         ComboBox2.SelectedIndex = CInt(IIf(ComboBox2.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox3.SelectedIndex = CInt(IIf(ComboBox3.Items.Count > 0, 0, -1)) 'Select ..
+        ComboBox4.SelectedIndex = CInt(IIf(ComboBox4.Items.Count > 0, 1, -1)) 'Select ..
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown1.ValueChanged
@@ -569,11 +588,12 @@ Public Class Form1
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged
         Calc_flange_Moments()
     End Sub
 
     Sub Calc_flange_Moments()
+        Dim words() As String
         Dim e, G, gt, HG, H, B, C, A As Double
         Dim db, dn, n As Double
         Dim fB As Double
@@ -589,6 +609,12 @@ Public Class Form1
 
         Dim CF, δb, K, I0 As Double
         Dim M1, M2, σθ As Double
+
+        If (ComboBox4.SelectedIndex > -1) Then          'Prevent exceptions
+            words = gaskets(ComboBox4.SelectedIndex).Split(separators, StringSplitOptions.None)
+            Double.TryParse(words(1), NumericUpDown30.Value)    'Gasket factor m
+            Double.TryParse(words(2), NumericUpDown31.Value)    'Gasket seat pressure y
+        End If
 
         A = NumericUpDown34.Value           'OD Flange 
         n = NumericUpDown25.Value           'Is No Bolts  
@@ -705,5 +731,8 @@ Public Class Form1
         NumericUpDown26.BackColor = IIf(Dia_bolt > db, Color.Red, Color.Yellow)    'Bolt dia
     End Sub
 
+    Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
+        Form2.Show()
+    End Sub
 
 End Class

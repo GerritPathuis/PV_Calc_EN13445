@@ -22,3 +22,4 @@ C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calculation.vb
 C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.exe
 C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.xml
 C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.pdb
+C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form2.resources
