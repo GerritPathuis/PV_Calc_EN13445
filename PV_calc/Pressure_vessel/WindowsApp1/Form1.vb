@@ -167,7 +167,7 @@ Public Class Form1
         TextBox18.Text = eq_ratio.ToString("0.00")
         TextBox19.Text = W_min.ToString("0")
         TextBox20.Text = (Ln - _deb / 2).ToString("0")
-        '----------- check--------
+        '----------- checks--------
         TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
     End Sub
 
@@ -569,7 +569,7 @@ Public Class Form1
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged
         Calc_flange_Moments()
     End Sub
 
@@ -577,32 +577,41 @@ Public Class Form1
         Dim e, G, gt, HG, H, B, C, A As Double
         Dim db, dn, n As Double
         Dim fB As Double
-        Dim W, b_gasket, b0_gasket, m As Double
+        Dim W, w_, b_gasket, b0_gasket, m As Double
         Dim y, Wa, Wop As Double
         Dim AB_min1, AB_min2, AB_min, Dia_bolt As Double
+
+        Dim HD, HT As Double
+        Dim hD_, hG_, hT_ As Double
+        Dim Ma, Mop As Double
+        Dim G0 As Double
+        Dim βT, βU, βY As Double
+
+        Dim CF, δb, K, I0 As Double
+        Dim M1, M2, σθ As Double
 
         A = NumericUpDown34.Value           'OD Flange 
         n = NumericUpDown25.Value           'Is No Bolts  
         C = NumericUpDown28.Value           'Bolt circle
-        W = NumericUpDown24.Value           'Width gasket
+        w_ = NumericUpDown24.Value          'Gasket width
         B = NumericUpDown23.Value           'ID Flange
         gt = NumericUpDown29.Value          'OD Gasket
         y = NumericUpDown31.Value           'Min seat stress
         m = NumericUpDown30.Value           'Gasket factor
-        db = NumericUpDown30.Value          'Dia bolt
+        db = NumericUpDown26.Value          'Dia bolt
         dn = db                             'Dia bolt nominal (niet af)
         fB = NumericUpDown27.Value          'Bolt design stress at oper-temp (Rp02/3)
         e = NumericUpDown32.Value           'Slip on flangethickness
 
-        '------------- bolting (11.5.2)------------
-        b0_gasket = w / 2
+        '------------- bolting ------------
+        b0_gasket = w_ / 2                  '(11.5.2)
 
         '------b_gasket = effective gasket width---------
         If b0_gasket <= 6.3 Then
             b_gasket = b0_gasket
             G = gt
         Else
-            b_gasket = 2.52 * Sqrt(b0_gasket)       '(11.5-4)
+            b_gasket = 2.52 * Sqrt(b0_gasket)  '(11.5-4)
             G = gt - 2 * b_gasket
         End If
 
@@ -614,32 +623,26 @@ Public Class Form1
         AB_min1 = Wa / fB
         AB_min2 = Wop / fB
         AB_min = IIf(AB_min1 < AB_min2, AB_min2, AB_min1)   'Take biggest
+
         '---- dia bolt---
         Dia_bolt = Sqrt((AB_min / n) * 4 / PI)
 
         '------------- Stepped Flange moment (11.5.3)------------
-        Dim HD, HT As Double
-        Dim hd_, hg_, ht_ As Double
-        Dim Ma, Mop As Double
-        Dim G0 As Double
-        Dim βT, βU, βY As Double
+
         HD = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
         HT = H - HD                 'Hydrostatic force via flange face
 
-        hd_ = (C - B) / 2                   '(11.5-13)
-        hg_ = (C - G) / 2                   '(11.5-14)
-        ht_ = (2 * C - B - G) / 4           '(11.5-15)
+        hD_ = (C - B) / 2                   '(11.5-13)
+        hG_ = (C - G) / 2                   '(11.5-14)
+        hT_ = (2 * C - B - G) / 4           '(11.5-15)
 
-        W = 0.5 * (db + dn) * fB
+        W = 0.5 * (db + dn) * fB            '(11.5-16)
 
-        Ma = W * hg_                        '(11.5-17)
-        Mop = Hd * hd_ + Ht * ht_ + Hg * hg_ '(11.5-18)
+        Ma = W * hG_                        '(11.5-17)
+        Mop = HD * hD_ + HT * hT_ + HG * hG_ '(11.5-18)
 
         '------------- Flange stresses and stress limit (11.5.4)------------
-        Dim CF, δb, K, I0 As Double
-        Dim M1, M2, σθ As Double
-
-        δb = NumericUpDown33.Value           'Distance adjacent bolts
+        δb = C * PI / n               '[mm] Distance adjacent bolts
         CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
         K = A / B                               '(11.5-21)
         G0 = e
@@ -677,13 +680,13 @@ Public Class Form1
         TextBox79.Text = (HD / 1000).ToString("0.0")     '[kN]
         TextBox75.Text = (HT / 1000).ToString("0.0")     '[kN]
 
-        TextBox80.Text = hd_.ToString("0.0")        '[mm]
-        TextBox86.Text = hg_.ToString("0.0")        '[mm]
-        TextBox88.Text = ht_.ToString("0.0")        '[mm]
+        TextBox80.Text = hD_.ToString("0.0")        '[mm]
+        TextBox86.Text = hG_.ToString("0.0")        '[mm]
+        TextBox88.Text = hT_.ToString("0.0")        '[mm]
         TextBox89.Text = W.ToString("0.0")          '[mm]
 
-        TextBox91.Text = Ma.ToString("0")         '[mm]
-        TextBox90.Text = Mop.ToString("0")        '[mm]
+        TextBox91.Text = Ma.ToString("0")           '[mm]
+        TextBox90.Text = Mop.ToString("0")          '[mm]
         TextBox92.Text = CF.ToString("0.0")         '[-]
         TextBox98.Text = βT.ToString("0.00")        '[-]
         TextBox97.Text = βU.ToString("0.00")        '[-]
@@ -692,8 +695,14 @@ Public Class Form1
 
         TextBox100.Text = M1.ToString("0")       '[-] Moment assembly
         TextBox101.Text = M2.ToString("0")       '[-] Moment operating
+        TextBox102.Text = σθ.ToString("0")       '[N/mm2]Tangential flange stress
+        TextBox103.Text = δb.ToString("0")       '[mm] Distance bolts
 
-        TextBox102.Text = σθ.ToString("0")       'Tangential flange stress
+        '-------------- checks --------------------
+        NumericUpDown28.BackColor = IIf(C <= B, Color.Red, Color.Yellow)    'Bolt diameter
+        NumericUpDown34.BackColor = IIf(A <= C, Color.Red, Color.Yellow)    'Flange OD
+        NumericUpDown24.BackColor = IIf(w_ > (A - B) / 2, Color.Red, Color.Yellow)    'Gasket width
+        NumericUpDown26.BackColor = IIf(Dia_bolt > db, Color.Red, Color.Yellow)    'Bolt dia
     End Sub
 
 
