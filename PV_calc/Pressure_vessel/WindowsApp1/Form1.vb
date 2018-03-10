@@ -569,7 +569,7 @@ Public Class Form1
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown33.ValueChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged
         Calc_flange_Moments()
     End Sub
 
@@ -637,6 +637,7 @@ Public Class Form1
 
         '------------- Flange stresses and stress limit (11.5.4)------------
         Dim CF, δb, K, I0 As Double
+        Dim M1, M2, σθ As Double
 
         δb = NumericUpDown33.Value           'Distance adjacent bolts
         CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
@@ -644,14 +645,20 @@ Public Class Form1
         G0 = e
         I0 = Sqrt(B * G0)                       '(11.5-22)
 
-        βT = K ^ 2 * (1 + 8.55246 * Log10(K)) - 1
+        βT = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1
         βT /= (1.0472 + 1.9448 * K ^ 2) * (K - 1)
 
-        βU = K ^ 2 * (1 + 8.55246 * Log10(K)) - 1
+        βU = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1
         βU /= 1.36136 * (K ^ 2 - 1) * (K - 1)
 
-        βY = 0.66845 + 5.7169 * (K ^ 2 * Log10(K)) / (K ^ 2 - 1)
-        βY *= 1 / (K - 1)
+        βY = 1 / (K - 1)
+        βY *= 0.66845 + 5.7169 * (K ^ 2 * Log10(K)) / (K ^ 2 - 1)
+
+        M1 = Ma * CF / B                '(11.5-26)
+        M2 = Mop * CF / B               '(11.5-27)
+
+        '----------- Loose flange method ----
+        σθ = βY * M2 / e ^ 2            '(11.5-35)
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.0")
@@ -659,7 +666,7 @@ Public Class Form1
         TextBox81.Text = b_gasket.ToString("0.0")
         TextBox93.Text = G.ToString("0.0")
         TextBox84.Text = dn.ToString("0.0")             '[mm]
-        TextBox94.Text = AB_min.ToString("0.0")         '[mm2] required bolt area
+        TextBox94.Text = AB_min.ToString("0")         '[mm2] required bolt area
         TextBox95.Text = Dia_bolt.ToString("0.0")       '[mm] calculated req. dia bolt
 
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
@@ -675,12 +682,18 @@ Public Class Form1
         TextBox88.Text = ht_.ToString("0.0")        '[mm]
         TextBox89.Text = W.ToString("0.0")          '[mm]
 
-        TextBox91.Text = Ma.ToString("0.0")         '[mm]
-        TextBox90.Text = Mop.ToString("0.0")        '[mm]
+        TextBox91.Text = Ma.ToString("0")         '[mm]
+        TextBox90.Text = Mop.ToString("0")        '[mm]
         TextBox92.Text = CF.ToString("0.0")         '[-]
         TextBox98.Text = βT.ToString("0.00")        '[-]
         TextBox97.Text = βU.ToString("0.00")        '[-]
         TextBox96.Text = βY.ToString("0.00")        '[-]
+        TextBox99.Text = K.ToString("0.00")         '[-]
+
+        TextBox100.Text = M1.ToString("0")       '[-] Moment assembly
+        TextBox101.Text = M2.ToString("0")       '[-] Moment operating
+
+        TextBox102.Text = σθ.ToString("0")       'Tangential flange stress
     End Sub
 
 
