@@ -34,13 +34,28 @@ Public Class Form1
     Public Shared gaskets() As String = {
    "Rubber without fabric < 75 IRH;0.50;0000;0",
    "Rubber without fabric > 75 IRH;1.00;1.40;0",
-   "Asbestor with binder 3.2mm    ;2.00;11.0;0",
-   "Asbestor with binder 1.6mm    ;2.75;25.5;0",
-   "Asbestor with binder 0.8mm    ;3.50;44.8;0",
+   "Asbestos with binder 3.2mm    ;2.00;11.0;0",
+   "Asbestos with binder 1.6mm    ;2.75;25.5;0",
+   "Asbestos with binder 0.8mm    ;3.50;44.8;0",
    "Spiral wound asbestos filled  ;2.50;69.0;0",
    "Currogated copper or brass    ;3.00;31.0;0",
-   "Grooved aluminium             ;3.25;37.9;0"}
+   "Grooved soft aluminium        ;3.25;37.9;0",
+   "Rubber o-ring < 75 IRH        ;0.25;0.70;0",
+   "Rubber o-ring > 75 IRH        ;0.25;1.40;0",
+   "Square Rubber ring < 75 IRH   ;0.25;1.00;0",
+   "Square Rubber ring > 75 IRH   ;0.25;2.80;0",
+   "NO seal                       ;0;0;0"}
 
+    'EN 10028-2 for steel
+    'EN 10028-7 for stainless steel
+    Public Shared steel() As String = {
+   "Material-------;50c;100;150;200;250;300;350;400;450;500;550;remarks--",
+   "1.0425 (P265GH);265;241;223;205;188;173;160;150;  0;  0;  0; max 400c",
+   "1.0473 (P355GH);343;323;299;275;252;232;214;202;  0;  0;  0; max 400c",
+   "1.4301 (304)   ;190;157;142;127;118;110;104; 98; 95; 92; 90; max 550c",
+   "1.4307 (304L)  ;180;147;132;118;108;100; 94; 89; 85; 81; 80; max 550c",
+   "1.4401 (316)   ;204;177;162;147;137;127;120;115;112;110;108; max 550c",
+   "1.4404 (316L)  ;200;166;152;137;127;118;113;108;103;100; 98; max 550c"}
 
     Public Shared joint_eff() As String = {"  0.7", "  0.85", "  1.0"}
 
@@ -64,28 +79,34 @@ Public Class Form1
 
 
         ComboBox1.Items.Clear()
-        For hh = 0 To (chap6.Length - 1)  'Fill combobox1 materials
+        For hh = 0 To (chap6.Length - 1)  'Fill combobox 
             words = chap6(hh).Split(separators, StringSplitOptions.None)
             ComboBox1.Items.Add(words(0))
         Next hh
 
         ComboBox2.Items.Clear()
-        For hh = 0 To (joint_eff.Length - 1)   'Fill combobox2 joint efficiency
+        For hh = 0 To (joint_eff.Length - 1)   'Fill combobox joint efficiency
             ComboBox2.Items.Add(joint_eff(hh))
             ComboBox3.Items.Add(joint_eff(hh))
         Next hh
 
         ComboBox4.Items.Clear()
-        For hh = 0 To (gaskets.Length - 1)  'Fill combobox4 materials
+        For hh = 0 To (gaskets.Length - 1)  'Fill combobox gasket materials
             words = gaskets(hh).Split(separators, StringSplitOptions.None)
             ComboBox4.Items.Add(words(0))
         Next hh
 
+        ComboBox5.Items.Clear()
+        For hh = 1 To (steel.Length - 1)  'Fill combobox steel
+            words = steel(hh).Split(separators, StringSplitOptions.None)
+            ComboBox5.Items.Add(words(0))
+        Next hh
         '----------------- prevent out of bounds------------------
         ComboBox1.SelectedIndex = CInt(IIf(ComboBox1.Items.Count > 0, 1, -1)) 'Select ..
         ComboBox2.SelectedIndex = CInt(IIf(ComboBox2.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox3.SelectedIndex = CInt(IIf(ComboBox3.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox4.SelectedIndex = CInt(IIf(ComboBox4.Items.Count > 0, 1, -1)) 'Select ..
+        ComboBox5.SelectedIndex = CInt(IIf(ComboBox5.Items.Count > 0, 0, -1)) 'Select ..
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown1.ValueChanged
@@ -190,15 +211,60 @@ Public Class Form1
         TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown6.ValueChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged, ComboBox5.SelectedIndexChanged
         Design_stress()
     End Sub
     Private Sub Design_stress()
-        Dim sf As Double
+        Dim sf, temp As Double
+        Dim words() As String
+        Dim y50, y100, y150, y200, y250, y300, y350, y400 As Double
+
+        If (ComboBox5.SelectedIndex > -1) Then          'Prevent exceptions
+            words = steel(ComboBox5.SelectedIndex + 1).Split(separators, StringSplitOptions.None)
+            TextBox3.Text = words(1)
+
+            TextBox104.Text = words(2)
+            TextBox105.Text = words(3)
+            TextBox106.Text = words(4)
+            TextBox107.Text = words(5)
+            TextBox108.Text = words(6)
+            TextBox109.Text = words(7)
+            TextBox110.Text = words(8)
+            Double.TryParse(words(1), y50)
+            Double.TryParse(words(2), y100)
+            Double.TryParse(words(3), y150)
+            Double.TryParse(words(4), y200)
+            Double.TryParse(words(5), y250)
+            Double.TryParse(words(6), y300)
+            Double.TryParse(words(7), y350)
+            Double.TryParse(words(8), y400)
+
+            temp = NumericUpDown5.Value
+            Select Case True
+                Case 50 > temp
+                    NumericUpDown10.Value = y50
+                Case 100 > temp
+                    NumericUpDown10.Value = y100
+                Case 150 > temp
+                    NumericUpDown10.Value = y150
+                Case 200 > temp
+                    NumericUpDown10.Value = y200
+                Case 250 > temp
+                    NumericUpDown10.Value = y250
+                Case 300 > temp
+                    NumericUpDown10.Value = y300
+                Case 350 > temp
+                    NumericUpDown10.Value = y350
+                Case 400 > temp
+                    NumericUpDown10.Value = y400
+                Case temp > 400
+                    MessageBox.Show("Problem temp too high")
+            End Select
+        End If
 
         _P = NumericUpDown4.Value                       'Calculation pressure [MPa=N/mm2]
         If (ComboBox1.SelectedIndex > -1) Then          'Prevent exceptions
-            Dim words() As String = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
+            words = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
             TextBox4.Text = sf.ToString                 'Safety factor
             NumericUpDown7.Value = NumericUpDown10.Value / sf
@@ -691,6 +757,7 @@ Public Class Form1
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.0")
+        TextBox76.Text = _fs.ToString("0")
         TextBox79.Text = H.ToString("0.0")
         TextBox81.Text = b_gasket.ToString("0.0")
         TextBox93.Text = G.ToString("0.0")
@@ -729,6 +796,7 @@ Public Class Form1
         NumericUpDown34.BackColor = IIf(A <= C, Color.Red, Color.Yellow)    'Flange OD
         NumericUpDown24.BackColor = IIf(w_ > (A - B) / 2, Color.Red, Color.Yellow)    'Gasket width
         NumericUpDown26.BackColor = IIf(Dia_bolt > db, Color.Red, Color.Yellow)    'Bolt dia
+        TextBox102.BackColor = IIf(σθ > _fs, Color.Red, Color.Yellow)    'Flange stress
     End Sub
 
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
