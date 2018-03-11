@@ -57,6 +57,20 @@ Public Class Form1
    "1.4401 (316)   ;204;177;162;147;137;127;120;115;112;110;108; max 550c",
    "1.4404 (316L)  ;200;166;152;137;127;118;113;108;103;100; 98; max 550c"}
 
+    'EN 1993-1-8 Bolts (Eurocode 3)
+    Public Shared Bolt() As String = {
+   "Bolt class-----;  ultimate;yield 0.2",
+   "Bolt class 4.6 ;  400;240",
+   "Bolt class 5.6 ;  500;300",
+   "Bolt class 8.8 ;  800;640",
+   "Bolt class 10.9; 1000;900",
+   "Bolt class A2-60; 600;210",
+   "Bolt class A2-70; 700;450",
+   "Bolt class A2-80; 800;600",
+   "Bolt class A4-60; 600;210",
+   "Bolt class A4-70; 700;450",
+   "Bolt class A4-80; 800;600"}
+
     Public Shared joint_eff() As String = {"  0.7", "  0.85", "  1.0"}
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -101,12 +115,19 @@ Public Class Form1
             words = steel(hh).Split(separators, StringSplitOptions.None)
             ComboBox5.Items.Add(words(0))
         Next hh
+
+        ComboBox6.Items.Clear()
+        For hh = 1 To (Bolt.Length - 1)  'Fill combobox steel
+            words = Bolt(hh).Split(separators, StringSplitOptions.None)
+            ComboBox6.Items.Add(words(0))
+        Next hh
         '----------------- prevent out of bounds------------------
         ComboBox1.SelectedIndex = CInt(IIf(ComboBox1.Items.Count > 0, 1, -1)) 'Select ..
         ComboBox2.SelectedIndex = CInt(IIf(ComboBox2.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox3.SelectedIndex = CInt(IIf(ComboBox3.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox4.SelectedIndex = CInt(IIf(ComboBox4.Items.Count > 0, 1, -1)) 'Select ..
         ComboBox5.SelectedIndex = CInt(IIf(ComboBox5.Items.Count > 0, 0, -1)) 'Select ..
+        ComboBox6.SelectedIndex = CInt(IIf(ComboBox6.Items.Count > 0, 0, -1)) 'Select ..
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown1.ValueChanged
@@ -654,7 +675,7 @@ Public Class Form1
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged
         Calc_flange_Moments()
     End Sub
 
@@ -675,11 +696,19 @@ Public Class Form1
 
         Dim CF, δb, K, I0 As Double
         Dim M1, M2, σθ As Double
+        Dim temp As Double
 
         If (ComboBox4.SelectedIndex > -1) Then          'Prevent exceptions
             words = gaskets(ComboBox4.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), NumericUpDown30.Value)    'Gasket factor m
             Double.TryParse(words(2), NumericUpDown31.Value)    'Gasket seat pressure y
+        End If
+
+        If (ComboBox6.SelectedIndex > -1) Then          'Prevent exceptions
+            words = Bolt(ComboBox6.SelectedIndex + 1).Split(separators, StringSplitOptions.None)
+
+            Double.TryParse(words(1), temp)    'Bolt stress
+            NumericUpDown27.Value = temp / 3
         End If
 
         A = NumericUpDown34.Value           'OD Flange 
@@ -766,7 +795,7 @@ Public Class Form1
         TextBox95.Text = Dia_bolt.ToString("0.0")       '[mm] calculated req. dia bolt
 
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
-        TextBox87.Text = (Hg / 1000).ToString("0.0")     '[kN]
+        TextBox87.Text = (HG / 1000).ToString("0.0")     '[kN]
         TextBox82.Text = (Wa / 1000).ToString("0.0")     '[kN]
         TextBox83.Text = (Wop / 1000).ToString("0.0")    '[kN]
 
