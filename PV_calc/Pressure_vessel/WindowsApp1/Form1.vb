@@ -241,7 +241,7 @@ Public Class Form1
         TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged, ComboBox5.SelectedIndexChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged, ComboBox5.SelectedIndexChanged, CheckBox2.CheckedChanged
         Design_stress()
     End Sub
     Private Sub Design_stress()
@@ -850,7 +850,7 @@ Public Class Form1
         Dim oPara1, oPara2 As Word.Paragraph
         Dim row, font_sizze As Integer
         Dim ufilename As String
-        ufilename = "PV_calc_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+        ufilename = "PV_calc_" & TextBox66.Text.Substring(0, 8) & "_" & TextBox69.Text.Substring(0, 8) & "_" & TextBox70.Text.Substring(0, 8) & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
         Try
             oWord = New Word.Application()
@@ -1178,7 +1178,7 @@ Public Class Form1
     'Save control settings and case_x_conditions to file
     Private Sub Save_tofile()
         Dim temp_string As String
-        Dim filename As String = "PV_Calc_" & TextBox7.Text & "_" & TextBox8.Text & DateTime.Now.ToString("_yyyy_MM_dd") & ".vtk"
+        Dim filename As String = "PV_Calc_" & TextBox66.Text & "_" & TextBox69.Text & "_" & TextBox70.Text & DateTime.Now.ToString("_yyyy_MM_dd") & ".vtk"
         Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
         Dim i As Integer
 
@@ -1186,7 +1186,7 @@ Public Class Form1
             TextBox8.Text = "-"
         End If
 
-        temp_string = TextBox7.Text & ";" & TextBox8.Text & ";" & TextBox9.Text & ";"
+        temp_string = TextBox66.Text & ";" & TextBox69.Text & ";" & TextBox70.Text & ";"
         temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
 
         '-------- find all numeric, combobox, checkbox and radiobutton controls -----------------
