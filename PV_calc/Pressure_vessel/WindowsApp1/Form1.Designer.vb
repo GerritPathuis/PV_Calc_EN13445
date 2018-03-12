@@ -25,6 +25,8 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.TextBox70 = New System.Windows.Forms.TextBox()
         Me.TextBox69 = New System.Windows.Forms.TextBox()
@@ -539,10 +541,9 @@ Partial Class Form1
         Me.NumericUpDown23 = New System.Windows.Forms.NumericUpDown()
         Me.Label236 = New System.Windows.Forms.Label()
         Me.Label237 = New System.Windows.Forms.Label()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
@@ -650,6 +651,26 @@ Partial Class Form1
         Me.TabPage1.Text = "Material and operating conditions"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'Button11
+        '
+        Me.Button11.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.Button11.Location = New System.Drawing.Point(660, 73)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(189, 34)
+        Me.Button11.TabIndex = 95
+        Me.Button11.Text = "Save Project"
+        Me.Button11.UseVisualStyleBackColor = False
+        '
+        'Button10
+        '
+        Me.Button10.BackColor = System.Drawing.Color.SpringGreen
+        Me.Button10.Location = New System.Drawing.Point(660, 33)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(189, 34)
+        Me.Button10.TabIndex = 94
+        Me.Button10.Text = "Retrieve Project"
+        Me.Button10.UseVisualStyleBackColor = False
+        '
         'GroupBox15
         '
         Me.GroupBox15.Controls.Add(Me.TextBox70)
@@ -692,9 +713,9 @@ Partial Class Form1
         Me.Label194.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label194.Location = New System.Drawing.Point(13, 67)
         Me.Label194.Name = "Label194"
-        Me.Label194.Size = New System.Drawing.Size(71, 16)
+        Me.Label194.Size = New System.Drawing.Size(66, 16)
         Me.Label194.TabIndex = 144
-        Me.Label194.Text = "Dissy type"
+        Me.Label194.Text = "Vessel ID"
         '
         'Label54
         '
@@ -702,9 +723,9 @@ Partial Class Form1
         Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label54.Location = New System.Drawing.Point(13, 42)
         Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(70, 16)
+        Me.Label54.Size = New System.Drawing.Size(87, 16)
         Me.Label54.TabIndex = 143
-        Me.Label54.Text = "Item name"
+        Me.Label54.Text = "Project name"
         '
         'Label40
         '
@@ -1010,6 +1031,7 @@ Partial Class Form1
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.CheckBox2)
         Me.GroupBox1.Controls.Add(Me.Label21)
         Me.GroupBox1.Controls.Add(Me.ComboBox5)
         Me.GroupBox1.Controls.Add(Me.Label68)
@@ -1057,7 +1079,7 @@ Partial Class Form1
         '
         Me.Label68.AutoSize = True
         Me.Label68.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label68.Location = New System.Drawing.Point(7, 192)
+        Me.Label68.Location = New System.Drawing.Point(7, 199)
         Me.Label68.Name = "Label68"
         Me.Label68.Size = New System.Drawing.Size(275, 18)
         Me.Label68.TabIndex = 139
@@ -1104,9 +1126,7 @@ Partial Class Form1
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(13, 164)
+        Me.CheckBox1.Location = New System.Drawing.Point(13, 154)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(166, 17)
         Me.CheckBox1.TabIndex = 119
@@ -6238,29 +6258,19 @@ Partial Class Form1
         Me.Label237.TabIndex = 177
         Me.Label237.Text = "Inside diameter Flange "
         '
-        'Button10
-        '
-        Me.Button10.BackColor = System.Drawing.Color.SpringGreen
-        Me.Button10.Location = New System.Drawing.Point(660, 33)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(189, 34)
-        Me.Button10.TabIndex = 94
-        Me.Button10.Text = "Retrieve Project"
-        Me.Button10.UseVisualStyleBackColor = False
-        '
-        'Button11
-        '
-        Me.Button11.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.Button11.Location = New System.Drawing.Point(660, 73)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(189, 34)
-        Me.Button11.TabIndex = 95
-        Me.Button11.Text = "Save Project"
-        Me.Button11.UseVisualStyleBackColor = False
-        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(13, 174)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(253, 17)
+        Me.CheckBox2.TabIndex = 142
+        Me.CheckBox2.Text = "EN 14460:2006 Shock resistent design (fs * 1.5)"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -6268,6 +6278,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(984, 663)
         Me.Controls.Add(Me.TabControl1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.Text = "Pressure Vessel Calculation acc. EN13445"
         Me.TabControl1.ResumeLayout(False)
@@ -6888,4 +6899,5 @@ Partial Class Form1
     Friend WithEvents Button10 As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents CheckBox2 As CheckBox
 End Class

@@ -93,9 +93,11 @@ Public Class Form1
 
         TextBox22.Text =
         "Important note" & vbCrLf &
-        "The yield strength is detremined from the mill certificate" & vbCrLf &
-        "given at the operating temperature. Different for piping and sheet steel" & vbCrLf &
-        "Safety factors follow the Eurocode"
+        "The yield strength follows EN 10028-2:2009 (mild steel)" & vbCrLf &
+        "and EN 10028-7:2016 for stainless steel at given temperature." & vbCrLf &
+        "Safety factors follow the Eurocode" & vbCrLf & vbCrLf &
+        "EN 14460:2006, Explosion resistand design follow EN 13445" & vbCrLf &
+        "for Explosion-Pressure-Shock-Resistant design stress multiplied bu 1.5"
 
         TextBox66.Text = "P" & DateTime.Now.ToString("yy") & ".10"
 
@@ -269,21 +271,21 @@ Public Class Form1
 
             temp = NumericUpDown5.Value
             Select Case True
-                Case 50 > temp
+                Case 50 >= temp
                     NumericUpDown10.Value = y50
-                Case 100 > temp
+                Case 100 >= temp
                     NumericUpDown10.Value = y100
-                Case 150 > temp
+                Case 150 >= temp
                     NumericUpDown10.Value = y150
-                Case 200 > temp
+                Case 200 >= temp
                     NumericUpDown10.Value = y200
-                Case 250 > temp
+                Case 250 >= temp
                     NumericUpDown10.Value = y250
-                Case 300 > temp
+                Case 300 >= temp
                     NumericUpDown10.Value = y300
-                Case 350 > temp
+                Case 350 >= temp
                     NumericUpDown10.Value = y350
-                Case 400 > temp
+                Case 400 >= temp
                     NumericUpDown10.Value = y400
                 Case temp > 400
                     MessageBox.Show("Problem temp too high")
@@ -297,6 +299,7 @@ Public Class Form1
             TextBox4.Text = sf.ToString                 'Safety factor
             NumericUpDown7.Value = NumericUpDown10.Value / sf
             If CheckBox1.Checked Then NumericUpDown7.Value *= 0.9   'PED cat IV
+            If CheckBox2.Checked Then NumericUpDown7.Value *= 1.5   'EN 14460 (Shock resistant)
             _fs = NumericUpDown7.Value      'allowable stress
         End If
     End Sub
