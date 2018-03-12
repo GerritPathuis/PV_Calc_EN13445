@@ -1278,9 +1278,9 @@ Public Class Form1
 
             '----- retrieve case condition-----
             words = control_words(0).Split(separators, StringSplitOptions.None) 'Split first line the read file content
-            TextBox7.Text = words(0)                  'Project number
-            TextBox8.Text = words(1)                  'Item name
-            TextBox9.Text = words(2)                  'Fan yupe
+            TextBox66.Text = words(0)                  'Project number
+            TextBox69.Text = words(1)                  'Project name
+            TextBox70.Text = words(2)                  'Vessel ID
 
             '---------- terugzetten numeric controls -----------------
             FindControlRecursive(all_num, Me, GetType(NumericUpDown))
