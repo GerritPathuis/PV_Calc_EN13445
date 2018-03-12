@@ -25,3 +25,7 @@ C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.pdb
 C:\Repositories\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form2.resources
 C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\PV_calculation.vbproj.ResolveComReference.cache
 C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form2.resources
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\bin\Debug\WindowsApp1.exe.manifest
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\bin\Debug\WindowsApp1.application
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.exe.manifest
+C:\Repos\PV_Calc\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.application
