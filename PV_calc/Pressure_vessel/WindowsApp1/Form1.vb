@@ -3,6 +3,7 @@ Imports System.Text
 Imports System.Math
 Imports System.Globalization
 Imports System.Threading
+Imports Word = Microsoft.Office.Interop.Word
 
 '-------------------------------------------------------
 'Pressure vessel calculation according to EN 13445
@@ -22,6 +23,11 @@ Public Class Form1
     Public _eb As Double        'Effective thickness nozzle thickness
 
     Dim separators() As String = {";"}
+
+    '----------- directory's-----------
+    Dim dirpath_Eng As String = "N:\Engineering\VBasic\PV_calc_input\"
+    Dim dirpath_Rap As String = "N:\Engineering\VBasic\PV_calc_rapport_copy\"
+    Dim dirpath_Home As String = "C:\Temp\"
 
     'Chapter 6, Max allowed values for pressure parts
     Public Shared chap6() As String = {
@@ -807,16 +813,16 @@ Public Class Form1
         TextBox88.Text = hT_.ToString("0.0")        '[mm]
         TextBox89.Text = W.ToString("0.0")          '[mm]
 
-        TextBox91.Text = Ma.ToString("0")           '[mm]
-        TextBox90.Text = Mop.ToString("0")          '[mm]
+        TextBox91.Text = (Ma * 10 ^ -3).ToString("0")   '[mm]
+        TextBox90.Text = (Mop * 10 ^ -3).ToString("0")  '[mm]
         TextBox92.Text = CF.ToString("0.0")         '[-]
         TextBox98.Text = βT.ToString("0.00")        '[-]
         TextBox97.Text = βU.ToString("0.00")        '[-]
         TextBox96.Text = βY.ToString("0.00")        '[-]
         TextBox99.Text = K.ToString("0.00")         '[-]
 
-        TextBox100.Text = M1.ToString("0")       '[-] Moment assembly
-        TextBox101.Text = M2.ToString("0")       '[-] Moment operating
+        TextBox100.Text = (M1 * 10 ^ -3).ToString("0.00")    '[-] Moment assembly
+        TextBox101.Text = (M2 * 10 ^ -3).ToString("0.00")    '[-] Moment operating
         TextBox102.Text = σθ.ToString("0")       '[N/mm2]Tangential flange stress
         TextBox103.Text = δb.ToString("0")       '[mm] Distance bolts
 
@@ -832,4 +838,325 @@ Public Class Form1
         Form2.Show()
     End Sub
 
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Dim oWord As Word.Application ' = Nothing
+
+        Dim oDoc As Word.Document
+        Dim oTable As Word.Table
+        Dim oPara1, oPara2 As Word.Paragraph
+        Dim row, font_sizze As Integer
+        Dim ufilename As String
+        ufilename = "PV_calc_" & TextBox7.Text & "_" & TextBox8.Text & "_" & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+
+        Try
+            oWord = New Word.Application()
+
+            'Start Word and open the document template. 
+            font_sizze = 9
+            oWord = CType(CreateObject("Word.Application"), Word.Application)
+            oWord.Visible = True
+            oDoc = oWord.Documents.Add
+
+            oDoc.PageSetup.TopMargin = 35
+            oDoc.PageSetup.BottomMargin = 15
+
+            'Insert a paragraph at the beginning of the document. 
+            oPara1 = oDoc.Content.Paragraphs.Add
+
+            oPara1.Range.Text = "VTK Engineering"
+            oPara1.Range.Font.Name = "Arial"
+            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Bold = CInt(True)
+            oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
+            oPara1.Range.InsertParagraphAfter()
+
+            oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
+            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Format.SpaceAfter = 1
+            oPara2.Range.Font.Bold = CInt(False)
+            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445" & vbCrLf
+            oPara2.Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 2)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 2).Range.Text = TextBox69.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Project number "
+            oTable.Cell(row, 2).Range.Text = TextBox66.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Pressure vessel id"
+            oTable.Cell(row, 2).Range.Text = TextBox70.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Author"
+            oTable.Cell(row, 2).Range.Text = Environment.UserName
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Date"
+            oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "File name"
+            oTable.Cell(row, 2).Range.Text = ufilename
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(4)
+
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 12, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Flange Input Data"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Internal Pressure"
+            oTable.Cell(row, 2).Range.Text = TextBox77.Text
+            oTable.Cell(row, 3).Range.Text = "[bar]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Flange design stress"
+            oTable.Cell(row, 2).Range.Text = TextBox76.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Flange OD"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown34.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Flange ID"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown23.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Bolt circle diameter"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown28.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Slip on flange thicknes"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown32.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Flange face Gasket width"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown24.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Gasket OD"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown29.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Gasket material"
+            oTable.Cell(row, 2).Range.Text = ComboBox4.Text.Substring(0, 24)
+            oTable.Cell(row, 3).Range.Text = ""
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Gasket factor m"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown30.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Gasket factor y"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown31.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[-]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------"Bolting 11.4.1"---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Bolting 11.4.1"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Number of Bolts"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown25.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Bolt diameter"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown26.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Bolting class"
+            oTable.Cell(row, 2).Range.Text = ComboBox6.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Bolt design stress"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown27.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Bolt required dia"
+            oTable.Cell(row, 2).Range.Text = TextBox95.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------"Bolt Loads and area's 11.5.2"---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 7, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Bolt Loads and area's 11.5.2"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Effective Gasket width"
+            oTable.Cell(row, 2).Range.Text = TextBox81.Text
+            oTable.Cell(row, 3).Range.Text = "[N]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Diameter Gasket load reaction"
+            oTable.Cell(row, 2).Range.Text = TextBox93.Text
+            oTable.Cell(row, 3).Range.Text = "[N]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Total Hydrostatic force"
+            oTable.Cell(row, 2).Range.Text = TextBox85.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Compression load on Gasket"
+            oTable.Cell(row, 2).Range.Text = TextBox87.Text
+            oTable.Cell(row, 3).Range.Text = "[kN]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Min bolt load for Assembly"
+            oTable.Cell(row, 2).Range.Text = TextBox82.Text
+            oTable.Cell(row, 3).Range.Text = "[kN]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Min bolt load for Operating"
+            oTable.Cell(row, 2).Range.Text = TextBox83.Text
+            oTable.Cell(row, 3).Range.Text = "[kN]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------"Flange moments 11.5.3"---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 9, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Flange moments 11.5.3"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Hydrostic force via shell"
+            oTable.Cell(row, 2).Range.Text = TextBox79.Text
+            oTable.Cell(row, 3).Range.Text = "[N]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Hydrostic force flange face"
+            oTable.Cell(row, 2).Range.Text = TextBox75.Text
+            oTable.Cell(row, 3).Range.Text = "[N]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Radial distance bolt circle"
+            oTable.Cell(row, 2).Range.Text = TextBox80.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Rad dist Bolt circle-HD"
+            oTable.Cell(row, 2).Range.Text = TextBox86.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Dist gasket load to bolt circle"
+            oTable.Cell(row, 2).Range.Text = TextBox88.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Design load assembly"
+            oTable.Cell(row, 2).Range.Text = TextBox89.Text
+            oTable.Cell(row, 3).Range.Text = "[N]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Total moment assembly condition"
+            oTable.Cell(row, 2).Range.Text = TextBox91.Text
+            oTable.Cell(row, 3).Range.Text = "[Nm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Total moment operating condition"
+            oTable.Cell(row, 2).Range.Text = TextBox90.Text
+            oTable.Cell(row, 3).Range.Text = "[Nm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+
+            '---------"Flange stress 11.5.4"---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Flange stress 11.5.4"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Distance bolts"
+            oTable.Cell(row, 2).Range.Text = TextBox103.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Bolt pich factor"
+            oTable.Cell(row, 2).Range.Text = TextBox92.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Moment assembly"
+            oTable.Cell(row, 2).Range.Text = TextBox100.Text
+            oTable.Cell(row, 3).Range.Text = "[Nm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Moment operating"
+            oTable.Cell(row, 2).Range.Text = TextBox101.Text
+            oTable.Cell(row, 3).Range.Text = "[Nm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Tangential Flange Stress"
+            oTable.Cell(row, 2).Range.Text = TextBox102.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '------------------save picture ---------------- 
+            'Chart1.SaveImage("c:\Temp\MainChart.gif", System.Drawing.Imaging.ImageFormat.Gif)
+            'oPara4 = oDoc.Content.Paragraphs.Add
+            'oPara4.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+            'oPara4.Range.InlineShapes.AddPicture("c:\Temp\MainChart.gif")
+            'oPara4.Range.InlineShapes.Item(1).LockAspectRatio = CType(True, Microsoft.Office.Core.MsoTriState)
+            'oPara4.Range.InlineShapes.Item(1).Width = 310
+            'oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+
+            '--------------Save file word file------------------
+            'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx
+
+            If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
+            If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
+            If (Not System.IO.Directory.Exists(dirpath_Home)) Then System.IO.Directory.CreateDirectory(dirpath_Home)
+
+            If Directory.Exists(dirpath_Rap) Then
+                oWord.ActiveDocument.SaveAs(dirpath_Rap & ufilename)
+            Else
+                oWord.ActiveDocument.SaveAs(dirpath_Home & ufilename)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
 End Class
