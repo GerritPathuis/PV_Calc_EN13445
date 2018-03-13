@@ -850,7 +850,7 @@ Public Class Form1
         Dim oPara1, oPara2 As Word.Paragraph
         Dim row, font_sizze As Integer
         Dim ufilename As String
-        ufilename = "PV_calc_" & TextBox66.Text.Substring(0, 8) & "_" & TextBox69.Text.Substring(0, 8) & "_" & TextBox70.Text.Substring(0, 8) & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+        ufilename = "PV_calc_" & TextBox66.Text & "_" & TextBox69.Text & "_" & TextBox70.Text & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
         Try
             oWord = New Word.Application()

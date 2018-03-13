@@ -689,6 +689,7 @@ Partial Class Form1
         'TextBox70
         '
         Me.TextBox70.Location = New System.Drawing.Point(136, 67)
+        Me.TextBox70.MaxLength = 15
         Me.TextBox70.Name = "TextBox70"
         Me.TextBox70.Size = New System.Drawing.Size(310, 20)
         Me.TextBox70.TabIndex = 146
@@ -696,6 +697,7 @@ Partial Class Form1
         'TextBox69
         '
         Me.TextBox69.Location = New System.Drawing.Point(136, 41)
+        Me.TextBox69.MaxLength = 15
         Me.TextBox69.Name = "TextBox69"
         Me.TextBox69.Size = New System.Drawing.Size(310, 20)
         Me.TextBox69.TabIndex = 145
@@ -703,6 +705,7 @@ Partial Class Form1
         'TextBox66
         '
         Me.TextBox66.Location = New System.Drawing.Point(136, 15)
+        Me.TextBox66.MaxLength = 15
         Me.TextBox66.Name = "TextBox66"
         Me.TextBox66.Size = New System.Drawing.Size(310, 20)
         Me.TextBox66.TabIndex = 142
@@ -1054,7 +1057,7 @@ Partial Class Form1
         Me.GroupBox1.Size = New System.Drawing.Size(573, 228)
         Me.GroupBox1.TabIndex = 89
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Material shell and flanges"
+        Me.GroupBox1.Text = "Material shell and flanges Yield strength (0.2%) acc. EN 10028-2 and EN 10028-7"
         '
         'CheckBox2
         '
@@ -1078,11 +1081,12 @@ Partial Class Form1
         '
         'ComboBox5
         '
+        Me.ComboBox5.BackColor = System.Drawing.Color.Yellow
         Me.ComboBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Location = New System.Drawing.Point(275, 22)
+        Me.ComboBox5.Location = New System.Drawing.Point(339, 22)
         Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(221, 24)
+        Me.ComboBox5.Size = New System.Drawing.Size(157, 24)
         Me.ComboBox5.TabIndex = 140
         '
         'Label68
@@ -1127,6 +1131,7 @@ Partial Class Form1
         '
         'TextBox4
         '
+        Me.TextBox4.Enabled = False
         Me.TextBox4.Location = New System.Drawing.Point(411, 106)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(85, 20)
@@ -1155,6 +1160,7 @@ Partial Class Form1
         '
         'ComboBox1
         '
+        Me.ComboBox1.BackColor = System.Drawing.Color.Yellow
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(275, 79)
         Me.ComboBox1.Name = "ComboBox1"
@@ -1216,6 +1222,7 @@ Partial Class Form1
         '
         'NumericUpDown7
         '
+        Me.NumericUpDown7.Enabled = False
         Me.NumericUpDown7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NumericUpDown7.Location = New System.Drawing.Point(411, 132)
         Me.NumericUpDown7.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
@@ -3028,10 +3035,10 @@ Partial Class Form1
         'Label149
         '
         Me.Label149.AutoSize = True
-        Me.Label149.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label149.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label149.Location = New System.Drawing.Point(450, 394)
         Me.Label149.Name = "Label149"
-        Me.Label149.Size = New System.Drawing.Size(36, 16)
+        Me.Label149.Size = New System.Drawing.Size(30, 13)
         Me.Label149.TabIndex = 212
         Me.Label149.Text = "<----"
         '
@@ -3262,20 +3269,20 @@ Partial Class Form1
         'Label132
         '
         Me.Label132.AutoSize = True
-        Me.Label132.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label132.Location = New System.Drawing.Point(318, 393)
+        Me.Label132.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label132.Location = New System.Drawing.Point(318, 396)
         Me.Label132.Name = "Label132"
-        Me.Label132.Size = New System.Drawing.Size(16, 16)
+        Me.Label132.Size = New System.Drawing.Size(14, 13)
         Me.Label132.TabIndex = 186
         Me.Label132.Text = "e"
         '
         'Label133
         '
         Me.Label133.AutoSize = True
-        Me.Label133.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label133.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label133.Location = New System.Drawing.Point(17, 393)
         Me.Label133.Name = "Label133"
-        Me.Label133.Size = New System.Drawing.Size(245, 16)
+        Me.Label133.Size = New System.Drawing.Size(239, 13)
         Me.Label133.TabIndex = 185
         Me.Label133.Text = "Required wall thickess (the thickest one)"
         '
@@ -3475,6 +3482,7 @@ Partial Class Form1
         'TextBox48
         '
         Me.TextBox48.Enabled = False
+        Me.TextBox48.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox48.Location = New System.Drawing.Point(356, 393)
         Me.TextBox48.Name = "TextBox48"
         Me.TextBox48.Size = New System.Drawing.Size(85, 20)
@@ -3968,16 +3976,17 @@ Partial Class Form1
         'Label166
         '
         Me.Label166.AutoSize = True
-        Me.Label166.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label166.Location = New System.Drawing.Point(373, 286)
+        Me.Label166.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label166.Location = New System.Drawing.Point(373, 288)
         Me.Label166.Name = "Label166"
-        Me.Label166.Size = New System.Drawing.Size(38, 16)
+        Me.Label166.Size = New System.Drawing.Size(33, 13)
         Me.Label166.TabIndex = 192
         Me.Label166.Text = "[mm]"
         '
         'TextBox58
         '
         Me.TextBox58.Enabled = False
+        Me.TextBox58.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox58.Location = New System.Drawing.Point(279, 285)
         Me.TextBox58.Name = "TextBox58"
         Me.TextBox58.Size = New System.Drawing.Size(85, 20)
@@ -3987,20 +3996,20 @@ Partial Class Form1
         'Label167
         '
         Me.Label167.AutoSize = True
-        Me.Label167.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label167.Location = New System.Drawing.Point(241, 285)
+        Me.Label167.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label167.Location = New System.Drawing.Point(241, 287)
         Me.Label167.Name = "Label167"
-        Me.Label167.Size = New System.Drawing.Size(16, 16)
+        Me.Label167.Size = New System.Drawing.Size(14, 13)
         Me.Label167.TabIndex = 190
         Me.Label167.Text = "e"
         '
         'Label168
         '
         Me.Label168.AutoSize = True
-        Me.Label168.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label168.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label168.Location = New System.Drawing.Point(17, 286)
         Me.Label168.Name = "Label168"
-        Me.Label168.Size = New System.Drawing.Size(121, 16)
+        Me.Label168.Size = New System.Drawing.Size(115, 13)
         Me.Label168.TabIndex = 189
         Me.Label168.Text = "Endplate thickness"
         '
@@ -4402,10 +4411,10 @@ Partial Class Form1
         'Label211
         '
         Me.Label211.AutoSize = True
-        Me.Label211.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label211.Location = New System.Drawing.Point(394, 131)
+        Me.Label211.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label211.Location = New System.Drawing.Point(394, 133)
         Me.Label211.Name = "Label211"
-        Me.Label211.Size = New System.Drawing.Size(38, 16)
+        Me.Label211.Size = New System.Drawing.Size(33, 13)
         Me.Label211.TabIndex = 181
         Me.Label211.Text = "[mm]"
         '
@@ -4455,6 +4464,7 @@ Partial Class Form1
         'TextBox71
         '
         Me.TextBox71.Enabled = False
+        Me.TextBox71.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox71.Location = New System.Drawing.Point(300, 130)
         Me.TextBox71.Name = "TextBox71"
         Me.TextBox71.Size = New System.Drawing.Size(85, 20)
@@ -4464,20 +4474,20 @@ Partial Class Form1
         'Label217
         '
         Me.Label217.AutoSize = True
-        Me.Label217.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label217.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label217.Location = New System.Drawing.Point(262, 131)
         Me.Label217.Name = "Label217"
-        Me.Label217.Size = New System.Drawing.Size(16, 16)
+        Me.Label217.Size = New System.Drawing.Size(14, 13)
         Me.Label217.TabIndex = 170
         Me.Label217.Text = "e"
         '
         'Label218
         '
         Me.Label218.AutoSize = True
-        Me.Label218.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label218.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label218.Location = New System.Drawing.Point(17, 132)
         Me.Label218.Name = "Label218"
-        Me.Label218.Size = New System.Drawing.Size(109, 16)
+        Me.Label218.Size = New System.Drawing.Size(103, 13)
         Me.Label218.TabIndex = 169
         Me.Label218.Text = "Flange thickness"
         '
