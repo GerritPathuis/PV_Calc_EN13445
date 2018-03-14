@@ -671,18 +671,31 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click, TabPage8.Enter, NumericUpDown22.ValueChanged
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click, TabPage8.Enter, NumericUpDown22.ValueChanged, NumericUpDown6.ValueChanged
         '10.5.3 Flat end with a full-face gasket 
         Dim e_flange, dia_bolt As Double
+        Dim d, d_procent, G, Y2, e_pierced As Double
 
         dia_bolt = NumericUpDown22.Value
         e_flange = 0.41 * dia_bolt * Sqrt(_P / _fs)
+
+        d_procent = NumericUpDown6.Value / 100
+        d = d_procent * dia_bolt
+
+        G = dia_bolt                           'NIET VOLGENS DE REGELS ESTIMATE
+
+        Y2 = Sqrt(G / (G - d))
+        e_pierced = e_flange * Y2
 
         TextBox68.Text = _P.ToString("0.0")
         TextBox67.Text = (_P * 10).ToString("0.0")
         TextBox63.Text = _fs.ToString("0.0")
         TextBox71.Text = e_flange.ToString("0.0")
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
+
+        TextBox73.Text = d.ToString("0")
+        TextBox112.Text = Y2.ToString("0.00")
+        TextBox111.Text = e_pierced.ToString("0.0")
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged
@@ -798,6 +811,7 @@ Public Class Form1
         TextBox78.Text = _P.ToString("0.0")
         TextBox76.Text = _fs.ToString("0")
         TextBox79.Text = H.ToString("0.0")
+        TextBox72.Text = b0_gasket.ToString("0.0")
         TextBox81.Text = b_gasket.ToString("0.0")
         TextBox93.Text = G.ToString("0.0")
         TextBox84.Text = dn.ToString("0.0")             '[mm]
@@ -1032,7 +1046,7 @@ Public Class Form1
             row += 1
             oTable.Cell(row, 1).Range.Text = "Total Hydrostatic force"
             oTable.Cell(row, 2).Range.Text = TextBox85.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[kN]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Compression load on Gasket"
             oTable.Cell(row, 2).Range.Text = TextBox87.Text
@@ -1371,4 +1385,6 @@ Public Class Form1
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Read_file()
     End Sub
+
+
 End Class
