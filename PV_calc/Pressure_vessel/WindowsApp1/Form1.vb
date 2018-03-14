@@ -692,7 +692,6 @@ Public Class Form1
         TextBox63.Text = _fs.ToString("0.0")
         TextBox71.Text = e_flange.ToString("0.0")
         TextBox74.Text = (e_flange * 0.8).ToString("0.0")
-
         TextBox73.Text = d.ToString("0")
         TextBox112.Text = Y2.ToString("0.00")
         TextBox111.Text = e_pierced.ToString("0.0")
