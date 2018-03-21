@@ -337,8 +337,12 @@ Public Class Form1
         '---------- Check-----
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
-    'Chapter 15 rectangle shell
+    'Chapter 15.5 rectangle shell
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
+        Calc_square_155()
+        Calc_square_156()
+    End Sub
+    Private Sub Calc_square_155()
         Dim a, ee, L, l1, I1 As Double
         Dim σmD, σmC, σmB, σmA, σmBC As Double  'membrane stress
         Dim σbD, σbC, σbB, σbA, σbBC As Double  'bending stress
@@ -444,6 +448,20 @@ Public Class Form1
         TextBox40.Text = (L + a) * 2.ToString("0.0")
         TextBox41.Text = (l1 + a) * 2.ToString("0.0")
 
+    End Sub
+    Private Sub Calc_square_156()
+        'Reinforced section
+        Dim tw, h, A As Double
+
+        tw = NumericUpDown19.Value   'Reinforcement rib
+        h = NumericUpDown33.Value    'Reinforcement rib
+
+
+
+        TextBox21.Text = "nn"
+        TextBox113.Text = "mm"
+        TextBox114.Text = "nn"
+        TextBox115.Text = "mm"
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
