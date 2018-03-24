@@ -340,7 +340,7 @@ Public Class Form1
     'Chapter 15.5 rectangle shell
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
         Calc_square_155()
-        Calc_square_156()
+        Calc_rib_square_156()
     End Sub
     Private Sub Calc_square_155()
         Dim a, ee, L, l1, I1 As Double
@@ -449,19 +449,44 @@ Public Class Form1
         TextBox41.Text = (l1 + a) * 2.ToString("0.0")
 
     End Sub
-    Private Sub Calc_square_156()
-        'Reinforced section
-        Dim tw, h, A As Double
+    Private Sub Calc_rib_square_156()
+        'Reinforced section (simple rectangle strip)
+        Dim L1, L2, a As Double
+        Dim tw, h, br, e, Arib, Q1, Q2, Q, j, bcw As Double
+        Dim τ As Double
+        Dim Irib, Iwall, I As Double
 
-        tw = NumericUpDown19.Value   'Reinforcement rib
-        h = NumericUpDown33.Value    'Reinforcement rib
+        e = NumericUpDown11.Value   'Plate tickness
+        tw = NumericUpDown19.Value  'Reinforcement rib
+        h = NumericUpDown33.Value   'Reinforcement rib
+        br = NumericUpDown35.Value  'Reinforcement rib distance
 
+        a = NumericUpDown17.Value   'Inside corner radius
+        L1 = NumericUpDown8.Value   'Lenght inside vessel
+        L2 = NumericUpDown9.Value   'Lenght inside vessel
 
+        Arib = tw * h               'Area rib
+        j = h / 2                   'Distance to neutral line (estimate)
+        Irib = tw * h ^ 3 / 12      '2nd Moment of area
+        Iwall = br * e ^ 3 / 12     '2nd Moment of area
 
-        TextBox21.Text = "nn"
-        TextBox113.Text = "mm"
-        TextBox114.Text = "nn"
-        TextBox115.Text = "mm"
+        '---- calc centroid composite----
+        I = 1
+        bcw = 1
+
+        Q1 = _P * br * L1 + 2 * a   'Load 1
+        Q2 = _P * br * L2 + 2 * a   'Load 2
+        Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
+
+        τ = Q * Arib * j / (I * bcw)
+
+        '---------- present results -----------
+        TextBox21.Text = Arib.ToString("0")
+        TextBox113.Text = j.ToString("0")
+        TextBox114.Text = I.ToString("0")
+        TextBox115.Text = bcw.ToString("0")
+        TextBox116.Text = Q.ToString("0")
+        TextBox117.Text = τ.ToString("0")
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
