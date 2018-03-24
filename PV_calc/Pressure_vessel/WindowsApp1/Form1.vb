@@ -338,7 +338,7 @@ Public Class Form1
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
     'Chapter 15.5 rectangle shell
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged
         Calc_square_155()
         Calc_rib_square_156()
     End Sub
@@ -454,7 +454,9 @@ Public Class Form1
         Dim L1, L2, a As Double
         Dim tw, h, br, e, Arib, Q1, Q2, Q, j, bcw As Double
         Dim τ As Double
-        Dim Irib, Iwall, I As Double
+        Dim Irib, Iwall, I As Double            '2nd Moment of area
+        Dim area_rib, area_wall, area_composed As Double       'Areas
+        Dim c_rib, c_wall, c_total As Double    'Centriods
 
         e = NumericUpDown11.Value   'Plate tickness
         tw = NumericUpDown19.Value  'Reinforcement rib
@@ -462,27 +464,42 @@ Public Class Form1
         br = NumericUpDown35.Value  'Reinforcement rib distance
 
         a = NumericUpDown17.Value   'Inside corner radius
-        L1 = NumericUpDown8.Value   'Lenght inside vessel
-        L2 = NumericUpDown9.Value   'Lenght inside vessel
+        L1 = NumericUpDown8.Value   'Lenght inside vessel (height or width)
+        L2 = NumericUpDown9.Value   'Lenght inside vessel (height or width)
 
-        Arib = tw * h               'Area rib
-        j = h / 2                   'Distance to neutral line (estimate)
+        '---- calc centroid composite----
+        '--- presure side wall is "position zero"
+        area_rib = tw * h      'Area reinforcement rib
+        area_wall = e * br     'Area vessel wall
+        area_composed = area_rib + area_wall
+        c_rib = e + h / 2
+        c_wall = e / 2
+        c_total = area_rib * c_rib + area_wall * c_wall
+        j = c_total / area_composed  'Distance to neutral line (estimate)
+
+        '---- calcu, 2nd Moment of area --
         Irib = tw * h ^ 3 / 12      '2nd Moment of area
         Iwall = br * e ^ 3 / 12     '2nd Moment of area
 
-        '---- calc centroid composite----
-        I = 1
+        '---- now Parallel axis theorem
+        I = Iwall + area_wall * (j - e / 2) ^ 2
+        I += Irib + area_rib * (j - h / 2) ^ 2
+
+
+
         bcw = 1
 
-        Q1 = _P * br * L1 + 2 * a   'Load 1
-        Q2 = _P * br * L2 + 2 * a   'Load 2
+
+
+        Q1 = _P * br * 2 * (L1 + a) 'Side Load 1
+        Q2 = _P * br * 2 * (L2 * a) 'Side Load 2
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
         τ = Q * Arib * j / (I * bcw)
 
         '---------- present results -----------
-        TextBox21.Text = Arib.ToString("0")
-        TextBox113.Text = j.ToString("0")
+        TextBox21.Text = area_composed.ToString("0")
+        TextBox113.Text = (j - e / 2).ToString("0")
         TextBox114.Text = I.ToString("0")
         TextBox115.Text = bcw.ToString("0")
         TextBox116.Text = Q.ToString("0")
