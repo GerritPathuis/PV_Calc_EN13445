@@ -8,7 +8,7 @@
         <beforeApplicationStartup />
       </update>
     </subscription>
-    <deploymentProvider codebase="file://vtkfile/data2/Engineering/VBasic/PV_calc/WindowsApp1.application" />
+    <deploymentProvider codebase="file://dcf1/data2$/Engineering/VBasic/PV_calc/WindowsApp1.application" />
   </deployment>
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
@@ -21,7 +21,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>M6Vin7WSYxi4i+3c+lU3mGXKOoKVjEyq2GnadrDdM+U=</dsig:DigestValue>
+        <dsig:DigestValue>S6LJLnNPozNiSqScDgceLqAQW28e1quNvnOm8iHadZ4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
