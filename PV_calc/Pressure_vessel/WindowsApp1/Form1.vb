@@ -338,9 +338,9 @@ Public Class Form1
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
     End Sub
     'Chapter 15.5 rectangle shell
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
         Calc_square_155()
-        Calc_rib_square_156()
+
     End Sub
     Private Sub Calc_square_155()
         Dim a, ee, L, l1, I1 As Double
@@ -505,6 +505,53 @@ Public Class Form1
         TextBox116.Text = Q.ToString("0")
         TextBox117.Text = τ.ToString("0")
     End Sub
+    Private Sub Calc_rectangle_15_6_4()
+        Dim h_long As Double
+        Dim H_short As Double
+        Dim e_wall As Double
+        Dim σm As Double
+        Dim σb As Double
+        Dim C As Double = 1.6
+        Dim g, b, ratio As Double
+
+        h_long = NumericUpDown36.Value   'Long side [mm]
+        H_short = NumericUpDown37.Value  'Short side [mm]
+        e_wall = NumericUpDown38.Value   'Wall [mm]
+
+        σm = (_P * h_long * H_short) / (2 * e_wall * (h_long + H_short))  '(15.6.4-1)
+
+        b = IIf(H_short < h_long, H_short, h_long)  'Shorter one
+        g = IIf(H_short > h_long, H_short, h_long)  'Longer one
+        ratio = g / b
+
+        Select Case True
+
+            Case (ratio >= 1 And ratio < 1.2)
+                C = 0.3078
+            Case (ratio >= 1.2 And ratio < 1.4)
+                C = 0.3834
+            Case (ratio >= 1.4 And ratio < 1.6)
+                C = 0.4356
+            Case (ratio >= 1.6 And ratio < 1.8)
+                C = 0.468
+            Case (ratio >= 1.8 And ratio < 2)
+                C = 0.4872
+            Case (ratio >= 2 And ratio < 2.15)
+                C = 0.4974
+            Case (ratio >= 2.15)
+                C = 0.5
+            Case ratio = 2
+
+        End Select
+
+        σb = _P * C * (b / e_wall) ^ 2              '(15.6.4-2)
+
+        TextBox118.Text = σm.ToString("0.0")
+        TextBox119.Text = σb.ToString("0.0")
+        TextBox120.Text = C.ToString("0.000")
+        TextBox121.Text = ratio.ToString("0.000")
+    End Sub
+
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
         ' Design_stress()
@@ -1445,5 +1492,8 @@ Public Class Form1
         Read_file()
     End Sub
 
-
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click, TabPage10.Enter, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged
+        Calc_rib_square_156()
+        Calc_rectangle_15_6_4()
+    End Sub
 End Class
