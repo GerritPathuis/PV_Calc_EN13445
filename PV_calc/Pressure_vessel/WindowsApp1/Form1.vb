@@ -10,9 +10,6 @@ Imports Word = Microsoft.Office.Interop.Word
 'Unfired pressure vessels part 3
 '-------------------------------------------------------
 Public Class Form1
-    ''' <summary>
-    ''' ttttttttttttttttttttttttttttttttttttttttttttttttttttt
-    ''' </summary>
     Public _P As Double         'Calculation pressure [Mpa]
     Public _fs As Double        'Allowable stress shell [N/mm2]
     Public _fp As Double        'Allowable stress reinforcement [N/mm2]
@@ -303,7 +300,7 @@ Public Class Form1
             NumericUpDown7.Value = NumericUpDown10.Value / sf
             If CheckBox1.Checked Then NumericUpDown7.Value *= 0.9   'PED cat IV
             If CheckBox2.Checked Then NumericUpDown7.Value *= 1.5   'EN 14460 (Shock resistant)
-            _fs = NumericUpDown7.Value      'allowable stress
+            _fs = NumericUpDown7.Value                  'allowable stress
         End If
     End Sub
 
@@ -452,7 +449,7 @@ Public Class Form1
         TextBox41.Text = (l1 + a) * 2.ToString("0.0")
 
     End Sub
-    Private Sub Calc_rib_square_156()
+    Private Sub Calc_rib_square_15_6_2()
         'Reinforced section (simple rectangle strip)
         Dim L1, L2, a As Double
         Dim tw, h, br, e, Arib, Q1, Q2, Q, j, bcw As Double
@@ -472,8 +469,8 @@ Public Class Form1
 
         '---- calc centroid composite----
         '--- presure side wall is "position zero"
-        area_rib = tw * h      'Area reinforcement rib
-        area_wall = e * br     'Area vessel wall
+        area_rib = tw * h           'Area reinforcement rib
+        area_wall = e * br          'Area vessel wall
         area_composed = area_rib + area_wall
         c_rib = e + h / 2
         c_wall = e / 2
@@ -493,12 +490,12 @@ Public Class Form1
         bcw = 1
 
 
-
-        Q1 = _P * br * 2 * (L1 + a) 'Side Load 1
-        Q2 = _P * br * 2 * (L2 * a) 'Side Load 2
+        ''----------- see 15.6.2.4 ------------------------
+        Q1 = _P * br * 2 * (L1 + a) 'Side Load 1    ???????????
+        Q2 = _P * br * 2 * (L2 * a) 'Side Load 2    ???????????????
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
-        τ = Q * Arib * j / (I * bcw)
+        τ = Q * Arib * j / (I * bcw)    '(15.6.2.1)
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
@@ -508,13 +505,15 @@ Public Class Form1
         TextBox116.Text = Q.ToString("0")
         TextBox117.Text = τ.ToString("0")
     End Sub
+
     Private Sub Calc_rectangle_15_6_4()
-        Dim h_long As Double
-        Dim H_short As Double
-        Dim e_wall As Double
-        Dim σm As Double
-        Dim σb As Double
-        Dim C As Double = 1.6
+        '=======15.6.4 Wall stress in unsupported zones=============
+        Dim h_long As Double    'long edge
+        Dim H_short As Double   'short edge
+        Dim e_wall As Double    'Wall thickness
+        Dim σm As Double        'Longitudinal membrane stress
+        Dim σb As Double        'Longitudinal bending stress 
+        Dim C As Double         'Constant
         Dim g, b, ratio As Double
 
         h_long = NumericUpDown36.Value   'Long side [mm]
@@ -525,10 +524,9 @@ Public Class Form1
 
         b = IIf(H_short < h_long, H_short, h_long)  'Shorter one
         g = IIf(H_short > h_long, H_short, h_long)  'Longer one
-        ratio = g / b
+        ratio = g / b               'Ratio edge length
 
         Select Case True
-
             Case (ratio >= 1 And ratio < 1.2)
                 C = 0.3078
             Case (ratio >= 1.2 And ratio < 1.4)
@@ -544,15 +542,18 @@ Public Class Form1
             Case (ratio >= 2.15)
                 C = 0.5
             Case ratio = 2
-
         End Select
 
         σb = _P * C * (b / e_wall) ^ 2              '(15.6.4-2)
 
-        TextBox118.Text = σm.ToString("0.0")
-        TextBox119.Text = σb.ToString("0.0")
+        TextBox118.Text = σm.ToString("0.0")    'Longitudinal membrane stress
+        TextBox119.Text = σb.ToString("0.0")    'Longitudinal bending stress 
         TextBox120.Text = C.ToString("0.000")
         TextBox121.Text = ratio.ToString("0.000")
+
+        '----------- check -------------
+        TextBox118.BackColor = IIf(σm > _fs, Color.Red, Color.LightGreen)
+        TextBox119.BackColor = IIf(((σm + σb) > 1.5 * _fs), Color.Red, Color.LightGreen)
     End Sub
 
 
@@ -1496,7 +1497,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click, TabPage10.Enter, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged
-        Calc_rib_square_156()
+        Calc_rib_square_15_6_2()
         Calc_rectangle_15_6_4()
     End Sub
 End Class
