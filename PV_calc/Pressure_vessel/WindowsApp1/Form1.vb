@@ -10,6 +10,9 @@ Imports Word = Microsoft.Office.Interop.Word
 'Unfired pressure vessels part 3
 '-------------------------------------------------------
 Public Class Form1
+    ''' <summary>
+    ''' ttttttttttttttttttttttttttttttttttttttttttttttttttttt
+    ''' </summary>
     Public _P As Double         'Calculation pressure [Mpa]
     Public _fs As Double        'Allowable stress shell [N/mm2]
     Public _fp As Double        'Allowable stress reinforcement [N/mm2]
