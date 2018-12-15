@@ -449,7 +449,7 @@ Public Class Form1
         TextBox41.Text = (l1 + a) * 2.ToString("0.0")
 
     End Sub
-    Private Sub Calc_rib_square_15_6_2()
+    Private Sub Calc_rect_reinforced_15_6_2()
         'Reinforced section (simple rectangle strip)
         Dim edge1, edge2 As Double    'Lenght inside vessel (height or width)
         Dim tw, hrib, br, e, Q1, Q2, Q, j, bcw As Double
@@ -457,6 +457,7 @@ Public Class Form1
         Dim Irib, Iwall, I As Double            '2nd Moment of area
         Dim area_rib, area_wall, area_composed As Double       'Areas
         Dim c_rib, c_wall, c_total As Double    'Centriods
+        Dim rib_stab As Double
 
         e = NumericUpDown38.Value   'Vessel-Plate tickness
         tw = NumericUpDown19.Value  'Reinforcement rib thickness
@@ -488,7 +489,7 @@ Public Class Form1
         I = Iwall + area_wall * (j - e / 2) ^ 2
         I += Irib + area_rib * (j - hrib / 2) ^ 2
 
-        bcw = e             'Web thickness page 327
+        bcw = e             'Web thickness page 327 for (C1 type)
 
         '----------- Shear load one side ------------------
         Q1 = _P * br * edge1 / 2 'Side Load 1 (15.6.2.3-2)
@@ -498,7 +499,8 @@ Public Class Form1
         τw = Q * area_rib * j / (I * bcw)    'Stress weld (15.6.2.1)
 
         τr = Q / area_rib                   'stress reinforcement(15.6.2.3-1)
-
+        '---------- compression stabiliyy------
+        rib_stab = hrib / tw                'Table 15.6-1 Sketch C1
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
@@ -515,12 +517,19 @@ Public Class Form1
 
         TextBox126.Text = τr.ToString("0")
         TextBox127.Text = _P.ToString("0.00")
+
+        TextBox128.Text = rib_stab.ToString("0.0")
+
+        TextBox129.Text = edge1.ToString("0")
+        TextBox130.Text = edge2.ToString("0")
+
         '----------- check -------------
         TextBox117.BackColor = IIf(τw > _fs, Color.Red, Color.LightGreen)
         TextBox126.BackColor = IIf(τr > _fs, Color.Red, Color.LightGreen)
+        TextBox128.BackColor = IIf(rib_stab > 10, Color.Red, Color.LightGreen)
     End Sub
 
-    Private Sub Calc_rectangle_15_6_4()
+    Private Sub Calc_rect_unreinforced_15_6_4()
         '=======15.6.4 Wall stress in unsupported zones=============
         Dim h_long As Double    'long edge
         Dim H_short As Double   'short edge
@@ -1511,8 +1520,8 @@ Public Class Form1
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click, TabPage10.Enter, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged
-        Calc_rib_square_15_6_2()
-        Calc_rectangle_15_6_4()
+        Calc_rect_reinforced_15_6_2()
+        Calc_rect_unreinforced_15_6_4()
     End Sub
 
 
