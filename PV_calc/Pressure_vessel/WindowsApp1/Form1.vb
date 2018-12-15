@@ -451,19 +451,20 @@ Public Class Form1
     End Sub
     Private Sub Calc_rib_square_15_6_2()
         'Reinforced section (simple rectangle strip)
-        Dim L1, L2, a As Double
+        Dim L1, L2 As Double    'Lenght inside vessel (height or width)
+        Dim a_rad As Double     'Corner Radius
         Dim tw, h, br, e, Arib, Q1, Q2, Q, j, bcw As Double
         Dim τ As Double
         Dim Irib, Iwall, I As Double            '2nd Moment of area
         Dim area_rib, area_wall, area_composed As Double       'Areas
         Dim c_rib, c_wall, c_total As Double    'Centriods
 
-        e = NumericUpDown11.Value   'Plate tickness
-        tw = NumericUpDown19.Value  'Reinforcement rib
-        h = NumericUpDown33.Value   'Reinforcement rib
+        e = NumericUpDown38.Value   'Vessel waal-Plate tickness
+        tw = NumericUpDown19.Value  'Reinforcement rib thicknes
+        h = NumericUpDown33.Value   'Reinforcement rib height
         br = NumericUpDown35.Value  'Reinforcement rib distance
 
-        a = NumericUpDown17.Value   'Inside corner radius
+        a_rad = NumericUpDown17.Value   'Inside corner radius
         L1 = NumericUpDown8.Value   'Lenght inside vessel (height or width)
         L2 = NumericUpDown9.Value   'Lenght inside vessel (height or width)
 
@@ -490,16 +491,16 @@ Public Class Form1
         bcw = 1
 
 
-        ''----------- see 15.6.2.4 ------------------------
-        Q1 = _P * br * 2 * (L1 + a) 'Side Load 1    ???????????
-        Q2 = _P * br * 2 * (L2 * a) 'Side Load 2    ???????????????
+        '----------- Shear load one side ------------------
+        Q1 = _P * br * (L1 + a_rad * 2) / 2 'Side Load 1 (15.6.2.3-2)
+        Q2 = _P * br * (L2 * a_rad * 2) / 2 'Side Load 2 (15.6.2.3-2)   
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
         τ = Q * Arib * j / (I * bcw)    '(15.6.2.1)
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
-        TextBox113.Text = (j - e / 2).ToString("0")
+        TextBox113.Text = (j - e / 2).ToString("0.0")
         TextBox114.Text = I.ToString("0")
         TextBox115.Text = bcw.ToString("0")
         TextBox116.Text = Q.ToString("0")
@@ -1500,4 +1501,6 @@ Public Class Form1
         Calc_rib_square_15_6_2()
         Calc_rectangle_15_6_4()
     End Sub
+
+
 End Class
