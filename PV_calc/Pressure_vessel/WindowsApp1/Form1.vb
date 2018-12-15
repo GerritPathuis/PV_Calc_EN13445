@@ -451,60 +451,73 @@ Public Class Form1
     End Sub
     Private Sub Calc_rib_square_15_6_2()
         'Reinforced section (simple rectangle strip)
-        Dim L1, L2 As Double    'Lenght inside vessel (height or width)
-        Dim a_rad As Double     'Corner Radius
-        Dim tw, h, br, e, Arib, Q1, Q2, Q, j, bcw As Double
-        Dim τ As Double
+        Dim edge1, edge2 As Double    'Lenght inside vessel (height or width)
+        Dim tw, hrib, br, e, Q1, Q2, Q, j, bcw As Double
+        Dim τw, τr As Double
         Dim Irib, Iwall, I As Double            '2nd Moment of area
         Dim area_rib, area_wall, area_composed As Double       'Areas
         Dim c_rib, c_wall, c_total As Double    'Centriods
 
-        e = NumericUpDown38.Value   'Vessel waal-Plate tickness
-        tw = NumericUpDown19.Value  'Reinforcement rib thicknes
-        h = NumericUpDown33.Value   'Reinforcement rib height
+        e = NumericUpDown38.Value   'Vessel-Plate tickness
+        tw = NumericUpDown19.Value  'Reinforcement rib thickness
+        hrib = NumericUpDown33.Value   'Reinforcement rib height
         br = NumericUpDown35.Value  'Reinforcement rib distance
 
-        a_rad = NumericUpDown17.Value   'Inside corner radius
-        L1 = NumericUpDown8.Value   'Lenght inside vessel (height or width)
-        L2 = NumericUpDown9.Value   'Lenght inside vessel (height or width)
+        edge1 = NumericUpDown36.Value   'Lenght inside vessel (height or width)
+        edge2 = NumericUpDown37.Value   'Lenght inside vessel (height or width)
 
         '---- calc centroid composite----
         '--- presure side wall is "position zero"
-        area_rib = tw * h           'Area reinforcement rib
+        area_rib = tw * hrib        'Area reinforcement rib
         area_wall = e * br          'Area vessel wall
         area_composed = area_rib + area_wall
-        c_rib = e + h / 2
+
+        'point zero= inside wall vessel
+        c_rib = e + hrib / 2
+
         c_wall = e / 2
+
         c_total = area_rib * c_rib + area_wall * c_wall
-        j = c_total / area_composed  'Distance to neutral line (estimate)
+        j = c_total / area_composed     'Distance inside vessel to neutral axis
 
         '---- calcu, 2nd Moment of area --
-        Irib = tw * h ^ 3 / 12      '2nd Moment of area
-        Iwall = br * e ^ 3 / 12     '2nd Moment of area
+        Irib = tw * hrib ^ 3 / 12       '2nd Moment of area
+        Iwall = br * e ^ 3 / 12         '2nd Moment of area
 
         '---- now Parallel axis theorem
         I = Iwall + area_wall * (j - e / 2) ^ 2
-        I += Irib + area_rib * (j - h / 2) ^ 2
+        I += Irib + area_rib * (j - hrib / 2) ^ 2
 
-
-
-        bcw = 1
-
+        bcw = e             'Web thickness page 327
 
         '----------- Shear load one side ------------------
-        Q1 = _P * br * (L1 + a_rad * 2) / 2 'Side Load 1 (15.6.2.3-2)
-        Q2 = _P * br * (L2 * a_rad * 2) / 2 'Side Load 2 (15.6.2.3-2)   
+        Q1 = _P * br * edge1 / 2 'Side Load 1 (15.6.2.3-2)
+        Q2 = _P * br * edge2 / 2 'Side Load 2 (15.6.2.3-2)   
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
-        τ = Q * Arib * j / (I * bcw)    '(15.6.2.1)
+        τw = Q * area_rib * j / (I * bcw)    'Stress weld (15.6.2.1)
+
+        τr = Q / area_rib                   'stress reinforcement(15.6.2.3-1)
+
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
         TextBox113.Text = (j - e / 2).ToString("0.0")
         TextBox114.Text = I.ToString("0")
-        TextBox115.Text = bcw.ToString("0")
-        TextBox116.Text = Q.ToString("0")
-        TextBox117.Text = τ.ToString("0")
+        TextBox115.Text = bcw.ToString("0.00")
+        TextBox124.Text = Q1 / 1000.ToString("0")
+        TextBox125.Text = Q2 / 1000.ToString("0")
+
+        TextBox116.Text = Q / 1000.ToString("0")
+        TextBox117.Text = τw.ToString("0")
+        TextBox122.Text = Irib.ToString("0")
+        TextBox123.Text = Iwall.ToString("0")
+
+        TextBox126.Text = τr.ToString("0")
+        TextBox127.Text = _P.ToString("0.00")
+        '----------- check -------------
+        TextBox117.BackColor = IIf(τw > _fs, Color.Red, Color.LightGreen)
+        TextBox126.BackColor = IIf(τr > _fs, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Calc_rectangle_15_6_4()
