@@ -564,7 +564,6 @@ Public Class Form1
                 C = 0.4974
             Case (ratio >= 2.15)
                 C = 0.5
-            Case ratio = 2
         End Select
 
         σb = _P * C * (b / e_wall) ^ 2              '(15.6.4-2)
