@@ -331,8 +331,8 @@ Public Class Form1
         '--------- present results--------
         TextBox2.Text = Round(e_wall, 4).ToString   'required wall [mm]
         TextBox5.Text = valid_check.ToString
-        TextBox6.Text = _P.ToString
-        TextBox53.Text = (_P * 10).ToString
+        TextBox6.Text = _P.ToString("0.00")         '[MPa]
+        TextBox53.Text = (_P * 10).ToString("0.00") '[Bar]
         TextBox7.Text = _fs.ToString
         TextBox8.Text = Round(Pmax, 2).ToString
 
@@ -418,7 +418,8 @@ Public Class Form1
         σTBC = Abs(σmBC) + Abs(σbBC)
 
         '----- pressure -----
-        TextBox25.Text = _P.ToString
+        TextBox25.Text = _P.ToString("0.00")        '[MPa]
+        TextBox132.Text = (_P * 10).ToString("0.00")    '[bar]
         '---- membrane stress ---
         TextBox23.Text = σmA.ToString("0.0")
         TextBox24.Text = σmB.ToString("0.0")
@@ -822,7 +823,7 @@ Public Class Form1
         Y2 = Sqrt(G / (G - d))
         e_pierced = e_flange * Y2
 
-        TextBox68.Text = _P.ToString("0.0")
+        TextBox68.Text = _P.ToString("0.00")
         TextBox67.Text = (_P * 10).ToString("0.0")
         TextBox63.Text = _fs.ToString("0.0")
         TextBox71.Text = e_flange.ToString("0.0")
@@ -942,7 +943,7 @@ Public Class Form1
         σθ = βY * M2 / e ^ 2            '(11.5-35)
 
         TextBox77.Text = (_P * 10).ToString("0.0")
-        TextBox78.Text = _P.ToString("0.0")
+        TextBox78.Text = _P.ToString("0.00")
         TextBox76.Text = _fs.ToString("0")
         TextBox79.Text = H.ToString("0.0")
         TextBox72.Text = b0_gasket.ToString("0.0")
