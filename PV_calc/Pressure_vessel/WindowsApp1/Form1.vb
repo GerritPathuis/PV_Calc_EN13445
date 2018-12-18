@@ -293,6 +293,7 @@ Public Class Form1
         End If
 
         _P = NumericUpDown4.Value                       'Calculation pressure [MPa=N/mm2]
+        TextBox131.Text = (_P * 10 ^ 4).ToString        'Calculation pressure [mBar]
         If (ComboBox1.SelectedIndex > -1) Then          'Prevent exceptions
             words = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
@@ -301,6 +302,7 @@ Public Class Form1
             If CheckBox1.Checked Then NumericUpDown7.Value *= 0.9   'PED cat IV
             If CheckBox2.Checked Then NumericUpDown7.Value *= 1.5   'EN 14460 (Shock resistant)
             _fs = NumericUpDown7.Value                  'allowable stress
+
         End If
     End Sub
 
