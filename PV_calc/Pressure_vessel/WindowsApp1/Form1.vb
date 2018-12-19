@@ -455,43 +455,49 @@ Public Class Form1
     Private Sub Calc_rect_reinforced_15_6_2()
         'Reinforced section (simple rectangle strip)
         Dim edge1, edge2 As Double    'Lenght inside vessel (height or width)
-        Dim tw, hrib, br, e, Q1, Q2, Q, j, bcw As Double
+        Dim tw, hrib, br, e, Q1, Q2, Q, yc, bcw As Double
         Dim τw, τr As Double
-        Dim Irib, Iwall, I As Double            '2nd Moment of area
+        Dim I2_rib, I2_wall, I As Double            '2nd Moment of area
+        Dim I1_rib As Double                        '1st Moment of area
         Dim area_rib, area_wall, area_composed As Double       'Areas
-        Dim c_rib, c_wall, c_total As Double    'Centriods
+        Dim c_rib, c_wall, c_total As Double        'Centriods
         Dim rib_stab As Double
+        Dim j As Double
 
-        e = NumericUpDown38.Value   'Vessel-Plate tickness
-        tw = NumericUpDown19.Value  'Reinforcement rib thickness
+        e = NumericUpDown38.Value       'Vessel-Plate tickness
+        tw = NumericUpDown19.Value      'Reinforcement rib thickness
         hrib = NumericUpDown33.Value   'Reinforcement rib height
-        br = NumericUpDown35.Value  'Reinforcement rib distance
+        br = NumericUpDown35.Value      'Reinforcement rib distance
 
         edge1 = NumericUpDown36.Value   'Lenght inside vessel (height or width)
         edge2 = NumericUpDown37.Value   'Lenght inside vessel (height or width)
 
         '---- calc centroid composite----
         '--- presure side wall is "position zero"
-        area_rib = tw * hrib        'Area reinforcement rib
-        area_wall = e * br          'Area vessel wall
+        area_rib = tw * hrib            'Area reinforcement rib
+        area_wall = e * br              'Area vessel wall
         area_composed = area_rib + area_wall
 
-        'point zero= inside wall vessel
-        c_rib = e + hrib / 2
-
+        '--------- yc= Distance inside vessel to neutral axis ---------
+        'point zero = inside wall vessel
+        c_rib = e + (hrib / 2)
         c_wall = e / 2
+        c_total = (area_rib * c_rib) + (area_wall * c_wall)
+        yc = c_total / area_composed
 
-        c_total = area_rib * c_rib + area_wall * c_wall
-        j = c_total / area_composed     'Distance inside vessel to neutral axis
+        '--------- j is distance weld to neutral axis composite to centroid A'-------
+        j = yc - e
+
+        '---- calcu, 1st Moment of area rib --
+        I1_rib = 0.25 * tw * hrib ^ 2
 
         '---- calcu, 2nd Moment of area --
-        Irib = tw * hrib ^ 3 / 12       '2nd Moment of area
-        Iwall = br * e ^ 3 / 12         '2nd Moment of area
+        I2_rib = tw * hrib ^ 3 / 12       '2nd Moment of area
+        I2_wall = br * e ^ 3 / 12         '2nd Moment of area
 
         '---- now Parallel axis theorem
-        I = Iwall + area_wall * (j - e / 2) ^ 2
-        I += Irib + area_rib * (j - hrib / 2) ^ 2
-
+        I = I2_wall + area_wall * (yc - e / 2) ^ 2
+        I += I2_rib + area_rib * (yc - hrib / 2) ^ 2
         bcw = e             'Web thickness page 327 for (C1 type)
 
         '----------- Shear load one side ------------------
@@ -499,15 +505,29 @@ Public Class Form1
         Q2 = _P * br * edge2 / 2 'Side Load 2 (15.6.2.3-2)   
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
-        τw = Q * area_rib * j / (I * bcw)    'Stress weld (15.6.2.1)
+        τw = Q * area_rib * j / (I * bcw)    'Stress weld (15.6.2.2-1)
 
         τr = Q / area_rib                   'stress reinforcement(15.6.2.3-1)
-        '---------- compression stabiliyy------
+        '---------- rib compression stabiliy ------
         rib_stab = hrib / tw                'Table 15.6-1 Sketch C1
+
+
+        '---------- ΔM pressure loads page 329 ------
+        Dim ΔM_long, ΔM_short As Double
+        Dim η As Double
+        Dim Ma, Mb, Mc, Md As Double
+        ΔM_long = 999
+        ΔM_short = 999
+        η = 999
+        Ma = 0      'Formula 15.6.5-3
+        Mb = 0      'Formula 15.6.5-5
+        Mc = 0      'Formula 15.6.5-7
+        Md = 0      'Formula 15.6.5-9
+
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
-        TextBox113.Text = (j - e / 2).ToString("0.0")
+        TextBox113.Text = j.ToString("0.0")
         TextBox114.Text = I.ToString("0")
         TextBox115.Text = bcw.ToString("0.00")
         TextBox124.Text = Q1 / 1000.ToString("0")
@@ -515,8 +535,8 @@ Public Class Form1
 
         TextBox116.Text = Q / 1000.ToString("0")
         TextBox117.Text = τw.ToString("0")
-        TextBox122.Text = Irib.ToString("0")
-        TextBox123.Text = Iwall.ToString("0")
+        TextBox122.Text = I2_rib.ToString("0")
+        TextBox123.Text = I2_wall.ToString("0")
 
         TextBox126.Text = τr.ToString("0")
         TextBox127.Text = _P.ToString("0.00")
@@ -525,6 +545,8 @@ Public Class Form1
 
         TextBox129.Text = edge1.ToString("0")
         TextBox130.Text = edge2.ToString("0")
+        TextBox134.Text = I1_rib.ToString("0")
+        TextBox141.Text = yc.ToString("0.0")
 
         '----------- check -------------
         TextBox117.BackColor = IIf(τw > _fs, Color.Red, Color.LightGreen)
