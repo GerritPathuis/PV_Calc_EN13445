@@ -466,7 +466,7 @@ Public Class Form1
 
         e = NumericUpDown38.Value       'Vessel-Plate tickness
         tw = NumericUpDown19.Value      'Reinforcement rib thickness
-        hrib = NumericUpDown33.Value   'Reinforcement rib height
+        hrib = NumericUpDown33.Value    'Reinforcement rib height
         br = NumericUpDown35.Value      'Reinforcement rib distance
 
         edge1 = NumericUpDown36.Value   'Lenght inside vessel (height or width)
@@ -511,7 +511,6 @@ Public Class Form1
         '---------- rib compression stabiliy ------
         rib_stab = hrib / tw                'Table 15.6-1 Sketch C1
 
-
         '---------- ΔM pressure loads page 329 ------
         Dim ΔM_long, ΔM_short As Double
         Dim η As Double
@@ -519,14 +518,17 @@ Public Class Form1
         ΔM_long = 999
         ΔM_short = 999
         η = 999
-        Ma = 0      'Formula 15.6.5-3
-        Mb = 0      'Formula 15.6.5-5
-        Mc = 0      'Formula 15.6.5-7
-        Md = 0      'Formula 15.6.5-9
+        Double.TryParse(TextBox146.Text, Ma)     'Formula 15.6.5-3
+        Double.TryParse(TextBox147.Text, Mb)     'Formula 15.6.5-5
+        Double.TryParse(TextBox148.Text, Mc)    'Formula 15.6.5-7
+        Double.TryParse(TextBox149.Text, Md)     'Formula 15.6.5-9
 
+        '?????????????
+        '?????????????
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
+        TextBox154.Text = area_rib.ToString("0")
         TextBox113.Text = j.ToString("0.0")
         TextBox114.Text = I.ToString("0")
         TextBox115.Text = bcw.ToString("0.00")
@@ -603,13 +605,96 @@ Public Class Form1
         TextBox119.BackColor = IIf(((σm + σb) > 1.5 * _fs), Color.Red, Color.LightGreen)
     End Sub
 
+    Private Sub Calc_rect_reinforced_15_6_5()
+        Dim σmD, σmA As Double  'Membrane stress
+        Dim h_long As Double    'long edge
+        Dim H_short As Double   'short edge
+        Dim h1_long As Double    'Pitch neutral lines reinforcements on long sides of vessel
+        Dim H1_short As Double   'Pitch neutral lines reinforcements on short sides of vessel
+        Dim inside_to_neutral As Double 'Distande
+        Dim c_fibre As Double   'Distance neutral axis to outer fibre
+        Dim br, hr As Double    'Pressure bearing width [mm]
+        Dim e_wall As Double    'Wall thickness
+        Dim A1, A2 As Double    'Area composite [mm]
+        Dim Ma, Mb, Mc, Md As Double 'Bending moment
+        Dim κ, α1 As Double
+        Dim σbA, σbB, σbC, σbD As Double
+        Dim I11 As Double '2nd moment of area short side plate and reinforcement combined
+        Dim I21 As Double '2nd moment of area long side plate and reinforcement combined
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
-        ' Design_stress()
-        Calc_kloepper()
+        '---------- get data ----------------
+        h_long = NumericUpDown36.Value      'Long side [mm]
+        H_short = NumericUpDown37.Value     'Short side [mm]
+        br = NumericUpDown35.Value          'Pressure bearing width [mm]
+        e_wall = NumericUpDown38.Value      'Wall [mm]
+        hr = NumericUpDown33.Value          'Hoogte rib [mm]
+
+        '--------- Pitch neutral lines reinforcements -----------
+        h1_long = h_long + hr       '[mm] long side vessel
+        H1_short = H_short + hr     '[mm] short side vessel
+
+        '-------- reinforcement idetical short and long side ------
+        Double.TryParse(TextBox154.Text, A1) 'Area composite [mm]
+        A2 = A1   'Area composite [mm]
+
+        '-------- Membrane stress ------------
+        σmD = _P * h_long * br / (2 * A1)     'Short side [N/mm]
+        σmA = _P * H_short * br / (2 * A2)    'Long side [N/mm]
+
+        '--------- Ratio's ---------------
+        α1 = H_short / h_long       'Formula (15.5.2-5)
+        κ = α1 * 1      'Formula (15.5.2-4) Reinforment short and long sides are identical
+
+        '------- Ma bending moment (Formula 15.6.5-3)-------------
+        Ma = _P * br * h_long ^ 2 / 24
+        Ma *= 3 - (2 * (1 + α1 ^ 2 * κ) / (1 + κ))  '
+
+        '------- Mb bending moment (Formula 15.6.5-5) -------------
+        Mb = _P * br * h_long ^ 2 / 12
+        Mb *= (1 + α1 ^ 2 * κ) / (1 + κ)
+
+        '------- Mc bending moment (Formula 15.6.5-7) -------------
+        Mc = _P * br * h_long ^ 2 / 12
+        Mc *= (1 + α1 ^ 2 * κ) / (1 + κ)
+
+        '------- Md bending moment (Formula 15.6.5-9) -------------
+        Md = _P * br * h_long ^ 2 / 24
+        Md *= 3 * α1 ^ 2 - (2 * (1 + α1 ^ 2 * κ) / (1 + κ))
+
+        '------- Bending stress ----
+        Double.TryParse(TextBox141.Text, inside_to_neutral)
+        c_fibre = hr - inside_to_neutral
+        Double.TryParse(TextBox114.Text, I11)
+        I21 = I11
+
+        σbA = Ma * c_fibre / I21
+        σbB = Mb * c_fibre / I21
+        σbC = Mc * c_fibre / I11
+        σbD = Md * c_fibre / I11
+
+        '------- present -----------
+        TextBox150.Text = σmD.ToString("0.0")
+        TextBox151.Text = σmA.ToString("0.0")
+        TextBox146.Text = (Ma / 10 ^ 3).ToString("0") '[KNmm]
+        TextBox147.Text = (Mb / 10 ^ 3).ToString("0") '[KNmm]
+        TextBox148.Text = (Mc / 10 ^ 3).ToString("0") '[KNmm]
+        TextBox149.Text = (Md / 10 ^ 3).ToString("0") '[KNmm]
+
+        TextBox152.Text = α1.ToString("0.00")
+        TextBox153.Text = κ.ToString("0.00")
+
+        TextBox155.Text = σbA.ToString("0")
+        TextBox156.Text = σbB.ToString("0")
+        TextBox157.Text = σbC.ToString("0")
+        TextBox158.Text = σbD.ToString("0")
+        TextBox159.Text = c_fibre.ToString("0")
     End Sub
 
-    Private Sub Calc_kloepper()
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
+        Calc_kloepper_7_5_3()
+    End Sub
+
+    Private Sub Calc_kloepper_7_5_3()
         Dim De, Di, Dm, Wall, r_knuckle As Double
         Dim Es, Ey, Eb As Double    'Wall thicknes
         Dim E_kloepper As Double    'Required Wall thicknes
@@ -856,10 +941,10 @@ Public Class Form1
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged
-        Calc_flange_Moments()
+        Calc_flange_Moments_11_5_3()
     End Sub
 
-    Sub Calc_flange_Moments()
+    Sub Calc_flange_Moments_11_5_3()
         Dim words() As String
         Dim e, G, gt, HG, H, B, C, A As Double
         Dim db, dn, n As Double
@@ -1008,6 +1093,8 @@ Public Class Form1
         NumericUpDown26.BackColor = IIf(Dia_bolt > db, Color.Red, Color.Yellow)    'Bolt dia
         TextBox102.BackColor = IIf(σθ > _fs, Color.Red, Color.Yellow)    'Flange stress
     End Sub
+
+
 
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
         Form2.Show()
@@ -1546,6 +1633,7 @@ Public Class Form1
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click, TabPage10.Enter, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged
         Calc_rect_reinforced_15_6_2()
         Calc_rect_unreinforced_15_6_4()
+        Calc_rect_reinforced_15_6_5()
     End Sub
 
 
