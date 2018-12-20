@@ -454,23 +454,24 @@ Public Class Form1
     End Sub
     Private Sub Calc_rect_reinforced_15_6_2()
         'Reinforced section (simple rectangle strip)
-        Dim edge1, edge2 As Double    'Lenght inside vessel (height or width)
+        Dim h_long, H_short As Double    'Lenght inside vessel 
         Dim tw, hrib, br, e, Q1, Q2, Q, yc, bcw As Double
         Dim τw, τr As Double
         Dim I2_rib, I2_wall, I As Double            '2nd Moment of area
         Dim I1_rib As Double                        '1st Moment of area
         Dim area_rib, area_wall, area_composed As Double       'Areas
         Dim c_rib, c_wall, c_total As Double        'Centriods
-        Dim rib_stab As Double
+        Dim rib_stab As Double                      'Reinforcement stability
         Dim j As Double
+        Dim τ_long, τ_short As Double               'τ welds
 
         e = NumericUpDown38.Value       'Vessel-Plate tickness
         tw = NumericUpDown19.Value      'Reinforcement rib thickness
         hrib = NumericUpDown33.Value    'Reinforcement rib height
         br = NumericUpDown35.Value      'Reinforcement rib distance
 
-        edge1 = NumericUpDown36.Value   'Lenght inside vessel (height or width)
-        edge2 = NumericUpDown37.Value   'Lenght inside vessel (height or width)
+        h_long = NumericUpDown36.Value   'Lenght inside vessel (height or width)
+        H_short = NumericUpDown37.Value   'Lenght inside vessel (height or width)
 
         '---- calc centroid composite----
         '--- presure side wall is "position zero"
@@ -501,8 +502,8 @@ Public Class Form1
         bcw = e             'Web thickness page 327 for (C1 type)
 
         '----------- Shear load one side ------------------
-        Q1 = _P * br * edge1 / 2 'Side Load 1 (15.6.2.3-2)
-        Q2 = _P * br * edge2 / 2 'Side Load 2 (15.6.2.3-2)   
+        Q1 = _P * br * h_long / 2 'Side Load 1 (15.6.2.3-2)
+        Q2 = _P * br * H_short / 2 'Side Load 2 (15.6.2.3-2)   
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
         τw = Q * area_rib * j / (I * bcw)    'Stress weld (15.6.2.2-1)
@@ -512,19 +513,35 @@ Public Class Form1
         rib_stab = hrib / tw                'Table 15.6-1 Sketch C1
 
         '---------- ΔM pressure loads page 329 ------
+        '---------- Chapter 15.6.2.3 ----------
         Dim ΔM_long, ΔM_short As Double
-        Dim η As Double
+        Dim η, lw As Double
         Dim Ma, Mb, Mc, Md As Double
-        ΔM_long = 999
-        ΔM_short = 999
-        η = 999
-        Double.TryParse(TextBox146.Text, Ma)     'Formula 15.6.5-3
-        Double.TryParse(TextBox147.Text, Mb)     'Formula 15.6.5-5
-        Double.TryParse(TextBox148.Text, Mc)    'Formula 15.6.5-7
-        Double.TryParse(TextBox149.Text, Md)     'Formula 15.6.5-9
+        Dim S As Double     'First moment of area reinforcement
+        Dim biw As Double   'Total weld throat of intermittent weld
+        Dim I11 As Double   'Second moment of area short side plate and reinforcement combined
 
-        '?????????????
-        '?????????????
+        '-------- get data ------------
+        Double.TryParse(TextBox146.Text, Ma)    'Formula 15.6.5-3
+        Double.TryParse(TextBox147.Text, Mb)    'Formula 15.6.5-5
+        Double.TryParse(TextBox148.Text, Mc)    'Formula 15.6.5-7
+        Double.TryParse(TextBox149.Text, Md)    'Formula 15.6.5-9
+        Double.TryParse(TextBox134.Text, S)     'First moment of area reinforcement
+        Double.TryParse(TextBox114.Text, I11)   '2nd moment of area short side plate and reinforcement combined
+        biw = NumericUpDown39.Value             'Total weld throat of intermittent weld
+        lw = NumericUpDown40.Value              'Total length intermittent welds
+
+        'Note I11 identical to I21 (reinforcements both side identical)
+
+        '----- calc 15.6.2.3 ------------
+        η = h_long / 2 - 1.5 * lw
+
+        ΔM_long = br * _P * (H_short ^ 2 / 8 - η ^ 2 / 2)    'Formula 15.6.2.2-3
+        ΔM_short = br * _P * (h_long ^ 2 / 8 - η ^ 2 / 2)    'Formula 15.6.2.2-4
+
+        τ_long = Abs(ΔM_long * S / (biw * lw * I11))
+        τ_short = Abs(ΔM_short * S / (biw * lw * I11))
+
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
@@ -545,10 +562,17 @@ Public Class Form1
 
         TextBox128.Text = rib_stab.ToString("0.0")
 
-        TextBox129.Text = edge1.ToString("0")
-        TextBox130.Text = edge2.ToString("0")
+        TextBox129.Text = h_long.ToString("0")
+        TextBox130.Text = H_short.ToString("0")
         TextBox134.Text = I1_rib.ToString("0")
         TextBox141.Text = yc.ToString("0.0")
+
+        TextBox138.Text = η.ToString("0")
+        TextBox139.Text = ΔM_long.ToString("0.0")
+        TextBox135.Text = ΔM_short.ToString("0.0")
+
+        TextBox142.Text = τ_long.ToString("0.0")
+        TextBox143.Text = τ_short.ToString("0.0")
 
         '----------- check -------------
         TextBox117.BackColor = IIf(τw > _fs, Color.Red, Color.LightGreen)
@@ -663,14 +687,14 @@ Public Class Form1
 
         '------- Bending stress ----
         Double.TryParse(TextBox141.Text, inside_to_neutral)
-        c_fibre = hr - inside_to_neutral
+        c_fibre = hr - inside_to_neutral 'Distance neutral axis to outer fibre
         Double.TryParse(TextBox114.Text, I11)
         I21 = I11
 
-        σbA = Ma * c_fibre / I21
-        σbB = Mb * c_fibre / I21
-        σbC = Mc * c_fibre / I11
-        σbD = Md * c_fibre / I11
+        σbA = Abs(Ma * c_fibre / I21)   '(Formula 15.6.5-4)
+        σbB = Abs(Mb * c_fibre / I21)   '(Formula 15.6.5-6)
+        σbC = Abs(Mc * c_fibre / I11)   '(Formula 15.6.5-8)
+        σbD = Abs(Md * c_fibre / I11)   '(Formula 15.6.5-10)
 
         '------- present -----------
         TextBox150.Text = σmD.ToString("0.0")
@@ -688,6 +712,12 @@ Public Class Form1
         TextBox157.Text = σbC.ToString("0")
         TextBox158.Text = σbD.ToString("0")
         TextBox159.Text = c_fibre.ToString("0")
+
+        '----------- check -------------
+        TextBox155.BackColor = IIf(σbA > _fs, Color.Red, Color.LightGreen)
+        TextBox156.BackColor = IIf(σbB > _fs, Color.Red, Color.LightGreen)
+        TextBox157.BackColor = IIf(σbC > _fs, Color.Red, Color.LightGreen)
+        TextBox158.BackColor = IIf(σbD > _fs, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
@@ -1630,7 +1660,7 @@ Public Class Form1
         Read_file()
     End Sub
 
-    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click, TabPage10.Enter, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click, TabPage10.Enter, NumericUpDown38.ValueChanged, NumericUpDown37.ValueChanged, NumericUpDown36.ValueChanged, NumericUpDown35.ValueChanged, NumericUpDown33.ValueChanged, NumericUpDown19.ValueChanged, NumericUpDown40.ValueChanged, NumericUpDown39.ValueChanged
         Calc_rect_reinforced_15_6_2()
         Calc_rect_unreinforced_15_6_4()
         Calc_rect_reinforced_15_6_5()
