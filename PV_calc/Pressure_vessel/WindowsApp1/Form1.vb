@@ -89,7 +89,7 @@ Public Class Form1
         "Based on " & vbCrLf &
         "EN 13445" & vbCrLf &
         "Unfired pressure vessels" & vbCrLf &
-        "Part 3 Design (issue 3:2016)"
+        "Part 3 Design (issue 2016)"
 
         TextBox22.Text =
         "Important note" & vbCrLf &
@@ -578,6 +578,9 @@ Public Class Form1
         TextBox117.BackColor = IIf(τw > _fs, Color.Red, Color.LightGreen)
         TextBox126.BackColor = IIf(τr > _fs, Color.Red, Color.LightGreen)
         TextBox128.BackColor = IIf(rib_stab > 10, Color.Red, Color.LightGreen)
+
+        TextBox142.BackColor = IIf(τ_long > _fs, Color.Red, Color.LightGreen)
+        TextBox143.BackColor = IIf(τ_short > _fs, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Calc_rect_unreinforced_15_6_4()
@@ -699,10 +702,10 @@ Public Class Form1
         '------- present -----------
         TextBox150.Text = σmD.ToString("0.0")
         TextBox151.Text = σmA.ToString("0.0")
-        TextBox146.Text = (Ma / 10 ^ 3).ToString("0") '[KNmm]
-        TextBox147.Text = (Mb / 10 ^ 3).ToString("0") '[KNmm]
-        TextBox148.Text = (Mc / 10 ^ 3).ToString("0") '[KNmm]
-        TextBox149.Text = (Md / 10 ^ 3).ToString("0") '[KNmm]
+        TextBox146.Text = (Ma / 10 ^ 3).ToString("0") '[Nm]
+        TextBox147.Text = (Mb / 10 ^ 3).ToString("0") '[Nm]
+        TextBox148.Text = (Mc / 10 ^ 3).ToString("0") '[Nm]
+        TextBox149.Text = (Md / 10 ^ 3).ToString("0") '[Nm]
 
         TextBox152.Text = α1.ToString("0.00")
         TextBox153.Text = κ.ToString("0.00")
@@ -714,6 +717,9 @@ Public Class Form1
         TextBox159.Text = c_fibre.ToString("0")
 
         '----------- check -------------
+        TextBox150.BackColor = IIf(σmD > _fs, Color.Red, Color.LightGreen)
+        TextBox151.BackColor = IIf(σmA > _fs, Color.Red, Color.LightGreen)
+
         TextBox155.BackColor = IIf(σbA > _fs, Color.Red, Color.LightGreen)
         TextBox156.BackColor = IIf(σbB > _fs, Color.Red, Color.LightGreen)
         TextBox157.BackColor = IIf(σbC > _fs, Color.Red, Color.LightGreen)
