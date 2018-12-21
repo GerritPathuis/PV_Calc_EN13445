@@ -566,6 +566,8 @@ Partial Class Form1
         Me.Label236 = New System.Windows.Forms.Label()
         Me.Label237 = New System.Windows.Forms.Label()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.PictureBox12 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.GroupBox29 = New System.Windows.Forms.GroupBox()
         Me.TextBox159 = New System.Windows.Forms.TextBox()
         Me.Label444 = New System.Windows.Forms.Label()
@@ -640,6 +642,7 @@ Partial Class Form1
         Me.NumericUpDown38 = New System.Windows.Forms.NumericUpDown()
         Me.Label367 = New System.Windows.Forms.Label()
         Me.GroupBox25 = New System.Windows.Forms.GroupBox()
+        Me.Label366 = New System.Windows.Forms.Label()
         Me.TextBox154 = New System.Windows.Forms.TextBox()
         Me.Label441 = New System.Windows.Forms.Label()
         Me.Label442 = New System.Windows.Forms.Label()
@@ -725,9 +728,7 @@ Partial Class Form1
         Me.PictureBox9 = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label366 = New System.Windows.Forms.Label()
-        Me.PictureBox11 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox12 = New System.Windows.Forms.PictureBox()
+        Me.Button13 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -800,6 +801,8 @@ Partial Class Form1
         CType(Me.NumericUpDown24, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NumericUpDown23, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage10.SuspendLayout
+        CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupBox29.SuspendLayout
         Me.GroupBox28.SuspendLayout
         CType(Me.NumericUpDown40, System.ComponentModel.ISupportInitialize).BeginInit
@@ -819,8 +822,6 @@ Partial Class Form1
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TabControl1
@@ -6758,6 +6759,7 @@ Partial Class Form1
         '
         'TabPage10
         '
+        Me.TabPage10.Controls.Add(Me.Button13)
         Me.TabPage10.Controls.Add(Me.PictureBox12)
         Me.TabPage10.Controls.Add(Me.PictureBox11)
         Me.TabPage10.Controls.Add(Me.GroupBox29)
@@ -6774,6 +6776,28 @@ Partial Class Form1
         Me.TabPage10.TabIndex = 10
         Me.TabPage10.Text = "Rectangle Reinforced 15.6"
         Me.TabPage10.UseVisualStyleBackColor = True
+        '
+        'PictureBox12
+        '
+        Me.PictureBox12.Image = CType(resources.GetObject("PictureBox12.Image"), System.Drawing.Image)
+        Me.PictureBox12.InitialImage = Nothing
+        Me.PictureBox12.Location = New System.Drawing.Point(628, 533)
+        Me.PictureBox12.Name = "PictureBox12"
+        Me.PictureBox12.Size = New System.Drawing.Size(112, 131)
+        Me.PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox12.TabIndex = 206
+        Me.PictureBox12.TabStop = False
+        '
+        'PictureBox11
+        '
+        Me.PictureBox11.Image = CType(resources.GetObject("PictureBox11.Image"), System.Drawing.Image)
+        Me.PictureBox11.InitialImage = Nothing
+        Me.PictureBox11.Location = New System.Drawing.Point(502, 533)
+        Me.PictureBox11.Name = "PictureBox11"
+        Me.PictureBox11.Size = New System.Drawing.Size(112, 131)
+        Me.PictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox11.TabIndex = 205
+        Me.PictureBox11.TabStop = False
         '
         'GroupBox29
         '
@@ -6805,7 +6829,7 @@ Partial Class Form1
         Me.GroupBox29.Size = New System.Drawing.Size(496, 140)
         Me.GroupBox29.TabIndex = 204
         Me.GroupBox29.TabStop = False
-        Me.GroupBox29.Text = "Chapter 15.6.5 membrane and bending stress in transvere section (Figure 15.6-4)"
+        Me.GroupBox29.Text = "Chapter 15.6.5 membrane and bending stress in transv. section (Figure 15.6-4)"
         '
         'TextBox159
         '
@@ -7328,8 +7352,8 @@ Partial Class Form1
         Me.GroupBox26.Controls.Add(Me.Label395)
         Me.GroupBox26.Controls.Add(Me.Label370)
         Me.GroupBox26.Controls.Add(Me.TextBox127)
-        Me.GroupBox26.Controls.Add(Me.Button12)
         Me.GroupBox26.Controls.Add(Me.Label396)
+        Me.GroupBox26.Controls.Add(Me.Button12)
         Me.GroupBox26.Controls.Add(Me.NumericUpDown37)
         Me.GroupBox26.Controls.Add(Me.Label369)
         Me.GroupBox26.Controls.Add(Me.Label371)
@@ -7406,7 +7430,7 @@ Partial Class Form1
         '
         'Button12
         '
-        Me.Button12.Location = New System.Drawing.Point(168, 50)
+        Me.Button12.Location = New System.Drawing.Point(158, 58)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(75, 34)
         Me.Button12.TabIndex = 195
@@ -7631,6 +7655,16 @@ Partial Class Form1
         Me.GroupBox25.TabIndex = 200
         Me.GroupBox25.TabStop = False
         Me.GroupBox25.Text = "Reinforcement rib type C1 (Figure 15.6-2)"
+        '
+        'Label366
+        '
+        Me.Label366.AutoSize = True
+        Me.Label366.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label366.Location = New System.Drawing.Point(18, 313)
+        Me.Label366.Name = "Label366"
+        Me.Label366.Size = New System.Drawing.Size(303, 13)
+        Me.Label366.TabIndex = 214
+        Me.Label366.Text = "Note reinformens ribs (type C1) long and short side are identical"
         '
         'TextBox154
         '
@@ -8209,9 +8243,9 @@ Partial Class Form1
         Me.Label365.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label365.Location = New System.Drawing.Point(16, 76)
         Me.Label365.Name = "Label365"
-        Me.Label365.Size = New System.Drawing.Size(201, 16)
+        Me.Label365.Size = New System.Drawing.Size(185, 16)
         Me.Label365.TabIndex = 199
-        Me.Label365.Text = "τ web-vessel continuous welded"
+        Me.Label365.Text = "τ web-vessel continuous weld"
         '
         'Label360
         '
@@ -8492,37 +8526,14 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Label366
+        'Button13
         '
-        Me.Label366.AutoSize = True
-        Me.Label366.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label366.Location = New System.Drawing.Point(18, 313)
-        Me.Label366.Name = "Label366"
-        Me.Label366.Size = New System.Drawing.Size(303, 13)
-        Me.Label366.TabIndex = 214
-        Me.Label366.Text = "Note reinformens ribs (type C1) long and short side are identical"
-        '
-        'PictureBox11
-        '
-        Me.PictureBox11.Image = CType(resources.GetObject("PictureBox11.Image"), System.Drawing.Image)
-        Me.PictureBox11.InitialImage = Nothing
-        Me.PictureBox11.Location = New System.Drawing.Point(502, 533)
-        Me.PictureBox11.Name = "PictureBox11"
-        Me.PictureBox11.Size = New System.Drawing.Size(112, 131)
-        Me.PictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox11.TabIndex = 205
-        Me.PictureBox11.TabStop = False
-        '
-        'PictureBox12
-        '
-        Me.PictureBox12.Image = CType(resources.GetObject("PictureBox12.Image"), System.Drawing.Image)
-        Me.PictureBox12.InitialImage = Nothing
-        Me.PictureBox12.Location = New System.Drawing.Point(628, 533)
-        Me.PictureBox12.Name = "PictureBox12"
-        Me.PictureBox12.Size = New System.Drawing.Size(112, 131)
-        Me.PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox12.TabIndex = 206
-        Me.PictureBox12.TabStop = False
+        Me.Button13.Location = New System.Drawing.Point(800, 560)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(108, 62)
+        Me.Button13.TabIndex = 235
+        Me.Button13.Text = "Print to word"
+        Me.Button13.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -8631,6 +8642,8 @@ Partial Class Form1
         CType(Me.NumericUpDown24, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NumericUpDown23, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage10.ResumeLayout(False)
+        CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox29.ResumeLayout(False)
         Me.GroupBox29.PerformLayout
         Me.GroupBox28.ResumeLayout(False)
@@ -8658,8 +8671,6 @@ Partial Class Form1
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(False)
 
     End Sub
@@ -9369,4 +9380,5 @@ Partial Class Form1
     Friend WithEvents PictureBox11 As PictureBox
     Friend WithEvents Label366 As Label
     Friend WithEvents PictureBox12 As PictureBox
+    Friend WithEvents Button13 As Button
 End Class

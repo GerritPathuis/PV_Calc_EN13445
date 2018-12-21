@@ -457,21 +457,22 @@ Public Class Form1
         Dim h_long, H_short As Double    'Lenght inside vessel 
         Dim tw, hrib, br, e, Q1, Q2, Q, yc, bcw As Double
         Dim τw, τr As Double
-        Dim I2_rib, I2_wall, I As Double            '2nd Moment of area
+        Dim I2_rib, I2_wall As Double
+        Dim I_11 As Double                           '2nd moment of area short side plate and reinforcement combined
         Dim I1_rib As Double                        '1st Moment of area
         Dim area_rib, area_wall, area_composed As Double       'Areas
         Dim c_rib, c_wall, c_total As Double        'Centriods
         Dim rib_stab As Double                      'Reinforcement stability
-        Dim j As Double
+        Dim j As Double 'j is distance weld to neutral axis composite to centroid A'
         Dim τ_long, τ_short As Double               'τ welds
 
-        e = NumericUpDown38.Value       'Vessel-Plate tickness
-        tw = NumericUpDown19.Value      'Reinforcement rib thickness
-        hrib = NumericUpDown33.Value    'Reinforcement rib height
-        br = NumericUpDown35.Value      'Reinforcement rib distance
+        e = NumericUpDown38.Value           'Vessel-Plate tickness
+        tw = NumericUpDown19.Value          'Reinforcement rib thickness
+        hrib = NumericUpDown33.Value        'Reinforcement rib height
+        br = NumericUpDown35.Value          'Reinforcement rib distance
 
-        h_long = NumericUpDown36.Value   'Lenght inside vessel (height or width)
-        H_short = NumericUpDown37.Value   'Lenght inside vessel (height or width)
+        h_long = NumericUpDown36.Value      'Lenght inside vessel (height or width)
+        H_short = NumericUpDown37.Value     'Lenght inside vessel (height or width)
 
         '---- calc centroid composite----
         '--- presure side wall is "position zero"
@@ -496,19 +497,22 @@ Public Class Form1
         I2_rib = tw * hrib ^ 3 / 12       '2nd Moment of area
         I2_wall = br * e ^ 3 / 12         '2nd Moment of area
 
-        '---- now Parallel axis theorem
-        I = I2_wall + area_wall * (yc - e / 2) ^ 2
-        I += I2_rib + area_rib * (yc - hrib / 2) ^ 2
-        bcw = e             'Web thickness page 327 for (C1 type)
+        '---- now Parallel axis theorem ---
+        I_11 = I2_wall + area_wall * (yc - e / 2) ^ 2
+        I_11 += I2_rib + area_rib * (yc - hrib / 2) ^ 2
+
+        '---- Web thickness page 327 for (C1 type)--
+        bcw = e
 
         '----------- Shear load one side ------------------
         Q1 = _P * br * h_long / 2 'Side Load 1 (15.6.2.3-2)
         Q2 = _P * br * H_short / 2 'Side Load 2 (15.6.2.3-2)   
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
-        τw = Q * area_rib * j / (I * bcw)    'Stress weld (15.6.2.2-1)
+        τw = Q * area_rib * j / (I_11 * bcw)    'Stress weld (15.6.2.2-1)
 
-        τr = Q / area_rib                   'stress reinforcement(15.6.2.3-1)
+        τr = Q / area_rib                       'stress reinforcement(15.6.2.3-1)
+
         '---------- rib compression stabiliy ------
         rib_stab = hrib / tw                'Table 15.6-1 Sketch C1
 
@@ -519,7 +523,6 @@ Public Class Form1
         Dim Ma, Mb, Mc, Md As Double
         Dim S As Double     'First moment of area reinforcement
         Dim biw As Double   'Total weld throat of intermittent weld
-        Dim I11 As Double   'Second moment of area short side plate and reinforcement combined
 
         '-------- get data ------------
         Double.TryParse(TextBox146.Text, Ma)    'Formula 15.6.5-3
@@ -527,27 +530,26 @@ Public Class Form1
         Double.TryParse(TextBox148.Text, Mc)    'Formula 15.6.5-7
         Double.TryParse(TextBox149.Text, Md)    'Formula 15.6.5-9
         Double.TryParse(TextBox134.Text, S)     'First moment of area reinforcement
-        Double.TryParse(TextBox114.Text, I11)   '2nd moment of area short side plate and reinforcement combined
-        biw = NumericUpDown39.Value             'Total weld throat of intermittent weld
-        lw = NumericUpDown40.Value              'Total length intermittent welds
 
-        'Note I11 identical to I21 (reinforcements both side identical)
+        biw = NumericUpDown39.Value             'Total weld throat of intermittent weld
+        lw = NumericUpDown40.Value              'Length intermittent welds Figure 15.6-3
 
         '----- calc 15.6.2.3 ------------
-        η = h_long / 2 - 1.5 * lw
+        'Note I_11 identical to I_21 (reinforcements both side identical)
 
-        ΔM_long = br * _P * (H_short ^ 2 / 8 - η ^ 2 / 2)    'Formula 15.6.2.2-3
-        ΔM_short = br * _P * (h_long ^ 2 / 8 - η ^ 2 / 2)    'Formula 15.6.2.2-4
+        η = h_long / 2 - 1.5 * lw       'Figure 15.6-3
 
-        τ_long = Abs(ΔM_long * S / (biw * lw * I11))
-        τ_short = Abs(ΔM_short * S / (biw * lw * I11))
+        ΔM_long = br * _P * (H_short ^ 2 / 8 - η ^ 2 / 2)   'Formula 15.6.2.2-3
+        ΔM_short = br * _P * (h_long ^ 2 / 8 - η ^ 2 / 2)   'Formula 15.6.2.2-4
 
+        τ_long = Abs(ΔM_long * S / (biw * lw * I_11))       'Formula 15.6.2.2-2
+        τ_short = Abs(ΔM_short * S / (biw * lw * I_11))     'Formula 15.6.2.2-2
 
         '---------- present results -----------
         TextBox21.Text = area_composed.ToString("0")
         TextBox154.Text = area_rib.ToString("0")
         TextBox113.Text = j.ToString("0.0")
-        TextBox114.Text = I.ToString("0")
+        TextBox114.Text = I_11.ToString("0")
         TextBox115.Text = bcw.ToString("0.00")
         TextBox124.Text = Q1 / 1000.ToString("0")
         TextBox125.Text = Q2 / 1000.ToString("0")
@@ -636,8 +638,8 @@ Public Class Form1
         Dim σmD, σmA As Double  'Membrane stress
         Dim h_long As Double    'long edge
         Dim H_short As Double   'short edge
-        Dim h1_long As Double    'Pitch neutral lines reinforcements on long sides of vessel
-        Dim H1_short As Double   'Pitch neutral lines reinforcements on short sides of vessel
+        Dim h1_long As Double   'Pitch neutral lines reinforcements on long sides of vessel
+        Dim H1_short As Double  'Pitch neutral lines reinforcements on short sides of vessel
         Dim inside_to_neutral As Double 'Distande
         Dim c_fibre As Double   'Distance neutral axis to outer fibre
         Dim br, hr As Double    'Pressure bearing width [mm]
@@ -1202,7 +1204,7 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "File name"
             oTable.Cell(row, 2).Range.Text = ufilename
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(4)
 
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
@@ -1263,7 +1265,7 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = NumericUpDown31.Value.ToString("0.0")
             oTable.Cell(row, 3).Range.Text = "[-]"
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
@@ -1300,7 +1302,7 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[mm]"
 
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
@@ -1340,7 +1342,7 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = TextBox83.Text
             oTable.Cell(row, 3).Range.Text = "[kN]"
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
@@ -1388,7 +1390,7 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = TextBox90.Text
             oTable.Cell(row, 3).Range.Text = "[Nm]"
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
@@ -1433,7 +1435,7 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = TextBox102.Text
             oTable.Cell(row, 3).Range.Text = "[N/mm2]"
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.5)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
@@ -1672,5 +1674,274 @@ Public Class Form1
         Calc_rect_reinforced_15_6_5()
     End Sub
 
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        print_15_6()
+    End Sub
+    Private Sub Print_15_6()
+        Dim oWord As Word.Application ' = Nothing
 
+        Dim oDoc As Word.Document
+        Dim oTable As Word.Table
+        Dim oPara1, oPara2 As Word.Paragraph
+        Dim row, font_sizze As Integer
+        Dim ufilename As String
+        ufilename = "PV_calc_Chapter 15.6" & TextBox66.Text & "_" & TextBox69.Text & "_" & TextBox70.Text & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+
+        Try
+            oWord = New Word.Application()
+
+            'Start Word and open the document template. 
+            font_sizze = 9
+            oWord = CType(CreateObject("Word.Application"), Word.Application)
+            oWord.Visible = True
+            oDoc = oWord.Documents.Add
+
+            oDoc.PageSetup.TopMargin = 35
+            oDoc.PageSetup.BottomMargin = 15
+
+            'Insert a paragraph at the beginning of the document. 
+            oPara1 = oDoc.Content.Paragraphs.Add
+
+            oPara1.Range.Text = "VTK Engineering"
+            oPara1.Range.Font.Name = "Arial"
+            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Bold = CInt(True)
+            oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
+            oPara1.Range.InsertParagraphAfter()
+
+            oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
+            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Format.SpaceAfter = 1
+            oPara2.Range.Font.Bold = CInt(False)
+            oPara2.Range.Text = "Rectangle Pressure Vessel Reinforced acc. EN13445 15.6" & vbCrLf
+            oPara2.Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 2)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 2).Range.Text = TextBox69.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Project number "
+            oTable.Cell(row, 2).Range.Text = TextBox66.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Pressure vessel id"
+            oTable.Cell(row, 2).Range.Text = TextBox70.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Author"
+            oTable.Cell(row, 2).Range.Text = Environment.UserName
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Date"
+            oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "File name"
+            oTable.Cell(row, 2).Range.Text = ufilename
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(4)
+
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "VESSEL DATA"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label327.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown19.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label340.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown33.Text
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label370.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown36.Value.ToString
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label367.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown37.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label373.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown38.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label357.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown35.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label396.Text
+            oTable.Cell(row, 2).Range.Text = TextBox127.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------"Bolting 11.4.1"---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Wall stress unsupported zone"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Inside long side"
+            oTable.Cell(row, 2).Range.Text = Label129.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Inside short side"
+            oTable.Cell(row, 2).Range.Text = Label130.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label378.Text
+            oTable.Cell(row, 2).Range.Text = TextBox118.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label381.Text
+            oTable.Cell(row, 2).Range.Text = TextBox119.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------Chapter 15.6.2.3 Reinforments stitch welded---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Reinforments stitch welded 15.6.2.3"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label415.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown39.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[N]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label418.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown40.Value.ToString("0")
+            oTable.Cell(row, 3).Range.Text = "[N]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "τ Long side stitch"
+            oTable.Cell(row, 2).Range.Text = TextBox142.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "τ Long side stitch"
+            oTable.Cell(row, 2).Range.Text = TextBox143.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------Chapter 15.6.5 membrane and bending str in transv. section (Figure 15.6-4)---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 7, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Stress transverse section 11.5.3"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "σ Membrane short side"
+            oTable.Cell(row, 2).Range.Text = TextBox124.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "σ Membrane long side"
+            oTable.Cell(row, 2).Range.Text = TextBox125.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "σ Bend A"
+            oTable.Cell(row, 2).Range.Text = TextBox155.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "σ Bend B"
+            oTable.Cell(row, 2).Range.Text = TextBox156.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "σ Bend C"
+            oTable.Cell(row, 2).Range.Text = TextBox157.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "σ Bend D"
+            oTable.Cell(row, 2).Range.Text = TextBox158.Text
+            oTable.Cell(row, 3).Range.Text = "[N]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+
+            '---------Chapter 15.6.2.4 Reinforced vessels (C1 reinforment rib)---------------------------------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Chapter 15.6.2.4"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label362.Text
+            oTable.Cell(row, 2).Range.Text = TextBox116.Text
+            oTable.Cell(row, 3).Range.Text = "[kN]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label365.Text
+            oTable.Cell(row, 2).Range.Text = TextBox117.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label393.Text
+            oTable.Cell(row, 2).Range.Text = TextBox126.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '--------------Save file word file------------------
+            'See https://msdn.microsoft.com/en-us/library/63w57f4b.aspx
+
+            If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
+            If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
+            If (Not System.IO.Directory.Exists(dirpath_Home)) Then System.IO.Directory.CreateDirectory(dirpath_Home)
+
+            If Directory.Exists(dirpath_Rap) Then
+                oWord.ActiveDocument.SaveAs(dirpath_Rap & ufilename)
+            Else
+                oWord.ActiveDocument.SaveAs(dirpath_Home & ufilename)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
 End Class
