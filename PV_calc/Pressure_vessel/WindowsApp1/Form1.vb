@@ -12,7 +12,8 @@ Imports Word = Microsoft.Office.Interop.Word
 Public Class Form1
     Public _P As Double         'Calculation pressure [Mpa]
     Public _fs As Double        'Allowable stress shell [N/mm2]
-    Public _fp As Double        'Allowable stress reinforcement [N/mm2]
+    Public _f02 As Double       'Yield 0.2% stress shell [N/mm2]
+    Public _fym As Double       'Allowable stress reinforcement [N/mm2]
 
     Public _De As Double        'Outside diameter shell
     Public _Di As Double        'Inside diameter shell
@@ -302,7 +303,9 @@ Public Class Form1
             If CheckBox1.Checked Then NumericUpDown7.Value *= 0.9   'PED cat IV
             If CheckBox2.Checked Then NumericUpDown7.Value *= 1.5   'EN 14460 (Shock resistant)
             _fs = NumericUpDown7.Value                  'allowable stress
-
+            _fym = NumericUpDown10.Value * 1.5          'sigma02*1.5
+            _f02 = NumericUpDown10.Value                'Yield 0.2%
+            TextBox133.Text = _fym.ToString             'Safety factor
         End If
     End Sub
 
@@ -441,11 +444,11 @@ Public Class Form1
         TextBox38.Text = σTBC.ToString("0.0")   'Bend
 
         '---- check '(eq 15.5.3-2)---
-        TextBox26.BackColor = IIf(σTA > 1.5 * _fs, Color.Red, Color.LightGreen)
-        TextBox27.BackColor = IIf(σTB > 1.5 * _fs, Color.Red, Color.LightGreen)
-        TextBox36.BackColor = IIf(σTC > 1.5 * _fs, Color.Red, Color.LightGreen)
-        TextBox37.BackColor = IIf(σTD > 1.5 * _fs, Color.Red, Color.LightGreen)
-        TextBox38.BackColor = IIf(σTBC > 1.5 * _fs, Color.Red, Color.LightGreen)
+        TextBox26.BackColor = IIf(σTA > 1.5 * _f02, Color.Red, Color.LightGreen)
+        TextBox27.BackColor = IIf(σTB > 1.5 * _f02, Color.Red, Color.LightGreen)
+        TextBox36.BackColor = IIf(σTC > 1.5 * _f02, Color.Red, Color.LightGreen)
+        TextBox37.BackColor = IIf(σTD > 1.5 * _f02, Color.Red, Color.LightGreen)
+        TextBox38.BackColor = IIf(σTBC > 1.5 * _f02, Color.Red, Color.LightGreen)
 
         '----- vessel size
         TextBox40.Text = (L + a) * 2.ToString("0.0")
@@ -577,12 +580,12 @@ Public Class Form1
         TextBox143.Text = τ_short.ToString("0.0")
 
         '----------- check -------------
-        TextBox117.BackColor = IIf(τw > _fs, Color.Red, Color.LightGreen)
-        TextBox126.BackColor = IIf(τr > _fs, Color.Red, Color.LightGreen)
+        TextBox117.BackColor = IIf(τw > _f02, Color.Red, Color.LightGreen)
+        TextBox126.BackColor = IIf(τr > _f02, Color.Red, Color.LightGreen)
         TextBox128.BackColor = IIf(rib_stab > 10, Color.Red, Color.LightGreen)
 
-        TextBox142.BackColor = IIf(τ_long > _fs, Color.Red, Color.LightGreen)
-        TextBox143.BackColor = IIf(τ_short > _fs, Color.Red, Color.LightGreen)
+        TextBox142.BackColor = IIf(τ_long > _f02, Color.Red, Color.LightGreen)
+        TextBox143.BackColor = IIf(τ_short > _f02, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Calc_rect_unreinforced_15_6_4()
@@ -631,7 +634,7 @@ Public Class Form1
 
         '----------- check -------------
         TextBox118.BackColor = IIf(σm > _fs, Color.Red, Color.LightGreen)
-        TextBox119.BackColor = IIf(((σm + σb) > 1.5 * _fs), Color.Red, Color.LightGreen)
+        TextBox119.BackColor = IIf(((σm + σb) > 1.5 * _f02), Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Calc_rect_reinforced_15_6_5()
@@ -719,13 +722,13 @@ Public Class Form1
         TextBox159.Text = c_fibre.ToString("0")
 
         '----------- check -------------
-        TextBox150.BackColor = IIf(σmD > _fs, Color.Red, Color.LightGreen)
-        TextBox151.BackColor = IIf(σmA > _fs, Color.Red, Color.LightGreen)
+        TextBox150.BackColor = IIf(σmD > _f02, Color.Red, Color.LightGreen)
+        TextBox151.BackColor = IIf(σmA > _f02, Color.Red, Color.LightGreen)
 
-        TextBox155.BackColor = IIf(σbA > _fs, Color.Red, Color.LightGreen)
-        TextBox156.BackColor = IIf(σbB > _fs, Color.Red, Color.LightGreen)
-        TextBox157.BackColor = IIf(σbC > _fs, Color.Red, Color.LightGreen)
-        TextBox158.BackColor = IIf(σbD > _fs, Color.Red, Color.LightGreen)
+        TextBox155.BackColor = IIf(σbA > _f02 * 1.5, Color.Red, Color.LightGreen)
+        TextBox156.BackColor = IIf(σbB > _f02 * 1.5, Color.Red, Color.LightGreen)
+        TextBox157.BackColor = IIf(σbC > _f02 * 1.5, Color.Red, Color.LightGreen)
+        TextBox158.BackColor = IIf(σbD > _f02 * 1.5, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
@@ -1131,9 +1134,6 @@ Public Class Form1
         NumericUpDown26.BackColor = IIf(Dia_bolt > db, Color.Red, Color.Yellow)    'Bolt dia
         TextBox102.BackColor = IIf(σθ > _fs, Color.Red, Color.Yellow)    'Flange stress
     End Sub
-
-
-
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
         Form2.Show()
     End Sub
@@ -1749,7 +1749,35 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
-            '----------------------------------------------
+            '---------------- Material data --------------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 3, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Material DATA"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Material"
+            oTable.Cell(row, 2).Range.Text = ComboBox5.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Yield 0.2%"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown10.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Allowed design stress"
+            oTable.Cell(row, 2).Range.Text = TextBox133.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------------- Vessel data --------------------
             'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
@@ -1767,6 +1795,14 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = Label340.Text
             oTable.Cell(row, 2).Range.Text = NumericUpDown33.Text
             oTable.Cell(row, 3).Range.Text = "[mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label430.Text
+            oTable.Cell(row, 2).Range.Text = TextBox141.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label352.Text
+            oTable.Cell(row, 2).Range.Text = TextBox114.Text
+            oTable.Cell(row, 3).Range.Text = "[mm4]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label370.Text
             oTable.Cell(row, 2).Range.Text = NumericUpDown36.Value.ToString
@@ -1788,12 +1824,12 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = TextBox127.Text
             oTable.Cell(row, 3).Range.Text = "[N/mm2]"
 
-            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
-            '---------"Bolting 11.4.1"---------------------------------------
+            '---------"Wall stress unsupported zone 15.6.4"---------------------------------------
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
@@ -1801,15 +1837,14 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Wall stress unsupported zone"
-
+            oTable.Cell(row, 1).Range.Text = "Wall stress unsupported zone 15.6.4"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Inside long side"
-            oTable.Cell(row, 2).Range.Text = Label129.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown36.Value.ToString("0")
             oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Inside short side"
-            oTable.Cell(row, 2).Range.Text = Label130.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown37.Value.ToString("0")
             oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label378.Text
@@ -1879,19 +1914,19 @@ Public Class Form1
             row += 1
             oTable.Cell(row, 1).Range.Text = "σ Bend A"
             oTable.Cell(row, 2).Range.Text = TextBox155.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "σ Bend B"
             oTable.Cell(row, 2).Range.Text = TextBox156.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "σ Bend C"
             oTable.Cell(row, 2).Range.Text = TextBox157.Text
-            oTable.Cell(row, 3).Range.Text = "[-]"
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "σ Bend D"
             oTable.Cell(row, 2).Range.Text = TextBox158.Text
-            oTable.Cell(row, 3).Range.Text = "[N]"
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
@@ -1907,7 +1942,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Chapter 15.6.2.4"
+            oTable.Cell(row, 1).Range.Text = "τ in Reinforcement web 15.6.2.4"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label362.Text
             oTable.Cell(row, 2).Range.Text = TextBox116.Text

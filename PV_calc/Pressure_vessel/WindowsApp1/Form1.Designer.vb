@@ -566,6 +566,7 @@ Partial Class Form1
         Me.Label236 = New System.Windows.Forms.Label()
         Me.Label237 = New System.Windows.Forms.Label()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
+        Me.Button13 = New System.Windows.Forms.Button()
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
         Me.GroupBox29 = New System.Windows.Forms.GroupBox()
@@ -625,8 +626,8 @@ Partial Class Form1
         Me.Label395 = New System.Windows.Forms.Label()
         Me.Label370 = New System.Windows.Forms.Label()
         Me.TextBox127 = New System.Windows.Forms.TextBox()
-        Me.Button12 = New System.Windows.Forms.Button()
         Me.Label396 = New System.Windows.Forms.Label()
+        Me.Button12 = New System.Windows.Forms.Button()
         Me.NumericUpDown37 = New System.Windows.Forms.NumericUpDown()
         Me.Label369 = New System.Windows.Forms.Label()
         Me.Label371 = New System.Windows.Forms.Label()
@@ -728,7 +729,9 @@ Partial Class Form1
         Me.PictureBox9 = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Button13 = New System.Windows.Forms.Button()
+        Me.TextBox133 = New System.Windows.Forms.TextBox()
+        Me.Label404 = New System.Windows.Forms.Label()
+        Me.Label405 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1272,6 +1275,9 @@ Partial Class Form1
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label405)
+        Me.GroupBox1.Controls.Add(Me.Label404)
+        Me.GroupBox1.Controls.Add(Me.TextBox133)
         Me.GroupBox1.Controls.Add(Me.CheckBox2)
         Me.GroupBox1.Controls.Add(Me.Label21)
         Me.GroupBox1.Controls.Add(Me.ComboBox5)
@@ -1305,9 +1311,9 @@ Partial Class Form1
         Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox2.Location = New System.Drawing.Point(13, 174)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(300, 17)
+        Me.CheckBox2.Size = New System.Drawing.Size(307, 17)
         Me.CheckBox2.TabIndex = 142
-        Me.CheckBox2.Text = "EN 14460:2006 Shock resistent design (fs * 1.5)"
+        Me.CheckBox2.Text = "EN 14460:2006 Shock resistent design (Ym * 1.5)"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'Label21
@@ -1480,9 +1486,9 @@ Partial Class Form1
         Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label37.Location = New System.Drawing.Point(431, 134)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(18, 16)
+        Me.Label37.Size = New System.Drawing.Size(25, 16)
         Me.Label37.TabIndex = 81
-        Me.Label37.Text = "fs"
+        Me.Label37.Text = "_fs"
         '
         'Button1
         '
@@ -6777,6 +6783,15 @@ Partial Class Form1
         Me.TabPage10.Text = "Rectangle Reinforced 15.6"
         Me.TabPage10.UseVisualStyleBackColor = True
         '
+        'Button13
+        '
+        Me.Button13.Location = New System.Drawing.Point(800, 560)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(108, 62)
+        Me.Button13.TabIndex = 235
+        Me.Button13.Text = "Print to word"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
         'PictureBox12
         '
         Me.PictureBox12.Image = CType(resources.GetObject("PictureBox12.Image"), System.Drawing.Image)
@@ -7428,16 +7443,6 @@ Partial Class Form1
         Me.TextBox127.TabIndex = 213
         Me.TextBox127.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Button12
-        '
-        Me.Button12.Location = New System.Drawing.Point(158, 58)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(75, 34)
-        Me.Button12.TabIndex = 195
-        Me.Button12.Text = "Button12"
-        Me.Button12.UseVisualStyleBackColor = True
-        Me.Button12.Visible = False
-        '
         'Label396
         '
         Me.Label396.AutoSize = True
@@ -7447,6 +7452,16 @@ Partial Class Form1
         Me.Label396.Size = New System.Drawing.Size(130, 16)
         Me.Label396.TabIndex = 212
         Me.Label396.Text = "Calculation pressure"
+        '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(158, 58)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(75, 34)
+        Me.Button12.TabIndex = 195
+        Me.Button12.Text = "Button12"
+        Me.Button12.UseVisualStyleBackColor = True
+        Me.Button12.Visible = False
         '
         'NumericUpDown37
         '
@@ -8526,14 +8541,34 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Button13
+        'TextBox133
         '
-        Me.Button13.Location = New System.Drawing.Point(800, 560)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(108, 62)
-        Me.Button13.TabIndex = 235
-        Me.Button13.Text = "Print to word"
-        Me.Button13.UseVisualStyleBackColor = True
+        Me.TextBox133.Enabled = False
+        Me.TextBox133.Location = New System.Drawing.Point(474, 173)
+        Me.TextBox133.Name = "TextBox133"
+        Me.TextBox133.Size = New System.Drawing.Size(85, 20)
+        Me.TextBox133.TabIndex = 143
+        Me.TextBox133.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label404
+        '
+        Me.Label404.AutoSize = True
+        Me.Label404.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label404.Location = New System.Drawing.Point(565, 175)
+        Me.Label404.Name = "Label404"
+        Me.Label404.Size = New System.Drawing.Size(59, 16)
+        Me.Label404.TabIndex = 144
+        Me.Label404.Text = "[N/mm2]"
+        '
+        'Label405
+        '
+        Me.Label405.AutoSize = True
+        Me.Label405.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label405.Location = New System.Drawing.Point(429, 175)
+        Me.Label405.Name = "Label405"
+        Me.Label405.Size = New System.Drawing.Size(36, 16)
+        Me.Label405.TabIndex = 145
+        Me.Label405.Text = "_fym"
         '
         'Form1
         '
@@ -9381,4 +9416,7 @@ Partial Class Form1
     Friend WithEvents Label366 As Label
     Friend WithEvents PictureBox12 As PictureBox
     Friend WithEvents Button13 As Button
+    Friend WithEvents Label404 As Label
+    Friend WithEvents TextBox133 As TextBox
+    Friend WithEvents Label405 As Label
 End Class
