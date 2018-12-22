@@ -179,7 +179,6 @@ Partial Class Form1
         Me.NumericUpDown14 = New System.Windows.Forms.NumericUpDown()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.Label44 = New System.Windows.Forms.Label()
-        Me.NumericUpDown13 = New System.Windows.Forms.NumericUpDown()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.NumericUpDown12 = New System.Windows.Forms.NumericUpDown()
         Me.Label42 = New System.Windows.Forms.Label()
@@ -737,6 +736,7 @@ Partial Class Form1
         Me.PictureBox9 = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.TextBox144 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -760,7 +760,6 @@ Partial Class Form1
         Me.GroupBox6.SuspendLayout
         Me.GroupBox4.SuspendLayout
         CType(Me.NumericUpDown14, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.NumericUpDown13, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NumericUpDown12, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage2.SuspendLayout
@@ -2479,12 +2478,12 @@ Partial Class Form1
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.TextBox144)
         Me.GroupBox4.Controls.Add(Me.Label76)
         Me.GroupBox4.Controls.Add(Me.Label77)
         Me.GroupBox4.Controls.Add(Me.NumericUpDown14)
         Me.GroupBox4.Controls.Add(Me.Label38)
         Me.GroupBox4.Controls.Add(Me.Label44)
-        Me.GroupBox4.Controls.Add(Me.NumericUpDown13)
         Me.GroupBox4.Controls.Add(Me.Label41)
         Me.GroupBox4.Controls.Add(Me.NumericUpDown12)
         Me.GroupBox4.Controls.Add(Me.Label42)
@@ -2550,20 +2549,6 @@ Partial Class Form1
         Me.Label44.Size = New System.Drawing.Size(32, 16)
         Me.Label44.TabIndex = 130
         Me.Label44.Text = "deb"
-        '
-        'NumericUpDown13
-        '
-        Me.NumericUpDown13.BackColor = System.Drawing.Color.Yellow
-        Me.NumericUpDown13.Enabled = False
-        Me.NumericUpDown13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NumericUpDown13.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.NumericUpDown13.Location = New System.Drawing.Point(328, 79)
-        Me.NumericUpDown13.Maximum = New Decimal(New Integer() {2000, 0, 0, 0})
-        Me.NumericUpDown13.Name = "NumericUpDown13"
-        Me.NumericUpDown13.Size = New System.Drawing.Size(85, 22)
-        Me.NumericUpDown13.TabIndex = 132
-        Me.NumericUpDown13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown13.Value = New Decimal(New Integer() {294, 0, 0, 0})
         '
         'Label41
         '
@@ -8644,6 +8629,15 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'TextBox144
+        '
+        Me.TextBox144.Enabled = False
+        Me.TextBox144.Location = New System.Drawing.Point(328, 80)
+        Me.TextBox144.Name = "TextBox144"
+        Me.TextBox144.Size = New System.Drawing.Size(85, 20)
+        Me.TextBox144.TabIndex = 185
+        Me.TextBox144.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -8688,7 +8682,6 @@ Partial Class Form1
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout
         CType(Me.NumericUpDown14, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NumericUpDown13, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NumericUpDown12, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage2.ResumeLayout(False)
@@ -8808,7 +8801,6 @@ Partial Class Form1
     Friend WithEvents Label38 As Label
     Friend WithEvents NumericUpDown12 As NumericUpDown
     Friend WithEvents Label41 As Label
-    Friend WithEvents NumericUpDown13 As NumericUpDown
     Friend WithEvents Label43 As Label
     Friend WithEvents NumericUpDown14 As NumericUpDown
     Friend WithEvents Label24 As Label
@@ -9500,4 +9492,5 @@ Partial Class Form1
     Friend WithEvents TextBox140 As TextBox
     Friend WithEvents Label406 As Label
     Friend WithEvents Label371 As Label
+    Friend WithEvents TextBox144 As TextBox
 End Class

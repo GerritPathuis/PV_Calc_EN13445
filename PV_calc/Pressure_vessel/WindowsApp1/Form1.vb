@@ -140,7 +140,7 @@ Public Class Form1
         ComboBox6.SelectedIndex = CInt(IIf(ComboBox6.Items.Count > 0, 0, -1)) 'Select ..
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown1.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown1.ValueChanged
         Calc_nozzle_fig949()
     End Sub
     Private Sub Calc_nozzle_fig949()
@@ -172,7 +172,7 @@ Public Class Form1
         nozzle_wall = NumericUpDown12.Value
         _dib = _deb - 2 * nozzle_wall
         If _dib < 10 Then _dib = 10
-        NumericUpDown13.Value = _dib
+        TextBox144.Text = _dib.ToString("0.0")
 
         '--------- Small opening 9.5.2.2
         D_small_opening = 0.15 * Sqrt((_Di + _eb) * _eb)
