@@ -308,6 +308,7 @@ Public Class Form1
             TextBox133.Text = _fym.ToString             'Safety factor
             TextBox136.Text = _f02.ToString("0")        'Max allowed bend
             TextBox137.Text = _fym.ToString("0")        'Max allowed bend+membrane
+            TextBox140.Text = _fym.ToString("0")        'Max allowed bend+membrane
         End If
     End Sub
 
@@ -346,11 +347,11 @@ Public Class Form1
     End Sub
     'Chapter 15.5 rectangle shell
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
-        Calc_square_155()
+        Calc_square_15_5()
 
     End Sub
-    Private Sub Calc_square_155()
-        Dim a, ee, L, l1, I1 As Double
+    Private Sub Calc_square_15_5()
+        Dim a, ee, L, L1, I1 As Double
         Dim σmD, σmC, σmB, σmA, σmBC As Double  'membrane stress
         Dim σbD, σbC, σbB, σbA, σbBC As Double  'bending stress
         Dim σTD, σTC, σTB, σTA, σTBC As Double  'Total stress
@@ -360,20 +361,20 @@ Public Class Form1
         a = NumericUpDown17.Value   'Inside corner radius
         ee = NumericUpDown11.Value  'wall thickness
         L = NumericUpDown8.Value    'Lenght
-        l1 = NumericUpDown9.Value   'Lenght
+        L1 = NumericUpDown9.Value   'Lenght
 
 
         '-------- membrane stress----------------
         σmC = _P * (a + L) / ee                     'At C (eq 15.5.1.2-1) 
         σmD = σmC                                   'At D
-        σmB = _P * (a + l1) / ee                    'At B (eq 15.5.1.2-2) 
+        σmB = _P * (a + L1) / ee                    'At B (eq 15.5.1.2-2) 
         σmA = σmB                                   'At A
-        σmBC = (_P / ee) * (a + Sqrt(L ^ 2 + l1 ^ 2)) 'At corner (eq 15.5.1.2-3) 
+        σmBC = (_P / ee) * (a + Sqrt(L ^ 2 + L1 ^ 2)) 'At corner (eq 15.5.1.2-3) 
 
         '------- bending stress----------------
         I1 = ee ^ 3 / 12    '(eq 15.5.1.2-4) second moment of area
-        α3 = L / l1         '(eq 15.5.1.2-14) factor
-        φ = a / l1          '(eq 15.5.1.2-15) angular indication
+        α3 = L / L1         '(eq 15.5.1.2-14) factor
+        φ = a / L1          '(eq 15.5.1.2-15) angular indication
 
         K3 = 6 * φ ^ 2 * α3                 '(eq 15.5.1.2-12)
         K3 -= 3 * PI * φ ^ 2
@@ -384,16 +385,16 @@ Public Class Form1
         K3 -= 2
         K3 += 1.5 * PI * α3 ^ 2 * φ
         K3 += 6 * φ * α3
-        K3 *= l1 ^ 2
+        K3 *= L1 ^ 2
         K3 /= 3 * (2 * α3 + PI * φ + 2)     'factor unreinforced vessel
 
         Ma = _P * K3                   'bending moment middle of side
 
 
         '------- bend in the corner -----
-        θ = Atan(l1 / L)                    '(eq 15.5.1.2-10) max value
+        θ = Atan(L1 / L)                    '(eq 15.5.1.2-10) max value
 
-        σbBC = 2 * a * (L * Cos(θ) - l1 * (1 - Sin(θ)))
+        σbBC = 2 * a * (L * Cos(θ) - L1 * (1 - Sin(θ)))
         σbBC += L ^ 2
         σbBC *= _P
         σbBC += 2 * Ma
@@ -406,12 +407,12 @@ Public Class Form1
         σbA += Ma * ee / (2 * I1)           '(eq 15.5.1.2-7)
 
         '------- bend at D -------
-        σbD = _P * (2 * a * L - 2 * a * l1 + L ^ 2 - l1 ^ 2)
+        σbD = _P * (2 * a * L - 2 * a * L1 + L ^ 2 - L1 ^ 2)
         σbD += 2 * Ma
         σbD *= ee / (4 * I1)                '(eq 15.5.1.2-6)
 
         '------- bend at C -------
-        σbC = _P * (2 * a * L - 2 * a * l1 + L ^ 2)
+        σbC = _P * (2 * a * L - 2 * a * L1 + L ^ 2)
         σbC += 2 * Ma
         σbC *= ee / (4 * I1)                '(eq 15.5.1.2-5)
 
@@ -454,7 +455,7 @@ Public Class Form1
 
         '----- vessel size
         TextBox40.Text = (L + a) * 2.ToString("0.0")
-        TextBox41.Text = (l1 + a) * 2.ToString("0.0")
+        TextBox41.Text = (L1 + a) * 2.ToString("0.0")
 
     End Sub
     Private Sub Calc_rect_reinforced_15_6_2()
