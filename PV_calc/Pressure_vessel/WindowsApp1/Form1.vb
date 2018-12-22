@@ -306,6 +306,8 @@ Public Class Form1
             _fym = NumericUpDown10.Value * 1.5          'sigma02*1.5
             _f02 = NumericUpDown10.Value                'Yield 0.2%
             TextBox133.Text = _fym.ToString             'Safety factor
+            TextBox136.Text = _f02.ToString("0")        'Max allowed bend
+            TextBox137.Text = _fym.ToString("0")        'Max allowed bend+membrane
         End If
     End Sub
 
@@ -456,8 +458,8 @@ Public Class Form1
 
     End Sub
     Private Sub Calc_rect_reinforced_15_6_2()
-        'Reinforced section (simple rectangle strip)
-        Dim h_long, H_short As Double    'Lenght inside vessel 
+        'Reinforcemenis a simple rectangle strip
+        Dim h_longe, H_shorte As Double    'Lenght inside vessel 
         Dim tw, hrib, br, e, Q1, Q2, Q, yc, bcw As Double
         Dim τw, τr As Double
         Dim I2_rib, I2_wall As Double
@@ -474,8 +476,8 @@ Public Class Form1
         hrib = NumericUpDown33.Value        'Reinforcement rib height
         br = NumericUpDown35.Value          'Reinforcement rib distance
 
-        h_long = NumericUpDown36.Value      'Lenght inside vessel (height or width)
-        H_short = NumericUpDown37.Value     'Lenght inside vessel (height or width)
+        h_longe = NumericUpDown36.Value      'Lenght inside vessel (height or width)
+        H_shorte = NumericUpDown35.Value     'Lenght inside vessel (height or width)
 
         '---- calc centroid composite----
         '--- presure side wall is "position zero"
@@ -508,8 +510,8 @@ Public Class Form1
         bcw = e
 
         '----------- Shear load one side ------------------
-        Q1 = _P * br * h_long / 2 'Side Load 1 (15.6.2.3-2)
-        Q2 = _P * br * H_short / 2 'Side Load 2 (15.6.2.3-2)   
+        Q1 = _P * br * h_longe / 2 'Side Load 1 (15.6.2.3-2)
+        Q2 = _P * br * H_shorte / 2 'Side Load 2 (15.6.2.3-2)   
         Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
 
         τw = Q * area_rib * j / (I_11 * bcw)    'Stress weld (15.6.2.2-1)
@@ -540,10 +542,10 @@ Public Class Form1
         '----- calc 15.6.2.3 ------------
         'Note I_11 identical to I_21 (reinforcements both side identical)
 
-        η = h_long / 2 - 1.5 * lw       'Figure 15.6-3
+        η = h_longe / 2 - 1.5 * lw       'Figure 15.6-3
 
-        ΔM_long = br * _P * (H_short ^ 2 / 8 - η ^ 2 / 2)   'Formula 15.6.2.2-3
-        ΔM_short = br * _P * (h_long ^ 2 / 8 - η ^ 2 / 2)   'Formula 15.6.2.2-4
+        ΔM_long = br * _P * (H_shorte ^ 2 / 8 - η ^ 2 / 2)   'Formula 15.6.2.2-3
+        ΔM_short = br * _P * (h_longe ^ 2 / 8 - η ^ 2 / 2)   'Formula 15.6.2.2-4
 
         τ_long = Abs(ΔM_long * S / (biw * lw * I_11))       'Formula 15.6.2.2-2
         τ_short = Abs(ΔM_short * S / (biw * lw * I_11))     'Formula 15.6.2.2-2
@@ -567,8 +569,8 @@ Public Class Form1
 
         TextBox128.Text = rib_stab.ToString("0.0")
 
-        TextBox129.Text = h_long.ToString("0")
-        TextBox130.Text = H_short.ToString("0")
+        TextBox129.Text = h_longe.ToString("0")
+        TextBox130.Text = H_shorte.ToString("0")
         TextBox134.Text = I1_rib.ToString("0")
         TextBox141.Text = yc.ToString("0.0")
 
@@ -598,9 +600,9 @@ Public Class Form1
         Dim C As Double         'Constant
         Dim g, b, ratio As Double
 
-        h_long = NumericUpDown36.Value   'Long side [mm]
-        H_short = NumericUpDown37.Value  'Short side [mm]
-        e_wall = NumericUpDown38.Value   'Wall [mm]
+        Double.TryParse(TextBox129.Text, h_long)    'Long side [mm]
+        Double.TryParse(TextBox130.Text, H_short)   'Short side [mm]
+        e_wall = NumericUpDown38.Value              'Wall [mm]
 
         σm = (_P * h_long * H_short) / (2 * e_wall * (h_long + H_short))  '(15.6.4-1)
 
@@ -627,12 +629,14 @@ Public Class Form1
 
         σb = _P * C * (b / e_wall) ^ 2              '(15.6.4-2)
 
-        TextBox118.Text = σm.ToString("0.0")    'Longitudinal membrane stress
-        TextBox119.Text = σb.ToString("0.0")    'Longitudinal bending stress 
-        TextBox120.Text = C.ToString("0.000")
-        TextBox121.Text = ratio.ToString("0.000")
+        TextBox118.Text = σm.ToString("0")    'Longitudinal membrane stress
+        TextBox119.Text = σb.ToString("0")    'Longitudinal bending stress 
+        TextBox120.Text = C.ToString("0.0000")
+        TextBox121.Text = ratio.ToString("0.00")
 
         '----------- check -------------
+        Label370.BackColor = IIf(NumericUpDown37.Value > NumericUpDown36.Value, Color.Red, Color.LightGreen)
+
         TextBox118.BackColor = IIf(σm > _fs, Color.Red, Color.LightGreen)
         TextBox119.BackColor = IIf(((σm + σb) > 1.5 * _f02), Color.Red, Color.LightGreen)
     End Sub
@@ -719,7 +723,7 @@ Public Class Form1
         TextBox156.Text = σbB.ToString("0")
         TextBox157.Text = σbC.ToString("0")
         TextBox158.Text = σbD.ToString("0")
-        TextBox159.Text = c_fibre.ToString("0")
+        TextBox159.Text = c_fibre.ToString("0.0")
 
         '----------- check -------------
         TextBox150.BackColor = IIf(σmD > _f02, Color.Red, Color.LightGreen)
@@ -1751,25 +1755,25 @@ Public Class Form1
 
             '---------------- Material data --------------------
             'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 3, 3)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 4, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Material DATA"
+            oTable.Cell(row, 1).Range.Text = "Material Ddata"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Material"
             oTable.Cell(row, 2).Range.Text = ComboBox5.Text
             oTable.Cell(row, 3).Range.Text = "[-]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Yield 0.2%"
-            oTable.Cell(row, 2).Range.Text = NumericUpDown10.Text
+            oTable.Cell(row, 1).Range.Text = "Max allowed membrane stress"
+            oTable.Cell(row, 2).Range.Text = TextBox136.Text
             oTable.Cell(row, 3).Range.Text = "[N/mm2]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Allowed design stress"
-            oTable.Cell(row, 2).Range.Text = TextBox133.Text
+            oTable.Cell(row, 1).Range.Text = "Max allowed membrane+bend stress"
+            oTable.Cell(row, 2).Range.Text = TextBox137.Text
             oTable.Cell(row, 3).Range.Text = "[N/mm2]"
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.91)
@@ -1786,7 +1790,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "VESSEL DATA"
+            oTable.Cell(row, 1).Range.Text = "Vessel Data"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label327.Text
             oTable.Cell(row, 2).Range.Text = NumericUpDown19.Text
