@@ -138,6 +138,8 @@ Public Class Form1
         ComboBox4.SelectedIndex = CInt(IIf(ComboBox4.Items.Count > 0, 1, -1)) 'Select ..
         ComboBox5.SelectedIndex = CInt(IIf(ComboBox5.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox6.SelectedIndex = CInt(IIf(ComboBox6.Items.Count > 0, 0, -1)) 'Select ..
+
+        TextBox66.Text = "P" & Now.ToString("yy") & ".10"
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown1.ValueChanged
