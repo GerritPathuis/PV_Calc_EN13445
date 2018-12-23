@@ -464,13 +464,14 @@ Public Class Form1
         Dim tw, hrib, br, e, Q1, Q2, Q, yc, bcw As Double
         Dim τw, τr As Double
         Dim I2_rib, I2_wall As Double
-        Dim I_11 As Double                           '2nd moment of area short side plate and reinforcement combined
+        Dim I_11 As Double                          '2nd moment of area short side plate and reinforcement combined
         Dim I1_rib As Double                        '1st Moment of area
         Dim area_rib, area_wall, area_composed As Double       'Areas
         Dim c_rib, c_wall, c_total As Double        'Centriods
         Dim rib_stab As Double                      'Reinforcement stability
         Dim j As Double 'j is distance weld to neutral axis composite to centroid A'
         Dim τ_long, τ_short As Double               'τ welds
+        Dim ε As Double                             'ratio
 
         e = NumericUpDown38.Value           'Vessel-Plate tickness
         tw = NumericUpDown19.Value          'Reinforcement rib thickness
@@ -521,6 +522,7 @@ Public Class Form1
 
         '---------- rib compression stabiliy ------
         rib_stab = hrib / tw                'Table 15.6-1 Sketch C1
+        ε = Sqrt(235 / _f02)
 
         '---------- ΔM pressure loads page 329 ------
         '---------- Chapter 15.6.2.3 ----------
@@ -541,7 +543,7 @@ Public Class Form1
         lw = NumericUpDown40.Value              'Length intermittent welds Figure 15.6-3
 
         '----- calc 15.6.2.3 ------------
-        'Note I_11 identical to I_21 (reinforcements both side identical)
+        'Note I_11 identical to I_21 (reinforcements both side are identical)
 
         η = h_longe / 2 - 1.5 * lw       'Figure 15.6-3
 
@@ -585,7 +587,7 @@ Public Class Form1
         '----------- check -------------
         TextBox117.BackColor = IIf(τw > _f02, Color.Red, Color.LightGreen)
         TextBox126.BackColor = IIf(τr > _f02, Color.Red, Color.LightGreen)
-        TextBox128.BackColor = IIf(rib_stab > 10, Color.Red, Color.LightGreen)
+        TextBox128.BackColor = IIf(rib_stab > 10 * ε, Color.Red, Color.LightGreen)
 
         TextBox142.BackColor = IIf(τ_long > _f02, Color.Red, Color.LightGreen)
         TextBox143.BackColor = IIf(τ_short > _f02, Color.Red, Color.LightGreen)
