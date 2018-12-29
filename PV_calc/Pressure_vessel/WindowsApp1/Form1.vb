@@ -158,8 +158,9 @@ Public Class Form1
         Dim Ln, Ln1, Ln2 As Double
         Dim D_small_opening As Double
         Dim W_min, W_min1, W_min2 As Double
+        Dim qz As Double
 
-        ls = NumericUpDown1.Value           'Distance shell-edge-opening to discontinuity
+        ls = NumericUpDown1.Value           'Actual Distance shell-edge-opening to discontinuity
         _De = NumericUpDown18.Value         'Shell OD 
         _eb = NumericUpDown41.Value         'Shell Wall 
         _Di = _De - 2 * _eb                 'Shell ID 
@@ -192,22 +193,22 @@ Public Class Form1
         '----Chapter 9.5.2.4.4.3 Nozzle in cylindrical shell
         Dim a, ls_min, ecs As Double
         ecs = eas                                   'assumed shell thickness for calculation
-        a = _deb / 2                                'equation 9.5-90
+        a = _deb / 2                                'equation 9.5-90 (page 107)
         ris = (_De / 2) - eas                       'equation 9.5-91
         lso = Sqrt(((_De - 2 * eas) + ecs) * ecs)   'equation 9.5-92
         ls_min = IIf(lso < ls, lso, ls)             'equation 9.5-93
         Aps = ris * (ls_min + a)                    'equation 9.5-94
 
-        '----------------------- formula 9.5-7 -----------------------
+        '--------------- formula 9.5-7 (page 99) --------------------
         'Af = Stress loaded cross-sectional area effective as reinforcement
-        Afw = 0                                     'Weld area in neglected
+        Afw = 0                              'Weld area in neglected
         Afb = nozzle_wall * (lbo + _eb)      'Nozzle wall
-        Afp = 0                                     'reinforcement ring NOT present
+        Afp = 0                              'reinforcement ring NOT present
         Afs = lso * _eb                      'Shell wall area
 
         'Ap = Pressure loaded area. 
         Apb = _dib / 2 * (lbo + _eb)         'Nozzle Pressure loaded area
-        Ap_phi = 0                                  'Oblique nozzles
+        Ap_phi = 0                            'Oblique nozzles
 
         eq_left = (Afs + Afw) * (_fs - 0.5 * _P)
         eq_left += Afp * (fop - 0.5 * _P)
@@ -216,12 +217,16 @@ Public Class Form1
         eq_right = _P * (Aps + Apb + 0.5 * Ap_phi)
         eq_ratio = eq_left / eq_right
 
-        '9.4.8 Minimum Distance between nozle and shell butt-weld
-        Ln1 = 0.5 * _deb + 2 * nozzle_wall       'Equation 9.4-4
+        '----- 9.4.8 Minimum Distance between nozle and shell butt-weld
+        Ln1 = 0.5 * _deb + 2 * nozzle_wall      'Equation 9.4-4 (page 90)
         Ln2 = 0.5 * _deb + 40
-        Ln = IIf(Ln1 > Ln2, Ln1, Ln2)
+        Ln = IIf(Ln1 > Ln2, Ln1, Ln2)           'Find biggest
+        TextBox164.Text = Ln1.ToString("0")     'Distance [mm2]
+        TextBox168.Text = Ln2.ToString("0")     'Distance [mm2]
 
-        'Figure 9.7-5          
+        qz = Ln - _deb / 2      'Distance shell edge opening-weld
+
+        '-------- Figure 9.7-5          
         W_min1 = 0.2 * Sqrt((2 * _Di * 0.5 + ecs) * ecs)    'equation 9.7-5
         W_min2 = 3 * eas                                    'equation 9.7-5
         W_min = IIf(W_min1 > W_min2, W_min1, W_min2)        'Find biggest
@@ -238,11 +243,13 @@ Public Class Form1
 
         TextBox16.Text = eq_left.ToString("0")
         TextBox17.Text = eq_right.ToString("0")
-        TextBox18.Text = eq_ratio.ToString("0.00")
+        TextBox18.Text = eq_ratio.ToString("0.0")
         TextBox19.Text = W_min.ToString("0")
-        TextBox20.Text = (Ln - _deb / 2).ToString("0")
+        TextBox20.Text = Ln.ToString("0")
+        TextBox169.Text = qz.ToString("0")
         '----------- checks--------
         TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
+        TextBox169.BackColor = IIf(qz > ls, Color.Red, Color.LightGreen)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged, ComboBox5.SelectedIndexChanged, CheckBox2.CheckedChanged
@@ -2021,5 +2028,89 @@ Public Class Form1
 
         '---------- Check-----
         TextBox161.BackColor = IIf(pmaxx < _P, Color.Red, Color.LightGreen)
+    End Sub
+
+    Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
+        Form3.Show()
+    End Sub
+
+    Private Sub PictureBox17_Click(sender As Object, e As EventArgs) Handles PictureBox17.Click
+        Form5.Show()
+    End Sub
+
+    Private Sub PictureBox16_Click(sender As Object, e As EventArgs) Handles PictureBox16.Click
+        Form4.Show()
+    End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click, TabPage12.Enter, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged
+        Calc_shell_vacuum_88()
+    End Sub
+    Private Sub Calc_shell_vacuum_88()
+        Dim σ_allowed, σe As Double
+        Dim α As Double 'Half apex cone
+        Dim De, Lcyl, h, Lcon, S As Double
+        Dim Tolerance As Double
+        Dim Pr As Double 'calculated lower bound collapse pressure 
+        Dim Py As Double 'pressure at which mean circumferential stress yields
+        Dim Pm As Double 'theoretical elastic instability pressure for collapse of a perfect cylindrical
+        Dim L As Double  'unsupported length of the shell
+        Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
+        Dim E As Double 'modulus of elasticity
+        Dim ε As Double 'mean elastic circumferential strain at collapse, see 8.5.2.2; 
+        Dim ncyl As Double  'number of circumferential waves for an unstiffened part of a cylinder, see 8.5.2.2; 
+        Dim Z As Double
+        Dim ν As Double = 0.3   'Poisson ratio
+        Dim ea As Double   'shell wall thickness
+
+        '--- get data ----
+        De = NumericUpDown43.Value      'OD shell
+        Lcyl = NumericUpDown44.Value    'Cylinder length
+        h = NumericUpDown45.Value       'Dished head height
+        Lcon = NumericUpDown46.Value    'Cone length
+        α = NumericUpDown47.Value / 180 * PI  'Half apex in rad
+        ea = NumericUpDown48.Value    'Shell wall thickness
+        R_shell = De / 2                      'Radius shell
+
+        '---- material --------
+        σ_allowed = NumericUpDown10.Value / 1.25
+        S = 1.5         'Safety factor (8.4.4-1) 
+        σe = σ_allowed / S
+        E = 210000      'Modulus of elasticity at the calculation temperature
+
+        '---- calculated lower bound collapse pressure obtained from Figure 8.5-5 ----------
+        L = Lcyl + 0.4 * h + Lcon   '(8.5.2-3) Unsupported Length
+
+        '--- pressure at which mean circumferential stress yields
+        Py = σe * ea / R_shell            '(8.5.2-4) 
+
+        Z = PI * R_shell / L      '(8.5.2-7) 
+
+        ε = (ncyl ^ 2 - 1 + Z ^ 2) ^ 2      '(8.5.2-6) 
+        ε *= ea ^ 2 / (12 * R_shell ^ 2 * (1 - ν))
+        ε += 1 / (ncyl ^ 2 / Z ^ 2 + 1) ^ 2
+        ε *= 1 / (ncyl ^ 2 - 1 + Z ^ 2 / 2)
+
+        '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
+        Pm = E * ea * ε / R_shell         '(8.5.2-5) 
+
+        '----------- Circularity tolerance  ----------
+        Tolerance = 0.005 * Pr / (_P * S)   '(8.5.1-1) 
+
+        '--------- present results--------
+        TextBox162.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
+        TextBox170.Text = σ_allowed.ToString("0.0")     '[N/mm]
+        TextBox171.Text = S.ToString("0.0") '[-]
+        TextBox165.Text = Tolerance.ToString("0.00")    '[-]
+        TextBox166.Text = (Py * 10).ToString("0.00")    '[MPa]-->[Bar]
+        TextBox167.Text = L.ToString("0")               '[mm]
+        TextBox172.Text = Pm.ToString("0.0")            '[-]
+        TextBox173.Text = Z.ToString("0.0")             '[-]
+        TextBox174.Text = ε.ToString("0.0")             '[-]
+        TextBox175.Text = ν.ToString("0.0")             '[-]
+        TextBox176.Text = ncyl.ToString("0.0")          '[-]
+        TextBox177.Text = E.ToString("0")               '[-]
+
+        '---------- Check-----
+        TextBox166.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
     End Sub
 End Class
