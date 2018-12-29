@@ -142,7 +142,7 @@ Public Class Form1
         TextBox66.Text = "P" & Now.ToString("yy") & ".10"
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown1.ValueChanged
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown18.ValueChanged
         Calc_nozzle_fig949()
     End Sub
     Private Sub Calc_nozzle_fig949()
@@ -160,9 +160,9 @@ Public Class Form1
         Dim W_min, W_min1, W_min2 As Double
 
         ls = NumericUpDown1.Value           'Distance shell-edge-opening to discontinuity
-        _De = NumericUpDown15.Value         'Shell OD 
-        _Di = NumericUpDown18.Value         'Shell ID 
-        _eb = NumericUpDown16.Value         'Shell Wall 
+        _De = NumericUpDown18.Value         'Shell OD 
+        _eb = NumericUpDown41.Value         'Shell Wall 
+        _Di = _De - 2 * _eb                 'Shell ID 
         _deb = NumericUpDown14.Value        'Outside diameter nozzle fitted in shell
         eas = _eb                           'Shell Analysis thickness of shell wall 
 
@@ -227,6 +227,7 @@ Public Class Form1
         W_min = IIf(W_min1 > W_min2, W_min1, W_min2)        'Find biggest
 
         '----- present--------
+        TextBox163.Text = _Di.ToString("0")     'Shell Inside Diameter
         TextBox9.Text = Afs.ToString("0")       'Shell area reinforcement [mm2]
         TextBox10.Text = Afw.ToString("0")      'Weld area reinforcement [mm2]
         TextBox11.Text = Afb.ToString("0")      'reinforcement [mm2]
@@ -314,11 +315,12 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged, NumericUpDown16.ValueChanged
-        Calc_shell742()
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged, NumericUpDown16.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown42.ValueChanged
+        Calc_cyl_shell742()         'Cylindrical shell
+        Calc_conical_shell764()     'Conus shell
     End Sub
     '7.4.2 Cylindrical shells 
-    Private Sub Calc_shell742()
+    Private Sub Calc_cyl_shell742()
         Dim De, Di, Dm, ea, z_joint, e_wall, Pmax, valid_check As Double
 
         If (ComboBox2.SelectedIndex > -1) Then          'Prevent exceptions
@@ -328,7 +330,7 @@ Public Class Form1
         De = NumericUpDown15.Value  'OD
         ea = NumericUpDown16.Value  'Wall thicknes
         Di = De - 2 * ea            'ID
-        NumericUpDown18.Value = Di
+        TextBox160.Text = Di.ToString("0.0")
 
         Dm = (De + Di) / 2                          'Average Dia
         Pmax = 2 * _fs * z_joint * ea / Dm          'Max pressure equation 7.4.3 
@@ -342,10 +344,11 @@ Public Class Form1
         TextBox6.Text = _P.ToString("0.00")         '[MPa]
         TextBox53.Text = (_P * 10).ToString("0.00") '[Bar]
         TextBox7.Text = _fs.ToString
-        TextBox8.Text = Round(Pmax, 2).ToString
+        TextBox8.Text = (Pmax * 10).ToString("0.00") '[Bar]
 
         '---------- Check-----
         TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
+        TextBox8.BackColor = IIf(Pmax < _P, Color.Red, Color.LightGreen)
     End Sub
     'Chapter 15.5 rectangle shell
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
@@ -1987,5 +1990,36 @@ Public Class Form1
         Catch ex As Exception
             MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
         End Try
+    End Sub
+    '7.6.4 Conical shells 
+    Private Sub Calc_conical_shell764()
+        Dim α As Double 'Half apex cone
+        Dim De, Di, ea, z_joint, e_con, e_cone As Double
+        Dim pmaxx As Double 'max pressure
+        Dim Dm As Double
+        If (ComboBox2.SelectedIndex > -1) Then          'Prevent exceptions
+            Double.TryParse(joint_eff(ComboBox2.SelectedIndex), z_joint)      'Joint efficiency
+        End If
+
+        De = NumericUpDown15.Value  'OD
+        ea = NumericUpDown16.Value  'Wall thicknes
+        Di = De - 2 * ea            'ID
+        α = NumericUpDown13.Value / 180 * PI        'Half apex in rad
+        Dm = (De + Di) / 2                          'Average diameter
+        e_cone = NumericUpDown42.Value              'Cone wall
+
+        '----------- cone wall thickness ----------
+        e_con = _P * Di / (2 * _fs * z_joint - _P)  'equation 7.6.2 Required wall thickness
+        e_con *= 1 / Cos(α)
+
+        '---------- max pressure ---------------
+        pmaxx = 2 * _fs * z_joint * e_cone * Cos(α) / Dm   'Max pressure equation 7.6.4 
+
+        '--------- present results--------
+        TextBox145.Text = Round(e_con, 2).ToString   'required cone wall [mm]
+        TextBox161.Text = (pmaxx * 10).ToString("0.00") '[MPa]-->[Bar]
+
+        '---------- Check-----
+        TextBox161.BackColor = IIf(pmaxx < _P, Color.Red, Color.LightGreen)
     End Sub
 End Class
