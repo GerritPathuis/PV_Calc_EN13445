@@ -2046,7 +2046,7 @@ Public Class Form1
         Calc_shell_vacuum_88()
     End Sub
     Private Sub Calc_shell_vacuum_88()
-        Dim σ_allowed, σe As Double
+        Dim σe As Double
         Dim α As Double 'Half apex cone
         Dim De, Lcyl, h, Lcon, S As Double
         Dim Tolerance As Double
@@ -2065,16 +2065,16 @@ Public Class Form1
         '--- get data ----
         De = NumericUpDown43.Value      'OD shell
         Lcyl = NumericUpDown44.Value    'Cylinder length
+        'ncyl = NumericUpDown49.Value   'no of waves 
         h = NumericUpDown45.Value       'Dished head height
         Lcon = NumericUpDown46.Value    'Cone length
         α = NumericUpDown47.Value / 180 * PI  'Half apex in rad
-        ea = NumericUpDown48.Value    'Shell wall thickness
-        R_shell = De / 2                      'Radius shell
+        ea = NumericUpDown48.Value      'Shell wall thickness
+        R_shell = De / 2                'Radius shell
 
         '---- material --------
-        σ_allowed = NumericUpDown10.Value / 1.25
         S = 1.5         'Safety factor (8.4.4-1) 
-        σe = σ_allowed / S
+        σe = NumericUpDown10.Value / 1.25
         E = 210000      'Modulus of elasticity at the calculation temperature
 
         '---- calculated lower bound collapse pressure obtained from Figure 8.5-5 ----------
@@ -2085,32 +2085,71 @@ Public Class Form1
 
         Z = PI * R_shell / L      '(8.5.2-7) 
 
-        ε = (ncyl ^ 2 - 1 + Z ^ 2) ^ 2      '(8.5.2-6) 
-        ε *= ea ^ 2 / (12 * R_shell ^ 2 * (1 - ν))
-        ε += 1 / (ncyl ^ 2 / Z ^ 2 + 1) ^ 2
-        ε *= 1 / (ncyl ^ 2 - 1 + Z ^ 2 / 2)
+        '---------- Find the smallest Pm ----------
+        Dim Pm_small As Double = 9999
 
+        TextBox178.Clear()
+
+        For i = 2 To 20
+            '--- calculate ε ----
+            ε = Calc_ε(i, Z, R_shell, ea, ν) '(8.5.2-6) 
+            '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
+            Pm = E * ea * ε / R_shell         '(8.5.2-5)
+            If Pm < Pm_small Then
+                Pm_small = Pm
+                ncyl = i
+            End If
+            TextBox178.Text &= "Pm_small =" & Pm_small.ToString("0.000") & " Ncyl_small= " & ncyl.ToString & " ε= " & ε.ToString & vbCrLf
+        Next
+
+        '--- now return to the smalles found case ----
+        ε = Calc_ε(ncyl, Z, R_shell, ea, ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-        Pm = E * ea * ε / R_shell         '(8.5.2-5) 
+        Pm = E * ea * ε / R_shell         '(8.5.2-5)
+
+        '---------------------------
+        Dim x As Double
+        Dim PrPy As Double
+
+        x = Pm / Py
+
+        PrPy = -0.0016 * x ^ 4 + 0.031 * x ^ 3 - 0.2225 * x ^ 2 + 0.7227 * x - 0.0288
+
+        Pr = PrPy * Py  'Calculated lower bound collapse pressure obtained from Figure 8.5-5
+
 
         '----------- Circularity tolerance  ----------
-        Tolerance = 0.005 * Pr / (_P * S)   '(8.5.1-1) 
+        '----------- Circularity tolerance  ----------
+        Tolerance = 0.005 * Pr / (_P * S)   '[%](8.5.1-1) 
 
         '--------- present results--------
         TextBox162.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
-        TextBox170.Text = σ_allowed.ToString("0.0")     '[N/mm]
+        TextBox170.Text = σe.ToString("0.0")            '[N/mm]
         TextBox171.Text = S.ToString("0.0") '[-]
-        TextBox165.Text = Tolerance.ToString("0.00")    '[-]
+        TextBox165.Text = Tolerance.ToString("0.0000")  '[-]
         TextBox166.Text = (Py * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox167.Text = L.ToString("0")               '[mm]
-        TextBox172.Text = Pm.ToString("0.0")            '[-]
+        TextBox172.Text = (Pm * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox173.Text = Z.ToString("0.0")             '[-]
-        TextBox174.Text = ε.ToString("0.0")             '[-]
+        TextBox174.Text = ε.ToString("0.00000")         '[-]
         TextBox175.Text = ν.ToString("0.0")             '[-]
-        TextBox176.Text = ncyl.ToString("0.0")          '[-]
         TextBox177.Text = E.ToString("0")               '[-]
+        TextBox179.Text = ncyl.ToString("0")            '[-]
+        TextBox176.Text = x.ToString("0.0")             '[-]Pm/Py
+        TextBox180.Text = PrPy.ToString("0.00")         '[-]Pr/Py
+        TextBox181.Text = (Pr * 10).ToString("0.00")    '[MPa]-->[Bar]
 
         '---------- Check-----
         TextBox166.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
+        TextBox172.BackColor = IIf(Pm < _P, Color.Red, Color.LightGreen)
     End Sub
+    Private Function Calc_ε(ncyl As Double, Z As Double, R_shell As Double, ea As Double, ν As Double) As Double
+        Dim ε As Double
+        ε = (ncyl ^ 2 - 1 + Z ^ 2) ^ 2      'Formula(8.5.2-6) 
+        ε *= ea ^ 2 / (12 * R_shell ^ 2 * (1 - ν ^ 2))
+        ε += 1 / (ncyl ^ 2 / Z ^ 2 + 1) ^ 2
+        ε *= 1 / (ncyl ^ 2 - 1 + Z ^ 2 / 2)
+        Return (ε)
+    End Function
+
 End Class
