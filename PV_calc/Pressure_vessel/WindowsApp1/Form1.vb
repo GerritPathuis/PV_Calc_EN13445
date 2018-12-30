@@ -2117,8 +2117,6 @@ Public Class Form1
 
         Pr = PrPy * Py  'Calculated lower bound collapse pressure obtained from Figure 8.5-5
 
-
-        '----------- Circularity tolerance  ----------
         '----------- Circularity tolerance  ----------
         Tolerance = 0.005 * Pr / (_P * S)   '[%](8.5.1-1) 
 
@@ -2142,6 +2140,7 @@ Public Class Form1
         '---------- Check-----
         TextBox166.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
         TextBox172.BackColor = IIf(Pm < _P, Color.Red, Color.LightGreen)
+        TextBox181.BackColor = IIf(Pr / S < _P, Color.Red, Color.LightGreen)
     End Sub
     Private Function Calc_ε(ncyl As Double, Z As Double, R_shell As Double, ea As Double, ν As Double) As Double
         Dim ε As Double

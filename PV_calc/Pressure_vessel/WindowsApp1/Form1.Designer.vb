@@ -864,10 +864,6 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label519 = New System.Windows.Forms.Label()
-        Me.Label521 = New System.Windows.Forms.Label()
-        Me.TextBox182 = New System.Windows.Forms.TextBox()
-        Me.Label522 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -3053,10 +3049,6 @@ Partial Class Form1
         '
         'GroupBox36
         '
-        Me.GroupBox36.Controls.Add(Me.Label519)
-        Me.GroupBox36.Controls.Add(Me.Label521)
-        Me.GroupBox36.Controls.Add(Me.TextBox182)
-        Me.GroupBox36.Controls.Add(Me.Label522)
         Me.GroupBox36.Controls.Add(Me.Label524)
         Me.GroupBox36.Controls.Add(Me.Label525)
         Me.GroupBox36.Controls.Add(Me.TextBox181)
@@ -3448,9 +3440,9 @@ Partial Class Form1
         Me.Label516.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label516.Location = New System.Drawing.Point(394, 102)
         Me.Label516.Name = "Label516"
-        Me.Label516.Size = New System.Drawing.Size(20, 16)
+        Me.Label516.Size = New System.Drawing.Size(59, 16)
         Me.Label516.TabIndex = 162
-        Me.Label516.Text = "[-]"
+        Me.Label516.Text = "[N/mm2]"
         '
         'TextBox177
         '
@@ -10215,45 +10207,6 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Label519
-        '
-        Me.Label519.AutoSize = True
-        Me.Label519.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label519.Location = New System.Drawing.Point(394, 246)
-        Me.Label519.Name = "Label519"
-        Me.Label519.Size = New System.Drawing.Size(36, 16)
-        Me.Label519.TabIndex = 272
-        Me.Label519.Text = "[bar]"
-        '
-        'Label521
-        '
-        Me.Label521.AutoSize = True
-        Me.Label521.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label521.Location = New System.Drawing.Point(248, 246)
-        Me.Label521.Name = "Label521"
-        Me.Label521.Size = New System.Drawing.Size(21, 16)
-        Me.Label521.TabIndex = 270
-        Me.Label521.Text = "Pr"
-        '
-        'TextBox182
-        '
-        Me.TextBox182.Enabled = False
-        Me.TextBox182.Location = New System.Drawing.Point(300, 243)
-        Me.TextBox182.Name = "TextBox182"
-        Me.TextBox182.Size = New System.Drawing.Size(85, 22)
-        Me.TextBox182.TabIndex = 271
-        Me.TextBox182.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label522
-        '
-        Me.Label522.AutoSize = True
-        Me.Label522.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label522.Location = New System.Drawing.Point(6, 246)
-        Me.Label522.Name = "Label522"
-        Me.Label522.Size = New System.Drawing.Size(199, 16)
-        Me.Label522.TabIndex = 269
-        Me.Label522.Text = "Lower bound collapse pressure "
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -11264,8 +11217,4 @@ Partial Class Form1
     Friend WithEvents Label525 As Label
     Friend WithEvents TextBox181 As TextBox
     Friend WithEvents Label526 As Label
-    Friend WithEvents Label519 As Label
-    Friend WithEvents Label521 As Label
-    Friend WithEvents TextBox182 As TextBox
-    Friend WithEvents Label522 As Label
 End Class
