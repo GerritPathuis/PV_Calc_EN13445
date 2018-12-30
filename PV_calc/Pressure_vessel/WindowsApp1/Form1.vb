@@ -22,7 +22,7 @@ Public Class Form1
     Public _deb As Double       'Outside diameter nozzle fitted in shell
     Public _dib As Double       'Inside diameter nozzle fitted in shell
     Public _eb As Double        'Effective thickness nozzle thickness
-
+    Public _Elasticity As Double 'Modulus of elasticity 
     Dim separators() As String = {";"}
 
     '----------- directory's-----------
@@ -56,13 +56,13 @@ Public Class Form1
     'EN 10028-2 for steel
     'EN 10028-7 for stainless steel
     Public Shared steel() As String = {
-   "Material-------;50c;100;150;200;250;300;350;400;450;500;550;remarks--",
-   "1.0425 (P265GH);265;241;223;205;188;173;160;150;  0;  0;  0; max 400c",
-   "1.0473 (P355GH);343;323;299;275;252;232;214;202;  0;  0;  0; max 400c",
-   "1.4301 (304)   ;190;157;142;127;118;110;104; 98; 95; 92; 90; max 550c",
-   "1.4307 (304L)  ;180;147;132;118;108;100; 94; 89; 85; 81; 80; max 550c",
-   "1.4401 (316)   ;204;177;162;147;137;127;120;115;112;110;108; max 550c",
-   "1.4404 (316L)  ;200;166;152;137;127;118;113;108;103;100; 98; max 550c"}
+   "Material-------;50c;100;150;200;250;300;350;400;450;500;550;remarks--;cs/ss",
+   "1.0425 (P265GH);265;241;223;205;188;173;160;150;  0;  0;  0; max 400c;cs",
+   "1.0473 (P355GH);343;323;299;275;252;232;214;202;  0;  0;  0; max 400c;cs",
+   "1.4301 (304)   ;190;157;142;127;118;110;104; 98; 95; 92; 90; max 550c;ss",
+   "1.4307 (304L)  ;180;147;132;118;108;100; 94; 89; 85; 81; 80; max 550c;ss",
+   "1.4401 (316)   ;204;177;162;147;137;127;120;115;112;110;108; max 550c;ss",
+   "1.4404 (316L)  ;200;166;152;137;127;118;113;108;103;100; 98; max 550c;ss"}
 
     'EN 1993-1-8 Bolts (Eurocode 3)
     Public Shared Bolt() As String = {
@@ -271,6 +271,7 @@ Public Class Form1
             TextBox108.Text = words(6)
             TextBox109.Text = words(7)
             TextBox110.Text = words(8)
+            TextBox182.Text = words(13) 'cs or ss
             Double.TryParse(words(1), y50)
             Double.TryParse(words(2), y100)
             Double.TryParse(words(3), y150)
@@ -319,7 +320,14 @@ Public Class Form1
             TextBox136.Text = _f02.ToString("0")        'Max allowed bend
             TextBox137.Text = _fym.ToString("0")        'Max allowed bend+membrane
             TextBox140.Text = _fym.ToString("0")        'Max allowed bend+membrane
-        End If
+
+            If String.Equals(TextBox182.Text, "cs") Then
+                _Elasticity = (213.16 - 6.92 * temp / 10 ^ 2 - 1.824 / 10 ^ 5 * temp ^ 2) * 1000
+            Else
+                _Elasticity = (201.66 - 8.48 * temp / 10 ^ 2) * 1000
+            End If
+            TextBox178.Text = _Elasticity.ToString("0")        'Max allowed bend+membrane
+            End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged, NumericUpDown16.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown42.ValueChanged
@@ -2042,12 +2050,12 @@ Public Class Form1
         Form4.Show()
     End Sub
 
-    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click, TabPage12.Enter, NumericUpDown48.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click, TabPage12.Enter, NumericUpDown48.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged
         Calc_shell_vacuum_88()
     End Sub
     Private Sub Calc_shell_vacuum_88()
         Dim σe As Double
-        Dim α As Double 'Half apex cone
+        'Dim α As Double 'Half apex cone
         Dim De, Lcyl, h, Lcon, S As Double
         Dim Tolerance As Double
         Dim Pr As Double 'calculated lower bound collapse pressure 
@@ -2055,7 +2063,6 @@ Public Class Form1
         Dim Pm As Double 'theoretical elastic instability pressure for collapse of a perfect cylindrical
         Dim L As Double  'unsupported length of the shell
         Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
-        Dim E As Double 'modulus of elasticity
         Dim ε As Double 'mean elastic circumferential strain at collapse, see 8.5.2.2; 
         Dim ncyl As Double  'number of circumferential waves for an unstiffened part of a cylinder, see 8.5.2.2; 
         Dim Z As Double
@@ -2065,17 +2072,14 @@ Public Class Form1
         '--- get data ----
         De = NumericUpDown43.Value      'OD shell
         Lcyl = NumericUpDown44.Value    'Cylinder length
-        'ncyl = NumericUpDown49.Value   'no of waves 
         h = NumericUpDown45.Value       'Dished head height
         Lcon = NumericUpDown46.Value    'Cone length
-        α = NumericUpDown47.Value / 180 * PI  'Half apex in rad
         ea = NumericUpDown48.Value      'Shell wall thickness
         R_shell = De / 2                'Radius shell
 
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
         σe = NumericUpDown10.Value / 1.25
-        E = 210000      'Modulus of elasticity at the calculation temperature
 
         '---- calculated lower bound collapse pressure obtained from Figure 8.5-5 ----------
         L = Lcyl + 0.4 * h + Lcon   '(8.5.2-3) Unsupported Length
@@ -2088,24 +2092,21 @@ Public Class Form1
         '---------- Find the smallest Pm ----------
         Dim Pm_small As Double = 9999
 
-        TextBox178.Clear()
-
         For i = 2 To 20
             '--- calculate ε ----
             ε = Calc_ε(i, Z, R_shell, ea, ν) '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-            Pm = E * ea * ε / R_shell         '(8.5.2-5)
+            Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
             If Pm < Pm_small Then
                 Pm_small = Pm
                 ncyl = i
             End If
-            TextBox178.Text &= "Pm_small =" & Pm_small.ToString("0.000") & " Ncyl_small= " & ncyl.ToString & " ε= " & ε.ToString & vbCrLf
         Next
 
         '--- now return to the smalles found case ----
         ε = Calc_ε(ncyl, Z, R_shell, ea, ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-        Pm = E * ea * ε / R_shell         '(8.5.2-5)
+        Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
 
         '---------------------------
         Dim x As Double
@@ -2131,7 +2132,7 @@ Public Class Form1
         TextBox173.Text = Z.ToString("0.0")             '[-]
         TextBox174.Text = ε.ToString("0.00000")         '[-]
         TextBox175.Text = ν.ToString("0.0")             '[-]
-        TextBox177.Text = E.ToString("0")               '[-]
+        TextBox177.Text = _Elasticity.ToString("0")               '[-]
         TextBox179.Text = ncyl.ToString("0")            '[-]
         TextBox176.Text = x.ToString("0.0")             '[-]Pm/Py
         TextBox180.Text = PrPy.ToString("0.00")         '[-]Pr/Py
@@ -2143,6 +2144,7 @@ Public Class Form1
         TextBox181.BackColor = IIf(Pr / S < _P, Color.Red, Color.LightGreen)
     End Sub
     Private Function Calc_ε(ncyl As Double, Z As Double, R_shell As Double, ea As Double, ν As Double) As Double
+        'Chapter External pressure 8.5
         Dim ε As Double
         ε = (ncyl ^ 2 - 1 + Z ^ 2) ^ 2      'Formula(8.5.2-6) 
         ε *= ea ^ 2 / (12 * R_shell ^ 2 * (1 - ν ^ 2))
