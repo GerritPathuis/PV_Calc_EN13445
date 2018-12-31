@@ -2180,7 +2180,7 @@ Public Class Form1
         Dim δ As Double     'parameter design of stiffeners, see Equations (8.5.3-19) and (8.5.3-20);
         Dim N As Double     'parameter interstiffener collapse calc., see Equation (8.5.3-21) and Table 8.5-2; 
         Dim wi As Double    'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
-        Dim ω As Double
+        Dim w As Double     'flange width as shown in Figure 8.5-9 b) 
         Dim Am As Double    'is the modified area of a stiffener, see Equation (8.5.3-17); 
         Dim B As Double     'parameter in the interstiffener collapse calculation, see Equation (8.5.3-18); 
 
@@ -2198,7 +2198,7 @@ Public Class Form1
         L2s = NumericUpDown49.Value     'Light stiffener to weld
         L3s = NumericUpDown53.Value     'Light stiffener distance
         ea = NumericUpDown47.Value      'Shell wall thickness
-        R_shell = De / 2                'Radius shell
+        R_shell = De / 2                'Radius cylindrical shell
 
 
         '---- material --------
@@ -2218,6 +2218,9 @@ Public Class Form1
 
         'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
         wi = stif_w
+        'Where flanges act as heavy stiffeners, the shaded area shall be determined as shown in Figure 8.5-9 a).
+        'Point 'A’ shall be positioned as shown in Figure 8.5-9 b) and w determined. 
+        w = stif_w
 
         '---- Figure 8.5-6 — Cylinder with light stiffeners -------
         L = L2s - stif_w            'see Figure 8.5-8 
@@ -2225,26 +2228,29 @@ Public Class Form1
         Lh = Lcyl + (0.4 * h) * 2   '(8.5.2-10) 
 
 
-        Py = σe * ea / (R_shell * (1 - γ * G))              '(8.5.3-15) 
-
-        γ = Am * (1 - ν / 2) / (Am + wi * ea) * (1 + B)     '(8.5.3-16)
-
-        Am = (R_shell / Rs) * A_stif                        '(8.5.3-17) 
-
-        B = 2 * ea * N / δ * (Am + ω * ea)                  '(8.5.3-18) 
-
-        δ = 3 * (1 - ν ^ 2) ^ 0.25 / (Sqrt(R_shell * ea))   '(8.5.3-19) 
-
-        N = (Cosh(δ * L) - Cos(δ * L)) / (Sinh(δ * L) + Sin(δ * L))         '(8.5.3-21) 
+        δ = 1.28 / (Sqrt(R_shell * ea))   '(8.5.3-20) 
 
         If L > 3 * Sqrt(R_shell * ea) Then
             G = 0
         Else
-            G = (Sinh(δ * L / 2) + Cos(δ * L / 2))
-            G += (Cosh(δ * L / 2) + Sin(δ * L / 2))
+            G = (Sinh(δ * L / 2) * Cos(δ * L / 2))  '(8.5.3-22) 
+            G += (Cosh(δ * L / 2) * Sin(δ * L / 2))
             G *= 2
             G /= (Sinh(δ * L) + Sin(δ * L))
         End If
+
+
+        N = (Cosh(δ * L) - Cos(δ * L)) / (Sinh(δ * L) + Sin(δ * L))         '(8.5.3-21) 
+
+        B = 2 * ea * N / (δ * (Am + w * ea))                '(8.5.3-18) ??????? w ???????????
+
+        Am = (R_shell / Rs) * A_stif                        '(8.5.3-17) 
+
+        γ = Am * (1 - ν / 2) / (Am + wi * ea) * (1 + B)     '(8.5.3-16)
+
+        Py = σe * ea / (R_shell * (1 - γ * G))              '(8.5.3-15) 
+
+
 
         '----------- Circularity tolerance  ----------
         Tolerance = 0.005 * Pr / (_P * S) * 100  '[%](8.5.1-1) 
@@ -2259,11 +2265,11 @@ Public Class Form1
         TextBox182.Text = S.ToString("0.0")             '[-]
         TextBox189.Text = N.ToString("0.0")             '[-]
         TextBox190.Text = A_stif.ToString               '[mm2]
-        TextBox191.Text = Am.ToString                   '[-]
-        TextBox192.Text = G.ToString                    '[-]
-        TextBox193.Text = B.ToString                    '[-]
-        TextBox194.Text = γ.ToString                    '[-]
-        TextBox195.Text = δ.ToString                    '[-]
+        TextBox191.Text = Am.ToString("0")              '[mm2]modified area of a stiffener
+        TextBox192.Text = G.ToString("0.00")            '[-]
+        TextBox193.Text = B.ToString("0.0")             '[-]
+        TextBox194.Text = γ.ToString("0.00")            '[-]
+        TextBox195.Text = δ.ToString("0.000")           '[-]
         TextBox196.Text = Rs.ToString                   '[-]
         TextBox197.Text = (Py * 10).ToString("0.00")    '[bar]
         TextBox198.Text = Ls.ToString("0")              '[mm]
