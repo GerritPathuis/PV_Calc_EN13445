@@ -2079,7 +2079,14 @@ Public Class Form1
 
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
-        σe = NumericUpDown10.Value / 1.25
+
+        '8.4.3 For shells made in austenitic steel, the nominal elastic limit shall be given by: 
+        If String.Equals(TextBox182.Text, "ss") Then
+            σe = NumericUpDown10.Value / 1.25
+        Else
+            σe = NumericUpDown10.Value
+        End If
+
 
         '---- calculated lower bound collapse pressure obtained from Figure 8.5-5 ----------
         L = Lcyl + 0.4 * h + Lcon   '(8.5.2-3) Unsupported Length
@@ -2119,13 +2126,13 @@ Public Class Form1
         Pr = PrPy * Py  'Calculated lower bound collapse pressure obtained from Figure 8.5-5
 
         '----------- Circularity tolerance  ----------
-        Tolerance = 0.005 * Pr / (_P * S)   '[%](8.5.1-1) 
+        Tolerance = 0.005 * Pr / (_P * S) * 100  '[%](8.5.1-1) 
 
         '--------- present results--------
         TextBox162.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox170.Text = σe.ToString("0.0")            '[N/mm]
         TextBox171.Text = S.ToString("0.0") '[-]
-        TextBox165.Text = Tolerance.ToString("0.0000")  '[-]
+        TextBox165.Text = Tolerance.ToString("0.00")  '[-]
         TextBox166.Text = (Py * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox167.Text = L.ToString("0")               '[mm]
         TextBox172.Text = (Pm * 10).ToString("0.00")    '[MPa]-->[Bar]
