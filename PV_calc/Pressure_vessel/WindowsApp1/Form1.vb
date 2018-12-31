@@ -2054,8 +2054,9 @@ Public Class Form1
         Calc_Cylinder_vacuum_852()
     End Sub
     Private Sub Calc_Cylinder_vacuum_852()
+        'Vacumm cylindrical shell NO stiffeners
         Dim σe As Double
-        'Dim α As Double 'Half apex cone
+        Dim α As Double 'Half apex cone
         Dim De, Lcyl, h, Lcon, S As Double
         Dim Tolerance As Double
         Dim Pr As Double 'calculated lower bound collapse pressure 
@@ -2075,6 +2076,7 @@ Public Class Form1
         h = NumericUpDown45.Value       'Dished head height
         Lcon = NumericUpDown46.Value    'Cone length
         ea = NumericUpDown48.Value      'Shell wall thickness
+        α = NumericUpDown57.Value       'Half apex cone
         R_shell = De / 2                'Radius shell
 
         '---- material --------
@@ -2089,7 +2091,11 @@ Public Class Form1
 
 
         '---- calculated lower bound collapse pressure obtained from Figure 8.5-5 ----------
-        L = Lcyl + 0.4 * h + Lcon   '(8.5.2-3) Unsupported Length
+        If α >= 30 Then
+            L = Lcyl + 0.4 * h    '(8.5.2) Unsupported Length
+        Else
+            L = Lcyl + 0.4 * h + Lcon   '(8.5.3) Unsupported Length
+        End If
 
         '--- pressure at which mean circumferential stress yields
         Py = σe * ea / R_shell            '(8.5.2-4) 
@@ -2160,13 +2166,28 @@ Public Class Form1
         Return (ε)
     End Function
     Private Sub Calc_Cylinder_vacuum_853()
+        'Vacumm cylindrical shell WITH stiffeners
         Dim σe As Double
         Dim De, Lcyl, h, L2s, L3s, S As Double
         Dim Tolerance As Double
-        Dim Pr As Double 'calculated lower bound collapse pressure 
-        Dim Py As Double 'pressure at which mean circumferential stress yields
+        Dim Pr As Double    'calculated lower bound collapse pressure 
+        Dim Py As Double    'pressure at which mean circumferential stress yields
         Dim L, Ls, Lh As Double  'unsupported length of the shell
         Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
+        Dim Rs As Double    'radius of the centroid of the stiffener cross-section
+        Dim G As Double     'parameter in the interstiffener collapse calculation, see Equation (8.5.3-22); 
+        Dim γ As Double     'parameter design of stiffeners, see Equations (8.5.3-16)
+        Dim δ As Double     'parameter design of stiffeners, see Equations (8.5.3-19) and (8.5.3-20);
+        Dim N As Double     'parameter interstiffener collapse calc., see Equation (8.5.3-21) and Table 8.5-2; 
+        Dim wi As Double    'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
+        Dim ω As Double
+        Dim Am As Double    'is the modified area of a stiffener, see Equation (8.5.3-17); 
+        Dim B As Double     'parameter in the interstiffener collapse calculation, see Equation (8.5.3-18); 
+
+        Dim A_stif As Double    'the cross-sectional area of stiffener; 
+        Dim stif_h As Double    'Stiffener height
+        Dim stif_w As Double    'Stiffener width
+
         Dim ν As Double = 0.3   'Poisson ratio
         Dim ea As Double   'shell wall thickness
 
@@ -2179,9 +2200,9 @@ Public Class Form1
         ea = NumericUpDown47.Value      'Shell wall thickness
         R_shell = De / 2                'Radius shell
 
+
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
-
         '8.4.3 For shells made in austenitic steel, the nominal elastic limit shall be given by: 
         If String.Equals(TextBox182.Text, "ss") Then
             σe = NumericUpDown10.Value / 1.25
@@ -2189,28 +2210,26 @@ Public Class Form1
             σe = NumericUpDown10.Value
         End If
 
+        '--- pressure at which mean circumferential stress yields
+        stif_h = NumericUpDown55.Value
+        stif_w = NumericUpDown54.Value
+        A_stif = stif_h * stif_w
+        Rs = R_shell + stif_h
+
+        'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
+        wi = stif_w
+
         '---- Figure 8.5-6 — Cylinder with light stiffeners -------
-        L = L3s                     'Figure 8.5-8 
+        L = L2s - stif_w            'see Figure 8.5-8 
         Ls = (L2s + L3s) / 2        '(8.5.3-7)
         Lh = Lcyl + (0.4 * h) * 2   '(8.5.2-10) 
 
-        '--- pressure at which mean circumferential stress yields
-        Dim G As Double
-        Dim γ As Double
-        Dim δ As Double 'parameter design of stiffeners, see Equations (8.5.3-19) and (8.5.3-20);
-        Dim N As Double  'parameter interstiffener collapse calc., see Equation (8.5.3-21) and Table 8.5-2; 
-        Dim wi As Double
-        Dim ω As Double
-        Dim Am As Double    'is the modified area of a stiffener, see Equation (8.5.3-17); 
-        Dim B As Double  'parameter in the interstiffener collapse calculation, see Equation (8.5.3-18); 
-        Dim Rs As Double        'radius of the centroid of the stiffener cross-section
-        Dim A_stif As Double    'the cross-sectional area of stiffener; 
 
         Py = σe * ea / (R_shell * (1 - γ * G))              '(8.5.3-15) 
 
         γ = Am * (1 - ν / 2) / (Am + wi * ea) * (1 + B)     '(8.5.3-16)
 
-        Am = (R_shell / Rs) * A_stif                         '(8.5.3-17) 
+        Am = (R_shell / Rs) * A_stif                        '(8.5.3-17) 
 
         B = 2 * ea * N / δ * (Am + ω * ea)                  '(8.5.3-18) 
 
@@ -2227,7 +2246,6 @@ Public Class Form1
             G /= (Sinh(δ * L) + Sin(δ * L))
         End If
 
-
         '----------- Circularity tolerance  ----------
         Tolerance = 0.005 * Pr / (_P * S) * 100  '[%](8.5.1-1) 
 
@@ -2240,11 +2258,13 @@ Public Class Form1
         TextBox186.Text = ν.ToString("0.0")             '[-]
         TextBox182.Text = S.ToString("0.0")             '[-]
         TextBox189.Text = N.ToString("0.0")             '[-]
+        TextBox190.Text = A_stif.ToString               '[mm2]
         TextBox191.Text = Am.ToString                   '[-]
         TextBox192.Text = G.ToString                    '[-]
         TextBox193.Text = B.ToString                    '[-]
         TextBox194.Text = γ.ToString                    '[-]
         TextBox195.Text = δ.ToString                    '[-]
+        TextBox196.Text = Rs.ToString                   '[-]
         TextBox197.Text = (Py * 10).ToString("0.00")    '[bar]
         TextBox198.Text = Ls.ToString("0")              '[mm]
         TextBox199.Text = Lh.ToString("0")              '[mm]
