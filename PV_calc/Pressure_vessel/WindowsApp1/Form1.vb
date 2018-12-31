@@ -2051,9 +2051,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click, TabPage12.Enter, NumericUpDown48.ValueChanged, NumericUpDown46.ValueChanged, NumericUpDown45.ValueChanged, NumericUpDown44.ValueChanged, NumericUpDown43.ValueChanged
-        Calc_shell_vacuum_88()
+        Calc_Cylinder_vacuum_852()
     End Sub
-    Private Sub Calc_shell_vacuum_88()
+    Private Sub Calc_Cylinder_vacuum_852()
         Dim σe As Double
         'Dim α As Double 'Half apex cone
         Dim De, Lcyl, h, Lcon, S As Double
@@ -2159,5 +2159,103 @@ Public Class Form1
         ε *= 1 / (ncyl ^ 2 - 1 + Z ^ 2 / 2)
         Return (ε)
     End Function
+    Private Sub Calc_Cylinder_vacuum_853()
+        Dim σe As Double
+        Dim De, Lcyl, h, L2s, L3s, S As Double
+        Dim Tolerance As Double
+        Dim Pr As Double 'calculated lower bound collapse pressure 
+        Dim Py As Double 'pressure at which mean circumferential stress yields
+        Dim L, Ls, Lh As Double  'unsupported length of the shell
+        Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
+        Dim ν As Double = 0.3   'Poisson ratio
+        Dim ea As Double   'shell wall thickness
 
+        '--- get data ----
+        De = NumericUpDown51.Value      'OD shell
+        Lcyl = NumericUpDown52.Value    'Cylinder length
+        h = NumericUpDown50.Value       'Dished head height
+        L2s = NumericUpDown49.Value     'Light stiffener to weld
+        L3s = NumericUpDown53.Value     'Light stiffener distance
+        ea = NumericUpDown47.Value      'Shell wall thickness
+        R_shell = De / 2                'Radius shell
+
+        '---- material --------
+        S = 1.5         'Safety factor (8.4.4-1) 
+
+        '8.4.3 For shells made in austenitic steel, the nominal elastic limit shall be given by: 
+        If String.Equals(TextBox182.Text, "ss") Then
+            σe = NumericUpDown10.Value / 1.25
+        Else
+            σe = NumericUpDown10.Value
+        End If
+
+        '---- Figure 8.5-6 — Cylinder with light stiffeners -------
+        L = L3s                     'Figure 8.5-8 
+        Ls = (L2s + L3s) / 2        '(8.5.3-7)
+        Lh = Lcyl + (0.4 * h) * 2   '(8.5.2-10) 
+
+        '--- pressure at which mean circumferential stress yields
+        Dim G As Double
+        Dim γ As Double
+        Dim δ As Double 'parameter design of stiffeners, see Equations (8.5.3-19) and (8.5.3-20);
+        Dim N As Double  'parameter interstiffener collapse calc., see Equation (8.5.3-21) and Table 8.5-2; 
+        Dim wi As Double
+        Dim ω As Double
+        Dim Am As Double    'is the modified area of a stiffener, see Equation (8.5.3-17); 
+        Dim B As Double  'parameter in the interstiffener collapse calculation, see Equation (8.5.3-18); 
+        Dim Rs As Double        'radius of the centroid of the stiffener cross-section
+        Dim A_stif As Double    'the cross-sectional area of stiffener; 
+
+        Py = σe * ea / (R_shell * (1 - γ * G))              '(8.5.3-15) 
+
+        γ = Am * (1 - ν / 2) / (Am + wi * ea) * (1 + B)     '(8.5.3-16)
+
+        Am = (R_shell / Rs) * A_stif                         '(8.5.3-17) 
+
+        B = 2 * ea * N / δ * (Am + ω * ea)                  '(8.5.3-18) 
+
+        δ = 3 * (1 - ν ^ 2) ^ 0.25 / (Sqrt(R_shell * ea))   '(8.5.3-19) 
+
+        N = (Cosh(δ * L) - Cos(δ * L)) / (Sinh(δ * L) + Sin(δ * L))         '(8.5.3-21) 
+
+        If L > 3 * Sqrt(R_shell * ea) Then
+            G = 0
+        Else
+            G = (Sinh(δ * L / 2) + Cos(δ * L / 2))
+            G += (Cosh(δ * L / 2) + Sin(δ * L / 2))
+            G *= 2
+            G /= (Sinh(δ * L) + Sin(δ * L))
+        End If
+
+
+        '----------- Circularity tolerance  ----------
+        Tolerance = 0.005 * Pr / (_P * S) * 100  '[%](8.5.1-1) 
+
+        '--------- present results--------
+        TextBox183.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
+        TextBox187.Text = σe.ToString("0.0")            '[N/mm]
+        TextBox188.Text = L.ToString("0")               '[mm]
+        'TextBox184.Text = Tolerance.ToString("0.00")   '[-]
+        TextBox185.Text = _Elasticity.ToString("0")     '[-]
+        TextBox186.Text = ν.ToString("0.0")             '[-]
+        TextBox182.Text = S.ToString("0.0")             '[-]
+        TextBox189.Text = N.ToString("0.0")             '[-]
+        TextBox191.Text = Am.ToString                   '[-]
+        TextBox192.Text = G.ToString                    '[-]
+        TextBox193.Text = B.ToString                    '[-]
+        TextBox194.Text = γ.ToString                    '[-]
+        TextBox195.Text = δ.ToString                    '[-]
+        TextBox197.Text = (Py * 10).ToString("0.00")    '[bar]
+        TextBox198.Text = Ls.ToString("0")              '[mm]
+        TextBox199.Text = Lh.ToString("0")              '[mm]
+
+        '---------- Check-----
+        'TextBox166.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
+        'TextBox172.BackColor = IIf(Pm < _P, Color.Red, Color.LightGreen)
+        'TextBox181.BackColor = IIf(Pr / S < _P, Color.Red, Color.LightGreen)
+    End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click, TabPage13.Enter, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown50.ValueChanged, NumericUpDown49.ValueChanged, NumericUpDown47.ValueChanged
+        Calc_Cylinder_vacuum_853()
+    End Sub
 End Class
