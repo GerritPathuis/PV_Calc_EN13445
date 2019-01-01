@@ -10,6 +10,7 @@ Imports Word = Microsoft.Office.Interop.Word
 'Unfired pressure vessels part 3
 '-------------------------------------------------------
 Public Class Form1
+    Public _ν As Double = 0.3    'Poisson ratio for steel
     Public _P As Double         'Calculation pressure [Mpa]
     Public _fs As Double        'Allowable stress shell [N/mm2]
     Public _f02 As Double       'Yield 0.2% stress shell [N/mm2]
@@ -326,8 +327,9 @@ Public Class Form1
             Else
                 _Elasticity = (201.66 - 8.48 * temp / 10 ^ 2) * 1000
             End If
-            TextBox178.Text = _Elasticity.ToString("0")        'Max allowed bend+membrane
-            End If
+            TextBox178.Text = _Elasticity.ToString("0") 'Max allowed bend+membrane
+            TextBox209.Text = _ν.ToString("0.0")        'Poissons rate for steel
+        End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged, NumericUpDown16.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown42.ValueChanged
@@ -869,7 +871,6 @@ Public Class Form1
         Dim g, H, J, U, f1 As Double
         Dim A, B, F, G_ As Double
         Dim a_, b_, c_, N, Q, K, S As Double
-        Dim ν As Double = 0.303     'Poisson 's ratio mild steel 
 
         De = NumericUpDown20.Value   'Outside dia shell
         es = NumericUpDown21.Value  'Shell Thickness
@@ -894,34 +895,34 @@ Public Class Form1
 
         g = Di / (Di + es)                  '(10.4-16)
 
-        H = (12 * (1 - ν ^ 2)) ^ 0.25       '(10.4-17) 
+        H = (12 * (1 - _ν ^ 2)) ^ 0.25       '(10.4-17) 
         H *= Sqrt(es / (Di + es))
 
         J = 3 * _fs / _P                     '(10.4-18) 
         J -= Di ^ 2 / (4 * (Di + es) * es)
         J -= 1
 
-        U = 2 * (2 - ν * g)
-        U /= Sqrt(3 * (1 - ν ^ 2))              '(10.4-19) 
+        U = 2 * (2 - _ν * g)
+        U /= Sqrt(3 * (1 - _ν ^ 2))              '(10.4-19) 
 
         f1 = 2 * g ^ 2 - g ^ 4                  '(10.4-20) 
 
         A = 3 * U * Di / (4 * es)               '(10.4-21) 
         A -= 2 * J
-        A *= (1 + ν)
-        A *= (1 + (1 - ν) * es / (Di + es))
+        A *= (1 + _ν)
+        A *= (1 + (1 - _ν) * es / (Di + es))
 
         B = 3 * U * Di / (8 * es)               '(10.4 - 22)
         B -= J
         B *= H ^ 2
-        B -= (3 / 2 * (2 - ν * g) * g)
+        B -= (3 / 2 * (2 - _ν * g) * g)
         B *= H
 
         F = 3 / 8 * U * g                       '(10.4-23) 
         F += 3 / 16 * f1 * (Di + es) / es
         F -= (2 * J * es / (Di + es))
         F *= H ^ 2
-        F -= (3 * (2 - ν * g) * g * es / (Di + es))
+        F -= (3 * (2 - _ν * g) * g * es / (Di + es))
 
         G_ = 3 / 8 * f1                         '(10.4-24) 
         G_ -= 2 * J * (es / (Di + es)) ^ 2
@@ -2067,7 +2068,6 @@ Public Class Form1
         Dim ε As Double     'mean elastic circumferential strain at collapse, see 8.5.2.2
         Dim ncyl As Double  'number of circumferential waves for an unstiffened part of a cylinder, see 8.5.2.2; 
         Dim Z As Double     'Formula (8.5.2-7) 
-        Dim ν As Double = 0.3   'Poisson ratio
         Dim ea As Double    'shell wall thickness
         Dim x As Double     'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
         Dim PrPy As Double  'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
@@ -2109,7 +2109,7 @@ Public Class Form1
 
         For i = 2 To 20
             '--- calculate ε ----
-            ε = Calc_ε(i, Z, R_shell, ea, ν) '(8.5.2-6) 
+            ε = Calc_ε(i, Z, R_shell, ea, _ν) '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
             Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
             If Pm < Pm_small Then
@@ -2119,7 +2119,7 @@ Public Class Form1
         Next
 
         '--- now return to the smalles found case ----
-        ε = Calc_ε(ncyl, Z, R_shell, ea, ν) '(8.5.2-6) 
+        ε = Calc_ε(ncyl, Z, R_shell, ea, _ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
         Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
 
@@ -2145,7 +2145,7 @@ Public Class Form1
         TextBox172.Text = (Pm * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox173.Text = Z.ToString("0.0")             '[-]
         TextBox174.Text = ε.ToString("0.00000")         '[-]
-        TextBox175.Text = ν.ToString("0.0")             '[-]
+        TextBox175.Text = _ν.ToString("0.0")            '[-]
         TextBox177.Text = _Elasticity.ToString("0")     '[-]
         TextBox179.Text = ncyl.ToString("0")            '[-]
         TextBox176.Text = x.ToString("0.0")             '[-]Pm/Py
@@ -2198,7 +2198,7 @@ Public Class Form1
         Dim stif_h As Double    'Stiffener height
         Dim stif_w As Double    'Stiffener width
 
-        Dim ν As Double = 0.3   'Poisson ratio
+
         Dim ea As Double   'shell wall thickness
 
         '--- get data ----
@@ -2256,7 +2256,7 @@ Public Class Form1
 
         Am = (R_shell ^ 2 / Rs ^ 2) * A_stif            '(8.5.3-17) 
 
-        γ = Am * (1 - ν / 2)                            '(8.5.3-16)
+        γ = Am * (1 - _ν / 2)                            '(8.5.3-16)
         γ /= (Am + wi * ea) * (1 + B)
 
         Py = σe * ea / (R_shell * (1 - γ * G))          '(8.5.3-15) 
@@ -2269,7 +2269,7 @@ Public Class Form1
 
         For i = 2 To 20
             '--- calculate ε ----
-            ε = Calc_ε(i, Z, R_shell, ea, ν) '(8.5.2-6) 
+            ε = Calc_ε(i, Z, R_shell, ea, _ν) '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
             Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
             If Pm < Pm_small Then
@@ -2279,7 +2279,7 @@ Public Class Form1
         Next
 
         '--- now return to the smalles found case ----
-        ε = Calc_ε(ncyl, Z, R_shell, ea, ν) '(8.5.2-6) 
+        ε = Calc_ε(ncyl, Z, R_shell, ea, _ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
         Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
 
@@ -2299,7 +2299,7 @@ Public Class Form1
         TextBox188.Text = L_uns.ToString("0")           '[mm]
         'TextBox184.Text = Tolerance.ToString("0.00")   '[-]
         TextBox185.Text = _Elasticity.ToString("0")     '[-]
-        TextBox186.Text = ν.ToString("0.0")             '[-]
+        TextBox186.Text = _ν.ToString("0.0")             '[-]
         TextBox182.Text = S.ToString("0.0")             '[-]
         TextBox189.Text = N.ToString("0.00")            '[-]
         TextBox190.Text = A_stif.ToString               '[mm2]
