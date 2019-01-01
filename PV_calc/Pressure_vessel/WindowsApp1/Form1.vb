@@ -2059,16 +2059,18 @@ Public Class Form1
         Dim α As Double 'Half apex cone
         Dim De, Lcyl, h, Lcon, S As Double
         Dim Tolerance As Double
-        Dim Pr As Double 'calculated lower bound collapse pressure 
-        Dim Py As Double 'pressure at which mean circumferential stress yields
-        Dim Pm As Double 'theoretical elastic instability pressure for collapse of a perfect cylindrical
-        Dim L As Double  'unsupported length of the shell
+        Dim Pr As Double    'calculated lower bound collapse pressure 
+        Dim Py As Double    'pressure at which mean circumferential stress yields
+        Dim Pm As Double    'theoretical elastic instability pressure for collapse of a perfect cylindrical
+        Dim L As Double     'unsupported length of the shell
         Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
-        Dim ε As Double 'mean elastic circumferential strain at collapse, see 8.5.2.2; 
+        Dim ε As Double     'mean elastic circumferential strain at collapse, see 8.5.2.2
         Dim ncyl As Double  'number of circumferential waves for an unstiffened part of a cylinder, see 8.5.2.2; 
-        Dim Z As Double
+        Dim Z As Double     'Formula (8.5.2-7) 
         Dim ν As Double = 0.3   'Poisson ratio
-        Dim ea As Double   'shell wall thickness
+        Dim ea As Double    'shell wall thickness
+        Dim x As Double     'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
+        Dim PrPy As Double  'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
 
         '--- get data ----
         De = NumericUpDown43.Value      'OD shell
@@ -2122,8 +2124,7 @@ Public Class Form1
         Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
 
         '---------------------------
-        Dim x As Double
-        Dim PrPy As Double
+
 
         x = Pm / Py
 
@@ -2137,15 +2138,15 @@ Public Class Form1
         '--------- present results--------
         TextBox162.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox170.Text = σe.ToString("0.0")            '[N/mm]
-        TextBox171.Text = S.ToString("0.0") '[-]
-        TextBox165.Text = Tolerance.ToString("0.00")  '[-]
+        TextBox171.Text = S.ToString("0.0")             '[-]
+        TextBox165.Text = Tolerance.ToString("0.00")    '[-]
         TextBox166.Text = (Py * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox167.Text = L.ToString("0")               '[mm]
         TextBox172.Text = (Pm * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox173.Text = Z.ToString("0.0")             '[-]
         TextBox174.Text = ε.ToString("0.00000")         '[-]
         TextBox175.Text = ν.ToString("0.0")             '[-]
-        TextBox177.Text = _Elasticity.ToString("0")               '[-]
+        TextBox177.Text = _Elasticity.ToString("0")     '[-]
         TextBox179.Text = ncyl.ToString("0")            '[-]
         TextBox176.Text = x.ToString("0.0")             '[-]Pm/Py
         TextBox180.Text = PrPy.ToString("0.00")         '[-]Pr/Py
@@ -2168,11 +2169,14 @@ Public Class Form1
     Private Sub Calc_Cylinder_vacuum_853()
         'Vacumm cylindrical shell WITH stiffeners
         Dim σe As Double
-        Dim De, Lcyl, h, L2s, L3s, S As Double
+        Dim De, Lcyl, h, S As Double
         Dim Tolerance As Double
         Dim Pr As Double    'calculated lower bound collapse pressure 
         Dim Py As Double    'pressure at which mean circumferential stress yields
-        Dim L, Ls, Lh As Double  'unsupported length of the shell
+        Dim L_uns As Double 'unsupported length of the shell
+        Dim L1s As Double   'Light stiffener distance to weld
+        Dim L2s As Double   'Light stiffener distance to next light stiffener
+        Dim Ls, Lh As Double  'unsupported length of the shell
         Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
         Dim Rs As Double    'radius of the centroid of the stiffener cross-section
         Dim G As Double     'parameter in the interstiffener collapse calculation, see Equation (8.5.3-22); 
@@ -2183,6 +2187,12 @@ Public Class Form1
         Dim w As Double     'flange width as shown in Figure 8.5-9 b) 
         Dim Am As Double    'is the modified area of a stiffener, see Equation (8.5.3-17); 
         Dim B As Double     'parameter in the interstiffener collapse calculation, see Equation (8.5.3-18); 
+        Dim Z As Double     'Formula (8.5.2-7)
+        Dim ε As Double     'mean elastic circumferential strain at collapse, see 8.5.2.2
+        Dim Pm As Double    'theoretical elastic instability pressure for collapse of a perfect cylindrical
+        Dim ncyl As Double  'number of circumferential waves for an unstiffened part of a cylinder, see 8.5.2.2; 
+        Dim x As Double     'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
+        Dim PrPy As Double  'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
 
         Dim A_stif As Double    'the cross-sectional area of stiffener; 
         Dim stif_h As Double    'Stiffener height
@@ -2195,11 +2205,10 @@ Public Class Form1
         De = NumericUpDown51.Value      'OD shell
         Lcyl = NumericUpDown52.Value    'Cylinder length
         h = NumericUpDown50.Value       'Dished head height
-        L2s = NumericUpDown49.Value     'Light stiffener to weld
-        L3s = NumericUpDown53.Value     'Light stiffener distance
+        L1s = NumericUpDown49.Value     'Light stiffener to weld
+        L2s = NumericUpDown53.Value     'Light stiffener-stiffener distance
         ea = NumericUpDown47.Value      'Shell wall thickness
         R_shell = De / 2                'Radius cylindrical shell
-
 
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
@@ -2223,34 +2232,63 @@ Public Class Form1
         w = stif_w
 
         '---- Figure 8.5-6 — Cylinder with light stiffeners -------
-        L = L2s - stif_w            'see Figure 8.5-8 
-        Ls = (L2s + L3s) / 2        '(8.5.3-7)
-        Lh = Lcyl + (0.4 * h) * 2   '(8.5.2-10) 
+        L_uns = L2s - stif_w            'see Figure 8.5-8 
+        Ls = (L1s + L2s) / 2            '(8.5.3-7)
+        Lh = Lcyl + (0.4 * h) * 2       '(8.5.2-10) 
 
 
-        δ = 1.28 / (Sqrt(R_shell * ea))   '(8.5.3-20) 
+        δ = 1.28 / (Sqrt(R_shell * ea)) '(8.5.3-20) 
 
-        If L > 3 * Sqrt(R_shell * ea) Then
+        If L_uns > 3 * Sqrt(R_shell * ea) Then
             G = 0
         Else
-            G = (Sinh(δ * L / 2) * Cos(δ * L / 2))  '(8.5.3-22) 
-            G += (Cosh(δ * L / 2) * Sin(δ * L / 2))
+            G = (Sinh(δ * L_uns / 2) * Cos(δ * L_uns / 2))      '(8.5.3-22) 
+            G += (Cosh(δ * L_uns / 2) * Sin(δ * L_uns / 2))
             G *= 2
-            G /= (Sinh(δ * L) + Sin(δ * L))
+            G /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
         End If
 
 
-        N = (Cosh(δ * L) - Cos(δ * L)) / (Sinh(δ * L) + Sin(δ * L))         '(8.5.3-21) 
+        N = Cosh(δ * L_uns) - Cos(δ * L_uns)                    '(8.5.3-21) 
+        N /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
 
-        B = 2 * ea * N / (δ * (Am + w * ea))                '(8.5.3-18) ??????? w ???????????
+        B = 2 * ea * N / (δ * (Am + w * ea))            '(8.5.3-18) 
 
-        Am = (R_shell / Rs) * A_stif                        '(8.5.3-17) 
+        Am = (R_shell ^ 2 / Rs ^ 2) * A_stif            '(8.5.3-17) 
 
-        γ = Am * (1 - ν / 2) / (Am + wi * ea) * (1 + B)     '(8.5.3-16)
+        γ = Am * (1 - ν / 2)                            '(8.5.3-16)
+        γ /= (Am + wi * ea) * (1 + B)
 
-        Py = σe * ea / (R_shell * (1 - γ * G))              '(8.5.3-15) 
+        Py = σe * ea / (R_shell * (1 - γ * G))          '(8.5.3-15) 
 
+        '----- calculate Pm according 8.5.2.2 ------
+        Z = PI * R_shell / L_uns                            '(8.5.2-7) 
 
+        '---------- Find the smallest Pm ----------
+        Dim Pm_small As Double = 9999
+
+        For i = 2 To 20
+            '--- calculate ε ----
+            ε = Calc_ε(i, Z, R_shell, ea, ν) '(8.5.2-6) 
+            '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
+            Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
+            If Pm < Pm_small Then
+                Pm_small = Pm
+                ncyl = i
+            End If
+        Next
+
+        '--- now return to the smalles found case ----
+        ε = Calc_ε(ncyl, Z, R_shell, ea, ν) '(8.5.2-6) 
+        '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
+        Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
+
+        '-----------Figure 8.5-5 — Values of Pr/Py versus Pm/Py ----------------
+        x = Pm / Py
+
+        PrPy = -0.0016 * x ^ 4 + 0.031 * x ^ 3 - 0.2225 * x ^ 2 + 0.7227 * x - 0.0288
+
+        Pr = PrPy * Py  'Calculated lower bound collapse pressure obtained from Figure 8.5-5
 
         '----------- Circularity tolerance  ----------
         Tolerance = 0.005 * Pr / (_P * S) * 100  '[%](8.5.1-1) 
@@ -2258,12 +2296,12 @@ Public Class Form1
         '--------- present results--------
         TextBox183.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox187.Text = σe.ToString("0.0")            '[N/mm]
-        TextBox188.Text = L.ToString("0")               '[mm]
+        TextBox188.Text = L_uns.ToString("0")           '[mm]
         'TextBox184.Text = Tolerance.ToString("0.00")   '[-]
         TextBox185.Text = _Elasticity.ToString("0")     '[-]
         TextBox186.Text = ν.ToString("0.0")             '[-]
         TextBox182.Text = S.ToString("0.0")             '[-]
-        TextBox189.Text = N.ToString("0.0")             '[-]
+        TextBox189.Text = N.ToString("0.00")            '[-]
         TextBox190.Text = A_stif.ToString               '[mm2]
         TextBox191.Text = Am.ToString("0")              '[mm2]modified area of a stiffener
         TextBox192.Text = G.ToString("0.00")            '[-]
@@ -2275,13 +2313,22 @@ Public Class Form1
         TextBox198.Text = Ls.ToString("0")              '[mm]
         TextBox199.Text = Lh.ToString("0")              '[mm]
 
+        TextBox201.Text = (Pr * 10).ToString("0.00")    '[MPa]-->[Bar]
+        TextBox202.Text = PrPy.ToString("0.00")         '[-]Pr/Py
+        TextBox203.Text = x.ToString("0.0")             '[-]Pm/Py
+        TextBox204.Text = ncyl.ToString("0")            '[-]
+        TextBox205.Text = S.ToString("0.0")             '[-]
+        TextBox206.Text = ε.ToString("0.00000")         '[-]
+        TextBox207.Text = Z.ToString("0.0")             '[-]
+        TextBox208.Text = (Pm * 10).ToString("0.00")    '[MPa]-->[Bar]
+
         '---------- Check-----
-        'TextBox166.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
-        'TextBox172.BackColor = IIf(Pm < _P, Color.Red, Color.LightGreen)
-        'TextBox181.BackColor = IIf(Pr / S < _P, Color.Red, Color.LightGreen)
+        TextBox197.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
+        TextBox208.BackColor = IIf(Pm < _P, Color.Red, Color.LightGreen)
+        TextBox201.BackColor = IIf(Pr / S < _P, Color.Red, Color.LightGreen)
     End Sub
 
-    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click, TabPage13.Enter, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown50.ValueChanged, NumericUpDown49.ValueChanged, NumericUpDown47.ValueChanged
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click, TabPage13.Enter, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown50.ValueChanged, NumericUpDown49.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown55.ValueChanged, NumericUpDown54.ValueChanged, NumericUpDown53.ValueChanged
         Calc_Cylinder_vacuum_853()
     End Sub
 End Class
