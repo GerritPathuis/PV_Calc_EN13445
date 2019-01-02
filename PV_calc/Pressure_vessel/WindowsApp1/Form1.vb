@@ -2330,15 +2330,15 @@ Public Class Form1
         Calc_Cylinder_vacuum_853()
     End Sub
 
-    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click, TabPage14.Enter
         '8.5.3.6 Design of light stiffeners 
         Calc_Light_Stiffeners_8536()
     End Sub
     Private Sub Calc_Light_Stiffeners_8536()
 
-        Dim ea As Double   'shell wall thickness
-        Dim De As Double     'Outside diameter shell
-        Dim Ls As Double  'unsupported length of the shell
+        Dim ea As Double    'shell wall thickness
+        Dim De As Double    'Outside diameter shell
+        Dim Ls As Double    'unsupported length of the shell
         Dim Lh As Double    'Is the distance between heavy stiffeners, see Table 8.5-1; 
         Dim Le As Double    'is the effective length of shell acting with a light stiffener, see Equation (8.5.3-34)
         Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
@@ -2350,14 +2350,37 @@ Public Class Form1
         Dim Iss As Double   'second moment of area of the stiffener cross-section 
         Dim Ass As Double   'cross-sectional area of stiffener
         Dim Ae As Double    'cross-sectional area of stiffener and effective length of shell, see Equation (8.5.3-30)
-        Dim λ As Double  'parameter depending on stiffener location, see Equations (8.5.3-28) and (8.5.3-29)
-
+        Dim λ As Double     'parameter depending on stiffener location, see Equations (8.5.3-28) and (8.5.3-29)
+        Dim rh, rw As Double
+        Dim x As Double
+        Dim y1, y2, y3 As Double 'Formula (8.5.3.6.3)
 
         '--- get data ----
         De = NumericUpDown51.Value      'OD shell
-        R_shell = De / 2
+        rh = NumericUpDown55.Value      'Rib height
+        rw = NumericUpDown54.Value      'Rib width
+        ea = NumericUpDown47.Value      'shell wall thickness
 
-        '----- formula's ----
+        R_shell = De / 2
+        Double.TryParse(TextBox196.Text, Rs)
+        Double.TryParse(TextBox190.Text, Ass)
+        'Double.TryParse(TextBox190.Text, rh)
+        'Double.TryParse(TextBox190.Text, rw)
+
+        '----8.5.3.6.3 Determination of Le ----
+        x = n ^ 2 * (ea / R_shell)  '(8.5.3-35) 
+
+        Le = y1 * Sqrt(ea / R_shell)        '(8.5.3-34)
+        Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
+        Le *= R_shell
+
+
+        '------ External stiffeners ---
+        λ = -1                      '(8.5.3-29) 
+        Ae = Ass + ea * Le          '(8.5.3-30) 
+        Le = 9999
+
+
         Pg = E * ea * β / R_shell       '(8.5.3-24) 
         Pg += (n ^ 2 - 1) * E * Ie / (R_shell ^ 3 * Ls)
 
@@ -2369,15 +2392,19 @@ Public Class Form1
         Ie += Ass * (ea / 2 * λ * (R_shell - Rs))
         Ie /= Ae
 
-        '------ External stiffeners ---
-        λ = -1                      '(8.5.3-29) 
-        Ae = Ass + ea * Le          '(8.5.3-30) 
-        Le = 9999
+
 
 
         '--------- present results--------
-        'TextBox183.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
-        'TextBox187.Text = σe.ToString("0.0")            '[N/mm]
+        TextBox210.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
+        TextBox211.Text = De.ToString("0.0")            'Diameter[mm]
+        'TextBox212.Text = De.ToString("0.0")            'Diameter[mm]
+        'TextBox213.Text = Lcyl.ToString("0.0")            'Diameter[mm]
+        'TextBox214.Text = De.ToString("0.0")            'Diameter[mm]
+        TextBox215.Text = ea.ToString("0.0")            'Diameter[mm]
+        TextBox216.Text = Ass.ToString("0.0")
+        TextBox217.Text = Rs.ToString("0.0")
+        TextBox218.Text = Ie.ToString("0.0")
 
         '---------- Check-----
         'TextBox197.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
