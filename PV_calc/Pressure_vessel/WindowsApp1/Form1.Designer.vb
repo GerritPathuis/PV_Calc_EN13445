@@ -53,6 +53,10 @@ Partial Class Form1
         Me.Label336 = New System.Windows.Forms.Label()
         Me.TextBox22 = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label622 = New System.Windows.Forms.Label()
+        Me.Label623 = New System.Windows.Forms.Label()
+        Me.TextBox209 = New System.Windows.Forms.TextBox()
+        Me.Label624 = New System.Windows.Forms.Label()
         Me.Label482 = New System.Windows.Forms.Label()
         Me.Label481 = New System.Windows.Forms.Label()
         Me.TextBox178 = New System.Windows.Forms.TextBox()
@@ -437,6 +441,10 @@ Partial Class Form1
         Me.Label541 = New System.Windows.Forms.Label()
         Me.Label542 = New System.Windows.Forms.Label()
         Me.PictureBox18 = New System.Windows.Forms.PictureBox()
+        Me.TabPage14 = New System.Windows.Forms.TabPage()
+        Me.Label483 = New System.Windows.Forms.Label()
+        Me.Label621 = New System.Windows.Forms.Label()
+        Me.GroupBox42 = New System.Windows.Forms.GroupBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.GroupBox34 = New System.Windows.Forms.GroupBox()
         Me.PictureBox17 = New System.Windows.Forms.PictureBox()
@@ -1004,14 +1012,32 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.TabPage14 = New System.Windows.Forms.TabPage()
-        Me.GroupBox42 = New System.Windows.Forms.GroupBox()
-        Me.Label621 = New System.Windows.Forms.Label()
-        Me.Label483 = New System.Windows.Forms.Label()
-        Me.Label622 = New System.Windows.Forms.Label()
-        Me.Label623 = New System.Windows.Forms.Label()
-        Me.TextBox209 = New System.Windows.Forms.TextBox()
-        Me.Label624 = New System.Windows.Forms.Label()
+        Me.Button16 = New System.Windows.Forms.Button()
+        Me.PictureBox19 = New System.Windows.Forms.PictureBox()
+        Me.Label625 = New System.Windows.Forms.Label()
+        Me.Label626 = New System.Windows.Forms.Label()
+        Me.Label627 = New System.Windows.Forms.Label()
+        Me.Label628 = New System.Windows.Forms.Label()
+        Me.Label629 = New System.Windows.Forms.Label()
+        Me.Label630 = New System.Windows.Forms.Label()
+        Me.Label631 = New System.Windows.Forms.Label()
+        Me.Label632 = New System.Windows.Forms.Label()
+        Me.Label633 = New System.Windows.Forms.Label()
+        Me.TextBox210 = New System.Windows.Forms.TextBox()
+        Me.Label634 = New System.Windows.Forms.Label()
+        Me.Label635 = New System.Windows.Forms.Label()
+        Me.Label636 = New System.Windows.Forms.Label()
+        Me.Label637 = New System.Windows.Forms.Label()
+        Me.Label638 = New System.Windows.Forms.Label()
+        Me.Label639 = New System.Windows.Forms.Label()
+        Me.Label640 = New System.Windows.Forms.Label()
+        Me.Label641 = New System.Windows.Forms.Label()
+        Me.Label642 = New System.Windows.Forms.Label()
+        Me.TextBox211 = New System.Windows.Forms.TextBox()
+        Me.TextBox212 = New System.Windows.Forms.TextBox()
+        Me.TextBox213 = New System.Windows.Forms.TextBox()
+        Me.TextBox214 = New System.Windows.Forms.TextBox()
+        Me.TextBox215 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1063,6 +1089,8 @@ Partial Class Form1
         CType(Me.NumericUpDown51, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NumericUpDown52, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox18, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage14.SuspendLayout
+        Me.GroupBox42.SuspendLayout
         Me.TabPage4.SuspendLayout
         Me.GroupBox34.SuspendLayout
         CType(Me.PictureBox17, System.ComponentModel.ISupportInitialize).BeginInit
@@ -1141,7 +1169,7 @@ Partial Class Form1
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage5.SuspendLayout
-        Me.TabPage14.SuspendLayout
+        CType(Me.PictureBox19, System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TabControl1
@@ -1167,7 +1195,7 @@ Partial Class Form1
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(959, 722)
+        Me.TabControl1.Size = New System.Drawing.Size(959, 765)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -1484,6 +1512,45 @@ Partial Class Form1
         Me.GroupBox2.TabIndex = 90
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Conditions"
+        '
+        'Label622
+        '
+        Me.Label622.AutoSize = True
+        Me.Label622.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label622.Location = New System.Drawing.Point(220, 132)
+        Me.Label622.Name = "Label622"
+        Me.Label622.Size = New System.Drawing.Size(15, 16)
+        Me.Label622.TabIndex = 163
+        Me.Label622.Text = "ν"
+        '
+        'Label623
+        '
+        Me.Label623.AutoSize = True
+        Me.Label623.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label623.Location = New System.Drawing.Point(365, 135)
+        Me.Label623.Name = "Label623"
+        Me.Label623.Size = New System.Drawing.Size(20, 16)
+        Me.Label623.TabIndex = 162
+        Me.Label623.Text = "[-]"
+        '
+        'TextBox209
+        '
+        Me.TextBox209.Enabled = False
+        Me.TextBox209.Location = New System.Drawing.Point(273, 132)
+        Me.TextBox209.Name = "TextBox209"
+        Me.TextBox209.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox209.TabIndex = 161
+        Me.TextBox209.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label624
+        '
+        Me.Label624.AutoSize = True
+        Me.Label624.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label624.Location = New System.Drawing.Point(14, 135)
+        Me.Label624.Name = "Label624"
+        Me.Label624.Size = New System.Drawing.Size(136, 16)
+        Me.Label624.TabIndex = 160
+        Me.Label624.Text = "Poisson ratio for steel"
         '
         'Label482
         '
@@ -1905,10 +1972,10 @@ Partial Class Form1
         Me.TabPage3.Controls.Add(Me.GroupBox3)
         Me.TabPage3.Controls.Add(Me.GroupBox5)
         Me.TabPage3.Controls.Add(Me.Button2)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 28)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 82)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(951, 690)
+        Me.TabPage3.Size = New System.Drawing.Size(951, 636)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "7.4 Cylindrical Shell + 7.6 Cone "
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -2598,10 +2665,10 @@ Partial Class Form1
         Me.TabPage6.Controls.Add(Me.PictureBox2)
         Me.TabPage6.Controls.Add(Me.GroupBox11)
         Me.TabPage6.Controls.Add(Me.Button5)
-        Me.TabPage6.Location = New System.Drawing.Point(4, 28)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 82)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(951, 690)
+        Me.TabPage6.Size = New System.Drawing.Size(951, 636)
         Me.TabPage6.TabIndex = 6
         Me.TabPage6.Text = "7.5.3 Dished Head"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -3242,10 +3309,10 @@ Partial Class Form1
         Me.TabPage12.Controls.Add(Me.Button14)
         Me.TabPage12.Controls.Add(Me.GroupBox33)
         Me.TabPage12.Controls.Add(Me.PictureBox15)
-        Me.TabPage12.Location = New System.Drawing.Point(4, 28)
+        Me.TabPage12.Location = New System.Drawing.Point(4, 82)
         Me.TabPage12.Name = "TabPage12"
         Me.TabPage12.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage12.Size = New System.Drawing.Size(951, 690)
+        Me.TabPage12.Size = New System.Drawing.Size(951, 636)
         Me.TabPage12.TabIndex = 12
         Me.TabPage12.Text = "8.5.2 Unstiffened Cylinder External Pressure"
         Me.TabPage12.UseVisualStyleBackColor = True
@@ -4183,7 +4250,7 @@ Partial Class Form1
         '
         Me.PictureBox15.Image = CType(resources.GetObject("PictureBox15.Image"), System.Drawing.Image)
         Me.PictureBox15.InitialImage = Nothing
-        Me.PictureBox15.Location = New System.Drawing.Point(492, 6)
+        Me.PictureBox15.Location = New System.Drawing.Point(468, 11)
         Me.PictureBox15.Name = "PictureBox15"
         Me.PictureBox15.Size = New System.Drawing.Size(477, 284)
         Me.PictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -4199,10 +4266,10 @@ Partial Class Form1
         Me.TabPage13.Controls.Add(Me.GroupBox38)
         Me.TabPage13.Controls.Add(Me.GroupBox37)
         Me.TabPage13.Controls.Add(Me.PictureBox18)
-        Me.TabPage13.Location = New System.Drawing.Point(4, 55)
+        Me.TabPage13.Location = New System.Drawing.Point(4, 82)
         Me.TabPage13.Name = "TabPage13"
         Me.TabPage13.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage13.Size = New System.Drawing.Size(951, 663)
+        Me.TabPage13.Size = New System.Drawing.Size(951, 679)
         Me.TabPage13.TabIndex = 13
         Me.TabPage13.Text = "8.5.3 Stiffened Cylinder External pressure"
         Me.TabPage13.UseVisualStyleBackColor = True
@@ -5716,6 +5783,74 @@ Partial Class Form1
         Me.PictureBox18.TabIndex = 147
         Me.PictureBox18.TabStop = False
         '
+        'TabPage14
+        '
+        Me.TabPage14.Controls.Add(Me.PictureBox19)
+        Me.TabPage14.Controls.Add(Me.Button16)
+        Me.TabPage14.Controls.Add(Me.Label483)
+        Me.TabPage14.Controls.Add(Me.Label621)
+        Me.TabPage14.Controls.Add(Me.GroupBox42)
+        Me.TabPage14.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage14.Name = "TabPage14"
+        Me.TabPage14.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage14.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage14.TabIndex = 14
+        Me.TabPage14.Text = "8.5.3.6 Design of light stiffeners"
+        Me.TabPage14.UseVisualStyleBackColor = True
+        '
+        'Label483
+        '
+        Me.Label483.AutoSize = True
+        Me.Label483.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label483.Location = New System.Drawing.Point(503, 431)
+        Me.Label483.Name = "Label483"
+        Me.Label483.Size = New System.Drawing.Size(261, 31)
+        Me.Label483.TabIndex = 2
+        Me.Label483.Text = "Under construction"
+        '
+        'Label621
+        '
+        Me.Label621.AutoSize = True
+        Me.Label621.Location = New System.Drawing.Point(9, 22)
+        Me.Label621.Name = "Label621"
+        Me.Label621.Size = New System.Drawing.Size(510, 16)
+        Me.Label621.TabIndex = 1
+        Me.Label621.Text = "8.5.3.6 Design of light stiffeners for cylindrical vessels with external pressure" &
+    " (page 57)"
+        '
+        'GroupBox42
+        '
+        Me.GroupBox42.Controls.Add(Me.TextBox215)
+        Me.GroupBox42.Controls.Add(Me.TextBox214)
+        Me.GroupBox42.Controls.Add(Me.TextBox213)
+        Me.GroupBox42.Controls.Add(Me.TextBox212)
+        Me.GroupBox42.Controls.Add(Me.TextBox211)
+        Me.GroupBox42.Controls.Add(Me.Label625)
+        Me.GroupBox42.Controls.Add(Me.Label626)
+        Me.GroupBox42.Controls.Add(Me.Label627)
+        Me.GroupBox42.Controls.Add(Me.Label628)
+        Me.GroupBox42.Controls.Add(Me.Label629)
+        Me.GroupBox42.Controls.Add(Me.Label630)
+        Me.GroupBox42.Controls.Add(Me.Label631)
+        Me.GroupBox42.Controls.Add(Me.Label632)
+        Me.GroupBox42.Controls.Add(Me.Label633)
+        Me.GroupBox42.Controls.Add(Me.TextBox210)
+        Me.GroupBox42.Controls.Add(Me.Label634)
+        Me.GroupBox42.Controls.Add(Me.Label635)
+        Me.GroupBox42.Controls.Add(Me.Label636)
+        Me.GroupBox42.Controls.Add(Me.Label637)
+        Me.GroupBox42.Controls.Add(Me.Label638)
+        Me.GroupBox42.Controls.Add(Me.Label639)
+        Me.GroupBox42.Controls.Add(Me.Label640)
+        Me.GroupBox42.Controls.Add(Me.Label641)
+        Me.GroupBox42.Controls.Add(Me.Label642)
+        Me.GroupBox42.Location = New System.Drawing.Point(12, 70)
+        Me.GroupBox42.Name = "GroupBox42"
+        Me.GroupBox42.Size = New System.Drawing.Size(459, 200)
+        Me.GroupBox42.TabIndex = 0
+        Me.GroupBox42.TabStop = False
+        Me.GroupBox42.Text = "Light stiffener design  8.5.3.6"
+        '
         'TabPage4
         '
         Me.TabPage4.Controls.Add(Me.GroupBox34)
@@ -5729,10 +5864,10 @@ Partial Class Form1
         Me.TabPage4.Controls.Add(Me.GroupBox4)
         Me.TabPage4.Controls.Add(Me.Label24)
         Me.TabPage4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage4.Location = New System.Drawing.Point(4, 55)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 82)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(951, 663)
+        Me.TabPage4.Size = New System.Drawing.Size(951, 636)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "9.4 Set-in Nozzles NO reinforcement"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -6573,10 +6708,10 @@ Partial Class Form1
         Me.TabPage7.Controls.Add(Me.Button6)
         Me.TabPage7.Controls.Add(Me.PictureBox3)
         Me.TabPage7.Controls.Add(Me.GroupBox12)
-        Me.TabPage7.Location = New System.Drawing.Point(4, 55)
+        Me.TabPage7.Location = New System.Drawing.Point(4, 82)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(951, 663)
+        Me.TabPage7.Size = New System.Drawing.Size(951, 636)
         Me.TabPage7.TabIndex = 7
         Me.TabPage7.Text = "10.4 Flat end welded"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -7199,10 +7334,10 @@ Partial Class Form1
         Me.TabPage8.Controls.Add(Me.PictureBox6)
         Me.TabPage8.Controls.Add(Me.GroupBox14)
         Me.TabPage8.Controls.Add(Me.Button7)
-        Me.TabPage8.Location = New System.Drawing.Point(4, 55)
+        Me.TabPage8.Location = New System.Drawing.Point(4, 82)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(951, 663)
+        Me.TabPage8.Size = New System.Drawing.Size(951, 636)
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "10.5 Flat end bolted"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -10126,7 +10261,7 @@ Partial Class Form1
         Me.TabPage10.Location = New System.Drawing.Point(4, 82)
         Me.TabPage10.Name = "TabPage10"
         Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(951, 636)
+        Me.TabPage10.Size = New System.Drawing.Size(951, 679)
         Me.TabPage10.TabIndex = 10
         Me.TabPage10.Text = "15.6 Rectangle Reinforced Vessel "
         Me.TabPage10.UseVisualStyleBackColor = True
@@ -11926,92 +12061,264 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'TabPage14
+        'Button16
         '
-        Me.TabPage14.Controls.Add(Me.Label483)
-        Me.TabPage14.Controls.Add(Me.Label621)
-        Me.TabPage14.Controls.Add(Me.GroupBox42)
-        Me.TabPage14.Location = New System.Drawing.Point(4, 55)
-        Me.TabPage14.Name = "TabPage14"
-        Me.TabPage14.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage14.Size = New System.Drawing.Size(951, 663)
-        Me.TabPage14.TabIndex = 14
-        Me.TabPage14.Text = "8.5.3.6 Design of light stiffeners"
-        Me.TabPage14.UseVisualStyleBackColor = True
+        Me.Button16.Location = New System.Drawing.Point(767, 414)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(75, 23)
+        Me.Button16.TabIndex = 3
+        Me.Button16.Text = "Button16"
+        Me.Button16.UseVisualStyleBackColor = True
         '
-        'GroupBox42
+        'PictureBox19
         '
-        Me.GroupBox42.Location = New System.Drawing.Point(12, 70)
-        Me.GroupBox42.Name = "GroupBox42"
-        Me.GroupBox42.Size = New System.Drawing.Size(459, 168)
-        Me.GroupBox42.TabIndex = 0
-        Me.GroupBox42.TabStop = False
-        Me.GroupBox42.Text = "GroupBox42"
+        Me.PictureBox19.Image = CType(resources.GetObject("PictureBox19.Image"), System.Drawing.Image)
+        Me.PictureBox19.Location = New System.Drawing.Point(602, 6)
+        Me.PictureBox19.Name = "PictureBox19"
+        Me.PictureBox19.Size = New System.Drawing.Size(341, 172)
+        Me.PictureBox19.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox19.TabIndex = 148
+        Me.PictureBox19.TabStop = False
         '
-        'Label621
+        'Label625
         '
-        Me.Label621.AutoSize = True
-        Me.Label621.Location = New System.Drawing.Point(9, 22)
-        Me.Label621.Name = "Label621"
-        Me.Label621.Size = New System.Drawing.Size(510, 16)
-        Me.Label621.TabIndex = 1
-        Me.Label621.Text = "8.5.3.6 Design of light stiffeners for cylindrical vessels with external pressure" &
-    " (page 57)"
+        Me.Label625.AutoSize = True
+        Me.Label625.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label625.Location = New System.Drawing.Point(263, 166)
+        Me.Label625.Name = "Label625"
+        Me.Label625.Size = New System.Drawing.Size(24, 16)
+        Me.Label625.TabIndex = 274
+        Me.Label625.Text = "ea"
         '
-        'Label483
+        'Label626
         '
-        Me.Label483.AutoSize = True
-        Me.Label483.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label483.Location = New System.Drawing.Point(503, 431)
-        Me.Label483.Name = "Label483"
-        Me.Label483.Size = New System.Drawing.Size(261, 31)
-        Me.Label483.TabIndex = 2
-        Me.Label483.Text = "Under construction"
+        Me.Label626.AutoSize = True
+        Me.Label626.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label626.Location = New System.Drawing.Point(395, 170)
+        Me.Label626.Name = "Label626"
+        Me.Label626.Size = New System.Drawing.Size(38, 16)
+        Me.Label626.TabIndex = 273
+        Me.Label626.Text = "[mm]"
         '
-        'Label622
+        'Label627
         '
-        Me.Label622.AutoSize = True
-        Me.Label622.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label622.Location = New System.Drawing.Point(220, 132)
-        Me.Label622.Name = "Label622"
-        Me.Label622.Size = New System.Drawing.Size(15, 16)
-        Me.Label622.TabIndex = 163
-        Me.Label622.Text = "ν"
+        Me.Label627.AutoSize = True
+        Me.Label627.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label627.Location = New System.Drawing.Point(7, 166)
+        Me.Label627.Name = "Label627"
+        Me.Label627.Size = New System.Drawing.Size(149, 16)
+        Me.Label627.TabIndex = 271
+        Me.Label627.Text = "Cylinder Wall thickness "
         '
-        'Label623
+        'Label628
         '
-        Me.Label623.AutoSize = True
-        Me.Label623.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label623.Location = New System.Drawing.Point(365, 135)
-        Me.Label623.Name = "Label623"
-        Me.Label623.Size = New System.Drawing.Size(20, 16)
-        Me.Label623.TabIndex = 162
-        Me.Label623.Text = "[-]"
+        Me.Label628.AutoSize = True
+        Me.Label628.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label628.Location = New System.Drawing.Point(263, 114)
+        Me.Label628.Name = "Label628"
+        Me.Label628.Size = New System.Drawing.Size(38, 16)
+        Me.Label628.TabIndex = 270
+        Me.Label628.Text = "h'=h''"
         '
-        'TextBox209
+        'Label629
         '
-        Me.TextBox209.Enabled = False
-        Me.TextBox209.Location = New System.Drawing.Point(273, 132)
-        Me.TextBox209.Name = "TextBox209"
-        Me.TextBox209.Size = New System.Drawing.Size(85, 22)
-        Me.TextBox209.TabIndex = 161
-        Me.TextBox209.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Label629.AutoSize = True
+        Me.Label629.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label629.Location = New System.Drawing.Point(395, 114)
+        Me.Label629.Name = "Label629"
+        Me.Label629.Size = New System.Drawing.Size(38, 16)
+        Me.Label629.TabIndex = 269
+        Me.Label629.Text = "[mm]"
         '
-        'Label624
+        'Label630
         '
-        Me.Label624.AutoSize = True
-        Me.Label624.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label624.Location = New System.Drawing.Point(14, 135)
-        Me.Label624.Name = "Label624"
-        Me.Label624.Size = New System.Drawing.Size(136, 16)
-        Me.Label624.TabIndex = 160
-        Me.Label624.Text = "Poisson ratio for steel"
+        Me.Label630.AutoSize = True
+        Me.Label630.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label630.Location = New System.Drawing.Point(7, 114)
+        Me.Label630.Name = "Label630"
+        Me.Label630.Size = New System.Drawing.Size(165, 16)
+        Me.Label630.TabIndex = 267
+        Me.Label630.Text = "External height dished end"
+        '
+        'Label631
+        '
+        Me.Label631.AutoSize = True
+        Me.Label631.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label631.Location = New System.Drawing.Point(263, 86)
+        Me.Label631.Name = "Label631"
+        Me.Label631.Size = New System.Drawing.Size(32, 16)
+        Me.Label631.TabIndex = 266
+        Me.Label631.Text = "Lcyl"
+        '
+        'Label632
+        '
+        Me.Label632.AutoSize = True
+        Me.Label632.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label632.Location = New System.Drawing.Point(395, 34)
+        Me.Label632.Name = "Label632"
+        Me.Label632.Size = New System.Drawing.Size(44, 16)
+        Me.Label632.TabIndex = 265
+        Me.Label632.Text = "[barg]"
+        '
+        'Label633
+        '
+        Me.Label633.AutoSize = True
+        Me.Label633.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label633.Location = New System.Drawing.Point(7, 32)
+        Me.Label633.Name = "Label633"
+        Me.Label633.Size = New System.Drawing.Size(113, 16)
+        Me.Label633.TabIndex = 264
+        Me.Label633.Text = "External Pressure"
+        '
+        'TextBox210
+        '
+        Me.TextBox210.Enabled = False
+        Me.TextBox210.Location = New System.Drawing.Point(301, 30)
+        Me.TextBox210.Name = "TextBox210"
+        Me.TextBox210.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox210.TabIndex = 263
+        Me.TextBox210.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label634
+        '
+        Me.Label634.AutoSize = True
+        Me.Label634.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label634.Location = New System.Drawing.Point(263, 32)
+        Me.Label634.Name = "Label634"
+        Me.Label634.Size = New System.Drawing.Size(24, 16)
+        Me.Label634.TabIndex = 262
+        Me.Label634.Text = "_P"
+        '
+        'Label635
+        '
+        Me.Label635.AutoSize = True
+        Me.Label635.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label635.Location = New System.Drawing.Point(395, 140)
+        Me.Label635.Name = "Label635"
+        Me.Label635.Size = New System.Drawing.Size(28, 16)
+        Me.Label635.TabIndex = 261
+        Me.Label635.Text = "[%]"
+        '
+        'Label636
+        '
+        Me.Label636.AutoSize = True
+        Me.Label636.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label636.Location = New System.Drawing.Point(395, 59)
+        Me.Label636.Name = "Label636"
+        Me.Label636.Size = New System.Drawing.Size(38, 16)
+        Me.Label636.TabIndex = 260
+        Me.Label636.Text = "[mm]"
+        '
+        'Label637
+        '
+        Me.Label637.AutoSize = True
+        Me.Label637.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label637.Location = New System.Drawing.Point(263, 59)
+        Me.Label637.Name = "Label637"
+        Me.Label637.Size = New System.Drawing.Size(26, 16)
+        Me.Label637.TabIndex = 258
+        Me.Label637.Text = "De"
+        '
+        'Label638
+        '
+        Me.Label638.AutoSize = True
+        Me.Label638.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label638.Location = New System.Drawing.Point(7, 59)
+        Me.Label638.Name = "Label638"
+        Me.Label638.Size = New System.Drawing.Size(160, 16)
+        Me.Label638.TabIndex = 257
+        Me.Label638.Text = "Outside diameter cylinder"
+        '
+        'Label639
+        '
+        Me.Label639.AutoSize = True
+        Me.Label639.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label639.Location = New System.Drawing.Point(395, 86)
+        Me.Label639.Name = "Label639"
+        Me.Label639.Size = New System.Drawing.Size(38, 16)
+        Me.Label639.TabIndex = 256
+        Me.Label639.Text = "[mm]"
+        '
+        'Label640
+        '
+        Me.Label640.AutoSize = True
+        Me.Label640.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label640.Location = New System.Drawing.Point(7, 86)
+        Me.Label640.Name = "Label640"
+        Me.Label640.Size = New System.Drawing.Size(228, 16)
+        Me.Label640.TabIndex = 253
+        Me.Label640.Text = "Cylinder length between tangent lines"
+        '
+        'Label641
+        '
+        Me.Label641.AutoSize = True
+        Me.Label641.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label641.Location = New System.Drawing.Point(263, 140)
+        Me.Label641.Name = "Label641"
+        Me.Label641.Size = New System.Drawing.Size(12, 16)
+        Me.Label641.TabIndex = 252
+        Me.Label641.Text = "-"
+        '
+        'Label642
+        '
+        Me.Label642.AutoSize = True
+        Me.Label642.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label642.Location = New System.Drawing.Point(7, 140)
+        Me.Label642.Name = "Label642"
+        Me.Label642.Size = New System.Drawing.Size(128, 16)
+        Me.Label642.TabIndex = 251
+        Me.Label642.Text = "Circularity tolerance "
+        '
+        'TextBox211
+        '
+        Me.TextBox211.Enabled = False
+        Me.TextBox211.Location = New System.Drawing.Point(301, 55)
+        Me.TextBox211.Name = "TextBox211"
+        Me.TextBox211.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox211.TabIndex = 275
+        Me.TextBox211.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox212
+        '
+        Me.TextBox212.Enabled = False
+        Me.TextBox212.Location = New System.Drawing.Point(301, 80)
+        Me.TextBox212.Name = "TextBox212"
+        Me.TextBox212.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox212.TabIndex = 276
+        Me.TextBox212.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox213
+        '
+        Me.TextBox213.Enabled = False
+        Me.TextBox213.Location = New System.Drawing.Point(301, 107)
+        Me.TextBox213.Name = "TextBox213"
+        Me.TextBox213.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox213.TabIndex = 277
+        Me.TextBox213.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox214
+        '
+        Me.TextBox214.Enabled = False
+        Me.TextBox214.Location = New System.Drawing.Point(301, 135)
+        Me.TextBox214.Name = "TextBox214"
+        Me.TextBox214.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox214.TabIndex = 278
+        Me.TextBox214.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox215
+        '
+        Me.TextBox215.Enabled = False
+        Me.TextBox215.Location = New System.Drawing.Point(301, 163)
+        Me.TextBox215.Name = "TextBox215"
+        Me.TextBox215.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox215.TabIndex = 279
+        Me.TextBox215.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(959, 722)
+        Me.ClientSize = New System.Drawing.Size(959, 765)
         Me.Controls.Add(Me.TabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
@@ -12085,6 +12392,10 @@ Partial Class Form1
         CType(Me.NumericUpDown51, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NumericUpDown52, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PictureBox18, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage14.ResumeLayout(False)
+        Me.TabPage14.PerformLayout
+        Me.GroupBox42.ResumeLayout(False)
+        Me.GroupBox42.PerformLayout
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout
         Me.GroupBox34.ResumeLayout(False)
@@ -12191,8 +12502,7 @@ Partial Class Form1
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout
-        Me.TabPage14.ResumeLayout(False)
-        Me.TabPage14.PerformLayout
+        CType(Me.PictureBox19, System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(False)
 
     End Sub
@@ -13186,4 +13496,30 @@ Partial Class Form1
     Friend WithEvents Label623 As Label
     Friend WithEvents TextBox209 As TextBox
     Friend WithEvents Label624 As Label
+    Friend WithEvents Button16 As Button
+    Friend WithEvents PictureBox19 As PictureBox
+    Friend WithEvents TextBox215 As TextBox
+    Friend WithEvents TextBox214 As TextBox
+    Friend WithEvents TextBox213 As TextBox
+    Friend WithEvents TextBox212 As TextBox
+    Friend WithEvents TextBox211 As TextBox
+    Friend WithEvents Label625 As Label
+    Friend WithEvents Label626 As Label
+    Friend WithEvents Label627 As Label
+    Friend WithEvents Label628 As Label
+    Friend WithEvents Label629 As Label
+    Friend WithEvents Label630 As Label
+    Friend WithEvents Label631 As Label
+    Friend WithEvents Label632 As Label
+    Friend WithEvents Label633 As Label
+    Friend WithEvents TextBox210 As TextBox
+    Friend WithEvents Label634 As Label
+    Friend WithEvents Label635 As Label
+    Friend WithEvents Label636 As Label
+    Friend WithEvents Label637 As Label
+    Friend WithEvents Label638 As Label
+    Friend WithEvents Label639 As Label
+    Friend WithEvents Label640 As Label
+    Friend WithEvents Label641 As Label
+    Friend WithEvents Label642 As Label
 End Class

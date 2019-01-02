@@ -2197,8 +2197,6 @@ Public Class Form1
         Dim A_stif As Double    'the cross-sectional area of stiffener; 
         Dim stif_h As Double    'Stiffener height
         Dim stif_w As Double    'Stiffener width
-
-
         Dim ea As Double   'shell wall thickness
 
         '--- get data ----
@@ -2256,13 +2254,13 @@ Public Class Form1
 
         Am = (R_shell ^ 2 / Rs ^ 2) * A_stif            '(8.5.3-17) 
 
-        γ = Am * (1 - _ν / 2)                            '(8.5.3-16)
+        γ = Am * (1 - _ν / 2)                           '(8.5.3-16)
         γ /= (Am + wi * ea) * (1 + B)
 
         Py = σe * ea / (R_shell * (1 - γ * G))          '(8.5.3-15) 
 
         '----- calculate Pm according 8.5.2.2 ------
-        Z = PI * R_shell / L_uns                            '(8.5.2-7) 
+        Z = PI * R_shell / L_uns                         '(8.5.2-7) 
 
         '---------- Find the smallest Pm ----------
         Dim Pm_small As Double = 9999
@@ -2330,5 +2328,59 @@ Public Class Form1
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click, TabPage13.Enter, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown50.ValueChanged, NumericUpDown49.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown55.ValueChanged, NumericUpDown54.ValueChanged, NumericUpDown53.ValueChanged
         Calc_Cylinder_vacuum_853()
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        '8.5.3.6 Design of light stiffeners 
+        Calc_Light_Stiffeners_8536()
+    End Sub
+    Private Sub Calc_Light_Stiffeners_8536()
+
+        Dim ea As Double   'shell wall thickness
+        Dim De As Double     'Outside diameter shell
+        Dim Ls As Double  'unsupported length of the shell
+        Dim Lh As Double    'Is the distance between heavy stiffeners, see Table 8.5-1; 
+        Dim Le As Double    'is the effective length of shell acting with a light stiffener, see Equation (8.5.3-34)
+        Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
+        Dim Rs As Double    'radius of the centroid of the stiffener cross-section
+        Dim Pg As Double    'theoretical elastic instability pressure of a stiffener on a cylinder
+        Dim β As Double     'Formula (8.5.3-25) 
+        Dim n As Double     'number of circumferential waves for a stiffened cylinder
+        Dim Ie As Double    'second moment of area of the composite cross-section 
+        Dim Iss As Double   'second moment of area of the stiffener cross-section 
+        Dim Ass As Double   'cross-sectional area of stiffener
+        Dim Ae As Double    'cross-sectional area of stiffener and effective length of shell, see Equation (8.5.3-30)
+        Dim λ As Double  'parameter depending on stiffener location, see Equations (8.5.3-28) and (8.5.3-29)
+
+
+        '--- get data ----
+        De = NumericUpDown51.Value      'OD shell
+        R_shell = De / 2
+
+        '----- formula's ----
+        Pg = E * ea * β / R_shell       '(8.5.3-24) 
+        Pg += (n ^ 2 - 1) * E * Ie / (R_shell ^ 3 * Ls)
+
+        β = n ^ 2 - 1 + 0.5 * (PI * R_shell / Lh) ^ 2   '(8.5.3-25)
+        β *= n ^ 2 * (Lh / PI * R_shell) ^ 2 + 1
+
+        Ie = ea ^ 3 * Le / 3        '(8.5.3-26) 
+        Ie += Iss
+        Ie += Ass * (ea / 2 * λ * (R_shell - Rs))
+        Ie /= Ae
+
+        '------ External stiffeners ---
+        λ = -1                      '(8.5.3-29) 
+        Ae = Ass + ea * Le          '(8.5.3-30) 
+        Le = 9999
+
+
+        '--------- present results--------
+        'TextBox183.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
+        'TextBox187.Text = σe.ToString("0.0")            '[N/mm]
+
+        '---------- Check-----
+        'TextBox197.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
+
     End Sub
 End Class
