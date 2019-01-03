@@ -23,7 +23,7 @@ Public Class Form1
     Public _deb As Double       'Outside diameter nozzle fitted in shell
     Public _dib As Double       'Inside diameter nozzle fitted in shell
     Public _eb As Double        'Effective thickness nozzle thickness
-    Public _Elasticity As Double 'Modulus of elasticity 
+    Public _E As Double         'Modulus of elasticity 
     Dim separators() As String = {";"}
 
     '----------- directory's-----------
@@ -170,7 +170,7 @@ Public Class Form1
 
         If _deb >= _De Then       'Nozzle dia can not be bigger then shell
             _deb = _De
-            NumericUpDown14.Value = _deb
+            NumericUpDown14.Value = CDec(_deb)
         End If
 
         nozzle_wall = NumericUpDown12.Value
@@ -197,7 +197,7 @@ Public Class Form1
         a = _deb / 2                                'equation 9.5-90 (page 107)
         ris = (_De / 2) - eas                       'equation 9.5-91
         lso = Sqrt(((_De - 2 * eas) + ecs) * ecs)   'equation 9.5-92
-        ls_min = IIf(lso < ls, lso, ls)             'equation 9.5-93
+        ls_min = CDbl(IIf(lso < ls, lso, ls))             'equation 9.5-93
         Aps = ris * (ls_min + a)                    'equation 9.5-94
 
         '--------------- formula 9.5-7 (page 99) --------------------
@@ -221,7 +221,7 @@ Public Class Form1
         '----- 9.4.8 Minimum Distance between nozle and shell butt-weld
         Ln1 = 0.5 * _deb + 2 * nozzle_wall      'Equation 9.4-4 (page 90)
         Ln2 = 0.5 * _deb + 40
-        Ln = IIf(Ln1 > Ln2, Ln1, Ln2)           'Find biggest
+        Ln = CDbl(IIf(Ln1 > Ln2, Ln1, Ln2))           'Find biggest
         TextBox164.Text = Ln1.ToString("0")     'Distance [mm2]
         TextBox168.Text = Ln2.ToString("0")     'Distance [mm2]
 
@@ -230,7 +230,7 @@ Public Class Form1
         '-------- Figure 9.7-5          
         W_min1 = 0.2 * Sqrt((2 * _Di * 0.5 + ecs) * ecs)    'equation 9.7-5
         W_min2 = 3 * eas                                    'equation 9.7-5
-        W_min = IIf(W_min1 > W_min2, W_min1, W_min2)        'Find biggest
+        W_min = CDbl(IIf(W_min1 > W_min2, W_min1, W_min2))        'Find biggest
 
         '----- present--------
         TextBox163.Text = _Di.ToString("0")     'Shell Inside Diameter
@@ -249,8 +249,8 @@ Public Class Form1
         TextBox20.Text = Ln.ToString("0")
         TextBox169.Text = qz.ToString("0")
         '----------- checks--------
-        TextBox16.BackColor = IIf(eq_left < eq_right, Color.Red, Color.LightGreen)
-        TextBox169.BackColor = IIf(qz > ls, Color.Red, Color.LightGreen)
+        TextBox16.BackColor = CType(IIf(eq_left < eq_right, Color.Red, Color.LightGreen), Color)
+        TextBox169.BackColor = CType(IIf(qz > ls, Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged, ComboBox5.SelectedIndexChanged, CheckBox2.CheckedChanged
@@ -285,21 +285,21 @@ Public Class Form1
             temp = NumericUpDown5.Value
             Select Case True
                 Case 50 >= temp
-                    NumericUpDown10.Value = y50
+                    NumericUpDown10.Value = CDec(y50)
                 Case 100 >= temp
-                    NumericUpDown10.Value = y100
+                    NumericUpDown10.Value = CDec(y100)
                 Case 150 >= temp
-                    NumericUpDown10.Value = y150
+                    NumericUpDown10.Value = CDec(y150)
                 Case 200 >= temp
-                    NumericUpDown10.Value = y200
+                    NumericUpDown10.Value = CDec(y200)
                 Case 250 >= temp
-                    NumericUpDown10.Value = y250
+                    NumericUpDown10.Value = CDec(y250)
                 Case 300 >= temp
-                    NumericUpDown10.Value = y300
+                    NumericUpDown10.Value = CDec(y300)
                 Case 350 >= temp
-                    NumericUpDown10.Value = y350
+                    NumericUpDown10.Value = CDec(y350)
                 Case 400 >= temp
-                    NumericUpDown10.Value = y400
+                    NumericUpDown10.Value = CDec(y400)
                 Case temp > 400
                     MessageBox.Show("Problem temp too high")
             End Select
@@ -311,9 +311,15 @@ Public Class Form1
             words = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
             TextBox4.Text = sf.ToString                 'Safety factor
-            NumericUpDown7.Value = NumericUpDown10.Value / sf
-            If CheckBox1.Checked Then NumericUpDown7.Value *= 0.9   'PED cat IV
-            If CheckBox2.Checked Then NumericUpDown7.Value *= 1.5   'EN 14460 (Shock resistant)
+            NumericUpDown7.Value = CDec(NumericUpDown10.Value / sf)
+            If CheckBox1.Checked Then
+                temp = NumericUpDown7.Value * 0.9
+                NumericUpDown7.Value = CDec(temp)
+            End If
+            If CheckBox2.Checked Then
+                temp = NumericUpDown7.Value * 1.5
+                NumericUpDown7.Value = CDec(temp)   'EN 14460 (Shock resistant)
+            End If
             _fs = NumericUpDown7.Value                  'allowable stress
             _fym = NumericUpDown10.Value * 1.5          'sigma02*1.5
             _f02 = NumericUpDown10.Value                'Yield 0.2%
@@ -323,11 +329,11 @@ Public Class Form1
             TextBox140.Text = _fym.ToString("0")        'Max allowed bend+membrane
 
             If String.Equals(TextBox182.Text, "cs") Then
-                _Elasticity = (213.16 - 6.92 * temp / 10 ^ 2 - 1.824 / 10 ^ 5 * temp ^ 2) * 1000
+                _E = (213.16 - 6.92 * temp / 10 ^ 2 - 1.824 / 10 ^ 5 * temp ^ 2) * 1000
             Else
-                _Elasticity = (201.66 - 8.48 * temp / 10 ^ 2) * 1000
+                _E = (201.66 - 8.48 * temp / 10 ^ 2) * 1000
             End If
-            TextBox178.Text = _Elasticity.ToString("0") 'Max allowed bend+membrane
+            TextBox178.Text = _E.ToString("0") 'Max allowed bend+membrane
             TextBox209.Text = _ν.ToString("0.0")        'Poissons rate for steel
         End If
     End Sub
@@ -364,8 +370,8 @@ Public Class Form1
         TextBox8.Text = (Pmax * 10).ToString("0.00") '[Bar]
 
         '---------- Check-----
-        TextBox5.BackColor = IIf(valid_check > 0.16, Color.Red, Color.LightGreen)
-        TextBox8.BackColor = IIf(Pmax < _P, Color.Red, Color.LightGreen)
+        TextBox5.BackColor = CType(IIf(valid_check > 0.16, Color.Red, Color.LightGreen), Color)
+        TextBox8.BackColor = CType(IIf(Pmax < _P, Color.Red, Color.LightGreen), Color)
     End Sub
     'Chapter 15.5 rectangle shell
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
@@ -469,15 +475,15 @@ Public Class Form1
         TextBox38.Text = σTBC.ToString("0.0")   'Bend
 
         '---- check '(eq 15.5.3-2)---
-        TextBox26.BackColor = IIf(σTA > 1.5 * _f02, Color.Red, Color.LightGreen)
-        TextBox27.BackColor = IIf(σTB > 1.5 * _f02, Color.Red, Color.LightGreen)
-        TextBox36.BackColor = IIf(σTC > 1.5 * _f02, Color.Red, Color.LightGreen)
-        TextBox37.BackColor = IIf(σTD > 1.5 * _f02, Color.Red, Color.LightGreen)
-        TextBox38.BackColor = IIf(σTBC > 1.5 * _f02, Color.Red, Color.LightGreen)
+        TextBox26.BackColor = CType(IIf(σTA > 1.5 * _f02, Color.Red, Color.LightGreen), Color)
+        TextBox27.BackColor = CType(IIf(σTB > 1.5 * _f02, Color.Red, Color.LightGreen), Color)
+        TextBox36.BackColor = CType(IIf(σTC > 1.5 * _f02, Color.Red, Color.LightGreen), Color)
+        TextBox37.BackColor = CType(IIf(σTD > 1.5 * _f02, Color.Red, Color.LightGreen), Color)
+        TextBox38.BackColor = CType(IIf(σTBC > 1.5 * _f02, Color.Red, Color.LightGreen), Color)
 
         '----- vessel size
-        TextBox40.Text = (L + a) * 2.ToString("0.0")
-        TextBox41.Text = (L1 + a) * 2.ToString("0.0")
+        TextBox40.Text = CType((L + a) * CDbl(2.ToString("0.0")), String)
+        TextBox41.Text = CType((L1 + a) * CDbl(2.ToString("0.0")), String)
 
     End Sub
     Private Sub Calc_rect_reinforced_15_6_2()
@@ -536,7 +542,7 @@ Public Class Form1
         '----------- Shear load one side ------------------
         Q1 = _P * br * h_longe / 2 'Side Load 1 (15.6.2.3-2)
         Q2 = _P * br * H_shorte / 2 'Side Load 2 (15.6.2.3-2)   
-        Q = IIf(Q1 > Q2, Q1, Q2)    'Find biggest Shear load
+        Q = CDbl(IIf(Q1 > Q2, Q1, Q2))    'Find biggest Shear load
 
         τw = Q * area_rib * j / (I_11 * bcw)    'Stress weld (15.6.2.2-1)
 
@@ -581,10 +587,10 @@ Public Class Form1
         TextBox113.Text = j.ToString("0.0")
         TextBox114.Text = I_11.ToString("0")
         TextBox115.Text = bcw.ToString("0.00")
-        TextBox124.Text = Q1 / 1000.ToString("0")
-        TextBox125.Text = Q2 / 1000.ToString("0")
+        TextBox124.Text = CType(Q1 / CDbl(1000.ToString("0")), String)
+        TextBox125.Text = CType(Q2 / CDbl(1000.ToString("0")), String)
 
-        TextBox116.Text = Q / 1000.ToString("0")
+        TextBox116.Text = CType(Q / CDbl(1000.ToString("0")), String)
         TextBox117.Text = τw.ToString("0")
         TextBox122.Text = I2_rib.ToString("0")
         TextBox123.Text = I2_wall.ToString("0")
@@ -607,12 +613,12 @@ Public Class Form1
         TextBox143.Text = τ_short.ToString("0.0")
 
         '----------- check -------------
-        TextBox117.BackColor = IIf(τw > _f02, Color.Red, Color.LightGreen)
-        TextBox126.BackColor = IIf(τr > _f02, Color.Red, Color.LightGreen)
-        TextBox128.BackColor = IIf(rib_stab > 10 * ε, Color.Red, Color.LightGreen)
+        TextBox117.BackColor = CType(IIf(τw > _f02, Color.Red, Color.LightGreen), Color)
+        TextBox126.BackColor = CType(IIf(τr > _f02, Color.Red, Color.LightGreen), Color)
+        TextBox128.BackColor = CType(IIf(rib_stab > 10 * ε, Color.Red, Color.LightGreen), Color)
 
-        TextBox142.BackColor = IIf(τ_long > _f02, Color.Red, Color.LightGreen)
-        TextBox143.BackColor = IIf(τ_short > _f02, Color.Red, Color.LightGreen)
+        TextBox142.BackColor = CType(IIf(τ_long > _f02, Color.Red, Color.LightGreen), Color)
+        TextBox143.BackColor = CType(IIf(τ_short > _f02, Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub Calc_rect_unreinforced_15_6_4()
@@ -631,8 +637,8 @@ Public Class Form1
 
         σm = (_P * h_long * H_short) / (2 * e_wall * (h_long + H_short))  '(15.6.4-1)
 
-        b = IIf(H_short < h_long, H_short, h_long)  'Shorter one
-        g = IIf(H_short > h_long, H_short, h_long)  'Longer one
+        b = CDbl(IIf(H_short < h_long, H_short, h_long))  'Shorter one
+        g = CDbl(IIf(H_short > h_long, H_short, h_long))  'Longer one
         ratio = g / b               'Ratio edge length
 
         Select Case True
@@ -660,10 +666,10 @@ Public Class Form1
         TextBox121.Text = ratio.ToString("0.00")
 
         '----------- check -------------
-        Label370.BackColor = IIf(NumericUpDown37.Value > NumericUpDown36.Value, Color.Red, Color.LightGreen)
+        Label370.BackColor = CType(IIf(NumericUpDown37.Value > NumericUpDown36.Value, Color.Red, Color.LightGreen), Color)
 
-        TextBox118.BackColor = IIf(σm > _fs, Color.Red, Color.LightGreen)
-        TextBox119.BackColor = IIf(((σm + σb) > 1.5 * _f02), Color.Red, Color.LightGreen)
+        TextBox118.BackColor = CType(IIf(σm > _fs, Color.Red, Color.LightGreen), Color)
+        TextBox119.BackColor = CType(IIf(((σm + σb) > 1.5 * _f02), Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub Calc_rect_reinforced_15_6_5()
@@ -751,13 +757,13 @@ Public Class Form1
         TextBox159.Text = c_fibre.ToString("0.0")
 
         '----------- check -------------
-        TextBox150.BackColor = IIf(σmD > _f02, Color.Red, Color.LightGreen)
-        TextBox151.BackColor = IIf(σmA > _f02, Color.Red, Color.LightGreen)
+        TextBox150.BackColor = CType(IIf(σmD > _f02, Color.Red, Color.LightGreen), Color)
+        TextBox151.BackColor = CType(IIf(σmA > _f02, Color.Red, Color.LightGreen), Color)
 
-        TextBox155.BackColor = IIf(σbA > _f02 * 1.5, Color.Red, Color.LightGreen)
-        TextBox156.BackColor = IIf(σbB > _f02 * 1.5, Color.Red, Color.LightGreen)
-        TextBox157.BackColor = IIf(σbC > _f02 * 1.5, Color.Red, Color.LightGreen)
-        TextBox158.BackColor = IIf(σbD > _f02 * 1.5, Color.Red, Color.LightGreen)
+        TextBox155.BackColor = CType(IIf(σbA > _f02 * 1.5, Color.Red, Color.LightGreen), Color)
+        TextBox156.BackColor = CType(IIf(σbB > _f02 * 1.5, Color.Red, Color.LightGreen), Color)
+        TextBox157.BackColor = CType(IIf(σbC > _f02 * 1.5, Color.Red, Color.LightGreen), Color)
+        TextBox158.BackColor = CType(IIf(σbD > _f02 * 1.5, Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click, NumericUpDown3.ValueChanged, NumericUpDown2.ValueChanged, GroupBox11.Enter, ComboBox3.SelectedIndexChanged
@@ -818,10 +824,10 @@ Public Class Form1
         TextBox52.Text = β.ToString("0.0")
 
         'Checks
-        TextBox48.BackColor = IIf(E_kloepper > Wall, Color.Red, Color.LightGreen)
+        TextBox48.BackColor = CType(IIf(E_kloepper > Wall, Color.Red, Color.LightGreen), Color)
 
     End Sub
-    Private Function Calc_kloepper_beta()
+    Private Function Calc_kloepper_beta() As Double
         '7.5.3.5 Formulae for calculation of factor E
         Dim k_e, k_Di, k_De, k_R, k_rr, k_N As Double
         Dim X, Y, Z, β, β006, β01, β02 As Double
@@ -889,7 +895,7 @@ Public Class Form1
         C1a = 0.40825 * A1 * (Di + es) / Di          '(10.4-4) 
         C1b = 0.299 * (1 + 1.7 * es / Di)
 
-        C1 = IIf(C1a > C1b, C1a, C1b)   'Find biggest
+        C1 = CDbl(IIf(C1a > C1b, C1a, C1b))   'Find biggest
 
         '-----------Calc C2 method 10.4-5 ---------- 
 
@@ -955,7 +961,7 @@ Public Class Form1
 
         E_flat1 = C1 * Di * Sqrt(_P / _fs)
         E_flat2 = C2 * Di * Sqrt(_P / _fs)
-        E_flat = IIf(E_flat1 > E_flat2, E_flat1, E_flat2)   'The biggest
+        E_flat = CDbl(IIf(E_flat1 > E_flat2, E_flat1, E_flat2))   'The biggest
 
         TextBox56.Text = _P.ToString("0.00")
         TextBox55.Text = (_P * 10).ToString("0.0")
@@ -978,8 +984,8 @@ Public Class Form1
         TextBox61.Text = (_P / _fs).ToString("0.000")
 
         'Checks
-        TextBox57.BackColor = IIf(C1 > 0.29 And C1 < 0.42, Color.LightGreen, Color.Red)
-        TextBox54.BackColor = IIf(C2 >= 0.3 And C2 < 1.0, Color.LightGreen, Color.Red)
+        TextBox57.BackColor = CType(IIf(C1 > 0.29 And C1 < 0.42, Color.LightGreen, Color.Red), Color)
+        TextBox54.BackColor = CType(IIf(C2 >= 0.3 And C2 < 1.0, Color.LightGreen, Color.Red), Color)
 
     End Sub
 
@@ -1034,15 +1040,17 @@ Public Class Form1
 
         If (ComboBox4.SelectedIndex > -1) Then          'Prevent exceptions
             words = gaskets(ComboBox4.SelectedIndex).Split(separators, StringSplitOptions.None)
-            Double.TryParse(words(1), NumericUpDown30.Value)    'Gasket factor m
-            Double.TryParse(words(2), NumericUpDown31.Value)    'Gasket seat pressure y
+            Double.TryParse(words(1), temp)    'Gasket factor m
+            NumericUpDown30.Value = CDec(temp)
+            Double.TryParse(words(2), temp)    'Gasket seat pressure y
+            NumericUpDown31.Value = CDec(temp)
         End If
 
         If (ComboBox6.SelectedIndex > -1) Then          'Prevent exceptions
             words = Bolt(ComboBox6.SelectedIndex + 1).Split(separators, StringSplitOptions.None)
 
             Double.TryParse(words(1), temp)    'Bolt stress
-            NumericUpDown27.Value = temp / 3
+            NumericUpDown27.Value = CDec(temp / 3)
         End If
 
         A = NumericUpDown34.Value           'OD Flange 
@@ -1077,7 +1085,7 @@ Public Class Form1
 
         AB_min1 = Wa / fB
         AB_min2 = Wop / fB
-        AB_min = IIf(AB_min1 < AB_min2, AB_min2, AB_min1)   'Take biggest
+        AB_min = CDbl(IIf(AB_min1 < AB_min2, AB_min2, AB_min1))   'Take biggest
 
         '---- dia bolt---
         Dia_bolt = Sqrt((AB_min / n) * 4 / PI)
@@ -1156,11 +1164,11 @@ Public Class Form1
         TextBox103.Text = δb.ToString("0")       '[mm] Distance bolts
 
         '-------------- checks --------------------
-        NumericUpDown28.BackColor = IIf(C <= B, Color.Red, Color.Yellow)    'Bolt diameter
-        NumericUpDown34.BackColor = IIf(A <= C, Color.Red, Color.Yellow)    'Flange OD
-        NumericUpDown24.BackColor = IIf(w_ > (A - B) / 2, Color.Red, Color.Yellow)    'Gasket width
-        NumericUpDown26.BackColor = IIf(Dia_bolt > db, Color.Red, Color.Yellow)    'Bolt dia
-        TextBox102.BackColor = IIf(σθ > _fs, Color.Red, Color.Yellow)    'Flange stress
+        NumericUpDown28.BackColor = CType(IIf(C <= B, Color.Red, Color.Yellow), Color)    'Bolt diameter
+        NumericUpDown34.BackColor = CType(IIf(A <= C, Color.Red, Color.Yellow), Color)    'Flange OD
+        NumericUpDown24.BackColor = CType(IIf(w_ > (A - B) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
+        NumericUpDown26.BackColor = CType(IIf(Dia_bolt > db, Color.Red, Color.Yellow), Color)    'Bolt dia
+        TextBox102.BackColor = CType(IIf(σθ > _fs, Color.Red, Color.Yellow), Color)    'Flange stress
     End Sub
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
         Form2.Show()
@@ -1703,7 +1711,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
-        print_15_6()
+        Print_15_6()
     End Sub
     Private Sub Print_15_6()
         Dim oWord As Word.Application ' = Nothing
@@ -2036,7 +2044,7 @@ Public Class Form1
         TextBox161.Text = (pmaxx * 10).ToString("0.00") '[MPa]-->[Bar]
 
         '---------- Check-----
-        TextBox161.BackColor = IIf(pmaxx < _P, Color.Red, Color.LightGreen)
+        TextBox161.BackColor = CType(IIf(pmaxx < _P, Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
@@ -2111,7 +2119,7 @@ Public Class Form1
             '--- calculate ε ----
             ε = Calc_ε(i, Z, R_shell, ea, _ν) '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-            Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
+            Pm = _E * ea * ε / R_shell         '(8.5.2-5)
             If Pm < Pm_small Then
                 Pm_small = Pm
                 ncyl = i
@@ -2121,7 +2129,7 @@ Public Class Form1
         '--- now return to the smalles found case ----
         ε = Calc_ε(ncyl, Z, R_shell, ea, _ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-        Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
+        Pm = _E * ea * ε / R_shell         '(8.5.2-5)
 
         '---------------------------
 
@@ -2146,16 +2154,16 @@ Public Class Form1
         TextBox173.Text = Z.ToString("0.0")             '[-]
         TextBox174.Text = ε.ToString("0.00000")         '[-]
         TextBox175.Text = _ν.ToString("0.0")            '[-]
-        TextBox177.Text = _Elasticity.ToString("0")     '[-]
+        TextBox177.Text = _E.ToString("0")     '[-]
         TextBox179.Text = ncyl.ToString("0")            '[-]
         TextBox176.Text = x.ToString("0.0")             '[-]Pm/Py
         TextBox180.Text = PrPy.ToString("0.00")         '[-]Pr/Py
         TextBox181.Text = (Pr * 10).ToString("0.00")    '[MPa]-->[Bar]
 
         '---------- Check-----
-        TextBox166.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
-        TextBox172.BackColor = IIf(Pm < _P, Color.Red, Color.LightGreen)
-        TextBox181.BackColor = IIf(Pr / S < _P, Color.Red, Color.LightGreen)
+        TextBox166.BackColor = CType(IIf(Py < _P, Color.Red, Color.LightGreen), Color)
+        TextBox172.BackColor = CType(IIf(Pm < _P, Color.Red, Color.LightGreen), Color)
+        TextBox181.BackColor = CType(IIf(Pr / S < _P, Color.Red, Color.LightGreen), Color)
     End Sub
     Private Function Calc_ε(ncyl As Double, Z As Double, R_shell As Double, ea As Double, ν As Double) As Double
         'Chapter External pressure 8.5
@@ -2231,7 +2239,7 @@ Public Class Form1
 
         '---- Figure 8.5-6 — Cylinder with light stiffeners -------
         L_uns = L2s - stif_w            'see Figure 8.5-8 
-        Ls = (L1s + L2s) / 2            '(8.5.3-7)
+        Ls = (L2s + L2s) / 2            '(8.5.3-7)
         Lh = Lcyl + (0.4 * h) * 2       '(8.5.2-10) 
 
 
@@ -2269,7 +2277,7 @@ Public Class Form1
             '--- calculate ε ----
             ε = Calc_ε(i, Z, R_shell, ea, _ν) '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-            Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
+            Pm = _E * ea * ε / R_shell         '(8.5.2-5)
             If Pm < Pm_small Then
                 Pm_small = Pm
                 ncyl = i
@@ -2279,7 +2287,7 @@ Public Class Form1
         '--- now return to the smalles found case ----
         ε = Calc_ε(ncyl, Z, R_shell, ea, _ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-        Pm = _Elasticity * ea * ε / R_shell         '(8.5.2-5)
+        Pm = _E * ea * ε / R_shell         '(8.5.2-5)
 
         '-----------Figure 8.5-5 — Values of Pr/Py versus Pm/Py ----------------
         x = Pm / Py
@@ -2296,7 +2304,7 @@ Public Class Form1
         TextBox187.Text = σe.ToString("0.0")            '[N/mm]
         TextBox188.Text = L_uns.ToString("0")           '[mm]
         'TextBox184.Text = Tolerance.ToString("0.00")   '[-]
-        TextBox185.Text = _Elasticity.ToString("0")     '[-]
+        TextBox185.Text = _E.ToString("0")     '[-]
         TextBox186.Text = _ν.ToString("0.0")             '[-]
         TextBox182.Text = S.ToString("0.0")             '[-]
         TextBox189.Text = N.ToString("0.00")            '[-]
@@ -2321,9 +2329,9 @@ Public Class Form1
         TextBox208.Text = (Pm * 10).ToString("0.00")    '[MPa]-->[Bar]
 
         '---------- Check-----
-        TextBox197.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
-        TextBox208.BackColor = IIf(Pm < _P, Color.Red, Color.LightGreen)
-        TextBox201.BackColor = IIf(Pr / S < _P, Color.Red, Color.LightGreen)
+        TextBox197.BackColor = CType(IIf(Py < _P, Color.Red, Color.LightGreen), Color)
+        TextBox208.BackColor = CType(IIf(Pm < _P, Color.Red, Color.LightGreen), Color)
+        TextBox201.BackColor = CType(IIf(Pr / S < _P, Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click, TabPage13.Enter, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown50.ValueChanged, NumericUpDown49.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown55.ValueChanged, NumericUpDown54.ValueChanged, NumericUpDown53.ValueChanged
@@ -2338,8 +2346,8 @@ Public Class Form1
 
         Dim ea As Double    'shell wall thickness
         Dim De As Double    'Outside diameter shell
-        Dim Ls As Double    'unsupported length of the shell
-        Dim Lh As Double    'Is the distance between heavy stiffeners, see Table 8.5-1; 
+        Dim Ls As Double    'unsupported length of the shell (8.5.3-7)
+        Dim Lh As Double    'Is the distance between heavy stiffeners, see Table (8.5.3-10) 
         Dim Le As Double    'is the effective length of shell acting with a light stiffener, see Equation (8.5.3-34)
         Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
         Dim Rs As Double    'radius of the centroid of the stiffener cross-section
@@ -2348,14 +2356,22 @@ Public Class Form1
         Dim n As Double     'number of circumferential waves for a stiffened cylinder
         Dim Ie As Double    'second moment of area of the composite cross-section 
         Dim Iss As Double   'second moment of area of the stiffener cross-section 
-        Dim Ass As Double   'cross-sectional area of stiffener
+        Dim As_ As Double   'cross-sectional area of stiffener
         Dim Ae As Double    'cross-sectional area of stiffener and effective length of shell, see Equation (8.5.3-30)
         Dim λ As Double     'parameter depending on stiffener location, see Equations (8.5.3-28) and (8.5.3-29)
         Dim rh, rw As Double
         Dim x As Double
         Dim y1, y2, y3 As Double 'Formula (8.5.3.6.3)
+        Dim Lcyl As Double
+        Dim L1s As Double
+        Dim L2s As Double   'Distance light stiff - light stiff
+        Dim u As Double
+        Dim Xe As Double
 
         '--- get data ----
+        Lcyl = NumericUpDown52.Value    'Cylinder length
+        L1s = NumericUpDown49.Value     'Distance rib to weld
+        L2s = NumericUpDown53.Value     'Distance rib to rib
         De = NumericUpDown51.Value      'OD shell
         rh = NumericUpDown55.Value      'Rib height
         rw = NumericUpDown54.Value      'Rib width
@@ -2363,51 +2379,119 @@ Public Class Form1
 
         R_shell = De / 2
         Double.TryParse(TextBox196.Text, Rs)
-        Double.TryParse(TextBox190.Text, Ass)
-        'Double.TryParse(TextBox190.Text, rh)
-        'Double.TryParse(TextBox190.Text, rw)
+        Double.TryParse(TextBox190.Text, As_)
+        Double.TryParse(TextBox198.Text, Ls)    '(8.5.3-7)
+        Double.TryParse(TextBox199.Text, Lh)    '(8.5.3-10)
 
-        '----8.5.3.6.3 Determination of Le ----
-        x = n ^ 2 * (ea / R_shell)  '(8.5.3-35) 
+        '---- Determine u --------
+        u = (Ls / R_shell) / Sqrt(ea / R_shell)    '(8.5.3-36) 
 
-        Le = y1 * Sqrt(ea / R_shell)        '(8.5.3-34)
-        Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
-        Le *= R_shell
+        Select Case (True)
+            Case (u <= 1)
+                y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
+                y2 = 0
+                y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
+            Case (u > 1) And (u <= 2.2)
+                y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
+                y2 = u - 1
+                y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
+            Case (u > 2.2) And (u <= 2.9)
+                y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
+                y2 = 1.2
+                y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
+            Case (u > 2.9) And (u <= 4.1)
+                y1 = 1.2 + 1.642 / u
+                y2 = 1.2
+                y3 = 0.75 + (1 / u)
+            Case (u > 4.1) And (u <= 5)
+                y1 = 1.556 + 0.183 / u
+                y2 = 1.2
+                y3 = 0.75 + (1 / u)
+            Case (u > 5)
+                y1 = 1.556 + 0.183 / u
+                y2 = 1.2
+                y3 = 0.65 + (1.5 / u)
+        End Select
+
+        '------Iss is the second moment of area of the stiffener cross-section 
+        'about the axis passing through the centroid Parallel to the cylinder axis;
+        ' for stability calculation 
+
+        Iss = rh * rw ^ 3 / 12  '[mm4]
 
 
-        '------ External stiffeners ---
-        λ = -1                      '(8.5.3-29) 
-        Ae = Ass + ea * Le          '(8.5.3-30) 
-        Le = 9999
+        '======== for n=2 to 6 calculate=========
+        TextBox232.Clear()
+        For i = 2 To 6
 
+            n = i
+            '----8.5.3.6.3 Determination of Le ----
+            x = n ^ 2 * (ea / R_shell)          '(8.5.3-35) 
 
-        Pg = E * ea * β / R_shell       '(8.5.3-24) 
-        Pg += (n ^ 2 - 1) * E * Ie / (R_shell ^ 3 * Ls)
+            If ((ea / R_shell) <= 0.0346 And (ea / R_shell) >= 0.001095) Then
+                Le = y1 * Sqrt(ea / R_shell)        '(8.5.3-34)
+                Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
+                Le *= R_shell
+            Else
+                Le = y1 * Sqrt(0.346)               '(8.5.3-34)
+                Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
+                Le *= R_shell
+            End If
 
-        β = n ^ 2 - 1 + 0.5 * (PI * R_shell / Lh) ^ 2   '(8.5.3-25)
-        β *= n ^ 2 * (Lh / PI * R_shell) ^ 2 + 1
+            '------ External stiffeners ---
+            λ = -1                      '(8.5.3-29) External stiff
+            Ae = As_ + ea * Le          '(8.5.3-30) 
 
-        Ie = ea ^ 3 * Le / 3        '(8.5.3-26) 
-        Ie += Iss
-        Ie += Ass * (ea / 2 * λ * (R_shell - Rs))
-        Ie /= Ae
+            β = n ^ 2 - 1 + 0.5 * (PI * R_shell / Lh) ^ 2   '(8.5.3-25)
+            β *= (n ^ 2 * (Lh / PI * R_shell) ^ 2 + 1) ^ 2
+            β ^= -1
 
+            Xe = 0.5 * ea ^ 2 * Le
+            Xe += As_ * (ea / 2 + λ * (R_shell - Rs))
+            Xe /= Ae
 
+            Ie = ea ^ 3 * Le / 3        '(8.5.3-26) 
+            Ie += Iss
+            Ie += As_ * (ea / 2 * λ * (R_shell - Rs)) ^ 2
+            Ie -= Ae * Xe ^ 2
 
+            Pg = _E * ea * β / R_shell       '(8.5.3-24) 
+            Pg += (n ^ 2 - 1) * _E * Ie / (R_shell ^ 3 * Ls)
+
+            TextBox232.Text &= "n= " & n.ToString & ", Pn= " & Pg.ToString & vbCrLf
+
+        Next
 
         '--------- present results--------
         TextBox210.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox211.Text = De.ToString("0.0")            'Diameter[mm]
-        'TextBox212.Text = De.ToString("0.0")            'Diameter[mm]
-        'TextBox213.Text = Lcyl.ToString("0.0")            'Diameter[mm]
-        'TextBox214.Text = De.ToString("0.0")            'Diameter[mm]
         TextBox215.Text = ea.ToString("0.0")            'Diameter[mm]
-        TextBox216.Text = Ass.ToString("0.0")
+        TextBox216.Text = As_.ToString("0.0")
         TextBox217.Text = Rs.ToString("0.0")
         TextBox218.Text = Ie.ToString("0.0")
+
+        TextBox214.Text = β.ToString("0.000000")
+        TextBox219.Text = L1s.ToString("0")
+        TextBox220.Text = L2s.ToString("0")
+
+        TextBox221.Text = rh.ToString("0.0")
+        TextBox222.Text = rw.ToString("0.0")
+        TextBox223.Text = (Pg * 10).ToString("0.00")  '[Mpa]-->[bar]
+        TextBox224.Text = Le.ToString("0.0")
+        TextBox225.Text = u.ToString("0.00")
+
+        TextBox226.Text = y1.ToString("0.000")
+        TextBox227.Text = y2.ToString("0.000")
+        TextBox228.Text = y3.ToString("0.000")
+        TextBox229.Text = (ea / R_shell).ToString("0.0000")
+        TextBox230.Text = Ls.ToString("0")
+        TextBox231.Text = Lh.ToString("0")
+        TextBox233.Text = Iss.ToString("0") '[mm]
+        TextBox234.Text = Xe.ToString("0.00")
 
         '---------- Check-----
         'TextBox197.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
 
     End Sub
+
 End Class
