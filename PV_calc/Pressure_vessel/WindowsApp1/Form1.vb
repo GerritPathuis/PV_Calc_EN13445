@@ -2072,7 +2072,7 @@ Public Class Form1
         Dim Py As Double    'pressure at which mean circumferential stress yields
         Dim Pm As Double    'theoretical elastic instability pressure for collapse of a perfect cylindrical
         Dim L As Double     'unsupported length of the shell
-        Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
+        Dim R_ As Double 'mean radius of a cylindrical or spherical shell
         Dim ε As Double     'mean elastic circumferential strain at collapse, see 8.5.2.2
         Dim ncyl As Double  'number of circumferential waves for an unstiffened part of a cylinder, see 8.5.2.2; 
         Dim Z As Double     'Formula (8.5.2-7) 
@@ -2087,7 +2087,7 @@ Public Class Form1
         Lcon = NumericUpDown46.Value    'Cone length
         ea = NumericUpDown48.Value      'Shell wall thickness
         α = NumericUpDown57.Value       'Half apex cone
-        R_shell = De / 2                'Radius shell
+        R_ = De / 2                'Radius shell
 
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
@@ -2108,18 +2108,18 @@ Public Class Form1
         End If
 
         '--- pressure at which mean circumferential stress yields
-        Py = σe * ea / R_shell            '(8.5.2-4) 
+        Py = σe * ea / R_            '(8.5.2-4) 
 
-        Z = PI * R_shell / L      '(8.5.2-7) 
+        Z = PI * R_ / L      '(8.5.2-7) 
 
         '---------- Find the smallest Pm ----------
         Dim Pm_small As Double = 9999
 
         For i = 2 To 20
             '--- calculate ε ----
-            ε = Calc_ε(i, Z, R_shell, ea, _ν) '(8.5.2-6) 
+            ε = Calc_ε(i, Z, R_, ea, _ν) '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-            Pm = _E * ea * ε / R_shell         '(8.5.2-5)
+            Pm = _E * ea * ε / R_         '(8.5.2-5)
             If Pm < Pm_small Then
                 Pm_small = Pm
                 ncyl = i
@@ -2127,9 +2127,9 @@ Public Class Form1
         Next
 
         '--- now return to the smalles found case ----
-        ε = Calc_ε(ncyl, Z, R_shell, ea, _ν) '(8.5.2-6) 
+        ε = Calc_ε(ncyl, Z, R_, ea, _ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-        Pm = _E * ea * ε / R_shell         '(8.5.2-5)
+        Pm = _E * ea * ε / R_         '(8.5.2-5)
 
         '---------------------------
 
@@ -2165,11 +2165,11 @@ Public Class Form1
         TextBox172.BackColor = CType(IIf(Pm < _P, Color.Red, Color.LightGreen), Color)
         TextBox181.BackColor = CType(IIf(Pr / S < _P, Color.Red, Color.LightGreen), Color)
     End Sub
-    Private Function Calc_ε(ncyl As Double, Z As Double, R_shell As Double, ea As Double, ν As Double) As Double
+    Private Function Calc_ε(ncyl As Double, Z As Double, R_ As Double, ea As Double, ν As Double) As Double
         'Chapter External pressure 8.5
         Dim ε As Double
         ε = (ncyl ^ 2 - 1 + Z ^ 2) ^ 2      'Formula(8.5.2-6) 
-        ε *= ea ^ 2 / (12 * R_shell ^ 2 * (1 - ν ^ 2))
+        ε *= ea ^ 2 / (12 * R_ ^ 2 * (1 - ν ^ 2))
         ε += 1 / (ncyl ^ 2 / Z ^ 2 + 1) ^ 2
         ε *= 1 / (ncyl ^ 2 - 1 + Z ^ 2 / 2)
         Return (ε)
@@ -2185,7 +2185,7 @@ Public Class Form1
         Dim L1s As Double   'Light stiffener distance to weld
         Dim L2s As Double   'Light stiffener distance to next light stiffener
         Dim Ls, Lh As Double  'unsupported length of the shell
-        Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
+        Dim R_ As Double 'mean radius of a cylindrical or spherical shell
         Dim Rs As Double    'radius of the centroid of the stiffener cross-section
         Dim G As Double     'parameter in the interstiffener collapse calculation, see Equation (8.5.3-22); 
         Dim γ As Double     'parameter design of stiffeners, see Equations (8.5.3-16)
@@ -2214,7 +2214,7 @@ Public Class Form1
         L1s = NumericUpDown49.Value     'Light stiffener to weld
         L2s = NumericUpDown53.Value     'Light stiffener-stiffener distance
         ea = NumericUpDown47.Value      'Shell wall thickness
-        R_shell = De / 2                'Radius cylindrical shell
+        R_ = De / 2                'Radius cylindrical shell
 
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
@@ -2229,7 +2229,7 @@ Public Class Form1
         stif_h = NumericUpDown55.Value
         stif_w = NumericUpDown54.Value
         A_stif = stif_h * stif_w
-        Rs = R_shell + stif_h
+        Rs = R_ + stif_h
 
         'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
         wi = stif_w
@@ -2243,9 +2243,9 @@ Public Class Form1
         Lh = Lcyl + (0.4 * h) * 2       '(8.5.2-10) 
 
 
-        δ = 1.28 / (Sqrt(R_shell * ea)) '(8.5.3-20) 
+        δ = 1.28 / (Sqrt(R_ * ea)) '(8.5.3-20) 
 
-        If L_uns > 3 * Sqrt(R_shell * ea) Then
+        If L_uns > 3 * Sqrt(R_ * ea) Then
             G = 0
         Else
             G = (Sinh(δ * L_uns / 2) * Cos(δ * L_uns / 2))      '(8.5.3-22) 
@@ -2260,24 +2260,24 @@ Public Class Form1
 
         B = 2 * ea * N / (δ * (Am + w * ea))            '(8.5.3-18) 
 
-        Am = (R_shell ^ 2 / Rs ^ 2) * A_stif            '(8.5.3-17) 
+        Am = (R_ ^ 2 / Rs ^ 2) * A_stif            '(8.5.3-17) 
 
         γ = Am * (1 - _ν / 2)                           '(8.5.3-16)
         γ /= (Am + wi * ea) * (1 + B)
 
-        Py = σe * ea / (R_shell * (1 - γ * G))          '(8.5.3-15) 
+        Py = σe * ea / (R_ * (1 - γ * G))          '(8.5.3-15) 
 
         '----- calculate Pm according 8.5.2.2 ------
-        Z = PI * R_shell / L_uns                         '(8.5.2-7) 
+        Z = PI * R_ / L_uns                         '(8.5.2-7) 
 
         '---------- Find the smallest Pm ----------
         Dim Pm_small As Double = 9999
 
         For i = 2 To 20
             '--- calculate ε ----
-            ε = Calc_ε(i, Z, R_shell, ea, _ν) '(8.5.2-6) 
+            ε = Calc_ε(i, Z, R_, ea, _ν) '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-            Pm = _E * ea * ε / R_shell         '(8.5.2-5)
+            Pm = _E * ea * ε / R_         '(8.5.2-5)
             If Pm < Pm_small Then
                 Pm_small = Pm
                 ncyl = i
@@ -2285,9 +2285,9 @@ Public Class Form1
         Next
 
         '--- now return to the smalles found case ----
-        ε = Calc_ε(ncyl, Z, R_shell, ea, _ν) '(8.5.2-6) 
+        ε = Calc_ε(ncyl, Z, R_, ea, _ν) '(8.5.2-6) 
         '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-        Pm = _E * ea * ε / R_shell         '(8.5.2-5)
+        Pm = _E * ea * ε / R_         '(8.5.2-5)
 
         '-----------Figure 8.5-5 — Values of Pr/Py versus Pm/Py ----------------
         x = Pm / Py
@@ -2343,13 +2343,13 @@ Public Class Form1
         Calc_Light_Stiffeners_8536()
     End Sub
     Private Sub Calc_Light_Stiffeners_8536()
-
         Dim ea As Double    'shell wall thickness
         Dim De As Double    'Outside diameter shell
         Dim Ls As Double    'unsupported length of the shell (8.5.3-7)
         Dim Lh As Double    'Is the distance between heavy stiffeners, see Table (8.5.3-10) 
         Dim Le As Double    'is the effective length of shell acting with a light stiffener, see Equation (8.5.3-34)
-        Dim R_shell As Double 'mean radius of a cylindrical or spherical shell
+        Dim h As Double     'Dished head [mm]
+        Dim R_ As Double    'radius of a cylindrical or spherical shell
         Dim Rs As Double    'radius of the centroid of the stiffener cross-section
         Dim Pg As Double    'theoretical elastic instability pressure of a stiffener on a cylinder
         Dim β As Double     'Formula (8.5.3-25) 
@@ -2359,17 +2359,19 @@ Public Class Form1
         Dim As_ As Double   'cross-sectional area of stiffener
         Dim Ae As Double    'cross-sectional area of stiffener and effective length of shell, see Equation (8.5.3-30)
         Dim λ As Double     'parameter depending on stiffener location, see Equations (8.5.3-28) and (8.5.3-29)
-        Dim rh, rw As Double
-        Dim x As Double
+        Dim rh, rw As Double    'Rib dimensions
+        Dim x As Double     'Formula  (8.5.3-35) 
         Dim y1, y2, y3 As Double 'Formula (8.5.3.6.3)
-        Dim Lcyl As Double
-        Dim L1s As Double
+        Dim Lcyl As Double  'Cylinder length
+        Dim L1s As Double   'Distance light stiff - weld
         Dim L2s As Double   'Distance light stiff - light stiff
-        Dim u As Double
+        Dim u As Double     'Formula '(8.5.3-36)
         Dim Xe As Double
+
 
         '--- get data ----
         Lcyl = NumericUpDown52.Value    'Cylinder length
+        h = NumericUpDown50.Value       'Dished head length
         L1s = NumericUpDown49.Value     'Distance rib to weld
         L2s = NumericUpDown53.Value     'Distance rib to rib
         De = NumericUpDown51.Value      'OD shell
@@ -2377,14 +2379,14 @@ Public Class Form1
         rw = NumericUpDown54.Value      'Rib width
         ea = NumericUpDown47.Value      'shell wall thickness
 
-        R_shell = De / 2
+        R_ = De / 2
         Double.TryParse(TextBox196.Text, Rs)
         Double.TryParse(TextBox190.Text, As_)
         Double.TryParse(TextBox198.Text, Ls)    '(8.5.3-7)
         Double.TryParse(TextBox199.Text, Lh)    '(8.5.3-10)
 
         '---- Determine u --------
-        u = (Ls / R_shell) / Sqrt(ea / R_shell)    '(8.5.3-36) 
+        u = (Ls / R_) / Sqrt(ea / R_)    '(8.5.3-36) 
 
         Select Case (True)
             Case (u <= 1)
@@ -2416,47 +2418,46 @@ Public Class Form1
         '------Iss is the second moment of area of the stiffener cross-section 
         'about the axis passing through the centroid Parallel to the cylinder axis;
         ' for stability calculation 
-
         Iss = rh * rw ^ 3 / 12  '[mm4]
-
 
         '======== for n=2 to 6 calculate=========
         TextBox232.Clear()
+
         For i = 2 To 6
 
             n = i
             '----8.5.3.6.3 Determination of Le ----
-            x = n ^ 2 * (ea / R_shell)          '(8.5.3-35) 
+            x = n ^ 2 * (ea / R_)          '(8.5.3-35) 
 
-            If ((ea / R_shell) <= 0.0346 And (ea / R_shell) >= 0.001095) Then
-                Le = y1 * Sqrt(ea / R_shell)        '(8.5.3-34)
+            If ((ea / R_) <= 0.0346 And (ea / R_) >= 0.001095) Then
+                Le = y1 * Sqrt(ea / R_)        '(8.5.3-34)
                 Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
-                Le *= R_shell
+                Le *= R_
             Else
                 Le = y1 * Sqrt(0.346)               '(8.5.3-34)
                 Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
-                Le *= R_shell
+                Le *= R_
             End If
 
             '------ External stiffeners ---
-            λ = -1                      '(8.5.3-29) External stiff
-            Ae = As_ + ea * Le          '(8.5.3-30) 
+            λ = -1                          '(8.5.3-29) External stiff
+            Ae = As_ + ea * Le              '(8.5.3-30) 
 
-            β = n ^ 2 - 1 + 0.5 * (PI * R_shell / Lh) ^ 2   '(8.5.3-25)
-            β *= (n ^ 2 * (Lh / PI * R_shell) ^ 2 + 1) ^ 2
+            β = n ^ 2 - 1 + 0.5 * (PI * R_ / Lh) ^ 2   '(8.5.3-25)
+            β *= (n ^ 2 * (Lh / PI * R_) ^ 2 + 1) ^ 2
             β ^= -1
 
-            Xe = 0.5 * ea ^ 2 * Le
-            Xe += As_ * (ea / 2 + λ * (R_shell - Rs))
+            Xe = 0.5 * ea ^ 2 * Le          '(8.5.3-27)
+            Xe += As_ * (ea / 2 + λ * (R_ - Rs))
             Xe /= Ae
 
-            Ie = ea ^ 3 * Le / 3        '(8.5.3-26) 
+            Ie = ea ^ 3 * Le / 3            '(8.5.3-26) 
             Ie += Iss
-            Ie += As_ * (ea / 2 * λ * (R_shell - Rs)) ^ 2
+            Ie += As_ * (ea / 2 * λ * (R_ - Rs)) ^ 2
             Ie -= Ae * Xe ^ 2
 
-            Pg = _E * ea * β / R_shell       '(8.5.3-24) 
-            Pg += (n ^ 2 - 1) * _E * Ie / (R_shell ^ 3 * Ls)
+            Pg = _E * ea * β / R_       '(8.5.3-24) 
+            Pg += (n ^ 2 - 1) * _E * Ie / (R_ ^ 3 * Ls)
 
             TextBox232.Text &= "n= " & n.ToString & ", Pn= " & Pg.ToString & vbCrLf
 
@@ -2470,6 +2471,8 @@ Public Class Form1
         TextBox217.Text = Rs.ToString("0.0")
         TextBox218.Text = Ie.ToString("0.0")
 
+        TextBox212.Text = Lcyl.ToString("0")
+        TextBox213.Text = h.ToString("0")
         TextBox214.Text = β.ToString("0.000000")
         TextBox219.Text = L1s.ToString("0")
         TextBox220.Text = L2s.ToString("0")
@@ -2483,14 +2486,14 @@ Public Class Form1
         TextBox226.Text = y1.ToString("0.000")
         TextBox227.Text = y2.ToString("0.000")
         TextBox228.Text = y3.ToString("0.000")
-        TextBox229.Text = (ea / R_shell).ToString("0.0000")
+        TextBox229.Text = (ea / R_).ToString("0.0000")
         TextBox230.Text = Ls.ToString("0")
         TextBox231.Text = Lh.ToString("0")
         TextBox233.Text = Iss.ToString("0") '[mm]
         TextBox234.Text = Xe.ToString("0.00")
 
         '---------- Check-----
-        'TextBox197.BackColor = IIf(Py < _P, Color.Red, Color.LightGreen)
+        TextBox223.BackColor = CType(IIf(Pg < _P, Color.Red, Color.LightGreen), Color)
 
     End Sub
 
