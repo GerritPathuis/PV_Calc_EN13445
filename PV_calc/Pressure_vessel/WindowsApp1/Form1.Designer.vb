@@ -444,6 +444,8 @@ Partial Class Form1
         Me.TabPage14 = New System.Windows.Forms.TabPage()
         Me.TextBox232 = New System.Windows.Forms.TextBox()
         Me.GroupBox44 = New System.Windows.Forms.GroupBox()
+        Me.TextBox200 = New System.Windows.Forms.TextBox()
+        Me.Label596 = New System.Windows.Forms.Label()
         Me.TextBox234 = New System.Windows.Forms.TextBox()
         Me.Label687 = New System.Windows.Forms.Label()
         Me.Label688 = New System.Windows.Forms.Label()
@@ -1103,8 +1105,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label596 = New System.Windows.Forms.Label()
-        Me.TextBox200 = New System.Windows.Forms.TextBox()
+        Me.GroupBox45 = New System.Windows.Forms.GroupBox()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1239,6 +1240,7 @@ Partial Class Form1
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage5.SuspendLayout
+        Me.GroupBox45.SuspendLayout
         Me.SuspendLayout
         '
         'TabControl1
@@ -4444,7 +4446,7 @@ Partial Class Form1
         Me.NumericUpDown53.ImeMode = System.Windows.Forms.ImeMode.Off
         Me.NumericUpDown53.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDown53.Location = New System.Drawing.Point(305, 49)
-        Me.NumericUpDown53.Maximum = New Decimal(New Integer() {2000, 0, 0, 0})
+        Me.NumericUpDown53.Maximum = New Decimal(New Integer() {4000, 0, 0, 0})
         Me.NumericUpDown53.Minimum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.NumericUpDown53.Name = "NumericUpDown53"
         Me.NumericUpDown53.Size = New System.Drawing.Size(85, 22)
@@ -5854,7 +5856,7 @@ Partial Class Form1
         '
         'TabPage14
         '
-        Me.TabPage14.Controls.Add(Me.TextBox232)
+        Me.TabPage14.Controls.Add(Me.GroupBox45)
         Me.TabPage14.Controls.Add(Me.GroupBox44)
         Me.TabPage14.Controls.Add(Me.PictureBox19)
         Me.TabPage14.Controls.Add(Me.Button16)
@@ -5871,10 +5873,12 @@ Partial Class Form1
         '
         'TextBox232
         '
-        Me.TextBox232.Location = New System.Drawing.Point(566, 278)
+        Me.TextBox232.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox232.Location = New System.Drawing.Point(3, 18)
         Me.TextBox232.Multiline = True
         Me.TextBox232.Name = "TextBox232"
-        Me.TextBox232.Size = New System.Drawing.Size(318, 226)
+        Me.TextBox232.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox232.Size = New System.Drawing.Size(442, 187)
         Me.TextBox232.TabIndex = 155
         '
         'GroupBox44
@@ -5954,6 +5958,25 @@ Partial Class Form1
         Me.GroupBox44.TabIndex = 154
         Me.GroupBox44.TabStop = False
         Me.GroupBox44.Text = "Figure 8.5-6 — Cylinder with light stiffeners "
+        '
+        'TextBox200
+        '
+        Me.TextBox200.Enabled = False
+        Me.TextBox200.Location = New System.Drawing.Point(227, 405)
+        Me.TextBox200.Name = "TextBox200"
+        Me.TextBox200.Size = New System.Drawing.Size(37, 22)
+        Me.TextBox200.TabIndex = 329
+        Me.TextBox200.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label596
+        '
+        Me.Label596.AutoSize = True
+        Me.Label596.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label596.Location = New System.Drawing.Point(205, 408)
+        Me.Label596.Name = "Label596"
+        Me.Label596.Size = New System.Drawing.Size(15, 16)
+        Me.Label596.TabIndex = 328
+        Me.Label596.Text = "n"
         '
         'TextBox234
         '
@@ -6238,6 +6261,7 @@ Partial Class Form1
         '
         'TextBox224
         '
+        Me.TextBox224.BackColor = System.Drawing.Color.Yellow
         Me.TextBox224.Enabled = False
         Me.TextBox224.Location = New System.Drawing.Point(301, 351)
         Me.TextBox224.Name = "TextBox224"
@@ -13079,24 +13103,15 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Label596
+        'GroupBox45
         '
-        Me.Label596.AutoSize = True
-        Me.Label596.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label596.Location = New System.Drawing.Point(205, 408)
-        Me.Label596.Name = "Label596"
-        Me.Label596.Size = New System.Drawing.Size(15, 16)
-        Me.Label596.TabIndex = 328
-        Me.Label596.Text = "n"
-        '
-        'TextBox200
-        '
-        Me.TextBox200.Enabled = False
-        Me.TextBox200.Location = New System.Drawing.Point(227, 405)
-        Me.TextBox200.Name = "TextBox200"
-        Me.TextBox200.Size = New System.Drawing.Size(37, 22)
-        Me.TextBox200.TabIndex = 329
-        Me.TextBox200.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.GroupBox45.Controls.Add(Me.TextBox232)
+        Me.GroupBox45.Location = New System.Drawing.Point(485, 259)
+        Me.GroupBox45.Name = "GroupBox45"
+        Me.GroupBox45.Size = New System.Drawing.Size(448, 208)
+        Me.GroupBox45.TabIndex = 156
+        Me.GroupBox45.TabStop = False
+        Me.GroupBox45.Text = "8.5.3.6.4 Maximum stresses in the stiffeners"
         '
         'Form1
         '
@@ -13292,6 +13307,8 @@ Partial Class Form1
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout
+        Me.GroupBox45.ResumeLayout(False)
+        Me.GroupBox45.PerformLayout
         Me.ResumeLayout(False)
 
     End Sub
@@ -14378,4 +14395,5 @@ Partial Class Form1
     Friend WithEvents Label595 As Label
     Friend WithEvents TextBox200 As TextBox
     Friend WithEvents Label596 As Label
+    Friend WithEvents GroupBox45 As GroupBox
 End Class

@@ -2190,7 +2190,7 @@ Public Class Form1
         Dim G As Double     'parameter in the interstiffener collapse calculation, see Equation (8.5.3-22); 
         Dim γ As Double     'parameter design of stiffeners, see Equations (8.5.3-16)
         Dim δ As Double     'parameter design of stiffeners, see Equations (8.5.3-19) and (8.5.3-20);
-        Dim N As Double     'parameter interstiffener collapse calc., see Equation (8.5.3-21) and Table 8.5-2; 
+        Dim N_ As Double    'parameter interstiffener collapse calc., see Equation (8.5.3-21) and Table 8.5-2; 
         Dim wi As Double    'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
         Dim w As Double     'flange width as shown in Figure 8.5-9 b) 
         Dim Am As Double    'is the modified area of a stiffener, see Equation (8.5.3-17); 
@@ -2255,10 +2255,10 @@ Public Class Form1
         End If
 
 
-        N = Cosh(δ * L_uns) - Cos(δ * L_uns)                    '(8.5.3-21) 
-        N /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
+        N_ = Cosh(δ * L_uns) - Cos(δ * L_uns)                    '(8.5.3-21) 
+        N_ /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
 
-        B = 2 * ea * N / (δ * (Am + w * ea))            '(8.5.3-18) 
+        B = 2 * ea * N_ / (δ * (Am + w * ea))            '(8.5.3-18) 
 
         Am = (R_ ^ 2 / Rs ^ 2) * A_stif            '(8.5.3-17) 
 
@@ -2307,13 +2307,13 @@ Public Class Form1
         TextBox185.Text = _E.ToString("0")     '[-]
         TextBox186.Text = _ν.ToString("0.0")             '[-]
         TextBox182.Text = S.ToString("0.0")             '[-]
-        TextBox189.Text = N.ToString("0.00")            '[-]
+        TextBox189.Text = N_.ToString("0.00")            '[-]
         TextBox190.Text = A_stif.ToString               '[mm2]
         TextBox191.Text = Am.ToString("0")              '[mm2]modified area of a stiffener
         TextBox192.Text = G.ToString("0.00")            '[-]
         TextBox193.Text = B.ToString("0.0")             '[-]
         TextBox194.Text = γ.ToString("0.00")            '[-]
-        TextBox195.Text = δ.ToString("0.000")           '[-]
+        TextBox195.Text = δ.ToString("0.000")           '[-]'(8.5.3-20) 
         TextBox196.Text = Rs.ToString                   '[-]
         TextBox197.Text = (Py * 10).ToString("0.00")    '[bar]
         TextBox198.Text = Ls.ToString("0")              '[mm]
@@ -2368,7 +2368,7 @@ Public Class Form1
         Dim β As Double     'Formula (8.5.3-25) 
         'Dim n As Double     'number of circumferential waves for a stiffened cylinder
         Dim Ie As Double    'second moment of area of the composite cross-section 
-        Dim Iss As Double   'second moment of area of the stiffener cross-section 
+        Dim Is_ As Double   'second moment of area of the stiffener cross-section 
         Dim As_ As Double   'cross-sectional area of stiffener
         Dim Ae As Double    'cross-sectional area of stiffener and effective length of shell, see Equation (8.5.3-30)
         Dim λ As Double     'parameter depending on stiffener location, see Equations (8.5.3-28) and (8.5.3-29)
@@ -2381,6 +2381,7 @@ Public Class Form1
         Dim u As Double     'Formula '(8.5.3-36)
         Dim Xe As Double
 
+        TextBox232.Clear()
 
         '--- get data ----
         Lcyl = NumericUpDown52.Value    'Cylinder length
@@ -2414,38 +2415,35 @@ Public Class Form1
                 y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
                 y2 = 1.2
                 y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
-            Case (u > 2.9) And (u <= 4.1)
+            Case (u > 2.9) And (u < 4.1)
                 y1 = 1.2 + 1.642 / u
                 y2 = 1.2
                 y3 = 0.75 + (1 / u)
-            Case (u > 4.1) And (u <= 5)
+            Case (u >= 4.1) And (u < 5)
                 y1 = 1.556 + 0.183 / u
                 y2 = 1.2
                 y3 = 0.75 + (1 / u)
-            Case (u > 5)
+            Case (u >= 5)
                 y1 = 1.556 + 0.183 / u
                 y2 = 1.2
                 y3 = 0.65 + (1.5 / u)
         End Select
 
-        '------Iss is the second moment of area of the stiffener cross-section 
+        '------Is_ is the second moment of area of the stiffener cross-section 
         'about the axis passing through the centroid Parallel to the cylinder axis;
         ' for stability calculation 
-        Iss = rh * rw ^ 3 / 12  '[mm4]
-
-        '======== for n=2 to 6 calculate=========
-        TextBox232.Clear()
-
+        Is_ = (rh * rw ^ 3) / 12  '[mm4]
 
         '----8.5.3.6.3 Determination of Le ----
         x = n ^ 2 * (ea / R_)          '(8.5.3-35) 
 
+        '----  (8.5.3-34) ------------
         If ((ea / R_) <= 0.0346 And (ea / R_) >= 0.001095) Then
-            Le = y1 * Sqrt(ea / R_)        '(8.5.3-34)
+            Le = y1 * Sqrt(ea / R_)
             Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
             Le *= R_
         Else
-            Le = y1 * Sqrt(0.346)               '(8.5.3-34)
+            Le = y1 * Sqrt(0.346)
             Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
             Le *= R_
         End If
@@ -2454,27 +2452,83 @@ Public Class Form1
         λ = -1                          '(8.5.3-29) External stiff
         Ae = As_ + ea * Le              '(8.5.3-30) 
 
-
         β = n ^ 2 - 1 + (0.5 * (PI * R_ / Lh) ^ 2)   '(8.5.3-25)
         β *= (n ^ 2 * (Lh / (PI * R_)) ^ 2 + 1) ^ 2
         β ^= -1
 
         Xe = 0.5 * ea ^ 2 * Le          '(8.5.3-27)
-            Xe += As_ * (ea / 2 + λ * (R_ - Rs))
+        Xe += As_ * (ea / 2 + λ * (R_ - Rs))
         Xe /= Ae
 
+
+        TextBox232.Text &= "ea=   " & vbTab & ea.ToString & vbCrLf
+        TextBox232.Text &= "Ae=   " & vbTab & Ae.ToString & vbCrLf
+        TextBox232.Text &= "Le=   " & vbTab & Le.ToString & vbCrLf
+        TextBox232.Text &= "Is=   " & vbTab & Is_.ToString & vbCrLf
+
+        TextBox232.Text &= "R_=   " & vbTab & R_.ToString & vbCrLf
+        TextBox232.Text &= "Rs=   " & vbTab & Rs.ToString & vbCrLf
+        TextBox232.Text &= "λ=   " & vbTab & λ.ToString & vbCrLf
+        TextBox232.Text &= "Xe=   " & vbTab & Xe.ToString & vbCrLf
+
         Ie = ea ^ 3 * Le / 3            '(8.5.3-26) 
-        Ie += Iss
+        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
+        Ie += Is_
+        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
         Ie += As_ * (ea / 2 * λ * (R_ - Rs)) ^ 2
+        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
         Ie -= Ae * Xe ^ 2
+        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
 
         Pg = _E * ea * β / R_       '(8.5.3-24) 
         Pg += (n ^ 2 - 1) * _E * Ie / (R_ ^ 3 * Ls)
 
+        '======================================================
+        '----- 8.5.3.6.4 Maximum stresses in the stiffeners ---
+        Dim σs As Double
+        Dim σes As Double = NumericUpDown10.Value   '(8.4.2-2)
+        Dim S As Double = 1.5
+        Dim Sf As Double = 1.5      'Equation (8.5.3-32) or (8.5.3-33);
+        Dim Pys As Double           'Equation(8.5.3-38)
+        Dim dmax, dmax1, dmax2 As Double
+        Dim Am As Double            'Equation (8.5.3-17);
+        Dim wi As Double
+        Dim δ As Double             'Equation (8.5.3-19);
+        Dim Rf As Double    'Figures 8.5-14 to 8.5-17);
+        Dim N_ As Double    'Equation (8.5.3-21) or Table 8.5-2;
+
+        '------ get data -----
+        Double.TryParse(TextBox195.Text, δ)
+        Double.TryParse(TextBox189.Text, N_)
+        Double.TryParse(TextBox191.Text, Am)
+
+        wi = rw             'Rib width
+        Rf = R_ / 2 + rh    'Vessel diameter+rib height
+
+        '-------- (8.5.3-40) ---------
+        dmax1 = λ * (R_ - Rf) - Xe + ea / 2
+        dmax2 = Xe
+        dmax = CDbl(IIf(dmax1 > dmax2, dmax1, dmax2))   'Take the biggest
+
+        '-------- (8.5.3-38)---------
+        Pys = 1 + Am / (wi * ea + 2 * N_ * ea / δ)
+        Pys *= σes * ea * Rf
+        Pys /= R_ ^ 2 * (1 - _ν / 2)
+
+        '-------- (8.5.3-37) --------
+        σs = S * Sf * (_P * σes / Pys)
+        σs += _E * dmax * 0.005 * (n ^ 2 - 1) * _P * S * Sf / (R_ * (Pg - _P * S * Sf))
+
+        TextBox232.Text &= "δ=   " & vbTab & δ.ToString & vbCrLf
+        TextBox232.Text &= "N_=   " & vbTab & N_.ToString & vbCrLf
+        TextBox232.Text &= "dmax= " & vbTab & dmax.ToString & vbCrLf
+        TextBox232.Text &= "Pys=  " & vbTab & Pys.ToString & vbCrLf
+        TextBox232.Text &= "Am=   " & vbTab & Am.ToString & vbCrLf
+        TextBox232.Text &= "Rf=   " & vbTab & Rf.ToString & vbCrLf
+        TextBox232.Text &= "σes=  " & vbTab & σes.ToString & vbCrLf
+        TextBox232.Text &= "σs=  " & vbTab & σs.ToString & vbCrLf
 
         '--------- present results--------
-        'TextBox232.Text &= "n= " & n.ToString & ", Pg= " & Pg.ToString & vbCrLf
-
         TextBox200.Text = n.ToString                    'No of waves
         TextBox210.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox211.Text = De.ToString("0.0")            'Diameter[mm]
@@ -2502,7 +2556,7 @@ Public Class Form1
         TextBox229.Text = (ea / R_).ToString("0.0000")
         TextBox230.Text = Ls.ToString("0")
         TextBox231.Text = Lh.ToString("0")
-        TextBox233.Text = Iss.ToString("0") '[mm]
+        TextBox233.Text = Is_.ToString("0") '[mm]
         TextBox234.Text = Xe.ToString("0.00")
 
         '---------- Check-----
