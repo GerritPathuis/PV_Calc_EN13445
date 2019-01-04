@@ -2340,9 +2340,22 @@ Public Class Form1
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click, TabPage14.Enter
         '8.5.3.6 Design of light stiffeners 
-        Calc_Light_Stiffeners_8536()
+        Dim pg, pg_small As Double
+        Dim n_low As Integer
+
+        'Iterate and find the smallest result
+        pg_small = 9999                 'Initial value
+        For i = 2 To 6
+            Calc_Light_Stiffeners_8536(i)
+            Double.TryParse(TextBox223.Text, pg)
+            If pg < pg_small Then
+                pg_small = pg
+                n_low = i
+            End If
+        Next
+        Calc_Light_Stiffeners_8536(n_low)
     End Sub
-    Private Sub Calc_Light_Stiffeners_8536()
+    Private Sub Calc_Light_Stiffeners_8536(n As Integer)
         Dim ea As Double    'shell wall thickness
         Dim De As Double    'Outside diameter shell
         Dim Ls As Double    'unsupported length of the shell (8.5.3-7)
@@ -2353,7 +2366,7 @@ Public Class Form1
         Dim Rs As Double    'radius of the centroid of the stiffener cross-section
         Dim Pg As Double    'theoretical elastic instability pressure of a stiffener on a cylinder
         Dim β As Double     'Formula (8.5.3-25) 
-        Dim n As Double     'number of circumferential waves for a stiffened cylinder
+        'Dim n As Double     'number of circumferential waves for a stiffened cylinder
         Dim Ie As Double    'second moment of area of the composite cross-section 
         Dim Iss As Double   'second moment of area of the stiffener cross-section 
         Dim As_ As Double   'cross-sectional area of stiffener
@@ -2423,47 +2436,46 @@ Public Class Form1
         '======== for n=2 to 6 calculate=========
         TextBox232.Clear()
 
-        For i = 2 To 6
 
-            n = i
-            '----8.5.3.6.3 Determination of Le ----
-            x = n ^ 2 * (ea / R_)          '(8.5.3-35) 
+        '----8.5.3.6.3 Determination of Le ----
+        x = n ^ 2 * (ea / R_)          '(8.5.3-35) 
 
-            If ((ea / R_) <= 0.0346 And (ea / R_) >= 0.001095) Then
-                Le = y1 * Sqrt(ea / R_)        '(8.5.3-34)
-                Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
-                Le *= R_
-            Else
-                Le = y1 * Sqrt(0.346)               '(8.5.3-34)
-                Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
-                Le *= R_
-            End If
+        If ((ea / R_) <= 0.0346 And (ea / R_) >= 0.001095) Then
+            Le = y1 * Sqrt(ea / R_)        '(8.5.3-34)
+            Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
+            Le *= R_
+        Else
+            Le = y1 * Sqrt(0.346)               '(8.5.3-34)
+            Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
+            Le *= R_
+        End If
 
-            '------ External stiffeners ---
-            λ = -1                          '(8.5.3-29) External stiff
-            Ae = As_ + ea * Le              '(8.5.3-30) 
+        '------ External stiffeners ---
+        λ = -1                          '(8.5.3-29) External stiff
+        Ae = As_ + ea * Le              '(8.5.3-30) 
 
-            β = n ^ 2 - 1 + 0.5 * (PI * R_ / Lh) ^ 2   '(8.5.3-25)
-            β *= (n ^ 2 * (Lh / PI * R_) ^ 2 + 1) ^ 2
-            β ^= -1
 
-            Xe = 0.5 * ea ^ 2 * Le          '(8.5.3-27)
+        β = n ^ 2 - 1 + (0.5 * (PI * R_ / Lh) ^ 2)   '(8.5.3-25)
+        β *= (n ^ 2 * (Lh / (PI * R_)) ^ 2 + 1) ^ 2
+        β ^= -1
+
+        Xe = 0.5 * ea ^ 2 * Le          '(8.5.3-27)
             Xe += As_ * (ea / 2 + λ * (R_ - Rs))
-            Xe /= Ae
+        Xe /= Ae
 
-            Ie = ea ^ 3 * Le / 3            '(8.5.3-26) 
-            Ie += Iss
-            Ie += As_ * (ea / 2 * λ * (R_ - Rs)) ^ 2
-            Ie -= Ae * Xe ^ 2
+        Ie = ea ^ 3 * Le / 3            '(8.5.3-26) 
+        Ie += Iss
+        Ie += As_ * (ea / 2 * λ * (R_ - Rs)) ^ 2
+        Ie -= Ae * Xe ^ 2
 
-            Pg = _E * ea * β / R_       '(8.5.3-24) 
-            Pg += (n ^ 2 - 1) * _E * Ie / (R_ ^ 3 * Ls)
+        Pg = _E * ea * β / R_       '(8.5.3-24) 
+        Pg += (n ^ 2 - 1) * _E * Ie / (R_ ^ 3 * Ls)
 
-            TextBox232.Text &= "n= " & n.ToString & ", Pn= " & Pg.ToString & vbCrLf
-
-        Next
 
         '--------- present results--------
+        'TextBox232.Text &= "n= " & n.ToString & ", Pg= " & Pg.ToString & vbCrLf
+
+        TextBox200.Text = n.ToString                    'No of waves
         TextBox210.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox211.Text = De.ToString("0.0")            'Diameter[mm]
         TextBox215.Text = ea.ToString("0.0")            'Diameter[mm]
@@ -2473,12 +2485,13 @@ Public Class Form1
 
         TextBox212.Text = Lcyl.ToString("0")
         TextBox213.Text = h.ToString("0")
-        TextBox214.Text = β.ToString("0.000000")
+        TextBox214.Text = β.ToString("F4")
         TextBox219.Text = L1s.ToString("0")
         TextBox220.Text = L2s.ToString("0")
 
         TextBox221.Text = rh.ToString("0.0")
         TextBox222.Text = rw.ToString("0.0")
+
         TextBox223.Text = (Pg * 10).ToString("0.00")  '[Mpa]-->[bar]
         TextBox224.Text = Le.ToString("0.0")
         TextBox225.Text = u.ToString("0.00")
@@ -2496,5 +2509,4 @@ Public Class Form1
         TextBox223.BackColor = CType(IIf(Pg < _P, Color.Red, Color.LightGreen), Color)
 
     End Sub
-
 End Class

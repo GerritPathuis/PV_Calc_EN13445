@@ -307,6 +307,7 @@ Partial Class Form1
         Me.Label471 = New System.Windows.Forms.Label()
         Me.PictureBox15 = New System.Windows.Forms.PictureBox()
         Me.TabPage13 = New System.Windows.Forms.TabPage()
+        Me.Label595 = New System.Windows.Forms.Label()
         Me.GroupBox41 = New System.Windows.Forms.GroupBox()
         Me.Label584 = New System.Windows.Forms.Label()
         Me.Label585 = New System.Windows.Forms.Label()
@@ -1102,7 +1103,8 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label595 = New System.Windows.Forms.Label()
+        Me.Label596 = New System.Windows.Forms.Label()
+        Me.TextBox200 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -4374,6 +4376,16 @@ Partial Class Form1
         Me.TabPage13.Text = "8.5.3 Stiffened Cylinder External pressure"
         Me.TabPage13.UseVisualStyleBackColor = True
         '
+        'Label595
+        '
+        Me.Label595.AutoSize = True
+        Me.Label595.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label595.Location = New System.Drawing.Point(486, 618)
+        Me.Label595.Name = "Label595"
+        Me.Label595.Size = New System.Drawing.Size(427, 25)
+        Me.Label595.TabIndex = 154
+        Me.Label595.Text = "See chapter 8.5.3.6 for Stiffener design"
+        '
         'GroupBox41
         '
         Me.GroupBox41.Controls.Add(Me.Label584)
@@ -5867,6 +5879,8 @@ Partial Class Form1
         '
         'GroupBox44
         '
+        Me.GroupBox44.Controls.Add(Me.TextBox200)
+        Me.GroupBox44.Controls.Add(Me.Label596)
         Me.GroupBox44.Controls.Add(Me.TextBox234)
         Me.GroupBox44.Controls.Add(Me.Label687)
         Me.GroupBox44.Controls.Add(Me.Label688)
@@ -13065,15 +13079,24 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Label595
+        'Label596
         '
-        Me.Label595.AutoSize = True
-        Me.Label595.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label595.Location = New System.Drawing.Point(486, 618)
-        Me.Label595.Name = "Label595"
-        Me.Label595.Size = New System.Drawing.Size(427, 25)
-        Me.Label595.TabIndex = 154
-        Me.Label595.Text = "See chapter 8.5.3.6 for Stiffener design"
+        Me.Label596.AutoSize = True
+        Me.Label596.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label596.Location = New System.Drawing.Point(205, 408)
+        Me.Label596.Name = "Label596"
+        Me.Label596.Size = New System.Drawing.Size(15, 16)
+        Me.Label596.TabIndex = 328
+        Me.Label596.Text = "n"
+        '
+        'TextBox200
+        '
+        Me.TextBox200.Enabled = False
+        Me.TextBox200.Location = New System.Drawing.Point(227, 405)
+        Me.TextBox200.Name = "TextBox200"
+        Me.TextBox200.Size = New System.Drawing.Size(37, 22)
+        Me.TextBox200.TabIndex = 329
+        Me.TextBox200.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Form1
         '
@@ -14353,4 +14376,6 @@ Partial Class Form1
     Friend WithEvents Label688 As Label
     Friend WithEvents Label689 As Label
     Friend WithEvents Label595 As Label
+    Friend WithEvents TextBox200 As TextBox
+    Friend WithEvents Label596 As Label
 End Class
