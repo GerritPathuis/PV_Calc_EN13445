@@ -2238,34 +2238,31 @@ Public Class Form1
         w = stif_w
 
         '---- Figure 8.5-6 — Cylinder with light stiffeners -------
-        L_uns = L2s - stif_w            'see Figure 8.5-8 
-        Ls = (L2s + L2s) / 2            '(8.5.3-7)
-        Lh = Lcyl + (0.4 * h) * 2       '(8.5.2-10) 
+        L_uns = L2s - stif_w                'see Figure 8.5-8 
+        Ls = (L2s + L2s) / 2                '(8.5.3-7)
+        Lh = Lcyl + (0.4 * h) * 2           '(8.5.2-10) 
+        δ = 1.28 / (Sqrt(R_ * ea))          '(8.5.3-20) 
 
-
-        δ = 1.28 / (Sqrt(R_ * ea)) '(8.5.3-20) 
-
-        If L_uns > 3 * Sqrt(R_ * ea) Then
+        If L_uns > 3 * Sqrt(R_ * ea) Then   '(8.5.3-22) 
             G = 0
         Else
-            G = (Sinh(δ * L_uns / 2) * Cos(δ * L_uns / 2))      '(8.5.3-22) 
+            G = (Sinh(δ * L_uns / 2) * Cos(δ * L_uns / 2))
             G += (Cosh(δ * L_uns / 2) * Sin(δ * L_uns / 2))
             G *= 2
             G /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
         End If
 
-
-        N_ = Cosh(δ * L_uns) - Cos(δ * L_uns)                    '(8.5.3-21) 
+        N_ = Cosh(δ * L_uns) - Cos(δ * L_uns)       '(8.5.3-21) 
         N_ /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
 
-        B = 2 * ea * N_ / (δ * (Am + w * ea))            '(8.5.3-18) 
+        B = 2 * ea * N_ / (δ * (Am + w * ea))       '(8.5.3-18) 
 
-        Am = (R_ ^ 2 / Rs ^ 2) * A_stif            '(8.5.3-17) 
+        Am = (R_ ^ 2 / Rs ^ 2) * A_stif             '(8.5.3-17) 
 
-        γ = Am * (1 - _ν / 2)                           '(8.5.3-16)
+        γ = Am * (1 - _ν / 2)                       '(8.5.3-16)
         γ /= (Am + wi * ea) * (1 + B)
 
-        Py = σe * ea / (R_ * (1 - γ * G))          '(8.5.3-15) 
+        Py = σe * ea / (R_ * (1 - γ * G))           '(8.5.3-15) 
 
         '----- calculate Pm according 8.5.2.2 ------
         Z = PI * R_ / L_uns                         '(8.5.2-7) 
@@ -2275,9 +2272,9 @@ Public Class Form1
 
         For i = 2 To 20
             '--- calculate ε ----
-            ε = Calc_ε(i, Z, R_, ea, _ν) '(8.5.2-6) 
+            ε = Calc_ε(i, Z, R_, ea, _ν)            '(8.5.2-6) 
             '--- theoretical elastic instability pressure for collapse of a perfect cylindrical
-            Pm = _E * ea * ε / R_         '(8.5.2-5)
+            Pm = _E * ea * ε / R_                   '(8.5.2-5)
             If Pm < Pm_small Then
                 Pm_small = Pm
                 ncyl = i
@@ -2310,7 +2307,7 @@ Public Class Form1
         TextBox189.Text = N_.ToString("0.00")            '[-]
         TextBox190.Text = A_stif.ToString               '[mm2]
         TextBox191.Text = Am.ToString("0")              '[mm2]modified area of a stiffener
-        TextBox192.Text = G.ToString("0.00")            '[-]
+        TextBox192.Text = G.ToString("0.000")           '[-]
         TextBox193.Text = B.ToString("0.0")             '[-]
         TextBox194.Text = γ.ToString("0.00")            '[-]
         TextBox195.Text = δ.ToString("0.000")           '[-]'(8.5.3-20) 
@@ -2334,15 +2331,16 @@ Public Class Form1
         TextBox201.BackColor = CType(IIf(Pr / S < _P, Color.Red, Color.LightGreen), Color)
     End Sub
 
-    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click, TabPage13.Enter, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown50.ValueChanged, NumericUpDown49.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown55.ValueChanged, NumericUpDown54.ValueChanged, NumericUpDown53.ValueChanged
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click, TabPage13.Enter, NumericUpDown52.ValueChanged, NumericUpDown51.ValueChanged, NumericUpDown50.ValueChanged, NumericUpDown49.ValueChanged, NumericUpDown47.ValueChanged, NumericUpDown53.ValueChanged
         Calc_Cylinder_vacuum_853()
     End Sub
 
-    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click, TabPage14.Enter
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click, TabPage14.Enter, NumericUpDown55.ValueChanged, NumericUpDown54.ValueChanged
         '8.5.3.6 Design of light stiffeners 
         Dim pg, pg_small As Double
         Dim n_low As Integer
 
+        Calc_Cylinder_vacuum_853()
         'Iterate and find the smallest result
         pg_small = 9999                 'Initial value
         For i = 2 To 6
@@ -2460,42 +2458,27 @@ Public Class Form1
         Xe += As_ * (ea / 2 + λ * (R_ - Rs))
         Xe /= Ae
 
-
-        TextBox232.Text &= "ea=   " & vbTab & ea.ToString & vbCrLf
-        TextBox232.Text &= "Ae=   " & vbTab & Ae.ToString & vbCrLf
-        TextBox232.Text &= "Le=   " & vbTab & Le.ToString & vbCrLf
-        TextBox232.Text &= "Is=   " & vbTab & Is_.ToString & vbCrLf
-
-        TextBox232.Text &= "R_=   " & vbTab & R_.ToString & vbCrLf
-        TextBox232.Text &= "Rs=   " & vbTab & Rs.ToString & vbCrLf
-        TextBox232.Text &= "λ=   " & vbTab & λ.ToString & vbCrLf
-        TextBox232.Text &= "Xe=   " & vbTab & Xe.ToString & vbCrLf
-
         Ie = ea ^ 3 * Le / 3            '(8.5.3-26) 
-        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
         Ie += Is_
-        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
         Ie += As_ * (ea / 2 * λ * (R_ - Rs)) ^ 2
-        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
         Ie -= Ae * Xe ^ 2
-        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
 
         Pg = _E * ea * β / R_       '(8.5.3-24) 
         Pg += (n ^ 2 - 1) * _E * Ie / (R_ ^ 3 * Ls)
 
         '======================================================
         '----- 8.5.3.6.4 Maximum stresses in the stiffeners ---
-        Dim σs As Double
         Dim σes As Double = NumericUpDown10.Value   '(8.4.2-2)
-        Dim S As Double = 1.5
-        Dim Sf As Double = 1.5      'Equation (8.5.3-32) or (8.5.3-33);
+        Dim S As Double = 1.5       'Equation(8.4.4-1) Safety factor
+        Dim Sf As Double = 1.33     'Equation (8.5.3-33)cold formed
         Dim Pys As Double           'Equation(8.5.3-38)
         Dim dmax, dmax1, dmax2 As Double
         Dim Am As Double            'Equation (8.5.3-17);
-        Dim wi As Double
+        Dim wi As Double            'Rib width
         Dim δ As Double             'Equation (8.5.3-19);
-        Dim Rf As Double    'Figures 8.5-14 to 8.5-17);
-        Dim N_ As Double    'Equation (8.5.3-21) or Table 8.5-2;
+        Dim Rf As Double            'Figures 8.5-14 to 8.5-17);
+        Dim N_ As Double            'Equation (8.5.3-21) or Table 8.5-2;
+        Dim σs As Double            'Max stress in stiffener (8.5.3-37)
 
         '------ get data -----
         Double.TryParse(TextBox195.Text, δ)
@@ -2519,12 +2502,31 @@ Public Class Form1
         σs = S * Sf * (_P * σes / Pys)
         σs += _E * dmax * 0.005 * (n ^ 2 - 1) * _P * S * Sf / (R_ * (Pg - _P * S * Sf))
 
+        TextBox232.Text &= "ea=   " & vbTab & ea.ToString & vbCrLf
+        TextBox232.Text &= "Ae=   " & vbTab & Ae.ToString & vbCrLf
+        TextBox232.Text &= "Le=   " & vbTab & Le.ToString & vbCrLf
+        TextBox232.Text &= "Is=   " & vbTab & Is_.ToString & vbCrLf
+
+        TextBox232.Text &= "R_=   " & vbTab & R_.ToString & vbCrLf
+        TextBox232.Text &= "Rs=   " & vbTab & Rs.ToString & vbCrLf
+        TextBox232.Text &= "λ=   " & vbTab & λ.ToString & vbCrLf
+        TextBox232.Text &= "Xe=   " & vbTab & Xe.ToString & vbCrLf
+        '--------------
+        TextBox232.Text &= "wi=   " & vbTab & wi.ToString & vbCrLf
+        TextBox232.Text &= "rh=   " & vbTab & rh.ToString & vbCrLf
+        TextBox232.Text &= "Rf=   " & vbTab & Rf.ToString & vbCrLf
+        TextBox232.Text &= "Ie=   " & vbTab & Ie.ToString & vbCrLf
         TextBox232.Text &= "δ=   " & vbTab & δ.ToString & vbCrLf
         TextBox232.Text &= "N_=   " & vbTab & N_.ToString & vbCrLf
+        TextBox232.Text &= "dmax1= " & vbTab & dmax1.ToString & vbCrLf
+        TextBox232.Text &= "dmax2= " & vbTab & dmax2.ToString & vbCrLf
         TextBox232.Text &= "dmax= " & vbTab & dmax.ToString & vbCrLf
-        TextBox232.Text &= "Pys=  " & vbTab & Pys.ToString & vbCrLf
         TextBox232.Text &= "Am=   " & vbTab & Am.ToString & vbCrLf
+        TextBox232.Text &= "Pys=  " & vbTab & Pys.ToString & vbCrLf
+
         TextBox232.Text &= "Rf=   " & vbTab & Rf.ToString & vbCrLf
+        TextBox232.Text &= "S=   " & vbTab & S.ToString & vbCrLf
+        TextBox232.Text &= "Sf=   " & vbTab & Sf.ToString & vbCrLf
         TextBox232.Text &= "σes=  " & vbTab & σes.ToString & vbCrLf
         TextBox232.Text &= "σs=  " & vbTab & σs.ToString & vbCrLf
 
@@ -2539,7 +2541,7 @@ Public Class Form1
 
         TextBox212.Text = Lcyl.ToString("0")
         TextBox213.Text = h.ToString("0")
-        TextBox214.Text = β.ToString("F4")
+        TextBox214.Text = β.ToString("E1")
         TextBox219.Text = L1s.ToString("0")
         TextBox220.Text = L2s.ToString("0")
 
@@ -2558,9 +2560,11 @@ Public Class Form1
         TextBox231.Text = Lh.ToString("0")
         TextBox233.Text = Is_.ToString("0") '[mm]
         TextBox234.Text = Xe.ToString("0.00")
+        TextBox235.Text = σs.ToString("0.0")
 
         '---------- Check-----
         TextBox223.BackColor = CType(IIf(Pg < _P, Color.Red, Color.LightGreen), Color)
+        TextBox235.BackColor = CType(IIf(σes < σs Or σs <= 0, Color.Red, Color.LightGreen), Color) '(8.5.3-41) 
 
     End Sub
 End Class
