@@ -4696,9 +4696,9 @@ Partial Class Form1
         Me.Label553.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label553.Location = New System.Drawing.Point(262, 23)
         Me.Label553.Name = "Label553"
-        Me.Label553.Size = New System.Drawing.Size(15, 16)
+        Me.Label553.Size = New System.Drawing.Size(22, 16)
         Me.Label553.TabIndex = 236
-        Me.Label553.Text = "L"
+        Me.Label553.Text = "L_"
         '
         'Label554
         '
@@ -6029,7 +6029,7 @@ Partial Class Form1
         Me.NumericUpDown54.Size = New System.Drawing.Size(58, 22)
         Me.NumericUpDown54.TabIndex = 284
         Me.NumericUpDown54.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown54.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.NumericUpDown54.Value = New Decimal(New Integer() {3, 0, 0, 0})
         '
         'NumericUpDown55
         '
@@ -6040,7 +6040,7 @@ Partial Class Form1
         Me.NumericUpDown55.Size = New System.Drawing.Size(49, 22)
         Me.NumericUpDown55.TabIndex = 284
         Me.NumericUpDown55.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown55.Value = New Decimal(New Integer() {80, 0, 0, 0})
+        Me.NumericUpDown55.Value = New Decimal(New Integer() {30, 0, 0, 0})
         '
         'TextBox200
         '

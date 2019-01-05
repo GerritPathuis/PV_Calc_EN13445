@@ -2181,7 +2181,7 @@ Public Class Form1
         Dim Tolerance As Double
         Dim Pr As Double    'calculated lower bound collapse pressure 
         Dim Py As Double    'pressure at which mean circumferential stress yields
-        Dim L_uns As Double 'unsupported length of the shell
+        Dim L_ As Double    'unsupported length of the shell
         Dim L1s As Double   'Light stiffener distance to weld
         Dim L2s As Double   'Light stiffener distance to next light stiffener
         Dim Ls, Lh As Double  'unsupported length of the shell
@@ -2231,7 +2231,7 @@ Public Class Form1
         '--- pressure at which mean circumferential stress yields
 
         As_ = stif_h * stif_w   'page 59
-        Rs = R_ + stif_h / 2    'is the radius of the centroid of the stiffener cross-section
+        Rs = R_ + (stif_h / 2)  'is the radius of the centroid of the stiffener cross-section
 
         'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
         wi = stif_w
@@ -2240,22 +2240,22 @@ Public Class Form1
         w = stif_w
 
         '---- Figure 8.5-6 — Cylinder with light stiffeners -------
-        L_uns = L2s - stif_w                'see Figure 8.5-8 
+        L_ = L2s - stif_w                'see Figure 8.5-8 
         Ls = (L2s + L2s) / 2                '(8.5.3-7)
         Lh = Lcyl + (0.4 * h) * 2           '(8.5.2-10) 
         δ = 1.28 / (Sqrt(R_ * ea))          '(8.5.3-20) 
 
-        If L_uns > 3 * Sqrt(R_ * ea) Then   '(8.5.3-22) 
+        If L_ > 3 * Sqrt(R_ * ea) Then   '(8.5.3-22) 
             G = 0
         Else
-            G = (Sinh(δ * L_uns / 2) * Cos(δ * L_uns / 2))
-            G += (Cosh(δ * L_uns / 2) * Sin(δ * L_uns / 2))
+            G = (Sinh(δ * L_ / 2) * Cos(δ * L_ / 2))
+            G += (Cosh(δ * L_ / 2) * Sin(δ * L_ / 2))
             G *= 2
-            G /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
+            G /= (Sinh(δ * L_) + Sin(δ * L_))
         End If
 
-        N_ = Cosh(δ * L_uns) - Cos(δ * L_uns)       '(8.5.3-21) 
-        N_ /= (Sinh(δ * L_uns) + Sin(δ * L_uns))
+        N_ = Cosh(δ * L_) - Cos(δ * L_)       '(8.5.3-21) 
+        N_ /= (Sinh(δ * L_) + Sin(δ * L_))
 
         B = 2 * ea * N_ / (δ * (Am + w * ea))       '(8.5.3-18) 
 
@@ -2267,7 +2267,7 @@ Public Class Form1
         Py = σe * ea / (R_ * (1 - γ * G))           '(8.5.3-15) 
 
         '----- calculate Pm according 8.5.2.2 ------
-        Z = PI * R_ / L_uns                         '(8.5.2-7) 
+        Z = PI * R_ / L_                         '(8.5.2-7) 
 
         '---------- Find the smallest Pm ----------
         Dim Pm_small As Double = 9999
@@ -2301,7 +2301,7 @@ Public Class Form1
         '--------- present results--------
         TextBox183.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox187.Text = σe.ToString("0.0")            '[N/mm]
-        TextBox188.Text = L_uns.ToString("0")           '[mm]
+        TextBox188.Text = L_.ToString("0")              '[mm] unsupported length
         'TextBox184.Text = Tolerance.ToString("0.00")   '[-]
         TextBox185.Text = _E.ToString("0")              '[-]
         TextBox186.Text = _ν.ToString("0.0")            '[-]
@@ -2450,7 +2450,7 @@ Public Class Form1
 
         '------ External stiffeners ---
         λ = -1                          '(8.5.3-29) External stiff
-        Ae = As_ + ea * Le              '(8.5.3-30) 
+        Ae = As_ + ea * Le              '(8.5.3-30) [mm2]
 
         β = n ^ 2 - 1 + (0.5 * (PI * R_ / Lh) ^ 2)   '(8.5.3-25)
         β *= (n ^ 2 * (Lh / (PI * R_)) ^ 2 + 1) ^ 2
@@ -2487,8 +2487,8 @@ Public Class Form1
         Double.TryParse(TextBox189.Text, N_)
         Double.TryParse(TextBox191.Text, Am)
 
-        wi = rw             'Rib width
-        Rf = R_ / 2 + rh    'Vessel diameter+rib height
+        wi = rw         'Rib width
+        Rf = R_ + rh    'Vessel radius +rib height
 
         '-------- (8.5.3-40) ---------
         dmax1 = λ * (R_ - Rf) - Xe + ea / 2
