@@ -2240,12 +2240,12 @@ Public Class Form1
         w = stif_w
 
         '---- Figure 8.5-6 — Cylinder with light stiffeners -------
-        L_ = L2s - stif_w                'see Figure 8.5-8 
+        L_ = L2s - stif_w                   'see Figure 8.5-8 
         Ls = (L2s + L2s) / 2                '(8.5.3-7)
         Lh = Lcyl + (0.4 * h) * 2           '(8.5.2-10) 
         δ = 1.28 / (Sqrt(R_ * ea))          '(8.5.3-20) 
 
-        If L_ > 3 * Sqrt(R_ * ea) Then   '(8.5.3-22) 
+        If L_ > 3 * Sqrt(R_ * ea) Then      '(8.5.3-22) 
             G = 0
         Else
             G = (Sinh(δ * L_ / 2) * Cos(δ * L_ / 2))
@@ -2355,7 +2355,7 @@ Public Class Form1
         Next
         Calc_Light_Stiffeners_8536(n_low)
     End Sub
-    Private Sub Calc_Light_Stiffeners_8536(n As Integer)
+    Private Sub Calc_Light_Stiffeners_8536(n_wave As Integer)
         Dim ea As Double    'shell wall thickness
         Dim De As Double    'Outside diameter shell
         Dim Ls As Double    'unsupported length of the shell (8.5.3-7)
@@ -2366,7 +2366,6 @@ Public Class Form1
         Dim Rs As Double    'radius of the centroid of the stiffener cross-section
         Dim Pg As Double    'theoretical elastic instability pressure of a stiffener on a cylinder
         Dim β As Double     'Formula (8.5.3-25) 
-        'Dim n As Double     'number of circumferential waves for a stiffened cylinder
         Dim Ie As Double    'second moment of area of the composite cross-section 
         Dim Is_ As Double   'second moment of area of the stiffener cross-section 
         Dim As_ As Double   'cross-sectional area of stiffener
@@ -2432,10 +2431,10 @@ Public Class Form1
         '------Is_ is the second moment of area of the stiffener cross-section 
         'about the axis passing through the centroid Parallel to the cylinder axis;
         ' for stability calculation 
-        Is_ = (rh * rw ^ 3) / 12  '[mm4]
+        Is_ = (rh * rw ^ 3) / 12        '[mm4]
 
         '----8.5.3.6.3 Determination of Le ----
-        x = n ^ 2 * (ea / R_)          '(8.5.3-35) 
+        x = n_wave ^ 2 * (ea / R_)          '(8.5.3-35) 
 
         '----  (8.5.3-34) ------------
         If ((ea / R_) <= 0.0346 And (ea / R_) >= 0.001095) Then
@@ -2452,8 +2451,8 @@ Public Class Form1
         λ = -1                          '(8.5.3-29) External stiff
         Ae = As_ + ea * Le              '(8.5.3-30) [mm2]
 
-        β = n ^ 2 - 1 + (0.5 * (PI * R_ / Lh) ^ 2)   '(8.5.3-25)
-        β *= (n ^ 2 * (Lh / (PI * R_)) ^ 2 + 1) ^ 2
+        β = n_wave ^ 2 - 1 + (0.5 * (PI * R_ / Lh) ^ 2)   '(8.5.3-25)
+        β *= (n_wave ^ 2 * (Lh / (PI * R_)) ^ 2 + 1) ^ 2
         β ^= -1
 
         Xe = 0.5 * ea ^ 2 * Le          '(8.5.3-27)
@@ -2466,7 +2465,7 @@ Public Class Form1
         Ie -= Ae * Xe ^ 2
 
         Pg = _E * ea * β / R_       '(8.5.3-24) 
-        Pg += (n ^ 2 - 1) * _E * Ie / (R_ ^ 3 * Ls)
+        Pg += (n_wave ^ 2 - 1) * _E * Ie / (R_ ^ 3 * Ls)
 
         '======================================================
         '----- 8.5.3.6.4 Maximum stresses in the stiffeners ---
@@ -2502,7 +2501,7 @@ Public Class Form1
 
         '-------- (8.5.3-37) --------
         σs = S * Sf * (_P * σes / Pys)
-        σs += _E * dmax * 0.005 * (n ^ 2 - 1) * _P * S * Sf / (R_ * (Pg - _P * S * Sf))
+        σs += _E * dmax * 0.005 * (n_wave ^ 2 - 1) * _P * S * Sf / (R_ * (Pg - _P * S * Sf))
 
         TextBox232.Text &= "ea=   " & vbTab & ea.ToString & vbCrLf
         TextBox232.Text &= "Ae=   " & vbTab & Ae.ToString & vbCrLf
@@ -2526,14 +2525,13 @@ Public Class Form1
         TextBox232.Text &= "Am=   " & vbTab & Am.ToString & vbCrLf
         TextBox232.Text &= "Pys=  " & vbTab & Pys.ToString & vbCrLf
 
-        TextBox232.Text &= "Rf=   " & vbTab & Rf.ToString & vbCrLf
         TextBox232.Text &= "S=   " & vbTab & S.ToString & vbCrLf
         TextBox232.Text &= "Sf=   " & vbTab & Sf.ToString & vbCrLf
         TextBox232.Text &= "σes=  " & vbTab & σes.ToString & vbCrLf
         TextBox232.Text &= "σs=  " & vbTab & σs.ToString & vbCrLf
 
         '--------- present results--------
-        TextBox200.Text = n.ToString                    'No of waves
+        TextBox200.Text = n_wave.ToString               'No of waves
         TextBox210.Text = (_P * 10).ToString("0.00")    '[MPa]-->[Bar]
         TextBox211.Text = De.ToString("0.0")            'Diameter[mm]
         TextBox215.Text = ea.ToString("0.0")            'Diameter[mm]
