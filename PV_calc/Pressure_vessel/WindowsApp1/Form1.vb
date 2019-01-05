@@ -2202,10 +2202,10 @@ Public Class Form1
         Dim x As Double     'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
         Dim PrPy As Double  'Figure 8.5-5 — Values of Pt/PP versus Pm/PP 
 
-        Dim A_stif As Double    'the cross-sectional area of stiffener; 
-        Dim stif_h As Double    'Stiffener height
-        Dim stif_w As Double    'Stiffener width
-        Dim ea As Double   'shell wall thickness
+        Dim As_ As Double    'the cross-sectional area of stiffener; 
+        Dim stif_h As Double 'Stiffener height
+        Dim stif_w As Double 'Stiffener width
+        Dim ea As Double     'shell wall thickness
 
         '--- get data ----
         De = NumericUpDown51.Value      'OD shell
@@ -2214,7 +2214,10 @@ Public Class Form1
         L1s = NumericUpDown49.Value     'Light stiffener to weld
         L2s = NumericUpDown53.Value     'Light stiffener-stiffener distance
         ea = NumericUpDown47.Value      'Shell wall thickness
-        R_ = De / 2                'Radius cylindrical shell
+        stif_h = NumericUpDown55.Value  'Stiffener height
+        stif_w = NumericUpDown54.Value  'Stiffener width
+        R_ = De / 2                     'Radius cylindrical shell
+
 
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
@@ -2226,10 +2229,9 @@ Public Class Form1
         End If
 
         '--- pressure at which mean circumferential stress yields
-        stif_h = NumericUpDown55.Value
-        stif_w = NumericUpDown54.Value
-        A_stif = stif_h * stif_w
-        Rs = R_ + stif_h
+
+        As_ = stif_h * stif_w   'page 59
+        Rs = R_ + stif_h / 2    'is the radius of the centroid of the stiffener cross-section
 
         'total width of stiffener i in contact with the shell, see equation (8.5.3-39) and (see Figures 8.5-14 to 8.5-17)
         wi = stif_w
@@ -2257,7 +2259,7 @@ Public Class Form1
 
         B = 2 * ea * N_ / (δ * (Am + w * ea))       '(8.5.3-18) 
 
-        Am = (R_ ^ 2 / Rs ^ 2) * A_stif             '(8.5.3-17) 
+        Am = (R_ ^ 2 / Rs ^ 2) * As_             '(8.5.3-17) 
 
         γ = Am * (1 - _ν / 2)                       '(8.5.3-16)
         γ /= (Am + wi * ea) * (1 + B)
@@ -2301,11 +2303,11 @@ Public Class Form1
         TextBox187.Text = σe.ToString("0.0")            '[N/mm]
         TextBox188.Text = L_uns.ToString("0")           '[mm]
         'TextBox184.Text = Tolerance.ToString("0.00")   '[-]
-        TextBox185.Text = _E.ToString("0")     '[-]
-        TextBox186.Text = _ν.ToString("0.0")             '[-]
+        TextBox185.Text = _E.ToString("0")              '[-]
+        TextBox186.Text = _ν.ToString("0.0")            '[-]
         TextBox182.Text = S.ToString("0.0")             '[-]
-        TextBox189.Text = N_.ToString("0.00")            '[-]
-        TextBox190.Text = A_stif.ToString               '[mm2]
+        TextBox189.Text = N_.ToString("0.00")           '[-]
+        TextBox190.Text = As_.ToString                  '[mm2]
         TextBox191.Text = Am.ToString("0")              '[mm2]modified area of a stiffener
         TextBox192.Text = G.ToString("0.000")           '[-]
         TextBox193.Text = B.ToString("0.0")             '[-]
@@ -2567,4 +2569,6 @@ Public Class Form1
         TextBox235.BackColor = CType(IIf(σes < σs Or σs <= 0, Color.Red, Color.LightGreen), Color) '(8.5.3-41) 
 
     End Sub
+
+
 End Class
