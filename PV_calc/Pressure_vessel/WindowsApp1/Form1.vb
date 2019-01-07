@@ -2352,7 +2352,7 @@ Public Class Form1
         Calc_Cylinder_vacuum_853()
         'Iterate and find the smallest result
         pg_small = 9999                 'Initial value
-        For i = 2 To 6
+        For i = 2 To 6                  '(8.5.3-41)
             Calc_Light_Stiffeners_8536(i)
             Double.TryParse(TextBox223.Text, pg)
             If pg < pg_small Then
@@ -2413,11 +2413,11 @@ Public Class Form1
                 y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
                 y2 = 0
                 y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
-            Case (u > 1) And (u <= 2.2)
+            Case (u > 1) And (u < 2.2)
                 y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
                 y2 = u - 1
                 y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
-            Case (u > 2.2) And (u <= 2.9)
+            Case (u >= 2.2) And (u <= 2.9)
                 y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
                 y2 = 1.2
                 y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
@@ -2449,7 +2449,7 @@ Public Class Form1
             Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
             Le *= R_
         Else
-            Le = y1 * Sqrt(0.346)
+            Le = y1 * Sqrt(0.0346)
             Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
             Le *= R_
         End If
@@ -2493,8 +2493,8 @@ Public Class Form1
         Double.TryParse(TextBox189.Text, N_)
         Double.TryParse(TextBox191.Text, Am)
 
-        wi = rw         'Rib width
-        Rf = R_ + rh    'Vessel radius +rib height
+        wi = rw         'Rib width (8.5.3-39)
+        Rf = R_ + rh    'Vessel radius +rib height, is the radius to the part of the stiffener furthest from the shell
 
         '-------- (8.5.3-40) ---------
         dmax1 = λ * (R_ - Rf) - Xe + ea / 2

@@ -99,6 +99,7 @@ Partial Class Form1
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox43 = New System.Windows.Forms.GroupBox()
         Me.Label643 = New System.Windows.Forms.Label()
+        Me.TextBox18 = New System.Windows.Forms.TextBox()
         Me.Label457 = New System.Windows.Forms.Label()
         Me.PictureBox14 = New System.Windows.Forms.PictureBox()
         Me.GroupBox31 = New System.Windows.Forms.GroupBox()
@@ -442,7 +443,6 @@ Partial Class Form1
         Me.Label542 = New System.Windows.Forms.Label()
         Me.PictureBox18 = New System.Windows.Forms.PictureBox()
         Me.TabPage14 = New System.Windows.Forms.TabPage()
-        Me.Label483 = New System.Windows.Forms.Label()
         Me.GroupBox45 = New System.Windows.Forms.GroupBox()
         Me.TextBox235 = New System.Windows.Forms.TextBox()
         Me.Label597 = New System.Windows.Forms.Label()
@@ -576,6 +576,7 @@ Partial Class Form1
         Me.Label80 = New System.Windows.Forms.Label()
         Me.Label74 = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Label489 = New System.Windows.Forms.Label()
         Me.Label67 = New System.Windows.Forms.Label()
         Me.Label78 = New System.Windows.Forms.Label()
         Me.TextBox17 = New System.Windows.Forms.TextBox()
@@ -1107,8 +1108,6 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label489 = New System.Windows.Forms.Label()
-        Me.TextBox18 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1248,7 +1247,6 @@ Partial Class Form1
         '
         'TabControl1
         '
-        Me.TabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage6)
@@ -1283,10 +1281,10 @@ Partial Class Form1
         Me.TabPage1.Controls.Add(Me.GroupBox1)
         Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.Label16)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 67)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage1.Size = New System.Drawing.Size(951, 694)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Material and operating conditions"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -2058,10 +2056,10 @@ Partial Class Form1
         Me.TabPage3.Controls.Add(Me.GroupBox3)
         Me.TabPage3.Controls.Add(Me.GroupBox5)
         Me.TabPage3.Controls.Add(Me.Button2)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage3.Size = New System.Drawing.Size(951, 736)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "7.4 Cylindrical Shell + 7.6 Cone "
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -2086,6 +2084,16 @@ Partial Class Form1
         Me.Label643.Size = New System.Drawing.Size(165, 20)
         Me.Label643.TabIndex = 150
         Me.Label643.Text = "Under Construction"
+        '
+        'TextBox18
+        '
+        Me.TextBox18.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.TextBox18.Location = New System.Drawing.Point(3, 51)
+        Me.TextBox18.Multiline = True
+        Me.TextBox18.Name = "TextBox18"
+        Me.TextBox18.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox18.Size = New System.Drawing.Size(490, 125)
+        Me.TextBox18.TabIndex = 156
         '
         'Label457
         '
@@ -2772,10 +2780,10 @@ Partial Class Form1
         Me.TabPage6.Controls.Add(Me.PictureBox2)
         Me.TabPage6.Controls.Add(Me.GroupBox11)
         Me.TabPage6.Controls.Add(Me.Button5)
-        Me.TabPage6.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 67)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage6.Size = New System.Drawing.Size(951, 694)
         Me.TabPage6.TabIndex = 6
         Me.TabPage6.Text = "7.5.3 Dished Head"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -3416,10 +3424,10 @@ Partial Class Form1
         Me.TabPage12.Controls.Add(Me.Button14)
         Me.TabPage12.Controls.Add(Me.GroupBox33)
         Me.TabPage12.Controls.Add(Me.PictureBox15)
-        Me.TabPage12.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage12.Location = New System.Drawing.Point(4, 67)
         Me.TabPage12.Name = "TabPage12"
         Me.TabPage12.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage12.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage12.Size = New System.Drawing.Size(951, 694)
         Me.TabPage12.TabIndex = 12
         Me.TabPage12.Text = "8.5.2 Unstiffened Cylinder External Pressure"
         Me.TabPage12.UseVisualStyleBackColor = True
@@ -4374,10 +4382,10 @@ Partial Class Form1
         Me.TabPage13.Controls.Add(Me.GroupBox38)
         Me.TabPage13.Controls.Add(Me.GroupBox37)
         Me.TabPage13.Controls.Add(Me.PictureBox18)
-        Me.TabPage13.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage13.Location = New System.Drawing.Point(4, 67)
         Me.TabPage13.Name = "TabPage13"
         Me.TabPage13.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage13.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage13.Size = New System.Drawing.Size(951, 694)
         Me.TabPage13.TabIndex = 13
         Me.TabPage13.Text = "8.5.3 Stiffened Cylinder External pressure"
         Me.TabPage13.UseVisualStyleBackColor = True
@@ -5848,30 +5856,19 @@ Partial Class Form1
         '
         'TabPage14
         '
-        Me.TabPage14.Controls.Add(Me.Label483)
         Me.TabPage14.Controls.Add(Me.GroupBox45)
         Me.TabPage14.Controls.Add(Me.GroupBox44)
         Me.TabPage14.Controls.Add(Me.PictureBox19)
         Me.TabPage14.Controls.Add(Me.Button16)
         Me.TabPage14.Controls.Add(Me.Label621)
         Me.TabPage14.Controls.Add(Me.GroupBox42)
-        Me.TabPage14.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage14.Location = New System.Drawing.Point(4, 67)
         Me.TabPage14.Name = "TabPage14"
         Me.TabPage14.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage14.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage14.Size = New System.Drawing.Size(951, 694)
         Me.TabPage14.TabIndex = 14
         Me.TabPage14.Text = "8.5.3.6 Design of light stiffeners"
         Me.TabPage14.UseVisualStyleBackColor = True
-        '
-        'Label483
-        '
-        Me.Label483.AutoSize = True
-        Me.Label483.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label483.Location = New System.Drawing.Point(483, 640)
-        Me.Label483.Name = "Label483"
-        Me.Label483.Size = New System.Drawing.Size(261, 31)
-        Me.Label483.TabIndex = 2
-        Me.Label483.Text = "Under construction"
         '
         'GroupBox45
         '
@@ -6961,10 +6958,10 @@ Partial Class Form1
         Me.TabPage4.Controls.Add(Me.GroupBox4)
         Me.TabPage4.Controls.Add(Me.Label24)
         Me.TabPage4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage4.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 46)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage4.Size = New System.Drawing.Size(951, 715)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "9.4 Set-in Nozzles NO reinforcement"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -7354,6 +7351,16 @@ Partial Class Form1
         Me.GroupBox6.TabIndex = 140
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Pressure loaded Area's [mm2] figure 9.4-9"
+        '
+        'Label489
+        '
+        Me.Label489.AutoSize = True
+        Me.Label489.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label489.Location = New System.Drawing.Point(12, 149)
+        Me.Label489.Name = "Label489"
+        Me.Label489.Size = New System.Drawing.Size(139, 16)
+        Me.Label489.TabIndex = 178
+        Me.Label489.Text = "Pressure loaded area"
         '
         'Label67
         '
@@ -7775,10 +7782,10 @@ Partial Class Form1
         Me.TabPage7.Controls.Add(Me.Button6)
         Me.TabPage7.Controls.Add(Me.PictureBox3)
         Me.TabPage7.Controls.Add(Me.GroupBox12)
-        Me.TabPage7.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage7.Location = New System.Drawing.Point(4, 67)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage7.Size = New System.Drawing.Size(951, 694)
         Me.TabPage7.TabIndex = 7
         Me.TabPage7.Text = "10.4 Flat end welded"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -7903,6 +7910,7 @@ Partial Class Form1
         Me.Button6.TabIndex = 145
         Me.Button6.Text = "Button6"
         Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.Visible = False
         '
         'PictureBox3
         '
@@ -8401,10 +8409,10 @@ Partial Class Form1
         Me.TabPage8.Controls.Add(Me.PictureBox6)
         Me.TabPage8.Controls.Add(Me.GroupBox14)
         Me.TabPage8.Controls.Add(Me.Button7)
-        Me.TabPage8.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage8.Location = New System.Drawing.Point(4, 67)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage8.Size = New System.Drawing.Size(951, 694)
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "10.5 Flat end bolted"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -8589,9 +8597,9 @@ Partial Class Form1
         'PictureBox6
         '
         Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
-        Me.PictureBox6.Location = New System.Drawing.Point(452, 6)
+        Me.PictureBox6.Location = New System.Drawing.Point(452, 11)
         Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.Size = New System.Drawing.Size(516, 274)
+        Me.PictureBox6.Size = New System.Drawing.Size(491, 274)
         Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox6.TabIndex = 146
         Me.PictureBox6.TabStop = False
@@ -8866,6 +8874,7 @@ Partial Class Form1
         Me.Button7.TabIndex = 144
         Me.Button7.Text = "Button7"
         Me.Button7.UseVisualStyleBackColor = True
+        Me.Button7.Visible = False
         '
         'TabPage9
         '
@@ -8877,10 +8886,10 @@ Partial Class Form1
         Me.TabPage9.Controls.Add(Me.GroupBox17)
         Me.TabPage9.Controls.Add(Me.Button8)
         Me.TabPage9.Controls.Add(Me.GroupBox16)
-        Me.TabPage9.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage9.Location = New System.Drawing.Point(4, 67)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage9.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage9.Size = New System.Drawing.Size(951, 694)
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "11.5 Slip-on Flanges"
         Me.TabPage9.UseVisualStyleBackColor = True
@@ -10695,10 +10704,10 @@ Partial Class Form1
         Me.TabPage2.Controls.Add(Me.GroupBox10)
         Me.TabPage2.Controls.Add(Me.GroupBox9)
         Me.TabPage2.Controls.Add(Me.PictureBox1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 67)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage2.Size = New System.Drawing.Size(951, 694)
         Me.TabPage2.TabIndex = 5
         Me.TabPage2.Text = "15.5 Unreinforced Rectangle Vessel "
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -11325,10 +11334,10 @@ Partial Class Form1
         Me.TabPage10.Controls.Add(Me.GroupBox25)
         Me.TabPage10.Controls.Add(Me.GroupBox23)
         Me.TabPage10.Controls.Add(Me.GroupBox24)
-        Me.TabPage10.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage10.Location = New System.Drawing.Point(4, 67)
         Me.TabPage10.Name = "TabPage10"
         Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage10.Size = New System.Drawing.Size(951, 694)
         Me.TabPage10.TabIndex = 10
         Me.TabPage10.Text = "15.6 Rectangle Reinforced Vessel "
         Me.TabPage10.UseVisualStyleBackColor = True
@@ -13054,10 +13063,10 @@ Partial Class Form1
         Me.TabPage11.Controls.Add(Me.PictureBox10)
         Me.TabPage11.Controls.Add(Me.Label356)
         Me.TabPage11.Controls.Add(Me.PictureBox9)
-        Me.TabPage11.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage11.Location = New System.Drawing.Point(4, 67)
         Me.TabPage11.Name = "TabPage11"
         Me.TabPage11.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage11.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage11.Size = New System.Drawing.Size(951, 694)
         Me.TabPage11.TabIndex = 11
         Me.TabPage11.Text = "15.6 figures"
         Me.TabPage11.UseVisualStyleBackColor = True
@@ -13109,10 +13118,10 @@ Partial Class Form1
         '
         Me.TabPage5.AllowDrop = True
         Me.TabPage5.Controls.Add(Me.TextBox1)
-        Me.TabPage5.Location = New System.Drawing.Point(4, 82)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 67)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(951, 679)
+        Me.TabPage5.Size = New System.Drawing.Size(951, 694)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "About"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -13129,26 +13138,6 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Label489
-        '
-        Me.Label489.AutoSize = True
-        Me.Label489.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label489.Location = New System.Drawing.Point(12, 149)
-        Me.Label489.Name = "Label489"
-        Me.Label489.Size = New System.Drawing.Size(139, 16)
-        Me.Label489.TabIndex = 178
-        Me.Label489.Text = "Pressure loaded area"
-        '
-        'TextBox18
-        '
-        Me.TextBox18.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.TextBox18.Location = New System.Drawing.Point(3, 51)
-        Me.TextBox18.Multiline = True
-        Me.TextBox18.Name = "TextBox18"
-        Me.TextBox18.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox18.Size = New System.Drawing.Size(490, 125)
-        Me.TextBox18.TabIndex = 156
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -13157,7 +13146,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "Pressure Vessel Calculation (17-12-2018) acc. EN 13445:2016"
+        Me.Text = "Pressure Vessel Calculation (07-02-2019) acc. EN 13445:2016"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout
@@ -14322,7 +14311,6 @@ Partial Class Form1
     Friend WithEvents TextBox208 As TextBox
     Friend WithEvents Label620 As Label
     Friend WithEvents TabPage14 As TabPage
-    Friend WithEvents Label483 As Label
     Friend WithEvents Label621 As Label
     Friend WithEvents GroupBox42 As GroupBox
     Friend WithEvents Label622 As Label
