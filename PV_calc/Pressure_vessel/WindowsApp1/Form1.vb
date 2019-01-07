@@ -348,8 +348,9 @@ Public Class Form1
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged, NumericUpDown16.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown42.ValueChanged
         Calc_cyl_shell742()         'Cylindrical shell
         Calc_conical_shell764()     'Conus shell
+        Calc_Junction766()          'Junction large end
     End Sub
-    '7.4.2 Cylindrical shells 
+    '7.4.2 Cylindrical shells internal pressure
     Private Sub Calc_cyl_shell742()
         Dim De, Di, Dm, ea, z_joint, e_wall, Pmax, valid_check As Double
 
@@ -2035,16 +2036,16 @@ Public Class Form1
         De = NumericUpDown15.Value  'OD
         ea = NumericUpDown16.Value  'Wall thicknes
         Di = De - 2 * ea            'ID
-        α = NumericUpDown13.Value / 180 * PI        'Half apex in rad
+        α = NumericUpDown13.Value / 180 * PI        'Half apex in radials
         Dm = (De + Di) / 2                          'Average diameter
         e_cone = NumericUpDown42.Value              'Cone wall
 
         '----------- cone wall thickness ----------
-        e_con = _P * Di / (2 * _fs * z_joint - _P)  'equation 7.6.2 Required wall thickness
+        e_con = _P * Di / (2 * _fs * z_joint - _P)  'equation (7.6-2) Required wall thickness
         e_con *= 1 / Cos(α)
 
         '---------- max pressure ---------------
-        pmaxx = 2 * _fs * z_joint * e_cone * Cos(α) / Dm   'Max pressure equation 7.6.4 
+        pmaxx = 2 * _fs * z_joint * e_cone * Cos(α) / Dm   'Max pressure equation (7.6-4) 
 
         '--------- present results--------
         TextBox145.Text = Round(e_con, 2).ToString   'required cone wall [mm]
@@ -2052,6 +2053,54 @@ Public Class Form1
 
         '---------- Check-----
         TextBox161.BackColor = CType(IIf(pmaxx < _P, Color.Red, Color.LightGreen), Color)
+    End Sub
+
+    '7.6.6 Junction between the large end of a cone and a cylinder without a knuckle
+    Private Sub Calc_Junction766()
+        Dim α As Double     'is Half apex cone
+        Dim β As Double     'is a factor defined in 7.6.6;
+        Dim Dc As Double    'diameter large end cone
+        Dim ej As Double    'is a required or analysis thickness at a junction at the large end of a cone
+        Dim ej1 As Double
+
+        Dc = NumericUpDown15.Value              'OD cone large end
+        α = NumericUpDown13.Value / 180 * PI    'Half apex in radials
+
+        'TextBox237.Clear()
+        ej = 40  'Initial thickness, Now iterate
+
+        For i = 1 To 1000
+
+            '----------- factor β ---------------------
+            β = 1 / 3 * Sqrt(Dc / ej)                '(7.6-11)
+            β *= Tan(α) / (1 + 1 / Sqrt(Cos(α)))
+            β -= 0.15
+
+            '----------- factor ej ---------------------
+            ej1 = _P * Dc * β / (2 * _fs)            '(7.6-12)
+
+            'TextBox237.Text &= "Dc=" & Dc.ToString & ", _fs=" & _fs.ToString("0.00")
+            'TextBox237.Text &= " β=" & β.ToString("0.00") & ", ej=" & ej.ToString("0.000") & ", ej1=" & ej1.ToString("0.000") & vbCrLf
+
+            If ej < ej1 Then
+                ej *= 1.03
+            Else
+                ej *= 0.97
+            End If
+            If Abs(ej - ej1) < 0.01 Then
+                i = 1000
+                TextBox18.BackColor = Color.LightGreen
+            Else
+                TextBox18.BackColor = Color.Red
+            End If
+        Next
+
+        '--------- present results--------
+        TextBox236.Text = β.ToString("0.0")     'Factor '(7.6-11)
+        TextBox18.Text = ej.ToString("0.000")    'required cone wall [mm]
+
+        '---------- Check-----
+        'TextBox161.BackColor = CType(IIf(pmaxx < _P, Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
