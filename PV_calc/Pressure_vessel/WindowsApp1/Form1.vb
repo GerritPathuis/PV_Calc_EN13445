@@ -2618,6 +2618,8 @@ Public Class Form1
         TextBox234.Text = Xe.ToString("0.00")
         TextBox235.Text = σs.ToString("0.0")
 
+        TextBox184.Text = ("0.5") 'Tolerance 0.5%
+
         '---------- Check-----
         TextBox223.BackColor = CType(IIf(Pg < _P, Color.Red, Color.LightGreen), Color)
         TextBox235.BackColor = CType(IIf(σes < σs Or σs <= 0, Color.Red, Color.LightGreen), Color) '(8.5.3-41) 
@@ -2808,7 +2810,7 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[bar]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label520.Text
-            oTable.Cell(row, 2).Range.Text = TextBox176.Text & ", " & TextBox180.Text
+            oTable.Cell(row, 2).Range.Text = TextBox176.Text & ",  " & TextBox180.Text
             oTable.Cell(row, 3).Range.Text = "[-]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label495.Text
@@ -2824,6 +2826,248 @@ Public Class Form1
             oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
+
+        Catch ex As Exception
+            MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
+
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles Button18.Click
+        'Design with Stiffeners (Vacuum operation)
+        Dim oWord As Word.Application
+
+        Dim oDoc As Word.Document
+        Dim oTable As Word.Table
+        Dim oPara1, oPara2 As Word.Paragraph
+        Dim row, font_sizze As Integer
+        Dim ufilename As String
+        ufilename = "PV_calc_" & TextBox66.Text & "_" & TextBox69.Text & "_" & TextBox70.Text & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
+
+        Try
+            oWord = New Word.Application()
+
+            'Start Word and open the document template. 
+            font_sizze = 9
+            oWord = CType(CreateObject("Word.Application"), Word.Application)
+            oWord.Visible = True
+            oDoc = oWord.Documents.Add
+
+            oDoc.PageSetup.TopMargin = 35
+            oDoc.PageSetup.BottomMargin = 15
+
+            'Insert a paragraph at the beginning of the document. 
+            oPara1 = oDoc.Content.Paragraphs.Add
+
+            oPara1.Range.Text = "VTK Engineering"
+            oPara1.Range.Font.Name = "Arial"
+            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Bold = CInt(True)
+            oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
+            oPara1.Range.InsertParagraphAfter()
+
+            oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
+            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Format.SpaceAfter = 1
+            oPara2.Range.Font.Bold = CInt(False)
+            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445" & vbCrLf
+            oPara2.Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 2)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 2).Range.Text = TextBox69.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Project number "
+            oTable.Cell(row, 2).Range.Text = TextBox66.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Pressure vessel id"
+            oTable.Cell(row, 2).Range.Text = TextBox70.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Author"
+            oTable.Cell(row, 2).Range.Text = Environment.UserName
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Date"
+            oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "File name"
+            oTable.Cell(row, 2).Range.Text = ufilename
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of column
+            oTable.Columns(2).Width = oWord.InchesToPoints(4)
+
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------Cylinder shells under External pressure 8.4 with stiffeners---------------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 7, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Stiffened Cylinder under External pressure 8.4"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label533.Text
+            oTable.Cell(row, 2).Range.Text = TextBox183.Text
+            oTable.Cell(row, 3).Range.Text = "[barg]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label538.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown51.Value.ToString
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label540.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown52.Value.ToString
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label530.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown50.Value.ToString
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label542.Text
+            oTable.Cell(row, 2).Range.Text = TextBox184.Text
+            oTable.Cell(row, 3).Range.Text = "[%]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label521.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown47.Value.ToString
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------Fig 8.5-6 - Cilinder with light stiffeners -----------------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Cilinder with light stiffeners"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label527.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown49.Value.ToString
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label586.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown53.Value.ToString
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label587.Text
+            oTable.Cell(row, 2).Range.Text = TextBox221.Text & "x" & TextBox222.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label591.Text
+            oTable.Cell(row, 2).Range.Text = TextBox190.Text
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label594.Text
+            oTable.Cell(row, 2).Range.Text = TextBox196.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '---------Nominal elastic limit σ  8.4.3-------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 4, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Nominal elastic limit σ  8.4.3"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label551.Text
+            oTable.Cell(row, 2).Range.Text = TextBox187.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label548.Text
+            oTable.Cell(row, 2).Range.Text = TextBox186.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label545.Text
+            oTable.Cell(row, 2).Range.Text = TextBox185.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '--------- Table 8.5-1 Definition of cilinder length-------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 4, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Definition of cilinder length"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label554.Text
+            oTable.Cell(row, 2).Range.Text = TextBox188.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label580.Text
+            oTable.Cell(row, 2).Range.Text = TextBox198.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label583.Text
+            oTable.Cell(row, 2).Range.Text = TextBox199.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '--------- 8.5.3.4 Interstiffener collapse-------
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "8.5.3.4 Interstiffener collapse"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label577.Text
+            oTable.Cell(row, 2).Range.Text = TextBox197.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label620.Text
+            oTable.Cell(row, 2).Range.Text = TextBox208.Text
+            oTable.Cell(row, 3).Range.Text = "[bar]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label609.Text
+            oTable.Cell(row, 2).Range.Text = TextBox205.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label603.Text
+            oTable.Cell(row, 2).Range.Text = TextBox201.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
         Catch ex As Exception
             MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.

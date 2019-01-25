@@ -318,6 +318,7 @@ Partial Class Form1
         Me.Label471 = New System.Windows.Forms.Label()
         Me.PictureBox15 = New System.Windows.Forms.PictureBox()
         Me.TabPage13 = New System.Windows.Forms.TabPage()
+        Me.Label699 = New System.Windows.Forms.Label()
         Me.Label595 = New System.Windows.Forms.Label()
         Me.GroupBox41 = New System.Windows.Forms.GroupBox()
         Me.TextBox222 = New System.Windows.Forms.TextBox()
@@ -1119,7 +1120,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label699 = New System.Windows.Forms.Label()
+        Me.Button18 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -4503,6 +4504,7 @@ Partial Class Form1
         '
         'TabPage13
         '
+        Me.TabPage13.Controls.Add(Me.Button18)
         Me.TabPage13.Controls.Add(Me.Label699)
         Me.TabPage13.Controls.Add(Me.Label595)
         Me.TabPage13.Controls.Add(Me.GroupBox41)
@@ -4519,6 +4521,16 @@ Partial Class Form1
         Me.TabPage13.TabIndex = 13
         Me.TabPage13.Text = "8.5 Cylinder Ext. pressure"
         Me.TabPage13.UseVisualStyleBackColor = True
+        '
+        'Label699
+        '
+        Me.Label699.AutoSize = True
+        Me.Label699.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label699.Location = New System.Drawing.Point(12, 13)
+        Me.Label699.Name = "Label699"
+        Me.Label699.Size = New System.Drawing.Size(455, 25)
+        Me.Label699.TabIndex = 155
+        Me.Label699.Text = "Design with Stiffeners (Vacuum operation)"
         '
         'Label595
         '
@@ -4930,7 +4942,7 @@ Partial Class Form1
         '
         'Button15
         '
-        Me.Button15.Location = New System.Drawing.Point(861, 71)
+        Me.Button15.Location = New System.Drawing.Point(847, 28)
         Me.Button15.Name = "Button15"
         Me.Button15.Size = New System.Drawing.Size(75, 23)
         Me.Button15.TabIndex = 151
@@ -5720,7 +5732,7 @@ Partial Class Form1
         Me.GroupBox37.Size = New System.Drawing.Size(456, 191)
         Me.GroupBox37.TabIndex = 148
         Me.GroupBox37.TabStop = False
-        Me.GroupBox37.Text = "Cylinder shells EXTERNAL pressure 8.4 page 51"
+        Me.GroupBox37.Text = "Cylinder shells EXTERNAL pressure 8.5 page 56"
         '
         'Label484
         '
@@ -13303,15 +13315,14 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Label699
+        'Button18
         '
-        Me.Label699.AutoSize = True
-        Me.Label699.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label699.Location = New System.Drawing.Point(12, 13)
-        Me.Label699.Name = "Label699"
-        Me.Label699.Size = New System.Drawing.Size(455, 25)
-        Me.Label699.TabIndex = 155
-        Me.Label699.Text = "Design with Stiffeners (Vacuum operation)"
+        Me.Button18.Location = New System.Drawing.Point(838, 105)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(135, 52)
+        Me.Button18.TabIndex = 156
+        Me.Button18.Text = "Print to Word"
+        Me.Button18.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -14612,4 +14623,5 @@ Partial Class Form1
     Friend WithEvents Label698 As Label
     Friend WithEvents Label697 As Label
     Friend WithEvents Label699 As Label
+    Friend WithEvents Button18 As Button
 End Class
