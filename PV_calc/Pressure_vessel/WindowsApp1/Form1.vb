@@ -96,7 +96,7 @@ Public Class Form1
         TextBox22.Text =
         "Important note" & vbCrLf &
         "The yield strength follows EN 10028-2:2009 (mild steel)" & vbCrLf &
-        "and EN 10028-7:2016 for stainless steel at given temperature." & vbCrLf &
+        "and EN 10028-7:2016 for stainless steel at given temperatureerature." & vbCrLf &
         "Safety factors follow the Eurocode" & vbCrLf & vbCrLf &
         "EN 14460:2006, Explosion resistand design follow EN 13445" & vbCrLf &
         "for Explosion-Pressure-Shock-Resistant design stress multiplied bu 1.5"
@@ -260,18 +260,20 @@ Public Class Form1
         TextBox169.BackColor = CType(IIf(qz > ls, Color.Red, Color.LightGreen), Color)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, CheckBox1.CheckedChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, NumericUpDown10.ValueChanged, ComboBox5.SelectedIndexChanged, CheckBox2.CheckedChanged
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, ComboBox5.SelectedIndexChanged, RadioButton3.CheckedChanged, RadioButton2.CheckedChanged, RadioButton1.CheckedChanged, RadioButton4.CheckedChanged
         Design_stress()
     End Sub
     Private Sub Design_stress()
-        Dim sf, temp As Double
+        Dim sf As Double
+        Dim temperature As Double  'temperature
         Dim words() As String
         Dim y50, y100, y150, y200, y250, y300, y350, y400 As Double
+        Dim yield_stress As Double = 99
+        Dim design_str As Double = 99
 
         If (ComboBox5.SelectedIndex > -1) Then          'Prevent exceptions
             words = steel(ComboBox5.SelectedIndex + 1).Split(separators, StringSplitOptions.None)
             TextBox3.Text = words(1)
-
             TextBox104.Text = words(2)
             TextBox105.Text = words(3)
             TextBox106.Text = words(4)
@@ -289,58 +291,68 @@ Public Class Form1
             Double.TryParse(words(7), y350)
             Double.TryParse(words(8), y400)
 
-            temp = NumericUpDown5.Value
+            temperature = NumericUpDown5.Value
             Select Case True
-                Case 50 >= temp
-                    NumericUpDown10.Value = CDec(y50)
-                Case 100 >= temp
-                    NumericUpDown10.Value = CDec(y100)
-                Case 150 >= temp
-                    NumericUpDown10.Value = CDec(y150)
-                Case 200 >= temp
-                    NumericUpDown10.Value = CDec(y200)
-                Case 250 >= temp
-                    NumericUpDown10.Value = CDec(y250)
-                Case 300 >= temp
-                    NumericUpDown10.Value = CDec(y300)
-                Case 350 >= temp
-                    NumericUpDown10.Value = CDec(y350)
-                Case 400 >= temp
-                    NumericUpDown10.Value = CDec(y400)
-                Case temp > 400
-                    MessageBox.Show("Problem temp too high")
+                Case 50 >= temperature
+                    yield_stress = CDec(y50)
+                Case 100 >= temperature
+                    yield_stress = CDec(y100)
+                Case 150 >= temperature
+                    yield_stress = CDec(y150)
+                Case 200 >= temperature
+                    yield_stress = CDec(y200)
+                Case 250 >= temperature
+                    yield_stress = CDec(y250)
+                Case 300 >= temperature
+                    yield_stress = CDec(y300)
+                Case 350 >= temperature
+                    yield_stress = CDec(y350)
+                Case 400 >= temperature
+                    yield_stress = CDec(y400)
+                Case temperature > 400
+                    MessageBox.Show("Problem temperature too high")
             End Select
         End If
 
         _P = NumericUpDown4.Value                       'Calculation pressure [MPa=N/mm2]
-        TextBox131.Text = (_P * 10 ^ 4).ToString        'Calculation pressure [mBar]
+
         If (ComboBox1.SelectedIndex > -1) Then          'Prevent exceptions
             words = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
             TextBox4.Text = sf.ToString                 'Safety factor
-            NumericUpDown7.Value = CDec(NumericUpDown10.Value / sf)
-            If CheckBox1.Checked Then
-                temp = NumericUpDown7.Value * 0.9
-                NumericUpDown7.Value = CDec(temp)
+            design_str = CDec(yield_stress / sf)
+
+            Select Case True
+                Case RadioButton4.Checked
+                    design_str = yield_stress / 1.25  'PED article 3.3 (NO calc required)
+                Case RadioButton1.Checked
+                    design_str = design_str       'PED I,II,III
+                Case RadioButton2.Checked
+                    design_str = design_str * 0.9 'PED IV
+                Case RadioButton3.Checked
+                    design_str = yield_stress   'EN 14460 6.2.1 (Shock resistant)
+            End Select
+
+            _fs = design_str                    'allowable stress
+            '_fym = yield_stress * 1.5               'sigma02*1.5
+            '_f02 = yield_stress                     'Yield 0.2%
+
+            If String.Equals(TextBox182.Text, "cs") Then
+                _E = (213.16 - 6.92 * temperature / 10 ^ 2 - 1.824 / 10 ^ 5 * temperature ^ 2) * 1000
+            Else
+                _E = (201.66 - 8.48 * temperature / 10 ^ 2) * 1000
             End If
-            If CheckBox2.Checked Then
-                temp = NumericUpDown7.Value * 1.5
-                NumericUpDown7.Value = CDec(temp)   'EN 14460 (Shock resistant)
-            End If
-            _fs = NumericUpDown7.Value                  'allowable stress
-            _fym = NumericUpDown10.Value * 1.5          'sigma02*1.5
-            _f02 = NumericUpDown10.Value                'Yield 0.2%
-            TextBox133.Text = _fym.ToString             'Safety factor
+
+            '-------- present -------------
+            TextBox131.Text = (_P * 10 ^ 4).ToString    'Calculation pressure [mBar]
+            'TextBox133.Text = _fym.ToString             'Safety factor
             TextBox136.Text = _f02.ToString("0")        'Max allowed bend
             TextBox137.Text = _fym.ToString("0")        'Max allowed bend+membrane
             TextBox140.Text = _fym.ToString("0")        'Max allowed bend+membrane
 
-            If String.Equals(TextBox182.Text, "cs") Then
-                _E = (213.16 - 6.92 * temp / 10 ^ 2 - 1.824 / 10 ^ 5 * temp ^ 2) * 1000
-            Else
-                _E = (201.66 - 8.48 * temp / 10 ^ 2) * 1000
-            End If
-            TextBox178.Text = _E.ToString("0") 'Max allowed bend+membrane
+            NumericUpDown7.Value = CDec(design_str)     'Design stress
+            TextBox133.Text = yield_stress.ToString("0")  'Yield stress
+            TextBox178.Text = _E.ToString("0")          'Max allowed bend+membrane
             TextBox209.Text = _ν.ToString("0.0")        'Poissons rate for steel
         End If
     End Sub
@@ -999,17 +1011,16 @@ Public Class Form1
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click, TabPage8.Enter, NumericUpDown22.ValueChanged, NumericUpDown6.ValueChanged
         '10.5.3 Flat end with a full-face gasket 
-        Dim e_flange, dia_bolt As Double
+        Dim e_flange, dia_bolt_circle As Double
         Dim d, d_procent, G, Y2, e_pierced As Double
 
-        dia_bolt = NumericUpDown22.Value
-        e_flange = 0.41 * dia_bolt * Sqrt(_P / _fs)
-
+        dia_bolt_circle = NumericUpDown22.Value
         d_procent = NumericUpDown6.Value / 100
-        d = d_procent * dia_bolt
 
-        G = dia_bolt                           'NIET VOLGENS DE REGELS ESTIMATE
 
+        e_flange = 0.41 * dia_bolt_circle * Sqrt(_P / _fs)
+        d = d_procent * dia_bolt_circle
+        G = dia_bolt_circle                           'NIET VOLGENS DE REGELS ESTIMATE
         Y2 = Sqrt(G / (G - d))
         e_pierced = e_flange * Y2
 
@@ -1034,7 +1045,7 @@ Public Class Form1
         Dim fB As Double
         Dim W, w_, b_gasket, b0_gasket, m As Double
         Dim y, Wa, Wop As Double
-        Dim AB_min1, AB_min2, AB_min, Dia_bolt As Double
+        Dim AB_min1, AB_min2, AB_min, dia_bolt_circle As Double
 
         Dim HD, HT As Double
         Dim hD_, hG_, hT_ As Double
@@ -1096,7 +1107,7 @@ Public Class Form1
         AB_min = CDbl(IIf(AB_min1 < AB_min2, AB_min2, AB_min1))   'Take biggest
 
         '---- dia bolt---
-        Dia_bolt = Sqrt((AB_min / n) * 4 / PI)
+        dia_bolt_circle = Sqrt((AB_min / n) * 4 / PI)
 
         '------------- Stepped Flange moment (11.5.3)------------
 
@@ -1143,7 +1154,7 @@ Public Class Form1
         TextBox93.Text = G.ToString("0.0")
         TextBox84.Text = dn.ToString("0.0")             '[mm]
         TextBox94.Text = AB_min.ToString("0")         '[mm2] required bolt area
-        TextBox95.Text = Dia_bolt.ToString("0.0")       '[mm] calculated req. dia bolt
+        TextBox95.Text = dia_bolt_circle.ToString("0.0")       '[mm] calculated req. dia bolt
 
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
         TextBox87.Text = (HG / 1000).ToString("0.0")     '[kN]
@@ -1175,7 +1186,7 @@ Public Class Form1
         NumericUpDown28.BackColor = CType(IIf(C <= B, Color.Red, Color.Yellow), Color)    'Bolt diameter
         NumericUpDown34.BackColor = CType(IIf(A <= C, Color.Red, Color.Yellow), Color)    'Flange OD
         NumericUpDown24.BackColor = CType(IIf(w_ > (A - B) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
-        NumericUpDown26.BackColor = CType(IIf(Dia_bolt > db, Color.Red, Color.Yellow), Color)    'Bolt dia
+        NumericUpDown26.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.Yellow), Color)    'Bolt dia
         TextBox102.BackColor = CType(IIf(σθ > _fs, Color.Red, Color.LightGreen), Color)    'Flange stress
     End Sub
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
@@ -2149,10 +2160,11 @@ Public Class Form1
         S = 1.5         'Safety factor (8.4.4-1) 
 
         '8.4.3 For shells made in austenitic steel, the nominal elastic limit shall be given by: 
+        Double.TryParse(TextBox133.Text, σe)
         If String.Equals(TextBox182.Text, "ss") Then
-            σe = NumericUpDown10.Value / 1.25
+            σe /= 1.25
         Else
-            σe = NumericUpDown10.Value
+            σe /= 1.0
         End If
 
 
@@ -2188,10 +2200,7 @@ Public Class Form1
         Pm = _E * ea * ε / R_         '(8.5.2-5)
 
         '---------------------------
-
-
         x = Pm / Py
-
         PrPy = -0.0016 * x ^ 4 + 0.031 * x ^ 3 - 0.2225 * x ^ 2 + 0.7227 * x - 0.0288
 
         Pr = PrPy * Py  'Calculated lower bound collapse pressure obtained from Figure 8.5-5
@@ -2278,10 +2287,12 @@ Public Class Form1
         '---- material --------
         S = 1.5         'Safety factor (8.4.4-1) 
         '8.4.3 For shells made in austenitic steel, the nominal elastic limit shall be given by: 
+
+        Double.TryParse(TextBox133.Text, σe)
         If String.Equals(TextBox182.Text, "ss") Then
-            σe = NumericUpDown10.Value / 1.25
+            σe /= 1.25
         Else
-            σe = NumericUpDown10.Value
+            σe /= 1.0
         End If
 
         '--- pressure at which mean circumferential stress yields
@@ -2525,7 +2536,7 @@ Public Class Form1
 
         '======================================================
         '----- 8.5.3.6.4 Maximum stresses in the stiffeners ---
-        Dim σes As Double = NumericUpDown10.Value   '(8.4.2-2)
+        Dim σes As Double
         Dim S As Double = 1.5       'Equation(8.4.4-1) Safety factor
         Dim Sf As Double = 1.33     'Equation (8.5.3-33)cold formed
         Dim Pys As Double           'Equation(8.5.3-38)
@@ -2536,6 +2547,9 @@ Public Class Form1
         Dim Rf As Double            'Figures 8.5-14 to 8.5-17);
         Dim N_ As Double            'Equation (8.5.3-21) or Table 8.5-2;
         Dim σs As Double            'Max stress in stiffener (8.5.3-37)
+
+        '------ allowed stress ------------
+        Double.TryParse(TextBox133.Text, σes) '(8.4.2-2)
 
         '------ get data -----
         Double.TryParse(TextBox195.Text, δ)
