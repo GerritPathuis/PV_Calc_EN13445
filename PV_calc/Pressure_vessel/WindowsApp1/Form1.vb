@@ -1026,25 +1026,31 @@ Public Class Form1
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click, TabPage8.Enter, NumericUpDown22.ValueChanged, NumericUpDown6.ValueChanged
-        '10.5.3 Flat end with a full-face gasket 
-        Dim e_flange, dia_bolt_circle As Double
+        '10.5.3 Flat end with a full-face gasket------------ 
+        Dim dia_bolt_circle As Double
         Dim d, d_procent, G, Y2, e_pierced As Double
+        Dim e_flange As Double
+        Dim e1 As Double
 
         dia_bolt_circle = NumericUpDown22.Value
         d_procent = NumericUpDown6.Value / 100
 
 
-        e_flange = 0.41 * dia_bolt_circle * Sqrt(_P / _fs)
-        d = d_procent * dia_bolt_circle
-        G = dia_bolt_circle                           'NIET VOLGENS DE REGELS ESTIMATE
-        Y2 = Sqrt(G / (G - d))
-        e_pierced = e_flange * Y2
+        e_flange = 0.41 * dia_bolt_circle * Sqrt(_P / _fs)  'Fornula (10.5-7)
+        e1 = e_flange * 0.8         'Formula (10.5-8) dikte flange at the bolts
+
+        '10.6.1 Pierced cicular flat ends------------- 
+        d = d_procent * dia_bolt_circle 'Chapter 10.6.1.3 max 50%
+        G = dia_bolt_circle             'Equation (10.6-4) 
+        Y2 = Sqrt(G / (G - d))          'Equation (10.6-4)
+        e_pierced = e_flange * Y2       'Equation (10.6-2)
+
 
         TextBox68.Text = _P.ToString("0.00")
         TextBox67.Text = (_P * 10).ToString("0.0")
-        TextBox63.Text = _fs.ToString("0.0")
+        TextBox63.Text = _fs.ToString("0.0")        'Allowed nominal design stress 
         TextBox71.Text = e_flange.ToString("0.0")
-        TextBox74.Text = (e_flange * 0.8).ToString("0.0")
+        TextBox74.Text = e1.ToString("0.0")
         TextBox73.Text = d.ToString("0")
         TextBox112.Text = Y2.ToString("0.00")
         TextBox111.Text = e_pierced.ToString("0.0")
@@ -1066,12 +1072,15 @@ Public Class Form1
         Dim HD, HT As Double
         Dim hD_, hG_, hT_ As Double
         Dim Ma, Mop As Double
-        Dim G0 As Double
+        Dim g0_ As Double       'is the thickness of hub at small end
+        Dim g1_ As Double       'is the thickness of hub at back of flange;
         Dim βT, βU, βY As Double
 
         Dim CF, δb, K, I0 As Double
         Dim M1, M2, σθ As Double
         Dim temp As Double
+
+        TextBox237.Clear()
 
         If (ComboBox4.SelectedIndex > -1) Then          'Prevent exceptions
             words = gaskets(ComboBox4.SelectedIndex).Split(separators, StringSplitOptions.None)
@@ -1141,25 +1150,130 @@ Public Class Form1
 
         '------------- Flange stresses and stress limit (11.5.4)------------
         δb = C * PI / n               '[mm] Distance adjacent bolts
-        CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
-        K = A / B                               '(11.5-21)
-        G0 = e
-        I0 = Sqrt(B * G0)                       '(11.5-22)
 
-        βT = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1
+        CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
+        K = A / B                                   '(11.5-21)
+        g0_ = e
+        I0 = Sqrt(B * g0_)                           '(11.5-22)
+
+        βT = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1 '(11.5-23)
         βT /= (1.0472 + 1.9448 * K ^ 2) * (K - 1)
 
-        βU = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1
+        βU = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1 '(11.5-24)
         βU /= 1.36136 * (K ^ 2 - 1) * (K - 1)
 
-        βY = 1 / (K - 1)
+        βY = 1 / (K - 1)                            '(11.5-24)
         βY *= 0.66845 + 5.7169 * (K ^ 2 * Log10(K)) / (K ^ 2 - 1)
 
         M1 = Ma * CF / B                '(11.5-26)
         M2 = Mop * CF / B               '(11.5-27)
 
-        '----------- Loose flange method ----
-        σθ = βY * M2 / e ^ 2            '(11.5-35)
+        TextBox237.AppendText("δb = " & δb.ToString & vbCrLf)
+        TextBox237.AppendText("CF= " & CF.ToString & vbCrLf)
+        TextBox237.AppendText("K= " & K.ToString & vbCrLf)
+        TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
+        TextBox237.AppendText("I0 = " & I0.ToString & vbCrLf)
+        TextBox237.AppendText("βT= " & βT.ToString & vbCrLf)
+        TextBox237.AppendText("βU= " & βU.ToString & vbCrLf)
+        TextBox237.AppendText("βY= " & βY.ToString & vbCrLf)
+        TextBox237.AppendText("M1= " & M1.ToString & vbCrLf)
+        TextBox237.AppendText("M2= " & M2.ToString & vbCrLf)
+
+
+        '----------- Integral method ---------------
+        '---11.5.4.1.2 Coefficients for flange stresses calculations
+        'alle coefficienten eindigen met een underscore !!
+        Dim A_, C_ As Double
+
+        Dim C1, C2, C3, C4, C5, C6, C7, C8, C9, C10 As Double
+        Dim C11, C12, C13, C14, C15, C16, C17, C18, C19, C20 As Double
+        Dim C21, C22, C23, C24, C25, C26, C27, C28, C29, C30 As Double
+        Dim C31, C32, C33, C34, C35, C36, C37 As Double
+
+        g0_ = 99
+        g1_ = 99
+
+
+        A_ = (g1_ / g0_) - 1                    '(11.5-43)
+        C_ = 48 * (1 - _ν ^ 2) * (H / L0) ^ 4   '(11.5-44)
+
+        C1 = 1 / 3 + A_ / 12
+        C2 = 5 / 42 + 17 * A_ / 336
+        C3 = 1 / 210 + A_ / 360
+        C4 = 11 / 360 + 59 * A_ / 5040 + (1 + 3 * A_) / C_
+        C5 = 1 / 90 + 5 * A_ / 1008 - (1 + A) ^ 3 / C
+        C6 = 1 / 120 + 17 * A / 5040 + 1 / C_
+        C7 = 215 / 2772 + 51 * A_ / 1232 + (120 + 225 * A_ + 150 * A_ ^ 2 + 35 * A_ ^ 3) / (14 * C_)
+        C8 = 31 / 6930 + 128 * A_ / 45045 + (66 + 165 * A_ + 132 * A_ ^ 2 + 35 * A ^ 3) / (77 * C_)
+        C9 = 553 / 30240 + 653 * A_ / 73920 + (42 + 198 * A_ + 117 * A_ ^ 2 + 25 * A ^ 3) / (84 * C_)
+        C10 = 29 / 3780 + 3 * A_ / 704 - (42 + 198 * A + 243 * A_ ^ 2 + 91 * A_ ^ 3) / (84 * C_)
+        C11 = 99
+        C12 = 99
+        C13 = C6 * C9 * C12 + C2 * C8 * C15
+        C14 = 99
+        C15 = 99
+        C16 = 99
+        C17 = 99
+        C18 = 99
+        C19 = 99
+        C20 = 99
+        C21 = 99
+        C22 = 99
+        C23 = 99
+        C24 = 99
+        C25 = 99
+        C26 = 99
+        C27 = 99
+        C28 = C22 - C19 - 1 / 12 + C19 * C26    '(11.5-73)
+        C29 = 99
+        C30 = 99
+        C31 = 99
+        C33 = 99
+        C34 = 99
+        C35 = 99
+        C36 = (C28 * C35 * C29 - C32 * C34 * C29) / C33
+        C37 = 99
+
+        TextBox237.AppendText("----- Integral method -----" & vbCrLf)
+        Dim βf As Double
+        βf = 0.90892   'Cylindrical hub         '(11.5-28)
+
+        TextBox237.AppendText("βf= " & βf.ToString & vbCrLf)
+
+        Dim βv As Double
+        βv = 0.550103   'Cylindrical hub    '(11.5-29)
+        TextBox237.AppendText("βv= " & βv.ToString & vbCrLf)
+
+        Dim φ As Double
+        φ = C36 / (1 + A_)                       '(11.5-30)
+        TextBox237.AppendText("A= " & A.ToString & vbCrLf)
+        TextBox237.AppendText("C36= " & C36.ToString & vbCrLf)
+        TextBox237.AppendText("φ= " & φ.ToString & vbCrLf)
+
+        Dim λ As Double
+        λ = e * βf + I0 / (βT * I0)             '(11.5-31)
+        λ += e ^ 3 * βv / (βU * I0 * g0_ ^ 2)
+        TextBox237.AppendText("λ= " & λ.ToString & vbCrLf)
+
+        '-------- Longitudinal hub stress -----
+        Dim σH As Double
+        σH = φ * m / (λ * g0_ ^ 2)               '(11.5-32)
+        TextBox237.AppendText("σH= " & σH.ToString & vbCrLf)
+
+        '-------- Radial flange stress -----
+        Dim σr As Double
+        σr = (1.333 * e * βf + I0) * m
+        σr /= λ * e ^ 2 * I0                    '(11.5-33)
+        TextBox237.AppendText("σr= " & σr.ToString & vbCrLf)
+
+        '---------- Tangential flange stress -----
+        σθ = βY * m / e ^ 2                     '(11.5-34)
+        σθ -= K ^ 2 + 1 / (K ^ 2 - 1)
+        TextBox237.AppendText("σθ= " & σθ.ToString & vbCrLf)
+
+        '==================================================
+        '----------- Loose flange method (Consists od 2 parts)  ----
+        σθ = βY * M2 / e ^ 2                    '(11.5-35)
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.00")
@@ -1169,8 +1283,8 @@ Public Class Form1
         TextBox81.Text = b_gasket.ToString("0.0")
         TextBox93.Text = G.ToString("0.0")
         TextBox84.Text = dn.ToString("0.0")             '[mm]
-        TextBox94.Text = AB_min.ToString("0")         '[mm2] required bolt area
-        TextBox95.Text = dia_bolt_circle.ToString("0.0")       '[mm] calculated req. dia bolt
+        TextBox94.Text = AB_min.ToString("0")           '[mm2] required bolt area
+        TextBox95.Text = dia_bolt_circle.ToString("0.0") '[mm] calculated req. dia bolt
 
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
         TextBox87.Text = (HG / 1000).ToString("0.0")     '[kN]
@@ -1202,7 +1316,12 @@ Public Class Form1
         NumericUpDown28.BackColor = CType(IIf(C <= B, Color.Red, Color.Yellow), Color)    'Bolt diameter
         NumericUpDown34.BackColor = CType(IIf(A <= C, Color.Red, Color.Yellow), Color)    'Flange OD
         NumericUpDown24.BackColor = CType(IIf(w_ > (A - B) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
-        NumericUpDown26.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.Yellow), Color)    'Bolt dia
+        '----- bolts ---------
+        NumericUpDown26.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.Yellow), Color) 'Bolt dia
+        TextBox95.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.LightGreen), Color)   'Bolt dia
+        '------ gasket outside diameter --------
+        NumericUpDown29.BackColor = CType(IIf(gt > A, Color.Red, Color.Yellow), Color) 'Bolt dia
+        '----- flange stress -----
         TextBox102.BackColor = CType(IIf(σθ > _fs, Color.Red, Color.LightGreen), Color)    'Flange stress
     End Sub
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
