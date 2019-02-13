@@ -61,6 +61,7 @@ Partial Class Form1
         Me.Label482 = New System.Windows.Forms.Label()
         Me.Label481 = New System.Windows.Forms.Label()
         Me.TextBox178 = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.Label402 = New System.Windows.Forms.Label()
         Me.TextBox131 = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -72,11 +73,20 @@ Partial Class Form1
         Me.NumericUpDown4 = New System.Windows.Forms.NumericUpDown()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TextBox133 = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.NumericUpDown7 = New System.Windows.Forms.NumericUpDown()
         Me.TextBox182 = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.Label68 = New System.Windows.Forms.Label()
-        Me.Label56 = New System.Windows.Forms.Label()
         Me.Label55 = New System.Windows.Forms.Label()
         Me.Label53 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -85,11 +95,7 @@ Partial Class Form1
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.NumericUpDown7 = New System.Windows.Forms.NumericUpDown()
-        Me.Label37 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Label643 = New System.Windows.Forms.Label()
         Me.GroupBox43 = New System.Windows.Forms.GroupBox()
@@ -1115,12 +1121,6 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TextBox133 = New System.Windows.Forms.TextBox()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1129,6 +1129,7 @@ Partial Class Form1
         CType(Me.NumericUpDown5, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NumericUpDown4, System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupBox1.SuspendLayout
+        Me.Panel1.SuspendLayout
         CType(Me.NumericUpDown7, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage3.SuspendLayout
         Me.GroupBox43.SuspendLayout
@@ -1255,7 +1256,6 @@ Partial Class Form1
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage5.SuspendLayout
-        Me.Panel1.SuspendLayout
         Me.SuspendLayout
         '
         'TabControl1
@@ -1678,6 +1678,16 @@ Partial Class Form1
         Me.TextBox178.TabIndex = 145
         Me.TextBox178.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(431, 134)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(202, 13)
+        Me.Label16.TabIndex = 109
+        Me.Label16.Text = " 1.0 [MPa] = 1.0 [N/mm2] = 10 bar"
+        '
         'Label402
         '
         Me.Label402.AutoSize = True
@@ -1807,6 +1817,127 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Material shell and flanges Yield strength (0.2%) acc. EN 10028-2 and EN 10028-7"
         '
+        'TextBox133
+        '
+        Me.TextBox133.Enabled = False
+        Me.TextBox133.Location = New System.Drawing.Point(474, 53)
+        Me.TextBox133.Name = "TextBox133"
+        Me.TextBox133.Size = New System.Drawing.Size(85, 20)
+        Me.TextBox133.TabIndex = 147
+        Me.TextBox133.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Panel1.Controls.Add(Me.RadioButton4)
+        Me.Panel1.Controls.Add(Me.RadioButton3)
+        Me.Panel1.Controls.Add(Me.Label30)
+        Me.Panel1.Controls.Add(Me.RadioButton1)
+        Me.Panel1.Controls.Add(Me.RadioButton2)
+        Me.Panel1.Controls.Add(Me.Label68)
+        Me.Panel1.Controls.Add(Me.Label37)
+        Me.Panel1.Controls.Add(Me.Label56)
+        Me.Panel1.Controls.Add(Me.NumericUpDown7)
+        Me.Panel1.Location = New System.Drawing.Point(13, 142)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(618, 123)
+        Me.Panel1.TabIndex = 120
+        '
+        'RadioButton4
+        '
+        Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Location = New System.Drawing.Point(16, 33)
+        Me.RadioButton4.Name = "RadioButton4"
+        Me.RadioButton4.Size = New System.Drawing.Size(91, 17)
+        Me.RadioButton4.TabIndex = 140
+        Me.RadioButton4.Text = "PED art 3.3"
+        Me.RadioButton4.UseVisualStyleBackColor = True
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Checked = True
+        Me.RadioButton3.Location = New System.Drawing.Point(16, 96)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(283, 17)
+        Me.RadioButton3.TabIndex = 98
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "EN 14460:2006:6.2.1 Shock resistent design "
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(13, 8)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(192, 16)
+        Me.Label30.TabIndex = 77
+        Me.Label30.Text = "Allowed nominal design stress "
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(16, 54)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(86, 17)
+        Me.RadioButton1.TabIndex = 96
+        Me.RadioButton1.Text = "PED I,II,III"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(16, 75)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(66, 17)
+        Me.RadioButton2.TabIndex = 97
+        Me.RadioButton2.Text = "PED IV"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label68.Location = New System.Drawing.Point(409, 100)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(195, 13)
+        Me.Label68.TabIndex = 139
+        Me.Label68.Text = "Nozzle material identical to shell material"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.Location = New System.Drawing.Point(317, 13)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(25, 16)
+        Me.Label37.TabIndex = 81
+        Me.Label37.Text = "_fs"
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label56.Location = New System.Drawing.Point(439, 11)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(59, 16)
+        Me.Label56.TabIndex = 124
+        Me.Label56.Text = "[N/mm2]"
+        '
+        'NumericUpDown7
+        '
+        Me.NumericUpDown7.Enabled = False
+        Me.NumericUpDown7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NumericUpDown7.Location = New System.Drawing.Point(348, 9)
+        Me.NumericUpDown7.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NumericUpDown7.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.NumericUpDown7.Name = "NumericUpDown7"
+        Me.NumericUpDown7.Size = New System.Drawing.Size(85, 24)
+        Me.NumericUpDown7.TabIndex = 78
+        Me.NumericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NumericUpDown7.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        '
         'TextBox182
         '
         Me.TextBox182.Enabled = False
@@ -1835,26 +1966,6 @@ Partial Class Form1
         Me.ComboBox5.Name = "ComboBox5"
         Me.ComboBox5.Size = New System.Drawing.Size(157, 24)
         Me.ComboBox5.TabIndex = 140
-        '
-        'Label68
-        '
-        Me.Label68.AutoSize = True
-        Me.Label68.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label68.Location = New System.Drawing.Point(409, 100)
-        Me.Label68.Name = "Label68"
-        Me.Label68.Size = New System.Drawing.Size(195, 13)
-        Me.Label68.TabIndex = 139
-        Me.Label68.Text = "Nozzle material identical to shell material"
-        '
-        'Label56
-        '
-        Me.Label56.AutoSize = True
-        Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label56.Location = New System.Drawing.Point(439, 11)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(59, 16)
-        Me.Label56.TabIndex = 124
-        Me.Label56.Text = "[N/mm2]"
         '
         'Label55
         '
@@ -1934,39 +2045,6 @@ Partial Class Form1
         Me.Label33.TabIndex = 76
         Me.Label33.Text = "Ym"
         '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(13, 8)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(192, 16)
-        Me.Label30.TabIndex = 77
-        Me.Label30.Text = "Allowed nominal design stress "
-        '
-        'NumericUpDown7
-        '
-        Me.NumericUpDown7.Enabled = False
-        Me.NumericUpDown7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NumericUpDown7.Location = New System.Drawing.Point(348, 9)
-        Me.NumericUpDown7.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.NumericUpDown7.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.NumericUpDown7.Name = "NumericUpDown7"
-        Me.NumericUpDown7.Size = New System.Drawing.Size(85, 24)
-        Me.NumericUpDown7.TabIndex = 78
-        Me.NumericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown7.Value = New Decimal(New Integer() {10, 0, 0, 0})
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(317, 13)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(25, 16)
-        Me.Label37.TabIndex = 81
-        Me.Label37.Text = "_fs"
-        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(433, 605)
@@ -1976,16 +2054,6 @@ Partial Class Form1
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(431, 134)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(202, 13)
-        Me.Label16.TabIndex = 109
-        Me.Label16.Text = " 1.0 [MPa] = 1.0 [N/mm2] = 10 bar"
         '
         'TabPage3
         '
@@ -13251,73 +13319,6 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'RadioButton1
-        '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(16, 54)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(86, 17)
-        Me.RadioButton1.TabIndex = 96
-        Me.RadioButton1.Text = "PED I,II,III"
-        Me.RadioButton1.UseVisualStyleBackColor = True
-        '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(16, 75)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(66, 17)
-        Me.RadioButton2.TabIndex = 97
-        Me.RadioButton2.Text = "PED IV"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'RadioButton3
-        '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Checked = True
-        Me.RadioButton3.Location = New System.Drawing.Point(16, 96)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(283, 17)
-        Me.RadioButton3.TabIndex = 98
-        Me.RadioButton3.Text = "EN 14460:2006:6.2.1 Shock resistent design "
-        Me.RadioButton3.UseVisualStyleBackColor = True
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel1.Controls.Add(Me.RadioButton4)
-        Me.Panel1.Controls.Add(Me.RadioButton3)
-        Me.Panel1.Controls.Add(Me.Label30)
-        Me.Panel1.Controls.Add(Me.RadioButton1)
-        Me.Panel1.Controls.Add(Me.RadioButton2)
-        Me.Panel1.Controls.Add(Me.Label68)
-        Me.Panel1.Controls.Add(Me.Label37)
-        Me.Panel1.Controls.Add(Me.Label56)
-        Me.Panel1.Controls.Add(Me.NumericUpDown7)
-        Me.Panel1.Location = New System.Drawing.Point(13, 142)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(618, 123)
-        Me.Panel1.TabIndex = 120
-        '
-        'TextBox133
-        '
-        Me.TextBox133.Enabled = False
-        Me.TextBox133.Location = New System.Drawing.Point(474, 53)
-        Me.TextBox133.Name = "TextBox133"
-        Me.TextBox133.Size = New System.Drawing.Size(85, 20)
-        Me.TextBox133.TabIndex = 147
-        Me.TextBox133.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'RadioButton4
-        '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(16, 33)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(91, 17)
-        Me.RadioButton4.TabIndex = 140
-        Me.RadioButton4.Text = "PED art 3.3"
-        Me.RadioButton4.UseVisualStyleBackColor = True
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -13340,6 +13341,8 @@ Partial Class Form1
         CType(Me.NumericUpDown4, System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout
         CType(Me.NumericUpDown7, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout
@@ -13515,8 +13518,6 @@ Partial Class Form1
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout
         Me.ResumeLayout(False)
 
     End Sub

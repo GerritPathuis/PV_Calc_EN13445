@@ -270,6 +270,9 @@ Public Class Form1
         Dim y50, y100, y150, y200, y250, y300, y350, y400 As Double
         Dim yield_stress As Double = 99
         Dim design_str As Double = 99
+        'Dim Δy As Double
+        Dim ΔT As Double
+
 
         If (ComboBox5.SelectedIndex > -1) Then          'Prevent exceptions
             words = steel(ComboBox5.SelectedIndex + 1).Split(separators, StringSplitOptions.None)
@@ -291,25 +294,33 @@ Public Class Form1
             Double.TryParse(words(7), y350)
             Double.TryParse(words(8), y400)
 
-            temperature = NumericUpDown5.Value
+            temperature = CDbl(NumericUpDown5.Value)
             Select Case True
+
                 Case 50 >= temperature
                     yield_stress = CDec(y50)
                 Case 100 >= temperature
-                    yield_stress = CDec(y100)
+                    ΔT = 50 - temperature
+                    yield_stress = Calc_design_stress(y50, y100, ΔT)
                 Case 150 >= temperature
-                    yield_stress = CDec(y150)
+                    ΔT = 100 - temperature
+                    yield_stress = Calc_design_stress(y100, y150, ΔT)
                 Case 200 >= temperature
-                    yield_stress = CDec(y200)
+                    ΔT = 150 - temperature
+                    yield_stress = Calc_design_stress(y150, y200, ΔT)
                 Case 250 >= temperature
-                    yield_stress = CDec(y250)
+                    ΔT = 200 - temperature
+                    yield_stress = Calc_design_stress(y200, y250, ΔT)
                 Case 300 >= temperature
-                    yield_stress = CDec(y300)
+                    ΔT = 250 - temperature
+                    yield_stress = Calc_design_stress(y250, y300, ΔT)
                 Case 350 >= temperature
-                    yield_stress = CDec(y350)
+                    ΔT = 300 - temperature
+                    yield_stress = Calc_design_stress(y300, y350, ΔT)
                 Case 400 >= temperature
-                    yield_stress = CDec(y400)
-                Case temperature > 400
+                    ΔT = 350 - temperature
+                    yield_stress = Calc_design_stress(y350, y400, ΔT)
+                Case temperature > 450
                     MessageBox.Show("Problem temperature too high")
             End Select
         End If
@@ -356,7 +367,12 @@ Public Class Form1
             TextBox209.Text = _ν.ToString("0.0")        'Poissons rate for steel
         End If
     End Sub
+    Public Function Calc_design_stress(stress_A As Double, stress_B As Double, ΔT As Double) As Double
+        Dim Δy As Double
 
+        Δy = stress_B - stress_A
+        Return (stress_A - (ΔT / 50 * Δy))
+    End Function
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NumericUpDown15.ValueChanged, TabPage3.Enter, ComboBox2.SelectedIndexChanged, NumericUpDown16.ValueChanged, NumericUpDown13.ValueChanged, NumericUpDown42.ValueChanged
         Calc_cyl_shell742()         'Cylindrical shell
         Calc_conical_shell764()     'Conus shell
@@ -2077,7 +2093,6 @@ Public Class Form1
         Dc = NumericUpDown15.Value              'OD cone large end
         α = NumericUpDown13.Value / 180 * PI    'Half apex in radials
 
-        'TextBox237.Clear()
         ej = 40  'Initial thickness, Now iterate
 
         For i = 1 To 1000
@@ -2089,9 +2104,6 @@ Public Class Form1
 
             '----------- factor ej ---------------------
             ej1 = _P * Dc * β / (2 * _fs)            '(7.6-12)
-
-            'TextBox237.Text &= "Dc=" & Dc.ToString & ", _fs=" & _fs.ToString("0.00")
-            'TextBox237.Text &= " β=" & β.ToString("0.00") & ", ej=" & ej.ToString("0.000") & ", ej1=" & ej1.ToString("0.000") & vbCrLf
 
             If ej < ej1 Then
                 ej *= 1.03
