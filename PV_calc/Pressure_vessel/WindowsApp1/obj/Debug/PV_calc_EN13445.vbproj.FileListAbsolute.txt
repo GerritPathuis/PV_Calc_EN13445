@@ -58,3 +58,5 @@ C:\Repositories\PV_Calc_EN13445\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\Wi
 C:\Repos\PV_Calc_EN13445\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form3.resources
 C:\Repos\PV_Calc_EN13445\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form4.resources
 C:\Repos\PV_Calc_EN13445\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form5.resources
+C:\Repos\PV_Calc_EN13445\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form6.resources
+C:\Repos\PV_Calc_EN13445\PV_calc\Pressure_vessel\WindowsApp1\obj\Debug\WindowsApp1.Form7.resources

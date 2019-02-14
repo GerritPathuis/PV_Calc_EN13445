@@ -1056,13 +1056,14 @@ Public Class Form1
         TextBox111.Text = e_pierced.ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged, NumericUpDown56.ValueChanged, NumericUpDown10.ValueChanged
         Calc_flange_Moments_11_5_3()
     End Sub
 
     Sub Calc_flange_Moments_11_5_3()
         Dim words() As String
         Dim e, G, gt, HG, H, B, C, A As Double
+        Dim h_ As Double 'hub length
         Dim db, dn, n As Double
         Dim fB As Double
         Dim W, w_, b_gasket, b0_gasket, m As Double
@@ -1109,6 +1110,9 @@ Public Class Form1
         dn = db                             'Dia bolt nominal (niet af)
         fB = NumericUpDown27.Value          'Bolt design stress at oper-temp (Rp02/3)
         e = NumericUpDown32.Value           'Slip on flangethickness
+        g0_ = NumericUpDown56.Value         'thickness of hub at small end
+        g1_ = NumericUpDown10.Value         'thickness of hub at back of flange
+        h_ = NumericUpDown59.Value           'hub length
 
         '------------- bolting ------------
         b0_gasket = w_ / 2                  '(11.5.2)
@@ -1153,8 +1157,7 @@ Public Class Form1
 
         CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
         K = A / B                                   '(11.5-21)
-        g0_ = e
-        I0 = Sqrt(B * g0_)                           '(11.5-22)
+        I0 = Sqrt(B * g0_)                          '(11.5-22)
 
         βT = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1 '(11.5-23)
         βT /= (1.0472 + 1.9448 * K ^ 2) * (K - 1)
@@ -1183,6 +1186,8 @@ Public Class Form1
         '----------- Integral method ---------------
         '---11.5.4.1.2 Coefficients for flange stresses calculations
         'alle coefficienten eindigen met een underscore !!
+        'alle formuler vanaf pagina 170
+
         Dim A_, C_ As Double
 
         Dim C1, C2, C3, C4, C5, C6, C7, C8, C9, C10 As Double
@@ -1190,28 +1195,24 @@ Public Class Form1
         Dim C21, C22, C23, C24, C25, C26, C27, C28, C29, C30 As Double
         Dim C31, C32, C33, C34, C35, C36, C37 As Double
 
-        g0_ = 99
-        g1_ = 99
-
-
         A_ = (g1_ / g0_) - 1                    '(11.5-43)
-        C_ = 48 * (1 - _ν ^ 2) * (H / L0) ^ 4   '(11.5-44)
+        C_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4   '(11.5-44)
 
         C1 = 1 / 3 + A_ / 12
         C2 = 5 / 42 + 17 * A_ / 336
         C3 = 1 / 210 + A_ / 360
         C4 = 11 / 360 + 59 * A_ / 5040 + (1 + 3 * A_) / C_
-        C5 = 1 / 90 + 5 * A_ / 1008 - (1 + A) ^ 3 / C
+        C5 = 1 / 90 + 5 * A_ / 1008 - (1 + A) ^ 3 / C_
         C6 = 1 / 120 + 17 * A / 5040 + 1 / C_
         C7 = (215 / 2772 + 51 * A_ / 1232 + (120 + 225 * A_ + 150 * A_ ^ 2 + 35 * A_ ^ 3)) / (14 * C_)
-        C8 = (31 / 6930 + 128 * A_ / 45045 + (66 + 165 * A_ + 132 * A_ ^ 2 + 35 * A ^ 3)) / (77 * C_)
-        C9 = (553 / 30240 + 653 * A_ / 73920 + (42 + 198 * A_ + 117 * A_ ^ 2 + 25 * A ^ 3)) / (84 * C_)
-        C10 = (29 / 3780 + 3 * A_ / 704 - (42 + 198 * A + 243 * A_ ^ 2 + 91 * A_ ^ 3)) / (84 * C_)
+        C8 = (31 / 6930 + 128 * A_ / 45045 + (66 + 165 * A_ + 132 * A_ ^ 2 + 35 * A_ ^ 3)) / (77 * C_)
+        C9 = (553 / 30240 + 653 * A_ / 73920 + (42 + 198 * A_ + 117 * A_ ^ 2 + 25 * A_ ^ 3)) / (84 * C_)
+        C10 = (29 / 3780 + 3 * A_ / 704 - (42 + 198 * A_ + 243 * A_ ^ 2 + 91 * A_ ^ 3)) / (84 * C_)
         C11 = (31 / 6048 + 1763 * A_ / 665280 + (42 + 72 * A_ + 45 * A_ ^ 2 + 10 * A_ ^ 3)) / (84 * C_)
         C12 = (1 / 2925 + 71 * A_ / 300300 + (88 + 198 * A_ + 156 * A_ ^ 2 + 42 * A_ ^ 3)) / (385 * C_)
-        C13 = (761 / 831600 + 937 * A_ / 1663200 + (2 + 12 * A_ + 17 * A_ ^ 2 + 3 * A ^ 3)) / (70 * C_)
-        C14 = (197 / 415600 + 97 * A_ / 554400 + (6 + 18 * A + 15 * A ^ 2 + 4 * A_ ^ 3)) / (210 * C_)
-        C15 = (233 / 831600 + 97 * A / 554400 + (6 + 18 * A_ + 15 * A ^ 2 + 4 * A ^ 3)) / (210 * C_)
+        C13 = (761 / 831600 + 937 * A_ / 1663200 + (2 + 12 * A_ + 17 * A_ ^ 2 + 3 * A_ ^ 3)) / (70 * C_)
+        C14 = (197 / 415600 + 97 * A_ / 554400 + (6 + 18 * A_ + 15 * A_ ^ 2 + 4 * A_ ^ 3)) / (210 * C_)
+        C15 = (233 / 831600 + 97 * A_ / 554400 + (6 + 18 * A_ + 15 * A_ ^ 2 + 4 * A_ ^ 3)) / (210 * C_)
         C16 = C1 * C7 * C12 + C2 * C8 * C3 + C3 * C8 * C2 - (C3 ^ 2 * C7 + C8 ^ 2 * C1 + C2 ^ 2 * C12)
         C17 = (C4 * C7 * C12 + C2 * C8 * C13 + C3 * C8 * C9 - (C13 * C7 * C3 + C8 ^ 2 * C4 + C12 * C2 * C9)) / C16
         C18 = (C5 * C7 * C12 + C2 * C8 * C14 + C3 * C8 * C10 - (C14 * C7 * C3 + C8 ^ 2 * C5 + C12 * C2 * C10)) / C16
@@ -1233,7 +1234,7 @@ Public Class Form1
         C34 = 1 / 12 + C18 - C21 - C18 * C26
         C35 = C18 * C30
         C36 = (C28 * C35 * C29 - C32 * C34 * C29) / C33
-        C37 = 99
+        C37 = (C26 * C3 / 2 + C34 * C31 * C29 - C30 * C34 / 2 - C35 * C27 * C29) / C33
 
         TextBox237.AppendText("----- Integral method -----" & vbCrLf)
         Dim βf As Double
@@ -1320,10 +1321,16 @@ Public Class Form1
         '----- bolts ---------
         NumericUpDown26.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.Yellow), Color) 'Bolt dia
         TextBox95.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.LightGreen), Color)   'Bolt dia
+
         '------ gasket outside diameter --------
         NumericUpDown29.BackColor = CType(IIf(gt > A, Color.Red, Color.Yellow), Color) 'Bolt dia
+
         '----- flange stress -----
         TextBox102.BackColor = CType(IIf(σθ > _fs, Color.Red, Color.LightGreen), Color)    'Flange stress
+
+        '----- flange hub thickness, g0_must be smallet then g1_ -----
+        NumericUpDown10.BackColor = CType(IIf((g0_ > g1_), Color.Red, Color.Yellow), Color)
+        NumericUpDown56.BackColor = CType(IIf((g0_ > g1_), Color.Red, Color.Yellow), Color)
     End Sub
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
         Form2.Show()
@@ -3218,5 +3225,13 @@ Public Class Form1
         Catch ex As Exception
             MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
         End Try
+    End Sub
+
+    Private Sub PictureBox20_Click(sender As Object, e As EventArgs) Handles PictureBox20.Click
+        Form7.Show()
+    End Sub
+
+    Private Sub PictureBox21_Click(sender As Object, e As EventArgs) Handles PictureBox21.Click
+        Form6.Show()
     End Sub
 End Class
