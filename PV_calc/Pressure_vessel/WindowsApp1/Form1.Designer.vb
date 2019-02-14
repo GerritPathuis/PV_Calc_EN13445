@@ -8849,9 +8849,9 @@ Partial Class Form1
         Me.Label216.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label216.Location = New System.Drawing.Point(17, 162)
         Me.Label216.Name = "Label216"
-        Me.Label216.Size = New System.Drawing.Size(233, 16)
+        Me.Label216.Size = New System.Drawing.Size(207, 16)
         Me.Label216.TabIndex = 222
-        Me.Label216.Text = "Flange extension thickness (minimum)"
+        Me.Label216.Text = "Flange outside thickness (> e*0.8)"
         '
         'Label186
         '
@@ -9195,10 +9195,10 @@ Partial Class Form1
         'Label324
         '
         Me.Label324.AutoSize = True
-        Me.Label324.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label324.Location = New System.Drawing.Point(11, 145)
+        Me.Label324.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label324.Location = New System.Drawing.Point(10, 145)
         Me.Label324.Name = "Label324"
-        Me.Label324.Size = New System.Drawing.Size(161, 16)
+        Me.Label324.Size = New System.Drawing.Size(186, 16)
         Me.Label324.TabIndex = 270
         Me.Label324.Text = "Tangential Flange Stress "
         '
@@ -9214,10 +9214,10 @@ Partial Class Form1
         'Label325
         '
         Me.Label325.AutoSize = True
-        Me.Label325.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label325.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label325.Location = New System.Drawing.Point(272, 143)
         Me.Label325.Name = "Label325"
-        Me.Label325.Size = New System.Drawing.Size(29, 20)
+        Me.Label325.Size = New System.Drawing.Size(27, 20)
         Me.Label325.TabIndex = 268
         Me.Label325.Text = "σθ"
         '
@@ -10656,10 +10656,10 @@ Partial Class Form1
         'Label308
         '
         Me.Label308.AutoSize = True
-        Me.Label308.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label308.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label308.Location = New System.Drawing.Point(10, 159)
         Me.Label308.Name = "Label308"
-        Me.Label308.Size = New System.Drawing.Size(109, 16)
+        Me.Label308.Size = New System.Drawing.Size(125, 16)
         Me.Label308.TabIndex = 239
         Me.Label308.Text = "Flange thickness"
         '
