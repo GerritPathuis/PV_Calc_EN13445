@@ -1066,7 +1066,8 @@ Public Class Form1
         Dim h_ As Double 'hub length
         Dim db, dn, n As Double
         Dim fB As Double
-        Dim W, w_, b_gasket, b0_gasket, m As Double
+        Dim W, w_, b_gasket, b0_gasket As Double
+        Dim m As Double             'Gasket factor
         Dim y, Wa, Wop As Double
         Dim AB_min1, AB_min2, AB_min, dia_bolt_circle As Double
 
@@ -1168,8 +1169,11 @@ Public Class Form1
         βY = 1 / (K - 1)                            '(11.5-24)
         βY *= 0.66845 + 5.7169 * (K ^ 2 * Log10(K)) / (K ^ 2 - 1)
 
-        M1 = Ma * CF / B                '(11.5-26)
-        M2 = Mop * CF / B               '(11.5-27)
+        M1 = Ma * CF / B                '(11.5-26) assembly condition
+        M2 = Mop * CF / B               '(11.5-27)  operating condition
+
+        TextBox237.AppendText("M1 = " & M1.ToString & vbCrLf)
+        TextBox237.AppendText("M2= " & M2.ToString & vbCrLf)
 
         TextBox237.AppendText("δb = " & δb.ToString & vbCrLf)
         TextBox237.AppendText("CF= " & CF.ToString & vbCrLf)
@@ -1187,9 +1191,8 @@ Public Class Form1
         '---11.5.4.1.2 Coefficients for flange stresses calculations
         'alle coefficienten eindigen met een underscore !!
         'alle formuler vanaf pagina 170
-
+        TextBox237.AppendText("----- Integral method -----" & vbCrLf)
         Dim A_, C_ As Double
-
         Dim C1, C2, C3, C4, C5, C6, C7, C8, C9, C10 As Double
         Dim C11, C12, C13, C14, C15, C16, C17, C18, C19, C20 As Double
         Dim C21, C22, C23, C24, C25, C26, C27, C28, C29, C30 As Double
@@ -1198,21 +1201,28 @@ Public Class Form1
         A_ = (g1_ / g0_) - 1                    '(11.5-43)
         C_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4   '(11.5-44)
 
+        TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
+        TextBox237.AppendText("g1_= " & g1_.ToString & vbCrLf)
+
+        TextBox237.AppendText("h_= " & h_.ToString & vbCrLf)
+        TextBox237.AppendText("A_= " & A_.ToString & vbCrLf)
+        TextBox237.AppendText("C_= " & C_.ToString & vbCrLf)
+
         C1 = 1 / 3 + A_ / 12
         C2 = 5 / 42 + 17 * A_ / 336
         C3 = 1 / 210 + A_ / 360
         C4 = 11 / 360 + 59 * A_ / 5040 + (1 + 3 * A_) / C_
-        C5 = 1 / 90 + 5 * A_ / 1008 - (1 + A) ^ 3 / C_
+        C5 = 1 / 90 + 5 * A_ / 1008 - (1 + A_) ^ 3 / C_
         C6 = 1 / 120 + 17 * A / 5040 + 1 / C_
-        C7 = (215 / 2772 + 51 * A_ / 1232 + (120 + 225 * A_ + 150 * A_ ^ 2 + 35 * A_ ^ 3)) / (14 * C_)
-        C8 = (31 / 6930 + 128 * A_ / 45045 + (66 + 165 * A_ + 132 * A_ ^ 2 + 35 * A_ ^ 3)) / (77 * C_)
-        C9 = (553 / 30240 + 653 * A_ / 73920 + (42 + 198 * A_ + 117 * A_ ^ 2 + 25 * A_ ^ 3)) / (84 * C_)
-        C10 = (29 / 3780 + 3 * A_ / 704 - (42 + 198 * A_ + 243 * A_ ^ 2 + 91 * A_ ^ 3)) / (84 * C_)
-        C11 = (31 / 6048 + 1763 * A_ / 665280 + (42 + 72 * A_ + 45 * A_ ^ 2 + 10 * A_ ^ 3)) / (84 * C_)
-        C12 = (1 / 2925 + 71 * A_ / 300300 + (88 + 198 * A_ + 156 * A_ ^ 2 + 42 * A_ ^ 3)) / (385 * C_)
-        C13 = (761 / 831600 + 937 * A_ / 1663200 + (2 + 12 * A_ + 17 * A_ ^ 2 + 3 * A_ ^ 3)) / (70 * C_)
-        C14 = (197 / 415600 + 97 * A_ / 554400 + (6 + 18 * A_ + 15 * A_ ^ 2 + 4 * A_ ^ 3)) / (210 * C_)
-        C15 = (233 / 831600 + 97 * A_ / 554400 + (6 + 18 * A_ + 15 * A_ ^ 2 + 4 * A_ ^ 3)) / (210 * C_)
+        C7 = 215 / 2772 + 51 * A_ / 1232 + (120 + 225 * A_ + 150 * A_ ^ 2 + 35 * A_ ^ 3) / (14 * C_)
+        C8 = 31 / 6930 + 128 * A_ / 45045 + (66 + 165 * A_ + 132 * A_ ^ 2 + 35 * A_ ^ 3) / (77 * C_)
+        C9 = 553 / 30240 + 653 * A_ / 73920 + (42 + 198 * A_ + 117 * A_ ^ 2 + 25 * A_ ^ 3) / (84 * C_)
+        C10 = 29 / 3780 + 3 * A_ / 704 - (42 + 198 * A_ + 243 * A_ ^ 2 + 91 * A_ ^ 3) / (84 * C_)
+        C11 = 31 / 6048 + 1763 * A_ / 665280 + (42 + 72 * A_ + 45 * A_ ^ 2 + 10 * A_ ^ 3) / (84 * C_)
+        C12 = 1 / 2925 + 71 * A_ / 300300 + (88 + 198 * A_ + 156 * A_ ^ 2 + 42 * A_ ^ 3) / (385 * C_)
+        C13 = 761 / 831600 + 937 * A_ / 1663200 + (2 + 12 * A_ + 11 * A_ ^ 2 + 3 * A_ ^ 3) / (70 * C_)
+        C14 = 197 / 415600 + 103 * A_ / 332640 + (2 + 12 * A_ + 17 * A_ ^ 2 + 7 * A_ ^ 3) / (70 * C_)
+        C15 = 233 / 831600 + 97 * A_ / 554400 + (6 + 18 * A_ + 15 * A_ ^ 2 + 4 * A_ ^ 3) / (210 * C_)
         C16 = C1 * C7 * C12 + C2 * C8 * C3 + C3 * C8 * C2 - (C3 ^ 2 * C7 + C8 ^ 2 * C1 + C2 ^ 2 * C12)
         C17 = (C4 * C7 * C12 + C2 * C8 * C13 + C3 * C8 * C9 - (C13 * C7 * C3 + C8 ^ 2 * C4 + C12 * C2 * C9)) / C16
         C18 = (C5 * C7 * C12 + C2 * C8 * C14 + C3 * C8 * C10 - (C14 * C7 * C3 + C8 ^ 2 * C5 + C12 * C2 * C10)) / C16
@@ -1220,11 +1230,11 @@ Public Class Form1
         C20 = (C1 * C9 * C12 + C4 * C8 * C3 + C3 * C13 * C2 - (C3 ^ 2 * C9 + C13 * C8 * C1 + C12 * C4 * C2)) / C16
         C21 = (C1 * C10 * C12 + C5 * C8 * C3 + C3 * C14 * C2 - (C3 ^ 2 * C10 + C14 * C8 * C1 + C12 * C5 * C2)) / C16
         C22 = (C1 * C11 * C12 + C6 * C8 * C3 + C3 * C15 * C2 - (C3 ^ 2 * C11 + C15 * C8 * C1 + C12 * C6 * C2)) / C16
-        C23 = (C1 * C7 * C13 + C2 * C8 * C3 + C4 * C8 * C2 - (C3 * C7 * C4 + C8 * C9 * C1 + C2 ^ 2 * C13)) / C16
+        C23 = (C1 * C7 * C13 + C2 * C9 * C3 + C4 * C8 * C2 - (C3 * C7 * C4 + C8 * C9 * C1 + C2 ^ 2 * C13)) / C16
         C24 = (C1 * C7 * C14 + C2 * C10 * C3 + C5 * C8 * C2 - (C3 * C7 * C5 + C8 * C10 * C1 + C2 ^ 2 * C14)) / C16
         C25 = (C1 * C7 * C15 + C2 * C11 * C3 + C6 * C8 * C2 - (C3 * C7 * C6 + C8 * C11 * C1 + C2 ^ 2 ^ C15)) / C16
         C26 = -(C_ / 4) ^ 0.25
-        C27 = C20 - C17 - 5 / 12 * C17 * C26
+        C27 = C20 - C17 - 5 / 12 + C17 * C26
         C28 = C22 - C19 - 1 / 12 + C19 * C26    '(11.5-73)
         C29 = -(C_ / 4) ^ 0.5
         C30 = -(C_ / 4) ^ 0.75
@@ -1234,12 +1244,17 @@ Public Class Form1
         C34 = 1 / 12 + C18 - C21 - C18 * C26
         C35 = C18 * C30
         C36 = (C28 * C35 * C29 - C32 * C34 * C29) / C33
-        C37 = (C26 * C3 / 2 + C34 * C31 * C29 - C30 * C34 / 2 - C35 * C27 * C29) / C33
+        C37 = (C26 * C35 / 2 + C34 * C31 * C29 - C30 * C34 / 2 - C35 * C27 * C29) / C33
 
-        TextBox237.AppendText("----- Integral method -----" & vbCrLf)
+        TextBox237.AppendText("C28= " & C28.ToString & vbCrLf)
+        TextBox237.AppendText("C29= " & C29.ToString & vbCrLf)
+        TextBox237.AppendText("C33= " & C33.ToString & vbCrLf)
+        TextBox237.AppendText("C34= " & C34.ToString & vbCrLf)
+        TextBox237.AppendText("C35= " & C35.ToString & vbCrLf)
+        TextBox237.AppendText("C36= " & C36.ToString & vbCrLf)
+
         Dim βf As Double
         βf = 0.90892   'Cylindrical hub         '(11.5-28)
-
         TextBox237.AppendText("βf= " & βf.ToString & vbCrLf)
 
         Dim βv As Double
@@ -1249,27 +1264,27 @@ Public Class Form1
         Dim φ As Double
         φ = C36 / (1 + A_)                       '(11.5-30)
         TextBox237.AppendText("A= " & A.ToString & vbCrLf)
-        TextBox237.AppendText("C36= " & C36.ToString & vbCrLf)
         TextBox237.AppendText("φ= " & φ.ToString & vbCrLf)
 
         Dim λ As Double
-        λ = e * βf + I0 / (βT * I0)             '(11.5-31)
-        λ += e ^ 3 * βv / (βU * I0 * g0_ ^ 2)
+        λ = (e * βf + I0) / (βT * I0)             '(11.5-31)
+        λ += (e ^ 3 * βv) / (βU * I0 * g0_ ^ 2)
+        TextBox237.AppendText("e= " & e.ToString & vbCrLf)
         TextBox237.AppendText("λ= " & λ.ToString & vbCrLf)
 
         '-------- Longitudinal hub stress -----
         Dim σH As Double
-        σH = φ * m / (λ * g0_ ^ 2)               '(11.5-32)
+        σH = φ * M2 / (λ * g0_ ^ 2)               '(11.5-32)
         TextBox237.AppendText("σH= " & σH.ToString & vbCrLf)
 
         '-------- Radial flange stress -----
         Dim σr As Double
-        σr = (1.333 * e * βf + I0) * m
+        σr = (1.333 * e * βf + I0) * M2
         σr /= λ * e ^ 2 * I0                    '(11.5-33)
         TextBox237.AppendText("σr= " & σr.ToString & vbCrLf)
 
         '---------- Tangential flange stress -----
-        σθ = βY * m / e ^ 2                     '(11.5-34)
+        σθ = βY * M2 / e ^ 2                     '(11.5-34)
         σθ -= K ^ 2 + 1 / (K ^ 2 - 1)
         TextBox237.AppendText("σθ= " & σθ.ToString & vbCrLf)
 
