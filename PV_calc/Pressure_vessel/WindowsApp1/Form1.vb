@@ -1062,14 +1062,16 @@ Public Class Form1
 
     Sub Calc_flange_Moments_11_5_3()
         Dim words() As String
-        Dim e, G, gt, HG, H, B, C, A As Double
-        Dim h_ As Double 'hub length
+        Dim e, G, gt, HG, H, B As Double
+        Dim C_bolt As Double
+        Dim A_OD As Double          'Outside diameter flange
+        Dim h_ As Double            'hub length
         Dim db, dn, n As Double
         Dim fB As Double
         Dim W, w_, b_gasket, b0_gasket As Double
         Dim m As Double             'Gasket factor
         Dim y, Wa, Wop As Double
-        Dim AB_min1, AB_min2, AB_min, dia_bolt_circle As Double
+        Dim AB_min1, AB_min2, AB_min, dia_bolt As Double
 
         Dim HD, HT As Double
         Dim hD_, hG_, hT_ As Double
@@ -1099,9 +1101,9 @@ Public Class Form1
             NumericUpDown27.Value = CDec(temp / 3)
         End If
 
-        A = NumericUpDown34.Value           'OD Flange 
+        A_OD = NumericUpDown34.Value        'OD Flange 
         n = NumericUpDown25.Value           'Is No Bolts  
-        C = NumericUpDown28.Value           'Bolt circle
+        C_Bolt = NumericUpDown28.Value      'Bolt circle
         w_ = NumericUpDown24.Value          'Gasket width
         B = NumericUpDown23.Value           'ID Flange
         gt = NumericUpDown29.Value          'OD Gasket
@@ -1132,21 +1134,22 @@ Public Class Form1
         Wa = PI * b0_gasket * G * y            '(11.5-7) Min req. bolt load
         Wop = H + HG                           '(11.5-8)
 
+        '------------- Required bolt area --------------------
         AB_min1 = Wa / fB
         AB_min2 = Wop / fB
         AB_min = CDbl(IIf(AB_min1 < AB_min2, AB_min2, AB_min1))   'Take biggest
 
         '---- dia bolt---
-        dia_bolt_circle = Sqrt((AB_min / n) * 4 / PI)
+        dia_bolt = Sqrt((AB_min / n) * 4 / PI)
 
         '------------- Stepped Flange moment (11.5.3)------------
 
         HD = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
         HT = H - HD                 'Hydrostatic force via flange face
 
-        hD_ = (C - B) / 2                   '(11.5-13)
-        hG_ = (C - G) / 2                   '(11.5-14)
-        hT_ = (2 * C - B - G) / 4           '(11.5-15)
+        hD_ = (C_bolt - B) / 2                   '(11.5-13)
+        hG_ = (C_bolt - G) / 2                   '(11.5-14)
+        hT_ = (2 * C_bolt - B - G) / 4           '(11.5-15)
 
         W = 0.5 * (db + dn) * fB            '(11.5-16)
 
@@ -1154,10 +1157,10 @@ Public Class Form1
         Mop = HD * hD_ + HT * hT_ + HG * hG_ '(11.5-18)
 
         '------------- Flange stresses and stress limit (11.5.4)------------
-        δb = C * PI / n               '[mm] Distance adjacent bolts
+        δb = C_bolt * PI / n               '[mm] Distance adjacent bolts
 
         CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
-        K = A / B                                   '(11.5-21)
+        K = A_OD / B                                   '(11.5-21)
         I0 = Sqrt(B * g0_)                          '(11.5-22)
 
         βT = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1 '(11.5-23)
@@ -1197,9 +1200,10 @@ Public Class Form1
         Dim C11, C12, C13, C14, C15, C16, C17, C18, C19, C20 As Double
         Dim C21, C22, C23, C24, C25, C26, C27, C28, C29, C30 As Double
         Dim C31, C32, C33, C34, C35, C36, C37 As Double
+        Dim E1, E2, E3, E4, E5, E6 As Double
 
-        A_ = (g1_ / g0_) - 1                    '(11.5-43)
-        C_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4   '(11.5-44)
+        A_ = (g1_ / g0_) - 1                        '(11.5-43)
+        C_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4      '(11.5-44)
 
         TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
         TextBox237.AppendText("g1_= " & g1_.ToString & vbCrLf)
@@ -1213,7 +1217,7 @@ Public Class Form1
         C3 = 1 / 210 + A_ / 360
         C4 = 11 / 360 + 59 * A_ / 5040 + (1 + 3 * A_) / C_
         C5 = 1 / 90 + 5 * A_ / 1008 - (1 + A_) ^ 3 / C_
-        C6 = 1 / 120 + 17 * A / 5040 + 1 / C_
+        C6 = 1 / 120 + 17 * A_ / 5040 + 1 / C_
         C7 = 215 / 2772 + 51 * A_ / 1232 + (120 + 225 * A_ + 150 * A_ ^ 2 + 35 * A_ ^ 3) / (14 * C_)
         C8 = 31 / 6930 + 128 * A_ / 45045 + (66 + 165 * A_ + 132 * A_ ^ 2 + 35 * A_ ^ 3) / (77 * C_)
         C9 = 553 / 30240 + 653 * A_ / 73920 + (42 + 198 * A_ + 117 * A_ ^ 2 + 25 * A_ ^ 3) / (84 * C_)
@@ -1246,6 +1250,13 @@ Public Class Form1
         C36 = (C28 * C35 * C29 - C32 * C34 * C29) / C33
         C37 = (C26 * C35 / 2 + C34 * C31 * C29 - C30 * C34 / 2 - C35 * C27 * C29) / C33
 
+        E1 = C17 * C36 + C18 + C19 * C37
+        E2 = C20 * C36 + C21 + C22 * C37
+        E3 = C23 * C36 + C24 + C25 * C37
+        E4 = ((3 + C37 + 3 * C36) / 12) - ((2 * E3 + 15 * E2 + 10 * E1) / 10)
+        E5 = (E1 * (3 + A_) / 6) + (E2 * (21 + 11 * A_) / 84) + (E3 * (3 + 2 * A_) / 210)
+        E6 = E5 - C36 * (7 / 120 + A_ / 36 + 3 * A_ / C_) - (1 / 40) - (A_ / 72) - C37 * (1 / 60 + A_ / 120 + 1 / C_)
+
         TextBox237.AppendText("C28= " & C28.ToString & vbCrLf)
         TextBox237.AppendText("C29= " & C29.ToString & vbCrLf)
         TextBox237.AppendText("C33= " & C33.ToString & vbCrLf)
@@ -1254,16 +1265,23 @@ Public Class Form1
         TextBox237.AppendText("C36= " & C36.ToString & vbCrLf)
 
         Dim βf As Double
-        βf = 0.90892   'Cylindrical hub         '(11.5-28)
-        TextBox237.AppendText("βf= " & βf.ToString & vbCrLf)
+        βf = -E6
+        βf /= (C_ / (3 * (1 - _ν * _ν))) ^ 0.25
+        βf /= ((1 + A_) ^ 3) / C_
+
+        'βf = 0.90892   'Cylindrical hub         '(11.5-28)
+        TextBox237.AppendText("βf= (0.90892)=" & βf.ToString & vbCrLf)
 
         Dim βv As Double
-        βv = 0.550103   'Cylindrical hub    '(11.5-29)
-        TextBox237.AppendText("βv= " & βv.ToString & vbCrLf)
+        βv = E4
+        βv /= ((3 * (1 - _ν * _ν)) / C_) ^ 0.25
+        βv /= ((1 + A_) ^ 3)
+        'βv = 0.550103   'Cylindrical hub    '(11.5-29)
+        TextBox237.AppendText("βv= (0.550103) " & βv.ToString & vbCrLf)
 
         Dim φ As Double
         φ = C36 / (1 + A_)                       '(11.5-30)
-        TextBox237.AppendText("A= " & A.ToString & vbCrLf)
+        TextBox237.AppendText("A_= " & A_.ToString & vbCrLf)
         TextBox237.AppendText("φ= " & φ.ToString & vbCrLf)
 
         Dim λ As Double
@@ -1301,7 +1319,7 @@ Public Class Form1
         TextBox93.Text = G.ToString("0.0")
         TextBox84.Text = dn.ToString("0.0")             '[mm]
         TextBox94.Text = AB_min.ToString("0")           '[mm2] required bolt area
-        TextBox95.Text = dia_bolt_circle.ToString("0.0") '[mm] calculated req. dia bolt
+        TextBox95.Text = dia_bolt.ToString("0.0") '[mm] calculated req. dia bolt
 
         TextBox85.Text = (H / 1000).ToString("0.0")      '[kN]
         TextBox87.Text = (HG / 1000).ToString("0.0")     '[kN]
@@ -1330,15 +1348,15 @@ Public Class Form1
         TextBox103.Text = δb.ToString("0")       '[mm] Distance bolts
 
         '-------------- checks --------------------
-        NumericUpDown28.BackColor = CType(IIf(C <= B, Color.Red, Color.Yellow), Color)    'Bolt diameter
-        NumericUpDown34.BackColor = CType(IIf(A <= C, Color.Red, Color.Yellow), Color)    'Flange OD
-        NumericUpDown24.BackColor = CType(IIf(w_ > (A - B) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
+        NumericUpDown28.BackColor = CType(IIf(C_bolt <= B, Color.Red, Color.Yellow), Color)    'Bolt diameter
+        NumericUpDown34.BackColor = CType(IIf(A_OD <= C_bolt, Color.Red, Color.Yellow), Color)    'Flange OD
+        NumericUpDown24.BackColor = CType(IIf(w_ > (A_OD - B) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
         '----- bolts ---------
-        NumericUpDown26.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.Yellow), Color) 'Bolt dia
-        TextBox95.BackColor = CType(IIf(dia_bolt_circle > db, Color.Red, Color.LightGreen), Color)   'Bolt dia
+        NumericUpDown26.BackColor = CType(IIf(dia_bolt > db, Color.Red, Color.Yellow), Color) 'Bolt dia
+        TextBox95.BackColor = CType(IIf(dia_bolt > db, Color.Red, Color.LightGreen), Color)   'Bolt dia
 
         '------ gasket outside diameter --------
-        NumericUpDown29.BackColor = CType(IIf(gt > A, Color.Red, Color.Yellow), Color) 'Bolt dia
+        NumericUpDown29.BackColor = CType(IIf(gt > A_OD, Color.Red, Color.Yellow), Color) 'Bolt dia
 
         '----- flange stress -----
         TextBox102.BackColor = CType(IIf(σθ > _fs, Color.Red, Color.LightGreen), Color)    'Flange stress

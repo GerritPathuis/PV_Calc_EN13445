@@ -10531,7 +10531,7 @@ Partial Class Form1
         Me.NumericUpDown56.Size = New System.Drawing.Size(68, 22)
         Me.NumericUpDown56.TabIndex = 249
         Me.NumericUpDown56.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NumericUpDown56.Value = New Decimal(New Integer() {6, 0, 0, 0})
+        Me.NumericUpDown56.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'NumericUpDown10
         '
