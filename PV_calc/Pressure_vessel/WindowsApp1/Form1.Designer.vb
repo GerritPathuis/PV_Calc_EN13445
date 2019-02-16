@@ -9649,9 +9649,9 @@ Partial Class Form1
         Me.Label262.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label262.Location = New System.Drawing.Point(11, 43)
         Me.Label262.Name = "Label262"
-        Me.Label262.Size = New System.Drawing.Size(87, 16)
+        Me.Label262.Size = New System.Drawing.Size(144, 16)
         Me.Label262.TabIndex = 230
-        Me.Label262.Text = "Bolt diameter"
+        Me.Label262.Text = "Selected Bolt diameter"
         '
         'Label263
         '

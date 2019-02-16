@@ -664,7 +664,7 @@ Public Class Form1
         Dim e_wall As Double    'Wall thickness
         Dim σm As Double        'Longitudinal membrane stress
         Dim σb As Double        'Longitudinal bending stress 
-        Dim C As Double         'Constant
+        Dim Con As Double         'Constant
         Dim g, b, ratio As Double
 
         Double.TryParse(TextBox129.Text, h_long)    'Long side [mm]
@@ -679,26 +679,26 @@ Public Class Form1
 
         Select Case True
             Case (ratio >= 1 And ratio < 1.2)
-                C = 0.3078
+                Con = 0.3078
             Case (ratio >= 1.2 And ratio < 1.4)
-                C = 0.3834
+                Con = 0.3834
             Case (ratio >= 1.4 And ratio < 1.6)
-                C = 0.4356
+                Con = 0.4356
             Case (ratio >= 1.6 And ratio < 1.8)
-                C = 0.468
+                Con = 0.468
             Case (ratio >= 1.8 And ratio < 2)
-                C = 0.4872
+                Con = 0.4872
             Case (ratio >= 2 And ratio < 2.15)
-                C = 0.4974
+                Con = 0.4974
             Case (ratio >= 2.15)
-                C = 0.5
+                Con = 0.5
         End Select
 
-        σb = _P * C * (b / e_wall) ^ 2              '(15.6.4-2)
+        σb = _P * Con * (b / e_wall) ^ 2              '(15.6.4-2)
 
         TextBox118.Text = σm.ToString("0")    'Longitudinal membrane stress
         TextBox119.Text = σb.ToString("0")    'Longitudinal bending stress 
-        TextBox120.Text = C.ToString("0.0000")
+        TextBox120.Text = Con.ToString("0.0000")
         TextBox121.Text = ratio.ToString("0.00")
 
         '----------- check -------------
@@ -1062,9 +1062,10 @@ Public Class Form1
 
     Sub Calc_flange_Moments_11_5_3()
         Dim words() As String
-        Dim e, G, gt, HG, H, B As Double
+        Dim e, G, gt, HG, H As Double
         Dim C_bolt As Double
         Dim A_OD As Double          'Outside diameter flange
+        Dim B_ID As Double          'Inside diameter flange
         Dim h_ As Double            'hub length
         Dim db, dn, n As Double
         Dim fB As Double
@@ -1080,9 +1081,11 @@ Public Class Form1
         Dim g1_ As Double       'is the thickness of hub at back of flange;
         Dim βT, βU, βY As Double
 
-        Dim CF, δb, K, I0 As Double
+        Dim CF, K, I0 As Double
+        Dim δb As Double        'Distance bolts on bolt circle
         Dim M1, M2, σθ As Double
         Dim temp As Double
+        Dim Ab As Double        'Area selected bolt
 
         TextBox237.Clear()
 
@@ -1105,24 +1108,25 @@ Public Class Form1
         n = NumericUpDown25.Value           'Is No Bolts  
         C_Bolt = NumericUpDown28.Value      'Bolt circle
         w_ = NumericUpDown24.Value          'Gasket width
-        B = NumericUpDown23.Value           'ID Flange
+        B_ID = NumericUpDown23.Value        'ID Flange
         gt = NumericUpDown29.Value          'OD Gasket
         y = NumericUpDown31.Value           'Min seat stress
         m = NumericUpDown30.Value           'Gasket factor
-        db = NumericUpDown26.Value          'Dia bolt
+        db = NumericUpDown26.Value          'Dia bolt selected
+        Ab = PI / 2 * db ^ 2                'Area selected bolt
         dn = db                             'Dia bolt nominal (niet af)
         fB = NumericUpDown27.Value          'Bolt design stress at oper-temp (Rp02/3)
         e = NumericUpDown32.Value           'Slip on flangethickness
         g0_ = NumericUpDown56.Value         'thickness of hub at small end
         g1_ = NumericUpDown10.Value         'thickness of hub at back of flange
-        h_ = NumericUpDown59.Value           'hub length
+        h_ = NumericUpDown59.Value          'hub length
 
         '------------- bolting ------------
-        b0_gasket = w_ / 2                  '(11.5.2)
+        b0_gasket = w_ / 2                  '(11.5.1)
 
         '------b_gasket = effective gasket width---------
         If b0_gasket <= 6.3 Then
-            b_gasket = b0_gasket
+            b_gasket = b0_gasket               '(11.5-3)
             G = gt
         Else
             b_gasket = 2.52 * Sqrt(b0_gasket)  '(11.5-4)
@@ -1131,7 +1135,9 @@ Public Class Form1
 
         H = PI / 4 * (G ^ 2 * _P)              '(11.5-5) Hydrostatic end force
         HG = 2 * PI * G * b_gasket * m * _P    '(11.5-6)
+        '--- assembly condition
         Wa = PI * b0_gasket * G * y            '(11.5-7) Min req. bolt load
+        '--- operating condition
         Wop = H + HG                           '(11.5-8)
 
         '------------- Required bolt area --------------------
@@ -1144,14 +1150,14 @@ Public Class Form1
 
         '------------- Stepped Flange moment (11.5.3)------------
 
-        HD = PI / 4 * B * 2 * _P    'Hydrostatic force via shell
-        HT = H - HD                 'Hydrostatic force via flange face
+        HD = PI / 4 * B_ID * 2 * _P         '(11.5-10) HT  Hydrostatic force via shell
+        HT = H - HD                         '(11.5-11) Hydrostatic force via flange face
 
-        hD_ = (C_bolt - B) / 2                   '(11.5-13)
-        hG_ = (C_bolt - G) / 2                   '(11.5-14)
-        hT_ = (2 * C_bolt - B - G) / 4           '(11.5-15)
+        hD_ = (C_bolt - B_ID) / 2           '(11.5-13)
+        hG_ = (C_bolt - G) / 2              '(11.5-14)
+        hT_ = (2 * C_bolt - B_ID - G) / 4   '(11.5-15)
 
-        W = 0.5 * (db + dn) * fB            '(11.5-16)
+        W = 0.5 * (AB_min + Ab) * fB        '(11.5-16)
 
         Ma = W * hG_                        '(11.5-17)
         Mop = HD * hD_ + HT * hT_ + HG * hG_ '(11.5-18)
@@ -1159,21 +1165,24 @@ Public Class Form1
         '------------- Flange stresses and stress limit (11.5.4)------------
         δb = C_bolt * PI / n               '[mm] Distance adjacent bolts
 
-        CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))
-        K = A_OD / B                                   '(11.5-21)
-        I0 = Sqrt(B * g0_)                          '(11.5-22)
+        CF = Sqrt(δb / (2 * db + 6 * e / (m + 0.5)))    '(11.5-20)
+        If (CF < 1) Then CF = 1
 
-        βT = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1 '(11.5-23)
+        K = A_OD / B_ID                                 '(11.5-21)
+
+        I0 = Sqrt(B_ID * g0_)                           '(11.5-22)
+
+        βT = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1     '(11.5-23)
         βT /= (1.0472 + 1.9448 * K ^ 2) * (K - 1)
 
-        βU = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1 '(11.5-24)
+        βU = (K ^ 2 * (1 + 8.55246 * Log10(K))) - 1     '(11.5-24)
         βU /= 1.36136 * (K ^ 2 - 1) * (K - 1)
 
-        βY = 1 / (K - 1)                            '(11.5-24)
-        βY *= 0.66845 + 5.7169 * (K ^ 2 * Log10(K)) / (K ^ 2 - 1)
+        βY = 1 / (K - 1)                                '(11.5-24)
+        βY *= 0.66845 + (5.7169 * (K ^ 2 * Log10(K)) / (K ^ 2 - 1))
 
-        M1 = Ma * CF / B                '(11.5-26) assembly condition
-        M2 = Mop * CF / B               '(11.5-27)  operating condition
+        M1 = Ma * CF / B_ID                '(11.5-26) assembly condition
+        M2 = Mop * CF / B_ID               '(11.5-27)  operating condition
 
         TextBox237.AppendText("M1 = " & M1.ToString & vbCrLf)
         TextBox237.AppendText("M2= " & M2.ToString & vbCrLf)
@@ -1195,54 +1204,58 @@ Public Class Form1
         'alle coefficienten eindigen met een underscore !!
         'alle formuler vanaf pagina 170
         TextBox237.AppendText("----- Integral method -----" & vbCrLf)
-        Dim A_, C_ As Double
+        Dim Aa_, Cc_ As Double
         Dim C1, C2, C3, C4, C5, C6, C7, C8, C9, C10 As Double
         Dim C11, C12, C13, C14, C15, C16, C17, C18, C19, C20 As Double
         Dim C21, C22, C23, C24, C25, C26, C27, C28, C29, C30 As Double
         Dim C31, C32, C33, C34, C35, C36, C37 As Double
         Dim E1, E2, E3, E4, E5, E6 As Double
 
-        A_ = (g1_ / g0_) - 1                        '(11.5-43)
-        C_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4      '(11.5-44)
+        Aa_ = (g1_ / g0_) - 1                        '(11.5-43)
+        Cc_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4      '(11.5-44)
 
+        TextBox237.AppendText("B= " & B_ID.ToString & vbCrLf)
         TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
         TextBox237.AppendText("g1_= " & g1_.ToString & vbCrLf)
-
+        TextBox237.AppendText("_ν= " & _ν.ToString & vbCrLf)
         TextBox237.AppendText("h_= " & h_.ToString & vbCrLf)
-        TextBox237.AppendText("A_= " & A_.ToString & vbCrLf)
-        TextBox237.AppendText("C_= " & C_.ToString & vbCrLf)
+        TextBox237.AppendText("I0= " & I0.ToString & vbCrLf)
+        TextBox237.AppendText("A= " & Aa_.ToString & vbCrLf)
+        TextBox237.AppendText("C= " & Cc_.ToString & vbCrLf)
 
-        C1 = 1 / 3 + A_ / 12
-        C2 = 5 / 42 + 17 * A_ / 336
-        C3 = 1 / 210 + A_ / 360
-        C4 = 11 / 360 + 59 * A_ / 5040 + (1 + 3 * A_) / C_
-        C5 = 1 / 90 + 5 * A_ / 1008 - (1 + A_) ^ 3 / C_
-        C6 = 1 / 120 + 17 * A_ / 5040 + 1 / C_
-        C7 = 215 / 2772 + 51 * A_ / 1232 + (120 + 225 * A_ + 150 * A_ ^ 2 + 35 * A_ ^ 3) / (14 * C_)
-        C8 = 31 / 6930 + 128 * A_ / 45045 + (66 + 165 * A_ + 132 * A_ ^ 2 + 35 * A_ ^ 3) / (77 * C_)
-        C9 = 553 / 30240 + 653 * A_ / 73920 + (42 + 198 * A_ + 117 * A_ ^ 2 + 25 * A_ ^ 3) / (84 * C_)
-        C10 = 29 / 3780 + 3 * A_ / 704 - (42 + 198 * A_ + 243 * A_ ^ 2 + 91 * A_ ^ 3) / (84 * C_)
-        C11 = 31 / 6048 + 1763 * A_ / 665280 + (42 + 72 * A_ + 45 * A_ ^ 2 + 10 * A_ ^ 3) / (84 * C_)
-        C12 = 1 / 2925 + 71 * A_ / 300300 + (88 + 198 * A_ + 156 * A_ ^ 2 + 42 * A_ ^ 3) / (385 * C_)
-        C13 = 761 / 831600 + 937 * A_ / 1663200 + (2 + 12 * A_ + 11 * A_ ^ 2 + 3 * A_ ^ 3) / (70 * C_)
-        C14 = 197 / 415600 + 103 * A_ / 332640 + (2 + 12 * A_ + 17 * A_ ^ 2 + 7 * A_ ^ 3) / (70 * C_)
-        C15 = 233 / 831600 + 97 * A_ / 554400 + (6 + 18 * A_ + 15 * A_ ^ 2 + 4 * A_ ^ 3) / (210 * C_)
+        C1 = 1 / 3 + Aa_ / 12
+        C2 = 5 / 42 + 17 * Aa_ / 336
+        C3 = 1 / 210 + Aa_ / 360
+        C4 = 11 / 360 + 59 * Aa_ / 5040 + (1 + 3 * Aa_) / Cc_
+        C5 = 1 / 90 + 5 * Aa_ / 1008 - (1 + Aa_) ^ 3 / Cc_
+        C6 = 1 / 120 + 17 * Aa_ / 5040 + 1 / Cc_
+        C7 = 215 / 2772 + 51 * Aa_ / 1232 + (120 + 225 * Aa_ + 150 * Aa_ ^ 2 + 35 * Aa_ ^ 3) / (14 * Cc_)
+        C8 = 31 / 6930 + 128 * Aa_ / 45045 + (66 + 165 * Aa_ + 132 * Aa_ ^ 2 + 35 * Aa_ ^ 3) / (77 * Cc_)
+        C9 = 553 / 30240 + 653 * Aa_ / 73920 + (42 + 198 * Aa_ + 117 * Aa_ ^ 2 + 25 * Aa_ ^ 3) / (84 * Cc_)
+        C10 = 29 / 3780 + 3 * Aa_ / 704 - (42 + 198 * Aa_ + 243 * Aa_ ^ 2 + 91 * Aa_ ^ 3) / (84 * Cc_)
+        C11 = 31 / 6048 + 1763 * Aa_ / 665280 + (42 + 72 * Aa_ + 45 * Aa_ ^ 2 + 10 * Aa_ ^ 3) / (84 * Cc_)
+        C12 = 1 / 2925 + 71 * Aa_ / 300300 + (88 + 198 * Aa_ + 156 * Aa_ ^ 2 + 42 * Aa_ ^ 3) / (385 * Cc_)
+        C13 = 761 / 831600 + 937 * Aa_ / 1663200 + (2 + 12 * Aa_ + 11 * Aa_ ^ 2 + 3 * Aa_ ^ 3) / (70 * Cc_)
+        C14 = 197 / 415800 + 103 * Aa_ / 332640 + (2 + 12 * Aa_ + 17 * Aa_ ^ 2 + 7 * Aa_ ^ 3) / (70 * Cc_)
+        C15 = 233 / 831600 + 97 * Aa_ / 554400 + (6 + 18 * Aa_ + 15 * Aa_ ^ 2 + 4 * Aa_ ^ 3) / (210 * Cc_)
+
         C16 = C1 * C7 * C12 + C2 * C8 * C3 + C3 * C8 * C2 - (C3 ^ 2 * C7 + C8 ^ 2 * C1 + C2 ^ 2 * C12)
+
         C17 = (C4 * C7 * C12 + C2 * C8 * C13 + C3 * C8 * C9 - (C13 * C7 * C3 + C8 ^ 2 * C4 + C12 * C2 * C9)) / C16
         C18 = (C5 * C7 * C12 + C2 * C8 * C14 + C3 * C8 * C10 - (C14 * C7 * C3 + C8 ^ 2 * C5 + C12 * C2 * C10)) / C16
-        C19 = (C6 * C7 * C13 + C2 * C8 * C15 + C3 * C8 * C11 - (C15 * C7 * C3 + C8 ^ 2 * C6 + C12 * C2 * C11)) / C16
+        C19 = (C6 * C7 * C12 + C2 * C8 * C15 + C3 * C8 * C11 - (C15 * C7 * C3 + C8 ^ 2 * C6 + C12 * C2 * C11)) / C16
         C20 = (C1 * C9 * C12 + C4 * C8 * C3 + C3 * C13 * C2 - (C3 ^ 2 * C9 + C13 * C8 * C1 + C12 * C4 * C2)) / C16
         C21 = (C1 * C10 * C12 + C5 * C8 * C3 + C3 * C14 * C2 - (C3 ^ 2 * C10 + C14 * C8 * C1 + C12 * C5 * C2)) / C16
         C22 = (C1 * C11 * C12 + C6 * C8 * C3 + C3 * C15 * C2 - (C3 ^ 2 * C11 + C15 * C8 * C1 + C12 * C6 * C2)) / C16
         C23 = (C1 * C7 * C13 + C2 * C9 * C3 + C4 * C8 * C2 - (C3 * C7 * C4 + C8 * C9 * C1 + C2 ^ 2 * C13)) / C16
         C24 = (C1 * C7 * C14 + C2 * C10 * C3 + C5 * C8 * C2 - (C3 * C7 * C5 + C8 * C10 * C1 + C2 ^ 2 * C14)) / C16
         C25 = (C1 * C7 * C15 + C2 * C11 * C3 + C6 * C8 * C2 - (C3 * C7 * C6 + C8 * C11 * C1 + C2 ^ 2 ^ C15)) / C16
-        C26 = -(C_ / 4) ^ 0.25
+        C26 = -(Cc_ / 4) ^ 0.25
         C27 = C20 - C17 - 5 / 12 + C17 * C26
         C28 = C22 - C19 - 1 / 12 + C19 * C26    '(11.5-73)
-        C29 = -(C_ / 4) ^ 0.5
-        C30 = -(C_ / 4) ^ 0.75
-        C31 = 3 * A_ / 2 - C17 * C30
+        C29 = -(Cc_ / 4) ^ 0.5
+        C30 = -(Cc_ / 4) ^ 0.75
+        C31 = 3 * Aa_ / 2 - C17 * C30
         C32 = 1 / 2 - C19 * C30
         C33 = C26 * C32 / 2 + C28 * C31 * C29 - (C30 * C28 / 2 + C31 * C27 * C29)
         C34 = 1 / 12 + C18 - C21 - C18 * C26
@@ -1254,8 +1267,8 @@ Public Class Form1
         E2 = C20 * C36 + C21 + C22 * C37
         E3 = C23 * C36 + C24 + C25 * C37
         E4 = ((3 + C37 + 3 * C36) / 12) - ((2 * E3 + 15 * E2 + 10 * E1) / 10)
-        E5 = (E1 * (3 + A_) / 6) + (E2 * (21 + 11 * A_) / 84) + (E3 * (3 + 2 * A_) / 210)
-        E6 = E5 - C36 * (7 / 120 + A_ / 36 + 3 * A_ / C_) - (1 / 40) - (A_ / 72) - C37 * (1 / 60 + A_ / 120 + 1 / C_)
+        E5 = (E1 * (3 + Aa_) / 6) + (E2 * (21 + 11 * Aa_) / 84) + (E3 * (3 + 2 * Aa_) / 210)
+        E6 = E5 - C36 * (7 / 120 + Aa_ / 36 + 3 * Aa_ / Cc_) - (1 / 40) - (Aa_ / 72) - C37 * (1 / 60 + Aa_ / 120 + 1 / Cc_)
 
         TextBox237.AppendText("C28= " & C28.ToString & vbCrLf)
         TextBox237.AppendText("C29= " & C29.ToString & vbCrLf)
@@ -1265,23 +1278,23 @@ Public Class Form1
         TextBox237.AppendText("C36= " & C36.ToString & vbCrLf)
 
         Dim βf As Double
-        βf = -E6
-        βf /= (C_ / (3 * (1 - _ν * _ν))) ^ 0.25
-        βf /= ((1 + A_) ^ 3) / C_
+        βf = -E6                                 '(11.5-28)
+        βf /= (Cc_ / (3 * (1 - _ν * _ν))) ^ 0.25
+        βf /= ((1 + Aa_) ^ 3) / Cc_
 
         'βf = 0.90892   'Cylindrical hub         '(11.5-28)
         TextBox237.AppendText("βf= (0.90892)=" & βf.ToString & vbCrLf)
 
         Dim βv As Double
-        βv = E4
-        βv /= ((3 * (1 - _ν * _ν)) / C_) ^ 0.25
-        βv /= ((1 + A_) ^ 3)
-        'βv = 0.550103   'Cylindrical hub    '(11.5-29)
-        TextBox237.AppendText("βv= (0.550103) " & βv.ToString & vbCrLf)
+        βv = E4                                      '(11.5-29)
+        βv /= ((3 * (1 - _ν * _ν)) / Cc_) ^ 0.25
+        βv /= ((1 + Aa_) ^ 3)
+        'βv = 0.550103   'Cylindrical hub       '(11.5-29)
+        TextBox237.AppendText("βv= (0.550103)= " & βv.ToString & vbCrLf)
 
         Dim φ As Double
-        φ = C36 / (1 + A_)                       '(11.5-30)
-        TextBox237.AppendText("A_= " & A_.ToString & vbCrLf)
+        φ = C36 / (1 + Aa_)                       '(11.5-30)
+        TextBox237.AppendText("Aa_= " & Aa_.ToString & vbCrLf)
         TextBox237.AppendText("φ= " & φ.ToString & vbCrLf)
 
         Dim λ As Double
@@ -1292,7 +1305,7 @@ Public Class Form1
 
         '-------- Longitudinal hub stress -----
         Dim σH As Double
-        σH = φ * M2 / (λ * g0_ ^ 2)               '(11.5-32)
+        σH = φ * M2 / (λ * g1_ ^ 2)               '(11.5-32)
         TextBox237.AppendText("σH= " & σH.ToString & vbCrLf)
 
         '-------- Radial flange stress -----
@@ -1303,7 +1316,7 @@ Public Class Form1
 
         '---------- Tangential flange stress -----
         σθ = βY * M2 / e ^ 2                     '(11.5-34)
-        σθ -= K ^ 2 + 1 / (K ^ 2 - 1)
+        σθ -= σr * (K ^ 2 + 1 / (K ^ 2 - 1))
         TextBox237.AppendText("σθ= " & σθ.ToString & vbCrLf)
 
         '==================================================
@@ -1348,9 +1361,9 @@ Public Class Form1
         TextBox103.Text = δb.ToString("0")       '[mm] Distance bolts
 
         '-------------- checks --------------------
-        NumericUpDown28.BackColor = CType(IIf(C_bolt <= B, Color.Red, Color.Yellow), Color)    'Bolt diameter
+        NumericUpDown28.BackColor = CType(IIf(C_bolt <= B_ID, Color.Red, Color.Yellow), Color)    'Bolt diameter
         NumericUpDown34.BackColor = CType(IIf(A_OD <= C_bolt, Color.Red, Color.Yellow), Color)    'Flange OD
-        NumericUpDown24.BackColor = CType(IIf(w_ > (A_OD - B) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
+        NumericUpDown24.BackColor = CType(IIf(w_ > (A_OD - B_ID) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
         '----- bolts ---------
         NumericUpDown26.BackColor = CType(IIf(dia_bolt > db, Color.Red, Color.Yellow), Color) 'Bolt dia
         TextBox95.BackColor = CType(IIf(dia_bolt > db, Color.Red, Color.LightGreen), Color)   'Bolt dia
