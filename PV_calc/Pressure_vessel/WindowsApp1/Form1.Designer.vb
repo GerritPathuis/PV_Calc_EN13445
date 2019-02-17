@@ -731,6 +731,7 @@ Partial Class Form1
         Me.Label218 = New System.Windows.Forms.Label()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.PictureBox21 = New System.Windows.Forms.PictureBox()
         Me.PictureBox20 = New System.Windows.Forms.PictureBox()
         Me.Button9 = New System.Windows.Forms.Button()
@@ -9056,6 +9057,7 @@ Partial Class Form1
         '
         'TabPage9
         '
+        Me.TabPage9.Controls.Add(Me.CheckBox1)
         Me.TabPage9.Controls.Add(Me.PictureBox21)
         Me.TabPage9.Controls.Add(Me.PictureBox20)
         Me.TabPage9.Controls.Add(Me.Button9)
@@ -9074,13 +9076,23 @@ Partial Class Form1
         Me.TabPage9.Text = "11.5 Narrow face gasket Flanges"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(309, 575)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(131, 20)
+        Me.CheckBox1.TabIndex = 237
+        Me.CheckBox1.Text = "Cylindrical slip on"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'PictureBox21
         '
         Me.PictureBox21.Image = CType(resources.GetObject("PictureBox21.Image"), System.Drawing.Image)
         Me.PictureBox21.InitialImage = CType(resources.GetObject("PictureBox21.InitialImage"), System.Drawing.Image)
-        Me.PictureBox21.Location = New System.Drawing.Point(11, 571)
+        Me.PictureBox21.Location = New System.Drawing.Point(11, 601)
         Me.PictureBox21.Name = "PictureBox21"
-        Me.PictureBox21.Size = New System.Drawing.Size(131, 129)
+        Me.PictureBox21.Size = New System.Drawing.Size(116, 99)
         Me.PictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox21.TabIndex = 236
         Me.PictureBox21.TabStop = False
@@ -9089,9 +9101,9 @@ Partial Class Form1
         '
         Me.PictureBox20.Image = CType(resources.GetObject("PictureBox20.Image"), System.Drawing.Image)
         Me.PictureBox20.InitialImage = CType(resources.GetObject("PictureBox20.InitialImage"), System.Drawing.Image)
-        Me.PictureBox20.Location = New System.Drawing.Point(161, 571)
+        Me.PictureBox20.Location = New System.Drawing.Point(161, 601)
         Me.PictureBox20.Name = "PictureBox20"
-        Me.PictureBox20.Size = New System.Drawing.Size(131, 129)
+        Me.PictureBox20.Size = New System.Drawing.Size(103, 99)
         Me.PictureBox20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox20.TabIndex = 235
         Me.PictureBox20.TabStop = False
@@ -9418,9 +9430,9 @@ Partial Class Form1
         '
         Me.PictureBox8.Image = CType(resources.GetObject("PictureBox8.Image"), System.Drawing.Image)
         Me.PictureBox8.InitialImage = CType(resources.GetObject("PictureBox8.InitialImage"), System.Drawing.Image)
-        Me.PictureBox8.Location = New System.Drawing.Point(311, 571)
+        Me.PictureBox8.Location = New System.Drawing.Point(311, 601)
         Me.PictureBox8.Name = "PictureBox8"
-        Me.PictureBox8.Size = New System.Drawing.Size(131, 129)
+        Me.PictureBox8.Size = New System.Drawing.Size(123, 99)
         Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox8.TabIndex = 232
         Me.PictureBox8.TabStop = False
@@ -9452,7 +9464,7 @@ Partial Class Form1
         Me.GroupBox19.Controls.Add(Me.Label259)
         Me.GroupBox19.Controls.Add(Me.Label258)
         Me.GroupBox19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox19.Location = New System.Drawing.Point(6, 387)
+        Me.GroupBox19.Location = New System.Drawing.Point(6, 391)
         Me.GroupBox19.Name = "GroupBox19"
         Me.GroupBox19.Size = New System.Drawing.Size(457, 175)
         Me.GroupBox19.TabIndex = 231
@@ -10438,9 +10450,9 @@ Partial Class Form1
         Me.GroupBox16.Controls.Add(Me.Label236)
         Me.GroupBox16.Controls.Add(Me.Label237)
         Me.GroupBox16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox16.Location = New System.Drawing.Point(6, 9)
+        Me.GroupBox16.Location = New System.Drawing.Point(6, 23)
         Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.Size = New System.Drawing.Size(457, 372)
+        Me.GroupBox16.Size = New System.Drawing.Size(457, 359)
         Me.GroupBox16.TabIndex = 144
         Me.GroupBox16.TabStop = False
         Me.GroupBox16.Text = "Flange moments 11.5.3 ()"
@@ -13617,6 +13629,7 @@ Partial Class Form1
         Me.GroupBox14.PerformLayout
         CType(Me.NumericUpDown22, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage9.ResumeLayout(False)
+        Me.TabPage9.PerformLayout
         CType(Me.PictureBox21, System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PictureBox20, System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox20.ResumeLayout(False)
@@ -14803,4 +14816,5 @@ Partial Class Form1
     Friend WithEvents Label702 As Label
     Friend WithEvents Label703 As Label
     Friend WithEvents NumericUpDown59 As NumericUpDown
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

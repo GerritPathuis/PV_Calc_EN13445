@@ -1056,7 +1056,7 @@ Public Class Form1
         TextBox111.Text = e_pierced.ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged, NumericUpDown56.ValueChanged, NumericUpDown10.ValueChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged, NumericUpDown56.ValueChanged, NumericUpDown10.ValueChanged, CheckBox1.CheckedChanged
         Calc_flange_Moments_11_5_3()
     End Sub
 
@@ -1087,7 +1087,22 @@ Public Class Form1
         Dim temp As Double
         Dim Ab As Double        'Area selected bolt
 
+        Dim Aa_, Cc_ As Double
+        Dim C1, C2, C3, C4, C5, C6, C7, C8, C9, C10 As Double
+        Dim C11, C12, C13, C14, C15, C16, C17, C18, C19, C20 As Double
+        Dim C21, C22, C23, C24, C25, C26, C27, C28, C29, C30 As Double
+        Dim C31, C32, C33, C34, C35, C36, C37 As Double
+        Dim E1, E2, E3, E4, E5, E6 As Double
+
+        Dim βv As Double
+        Dim βf As Double
+        Dim φ As Double
+        Dim λ As Double
+        Dim σH As Double
+        Dim σr As Double
+
         TextBox237.Clear()
+
 
         If (ComboBox4.SelectedIndex > -1) Then          'Prevent exceptions
             words = gaskets(ComboBox4.SelectedIndex).Split(separators, StringSplitOptions.None)
@@ -1149,7 +1164,6 @@ Public Class Form1
         dia_bolt = Sqrt((AB_min / n) * 4 / PI)
 
         '------------- Stepped Flange moment (11.5.3)------------
-
         HD = PI / 4 * B_ID * 2 * _P         '(11.5-10) HT  Hydrostatic force via shell
         HT = H - HD                         '(11.5-11) Hydrostatic force via flange face
 
@@ -1203,13 +1217,7 @@ Public Class Form1
         '---11.5.4.1.2 Coefficients for flange stresses calculations
         'alle coefficienten eindigen met een underscore !!
         'alle formuler vanaf pagina 170
-        TextBox237.AppendText("----- Integral method -----" & vbCrLf)
-        Dim Aa_, Cc_ As Double
-        Dim C1, C2, C3, C4, C5, C6, C7, C8, C9, C10 As Double
-        Dim C11, C12, C13, C14, C15, C16, C17, C18, C19, C20 As Double
-        Dim C21, C22, C23, C24, C25, C26, C27, C28, C29, C30 As Double
-        Dim C31, C32, C33, C34, C35, C36, C37 As Double
-        Dim E1, E2, E3, E4, E5, E6 As Double
+        TextBox237.AppendText("------------- Integral method ------------" & vbCrLf)
 
         Aa_ = (g1_ / g0_) - 1                        '(11.5-43)
         Cc_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4      '(11.5-44)
@@ -1217,39 +1225,41 @@ Public Class Form1
         TextBox237.AppendText("B= " & B_ID.ToString & vbCrLf)
         TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
         TextBox237.AppendText("g1_= " & g1_.ToString & vbCrLf)
+        TextBox237.AppendText("g1/g0= " & (g1_ / g0_).ToString("0.00") & vbCrLf)
         TextBox237.AppendText("_ν= " & _ν.ToString & vbCrLf)
         TextBox237.AppendText("h_= " & h_.ToString & vbCrLf)
         TextBox237.AppendText("I0= " & I0.ToString & vbCrLf)
+        TextBox237.AppendText("h/I0= " & (h_ / I0).ToString("0.00") & vbCrLf)
         TextBox237.AppendText("A= " & Aa_.ToString & vbCrLf)
         TextBox237.AppendText("C= " & Cc_.ToString & vbCrLf)
 
         C1 = 1 / 3 + Aa_ / 12
         C2 = 5 / 42 + 17 * Aa_ / 336
         C3 = 1 / 210 + Aa_ / 360
-        C4 = 11 / 360 + 59 * Aa_ / 5040 + (1 + 3 * Aa_) / Cc_
-        C5 = 1 / 90 + 5 * Aa_ / 1008 - (1 + Aa_) ^ 3 / Cc_
-        C6 = 1 / 120 + 17 * Aa_ / 5040 + 1 / Cc_
-        C7 = 215 / 2772 + 51 * Aa_ / 1232 + (120 + 225 * Aa_ + 150 * Aa_ ^ 2 + 35 * Aa_ ^ 3) / (14 * Cc_)
-        C8 = 31 / 6930 + 128 * Aa_ / 45045 + (66 + 165 * Aa_ + 132 * Aa_ ^ 2 + 35 * Aa_ ^ 3) / (77 * Cc_)
-        C9 = 553 / 30240 + 653 * Aa_ / 73920 + (42 + 198 * Aa_ + 117 * Aa_ ^ 2 + 25 * Aa_ ^ 3) / (84 * Cc_)
-        C10 = 29 / 3780 + 3 * Aa_ / 704 - (42 + 198 * Aa_ + 243 * Aa_ ^ 2 + 91 * Aa_ ^ 3) / (84 * Cc_)
-        C11 = 31 / 6048 + 1763 * Aa_ / 665280 + (42 + 72 * Aa_ + 45 * Aa_ ^ 2 + 10 * Aa_ ^ 3) / (84 * Cc_)
-        C12 = 1 / 2925 + 71 * Aa_ / 300300 + (88 + 198 * Aa_ + 156 * Aa_ ^ 2 + 42 * Aa_ ^ 3) / (385 * Cc_)
-        C13 = 761 / 831600 + 937 * Aa_ / 1663200 + (2 + 12 * Aa_ + 11 * Aa_ ^ 2 + 3 * Aa_ ^ 3) / (70 * Cc_)
-        C14 = 197 / 415800 + 103 * Aa_ / 332640 + (2 + 12 * Aa_ + 17 * Aa_ ^ 2 + 7 * Aa_ ^ 3) / (70 * Cc_)
-        C15 = 233 / 831600 + 97 * Aa_ / 554400 + (6 + 18 * Aa_ + 15 * Aa_ ^ 2 + 4 * Aa_ ^ 3) / (210 * Cc_)
+        C4 = (11 / 360) + (59 * Aa_ / 5040) + ((1 + 3 * Aa_) / Cc_)
+        C5 = (1 / 90) + (5 * Aa_ / 1008) - (((1 + Aa_) ^ 3) / Cc_)
+        C6 = 1 / 120 + 17 * Aa_ / 5040 + (1 / Cc_)
+        C7 = 215 / 2772 + 51 * Aa_ / 1232 + ((120 + 225 * Aa_ + 150 * Aa_ ^ 2 + 35 * Aa_ ^ 3) / 14) * 1 / Cc_
+        C8 = 31 / 6930 + 128 * Aa_ / 45045 + ((66 + 165 * Aa_ + 132 * Aa_ ^ 2 + 35 * Aa_ ^ 3) / 77) * 1 / Cc_
+        C9 = 553 / 30240 + 653 * Aa_ / 73920 + ((42 + 198 * Aa_ + 117 * Aa_ ^ 2 + 25 * Aa_ ^ 3) / 84) * 1 / Cc_
+        C10 = 29 / 3780 + 3 * Aa_ / 704 - ((42 + 198 * Aa_ + 243 * Aa_ ^ 2 + 91 * Aa_ ^ 3) / 84 * 1) / Cc_
+        C11 = 31 / 6048 + 1763 * Aa_ / 665280 + ((42 + 72 * Aa_ + 45 * Aa_ ^ 2 + 10 * Aa_ ^ 3) / 84) * 1 / Cc_
+        C12 = 1 / 2925 + 71 * Aa_ / 300300 + ((88 + 198 * Aa_ + 156 * Aa_ ^ 2 + 42 * Aa_ ^ 3) / 385) * 1 / Cc_
+        C13 = 761 / 831600 + 937 * Aa_ / 1663200 + ((2 + 12 * Aa_ + 11 * Aa_ ^ 2 + 3 * Aa_ ^ 3) / 70) * 1 / Cc_
+        C14 = 197 / 415800 + 103 * Aa_ / 332640 + ((2 + 12 * Aa_ + 17 * Aa_ ^ 2 + 7 * Aa_ ^ 3) / 70) * 1 / Cc_
+        C15 = 233 / 831600 + 97 * Aa_ / 554400 + ((6 + 18 * Aa_ + 15 * Aa_ ^ 2 + 4 * Aa_ ^ 3) / 210) * 1 / Cc_
 
         C16 = C1 * C7 * C12 + C2 * C8 * C3 + C3 * C8 * C2 - (C3 ^ 2 * C7 + C8 ^ 2 * C1 + C2 ^ 2 * C12)
 
-        C17 = (C4 * C7 * C12 + C2 * C8 * C13 + C3 * C8 * C9 - (C13 * C7 * C3 + C8 ^ 2 * C4 + C12 * C2 * C9)) / C16
-        C18 = (C5 * C7 * C12 + C2 * C8 * C14 + C3 * C8 * C10 - (C14 * C7 * C3 + C8 ^ 2 * C5 + C12 * C2 * C10)) / C16
-        C19 = (C6 * C7 * C12 + C2 * C8 * C15 + C3 * C8 * C11 - (C15 * C7 * C3 + C8 ^ 2 * C6 + C12 * C2 * C11)) / C16
-        C20 = (C1 * C9 * C12 + C4 * C8 * C3 + C3 * C13 * C2 - (C3 ^ 2 * C9 + C13 * C8 * C1 + C12 * C4 * C2)) / C16
-        C21 = (C1 * C10 * C12 + C5 * C8 * C3 + C3 * C14 * C2 - (C3 ^ 2 * C10 + C14 * C8 * C1 + C12 * C5 * C2)) / C16
-        C22 = (C1 * C11 * C12 + C6 * C8 * C3 + C3 * C15 * C2 - (C3 ^ 2 * C11 + C15 * C8 * C1 + C12 * C6 * C2)) / C16
-        C23 = (C1 * C7 * C13 + C2 * C9 * C3 + C4 * C8 * C2 - (C3 * C7 * C4 + C8 * C9 * C1 + C2 ^ 2 * C13)) / C16
-        C24 = (C1 * C7 * C14 + C2 * C10 * C3 + C5 * C8 * C2 - (C3 * C7 * C5 + C8 * C10 * C1 + C2 ^ 2 * C14)) / C16
-        C25 = (C1 * C7 * C15 + C2 * C11 * C3 + C6 * C8 * C2 - (C3 * C7 * C6 + C8 * C11 * C1 + C2 ^ 2 ^ C15)) / C16
+        C17 = (C4 * C7 * C12 + C2 * C8 * C13 + C3 * C8 * C9 - (C13 * C7 * C3 + C8 ^ 2 * C4 + C12 * C2 * C9)) * 1 / C16
+        C18 = (C5 * C7 * C12 + C2 * C8 * C14 + C3 * C8 * C10 - (C14 * C7 * C3 + C8 ^ 2 * C5 + C12 * C2 * C10)) * 1 / C16
+        C19 = (C6 * C7 * C12 + C2 * C8 * C15 + C3 * C8 * C11 - (C15 * C7 * C3 + C8 ^ 2 * C6 + C12 * C2 * C11)) * 1 / C16
+        C20 = (C1 * C9 * C12 + C4 * C8 * C3 + C3 * C13 * C2 - (C3 ^ 2 * C9 + C13 * C8 * C1 + C12 * C4 * C2)) * 1 / C16
+        C21 = (C1 * C10 * C12 + C5 * C8 * C3 + C3 * C14 * C2 - (C3 ^ 2 * C10 + C14 * C8 * C1 + C12 * C5 * C2)) * 1 / C16
+        C22 = (C1 * C11 * C12 + C6 * C8 * C3 + C3 * C15 * C2 - (C3 ^ 2 * C11 + C15 * C8 * C1 + C12 * C6 * C2)) * 1 / C16
+        C23 = (C1 * C7 * C13 + C2 * C9 * C3 + C4 * C8 * C2 - (C3 * C7 * C4 + C8 * C9 * C1 + C2 ^ 2 * C13)) * 1 / C16
+        C24 = (C1 * C7 * C14 + C2 * C10 * C3 + C5 * C8 * C2 - (C3 * C7 * C5 + C8 * C10 * C1 + C2 ^ 2 * C14)) * 1 / C16
+        C25 = (C1 * C7 * C15 + C2 * C11 * C3 + C6 * C8 * C2 - (C3 * C7 * C6 + C8 * C11 * C1 + C2 ^ 2 ^ C15)) * 1 / C16
         C26 = -(Cc_ / 4) ^ 0.25
         C27 = C20 - C17 - 5 / 12 + C17 * C26
         C28 = C22 - C19 - 1 / 12 + C19 * C26    '(11.5-73)
@@ -1261,7 +1271,7 @@ Public Class Form1
         C34 = 1 / 12 + C18 - C21 - C18 * C26
         C35 = C18 * C30
         C36 = (C28 * C35 * C29 - C32 * C34 * C29) / C33
-        C37 = (C26 * C35 / 2 + C34 * C31 * C29 - C30 * C34 / 2 - C35 * C27 * C29) / C33
+        C37 = (C26 * C35 / 2 + (C34 * C31 * C29) - (C30 * C34 / 2) - C35 * C27 * C29) / C33
 
         E1 = C17 * C36 + C18 + C19 * C37
         E2 = C20 * C36 + C21 + C22 * C37
@@ -1270,46 +1280,59 @@ Public Class Form1
         E5 = (E1 * (3 + Aa_) / 6) + (E2 * (21 + 11 * Aa_) / 84) + (E3 * (3 + 2 * Aa_) / 210)
         E6 = E5 - C36 * (7 / 120 + Aa_ / 36 + 3 * Aa_ / Cc_) - (1 / 40) - (Aa_ / 72) - C37 * (1 / 60 + Aa_ / 120 + 1 / Cc_)
 
+        TextBox237.AppendText("C1= " & C1.ToString & vbCrLf)
+        TextBox237.AppendText("C2= " & C2.ToString & vbCrLf)
+        TextBox237.AppendText("C3= " & C3.ToString & vbCrLf)
+        TextBox237.AppendText("C4= " & C4.ToString & vbCrLf)
+        TextBox237.AppendText("C5= " & C5.ToString & vbCrLf)
+        TextBox237.AppendText("C6= " & C6.ToString & vbCrLf)
+        TextBox237.AppendText("C26= " & C26.ToString & vbCrLf)
+        TextBox237.AppendText("C27= " & C27.ToString & vbCrLf)
         TextBox237.AppendText("C28= " & C28.ToString & vbCrLf)
         TextBox237.AppendText("C29= " & C29.ToString & vbCrLf)
+        TextBox237.AppendText("C30= " & C30.ToString & vbCrLf)
+        TextBox237.AppendText("C31= " & C31.ToString & vbCrLf)
+        TextBox237.AppendText("C32= " & C32.ToString & vbCrLf)
         TextBox237.AppendText("C33= " & C33.ToString & vbCrLf)
         TextBox237.AppendText("C34= " & C34.ToString & vbCrLf)
         TextBox237.AppendText("C35= " & C35.ToString & vbCrLf)
         TextBox237.AppendText("C36= " & C36.ToString & vbCrLf)
 
-        Dim βf As Double
-        βf = -E6                                 '(11.5-28)
-        βf /= (Cc_ / (3 * (1 - _ν * _ν))) ^ 0.25
-        βf /= ((1 + Aa_) ^ 3) / Cc_
+        If (CheckBox1.Checked) Then
+            βf = 0.90892    'Cylindrical hub        '(11.5-28)
+            βv = 0.550103   'Cylindrical hub        '(11.5-29)
+            φ = 1           'g1/g0=1                'fig (11.5-6)
+            PictureBox20.Visible = False
+            PictureBox21.Visible = False
+        Else
+            βf = -E6                                '(11.5-28)
+            βf /= (Cc_ / (3 * (1 - _ν * _ν))) ^ 0.25
+            βf /= ((1 + Aa_) ^ 3) / Cc_
 
-        'βf = 0.90892   'Cylindrical hub         '(11.5-28)
-        TextBox237.AppendText("βf= (0.90892)=" & βf.ToString & vbCrLf)
+            βv = E4                                 '(11.5-29)
+            βv /= ((3 * (1 - _ν * _ν)) / Cc_) ^ 0.25
+            βv /= ((1 + Aa_) ^ 3)
 
-        Dim βv As Double
-        βv = E4                                      '(11.5-29)
-        βv /= ((3 * (1 - _ν * _ν)) / Cc_) ^ 0.25
-        βv /= ((1 + Aa_) ^ 3)
-        'βv = 0.550103   'Cylindrical hub       '(11.5-29)
-        TextBox237.AppendText("βv= (0.550103)= " & βv.ToString & vbCrLf)
+            φ = C36 / (1 + Aa_)                       '(11.5-30)
+            PictureBox20.Visible = True
+            PictureBox21.Visible = True
+        End If
 
-        Dim φ As Double
-        φ = C36 / (1 + Aa_)                       '(11.5-30)
         TextBox237.AppendText("Aa_= " & Aa_.ToString & vbCrLf)
-        TextBox237.AppendText("φ= " & φ.ToString & vbCrLf)
+        TextBox237.AppendText("βf= (0.90892)=" & βf.ToString & vbCrLf)
+        TextBox237.AppendText("βv= (0.550103)= " & βv.ToString & vbCrLf)
+        TextBox237.AppendText("φ=  (1.0)= " & φ.ToString & vbCrLf)
 
-        Dim λ As Double
         λ = (e * βf + I0) / (βT * I0)             '(11.5-31)
         λ += (e ^ 3 * βv) / (βU * I0 * g0_ ^ 2)
         TextBox237.AppendText("e= " & e.ToString & vbCrLf)
         TextBox237.AppendText("λ= " & λ.ToString & vbCrLf)
 
         '-------- Longitudinal hub stress -----
-        Dim σH As Double
         σH = φ * M2 / (λ * g1_ ^ 2)               '(11.5-32)
         TextBox237.AppendText("σH= " & σH.ToString & vbCrLf)
 
         '-------- Radial flange stress -----
-        Dim σr As Double
         σr = (1.333 * e * βf + I0) * M2
         σr /= λ * e ^ 2 * I0                    '(11.5-33)
         TextBox237.AppendText("σr= " & σr.ToString & vbCrLf)
@@ -3280,4 +3303,6 @@ Public Class Form1
     Private Sub PictureBox21_Click(sender As Object, e As EventArgs) Handles PictureBox21.Click
         Form6.Show()
     End Sub
+
+
 End Class
