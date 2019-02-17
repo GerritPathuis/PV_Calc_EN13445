@@ -1056,7 +1056,7 @@ Public Class Form1
         TextBox111.Text = e_pierced.ToString("0.0")
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged, NumericUpDown56.ValueChanged, NumericUpDown10.ValueChanged, CheckBox1.CheckedChanged
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click, TabPage9.Enter, NumericUpDown24.ValueChanged, NumericUpDown23.ValueChanged, NumericUpDown31.ValueChanged, NumericUpDown30.ValueChanged, NumericUpDown29.ValueChanged, NumericUpDown28.ValueChanged, NumericUpDown34.ValueChanged, NumericUpDown32.ValueChanged, ComboBox4.SelectedIndexChanged, NumericUpDown27.ValueChanged, NumericUpDown26.ValueChanged, NumericUpDown25.ValueChanged, ComboBox6.SelectedIndexChanged, NumericUpDown56.ValueChanged, NumericUpDown10.ValueChanged, CheckBox1.CheckedChanged, NumericUpDown59.ValueChanged
         Calc_flange_Moments_11_5_3()
     End Sub
 
@@ -1267,15 +1267,15 @@ Public Class Form1
         C30 = -(Cc_ / 4) ^ 0.75
         C31 = 3 * Aa_ / 2 - C17 * C30
         C32 = 1 / 2 - C19 * C30
-        C33 = C26 * C32 / 2 + C28 * C31 * C29 - (C30 * C28 / 2 + C31 * C27 * C29)
-        C34 = 1 / 12 + C18 - C21 - C18 * C26
+        C33 = C26 * C32 / 2 + C28 * C31 * C29 - (C30 * C28 / 2 + C32 * C27 * C29)
+        C34 = 1 / 12 + C18 - C21 - (C18 * C26)
         C35 = C18 * C30
-        C36 = (C28 * C35 * C29 - C32 * C34 * C29) / C33
-        C37 = (C26 * C35 / 2 + (C34 * C31 * C29) - (C30 * C34 / 2) - C35 * C27 * C29) / C33
+        C36 = (C28 * C35 * C29 - C32 * C34 * C29) * 1 / C33
+        C37 = (C26 * C35 / 2 + (C34 * C31 * C29) - (C30 * C34 / 2) - (C35 * C27 * C29)) * 1 / C33
 
-        E1 = C17 * C36 + C18 + C19 * C37
-        E2 = C20 * C36 + C21 + C22 * C37
-        E3 = C23 * C36 + C24 + C25 * C37
+        E1 = (C17 * C36) + C18 + (C19 * C37)
+        E2 = (C20 * C36) + C21 + (C22 * C37)
+        E3 = (C23 * C36) + C24 + (C25 * C37)
         E4 = ((3 + C37 + 3 * C36) / 12) - ((2 * E3 + 15 * E2 + 10 * E1) / 10)
         E5 = (E1 * (3 + Aa_) / 6) + (E2 * (21 + 11 * Aa_) / 84) + (E3 * (3 + 2 * Aa_) / 210)
         E6 = E5 - C36 * (7 / 120 + Aa_ / 36 + 3 * Aa_ / Cc_) - (1 / 40) - (Aa_ / 72) - C37 * (1 / 60 + Aa_ / 120 + 1 / Cc_)
