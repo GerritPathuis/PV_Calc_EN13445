@@ -1101,8 +1101,7 @@ Public Class Form1
         Dim σH As Double
         Dim σr As Double
 
-        TextBox237.Clear()
-
+        'TextBox237.Clear()
 
         If (ComboBox4.SelectedIndex > -1) Then          'Prevent exceptions
             words = gaskets(ComboBox4.SelectedIndex).Split(separators, StringSplitOptions.None)
@@ -1198,40 +1197,39 @@ Public Class Form1
         M1 = Ma * CF / B_ID                '(11.5-26) assembly condition
         M2 = Mop * CF / B_ID               '(11.5-27)  operating condition
 
-        TextBox237.AppendText("M1 = " & M1.ToString & vbCrLf)
-        TextBox237.AppendText("M2= " & M2.ToString & vbCrLf)
-
-        TextBox237.AppendText("δb = " & δb.ToString & vbCrLf)
-        TextBox237.AppendText("CF= " & CF.ToString & vbCrLf)
-        TextBox237.AppendText("K= " & K.ToString & vbCrLf)
-        TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
-        TextBox237.AppendText("I0 = " & I0.ToString & vbCrLf)
-        TextBox237.AppendText("βT= " & βT.ToString & vbCrLf)
-        TextBox237.AppendText("βU= " & βU.ToString & vbCrLf)
-        TextBox237.AppendText("βY= " & βY.ToString & vbCrLf)
-        TextBox237.AppendText("M1= " & M1.ToString & vbCrLf)
-        TextBox237.AppendText("M2= " & M2.ToString & vbCrLf)
+        'TextBox237.AppendText("M1 = " & M1.ToString & vbCrLf)
+        'TextBox237.AppendText("M2= " & M2.ToString & vbCrLf)
+        'TextBox237.AppendText("δb = " & δb.ToString & vbCrLf)
+        'TextBox237.AppendText("CF= " & CF.ToString & vbCrLf)
+        'TextBox237.AppendText("K= " & K.ToString & vbCrLf)
+        'TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
+        'TextBox237.AppendText("I0 = " & I0.ToString & vbCrLf)
+        'TextBox237.AppendText("βT= " & βT.ToString & vbCrLf)
+        'TextBox237.AppendText("βU= " & βU.ToString & vbCrLf)
+        'TextBox237.AppendText("βY= " & βY.ToString & vbCrLf)
+        'TextBox237.AppendText("M1= " & M1.ToString & vbCrLf)
+        'TextBox237.AppendText("M2= " & M2.ToString & vbCrLf)
 
 
         '----------- Integral method ---------------
         '---11.5.4.1.2 Coefficients for flange stresses calculations
         'alle coefficienten eindigen met een underscore !!
         'alle formuler vanaf pagina 170
-        TextBox237.AppendText("------------- Integral method ------------" & vbCrLf)
+        'TextBox237.AppendText("------------- Integral method ------------" & vbCrLf)
 
         Aa_ = (g1_ / g0_) - 1                        '(11.5-43)
         Cc_ = 48 * (1 - _ν ^ 2) * (h_ / I0) ^ 4      '(11.5-44)
 
-        TextBox237.AppendText("B= " & B_ID.ToString & vbCrLf)
-        TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
-        TextBox237.AppendText("g1_= " & g1_.ToString & vbCrLf)
-        TextBox237.AppendText("g1/g0= " & (g1_ / g0_).ToString("0.00") & vbCrLf)
-        TextBox237.AppendText("_ν= " & _ν.ToString & vbCrLf)
-        TextBox237.AppendText("h_= " & h_.ToString & vbCrLf)
-        TextBox237.AppendText("I0= " & I0.ToString & vbCrLf)
-        TextBox237.AppendText("h/I0= " & (h_ / I0).ToString("0.00") & vbCrLf)
-        TextBox237.AppendText("A= " & Aa_.ToString & vbCrLf)
-        TextBox237.AppendText("C= " & Cc_.ToString & vbCrLf)
+        'TextBox237.AppendText("B= " & B_ID.ToString & vbCrLf)
+        'TextBox237.AppendText("g0_= " & g0_.ToString & vbCrLf)
+        'TextBox237.AppendText("g1_= " & g1_.ToString & vbCrLf)
+        'TextBox237.AppendText("g1/g0= " & (g1_ / g0_).ToString("0.00") & vbCrLf)
+        'TextBox237.AppendText("_ν= " & _ν.ToString & vbCrLf)
+        'TextBox237.AppendText("h_= " & h_.ToString & vbCrLf)
+        'TextBox237.AppendText("I0= " & I0.ToString & vbCrLf)
+        'TextBox237.AppendText("h/I0= " & (h_ / I0).ToString("0.00") & vbCrLf)
+        'TextBox237.AppendText("A= " & Aa_.ToString & vbCrLf)
+        'TextBox237.AppendText("C= " & Cc_.ToString & vbCrLf)
 
         C1 = 1 / 3 + Aa_ / 12
         C2 = 5 / 42 + 17 * Aa_ / 336
@@ -1248,9 +1246,7 @@ Public Class Form1
         C13 = 761 / 831600 + 937 * Aa_ / 1663200 + ((2 + 12 * Aa_ + 11 * Aa_ ^ 2 + 3 * Aa_ ^ 3) / 70) * 1 / Cc_
         C14 = 197 / 415800 + 103 * Aa_ / 332640 + ((2 + 12 * Aa_ + 17 * Aa_ ^ 2 + 7 * Aa_ ^ 3) / 70) * 1 / Cc_
         C15 = 233 / 831600 + 97 * Aa_ / 554400 + ((6 + 18 * Aa_ + 15 * Aa_ ^ 2 + 4 * Aa_ ^ 3) / 210) * 1 / Cc_
-
         C16 = C1 * C7 * C12 + C2 * C8 * C3 + C3 * C8 * C2 - (C3 ^ 2 * C7 + C8 ^ 2 * C1 + C2 ^ 2 * C12)
-
         C17 = (C4 * C7 * C12 + C2 * C8 * C13 + C3 * C8 * C9 - (C13 * C7 * C3 + C8 ^ 2 * C4 + C12 * C2 * C9)) * 1 / C16
         C18 = (C5 * C7 * C12 + C2 * C8 * C14 + C3 * C8 * C10 - (C14 * C7 * C3 + C8 ^ 2 * C5 + C12 * C2 * C10)) * 1 / C16
         C19 = (C6 * C7 * C12 + C2 * C8 * C15 + C3 * C8 * C11 - (C15 * C7 * C3 + C8 ^ 2 * C6 + C12 * C2 * C11)) * 1 / C16
@@ -1280,23 +1276,6 @@ Public Class Form1
         E5 = (E1 * (3 + Aa_) / 6) + (E2 * (21 + 11 * Aa_) / 84) + (E3 * (3 + 2 * Aa_) / 210)
         E6 = E5 - C36 * (7 / 120 + Aa_ / 36 + 3 * Aa_ / Cc_) - (1 / 40) - (Aa_ / 72) - C37 * (1 / 60 + Aa_ / 120 + 1 / Cc_)
 
-        TextBox237.AppendText("C1= " & C1.ToString & vbCrLf)
-        TextBox237.AppendText("C2= " & C2.ToString & vbCrLf)
-        TextBox237.AppendText("C3= " & C3.ToString & vbCrLf)
-        TextBox237.AppendText("C4= " & C4.ToString & vbCrLf)
-        TextBox237.AppendText("C5= " & C5.ToString & vbCrLf)
-        TextBox237.AppendText("C6= " & C6.ToString & vbCrLf)
-        TextBox237.AppendText("C26= " & C26.ToString & vbCrLf)
-        TextBox237.AppendText("C27= " & C27.ToString & vbCrLf)
-        TextBox237.AppendText("C28= " & C28.ToString & vbCrLf)
-        TextBox237.AppendText("C29= " & C29.ToString & vbCrLf)
-        TextBox237.AppendText("C30= " & C30.ToString & vbCrLf)
-        TextBox237.AppendText("C31= " & C31.ToString & vbCrLf)
-        TextBox237.AppendText("C32= " & C32.ToString & vbCrLf)
-        TextBox237.AppendText("C33= " & C33.ToString & vbCrLf)
-        TextBox237.AppendText("C34= " & C34.ToString & vbCrLf)
-        TextBox237.AppendText("C35= " & C35.ToString & vbCrLf)
-        TextBox237.AppendText("C36= " & C36.ToString & vbCrLf)
 
         If (CheckBox1.Checked) Then
             βf = 0.90892    'Cylindrical hub        '(11.5-28)
@@ -1318,33 +1297,47 @@ Public Class Form1
             PictureBox21.Visible = True
         End If
 
-        TextBox237.AppendText("Aa_= " & Aa_.ToString & vbCrLf)
-        TextBox237.AppendText("βf= (0.90892)=" & βf.ToString & vbCrLf)
-        TextBox237.AppendText("βv= (0.550103)= " & βv.ToString & vbCrLf)
-        TextBox237.AppendText("φ=  (1.0)= " & φ.ToString & vbCrLf)
-
         λ = (e * βf + I0) / (βT * I0)             '(11.5-31)
         λ += (e ^ 3 * βv) / (βU * I0 * g0_ ^ 2)
-        TextBox237.AppendText("e= " & e.ToString & vbCrLf)
-        TextBox237.AppendText("λ= " & λ.ToString & vbCrLf)
 
         '-------- Longitudinal hub stress -----
         σH = φ * M2 / (λ * g1_ ^ 2)               '(11.5-32)
-        TextBox237.AppendText("σH= " & σH.ToString & vbCrLf)
 
         '-------- Radial flange stress -----
         σr = (1.333 * e * βf + I0) * M2
         σr /= λ * e ^ 2 * I0                    '(11.5-33)
-        TextBox237.AppendText("σr= " & σr.ToString & vbCrLf)
 
         '---------- Tangential flange stress -----
         σθ = βY * M2 / e ^ 2                     '(11.5-34)
         σθ -= σr * (K ^ 2 + 1 / (K ^ 2 - 1))
-        TextBox237.AppendText("σθ= " & σθ.ToString & vbCrLf)
+
+        'TextBox237.AppendText("Aa_= " & Aa_.ToString & vbCrLf)
+        'TextBox237.AppendText("βf= (0.90892)=" & βf.ToString & vbCrLf)
+        'TextBox237.AppendText("βv= (0.550103)= " & βv.ToString & vbCrLf)
+        'TextBox237.AppendText("φ=  (1.0)= " & φ.ToString & vbCrLf)
+        'TextBox237.AppendText("e= " & e.ToString & vbCrLf)
+        'TextBox237.AppendText("λ= " & λ.ToString & vbCrLf)
+        'TextBox237.AppendText("σH= " & σH.ToString & vbCrLf)
+        'TextBox237.AppendText("σr= " & σr.ToString & vbCrLf)
+        'TextBox237.AppendText("σθ= " & σθ.ToString & vbCrLf)
+
+
+        '-------- Stress limits ----- 
+        Dim k_limit As Double
+
+        Select Case (True)
+            Case (B_ID <= 1000)
+                k_limit = 1
+            Case (B_ID > 1000) And (B_ID <= 2000)
+                k_limit = 2 / 3 * (1 + B_ID / 2000)
+            Case (B_ID > 2000)
+                k_limit = 1.33
+        End Select
+
 
         '==================================================
         '----------- Loose flange method (Consists od 2 parts)  ----
-        σθ = βY * M2 / e ^ 2                    '(11.5-35)
+        ' σθ = βY * M2 / e ^ 2                    '(11.5-35)
 
         TextBox77.Text = (_P * 10).ToString("0.0")
         TextBox78.Text = _P.ToString("0.00")
@@ -1380,9 +1373,17 @@ Public Class Form1
 
         TextBox100.Text = (M1 * 10 ^ -3).ToString("0.00")    '[-] Moment assembly
         TextBox101.Text = (M2 * 10 ^ -3).ToString("0.00")    '[-] Moment operating
-        TextBox102.Text = σθ.ToString("0")       '[N/mm2]Tangential flange stress
         TextBox103.Text = δb.ToString("0")       '[mm] Distance bolts
 
+        TextBox239.Text = βf.ToString("0.000")
+        TextBox240.Text = βv.ToString("0.000")
+        TextBox241.Text = φ.ToString("0.00")
+
+        TextBox238.Text = σH.ToString("0.0")
+        TextBox242.Text = σr.ToString("0.0")
+        TextBox243.Text = σθ.ToString("0.0")
+
+        TextBox244.Text = k_limit.ToString("0.0")   'Stress limit
         '-------------- checks --------------------
         NumericUpDown28.BackColor = CType(IIf(C_bolt <= B_ID, Color.Red, Color.Yellow), Color)    'Bolt diameter
         NumericUpDown34.BackColor = CType(IIf(A_OD <= C_bolt, Color.Red, Color.Yellow), Color)    'Flange OD
@@ -1395,7 +1396,19 @@ Public Class Form1
         NumericUpDown29.BackColor = CType(IIf(gt > A_OD, Color.Red, Color.Yellow), Color) 'Bolt dia
 
         '----- flange stress -----
-        TextBox102.BackColor = CType(IIf(σθ > _fs, Color.Red, Color.LightGreen), Color)    'Flange stress
+        Dim σH_OK, σr_OK, σθ_OK As Boolean
+
+        σH_OK = CBool(IIf((k_limit * σH > _fs), False, True))
+        σr_OK = CBool(IIf(k_limit * σr > _fs, False, True))
+        σθ_OK = CBool(IIf(k_limit * σθ > _fs, False, True))
+
+        TextBox102.Text = ""
+        If ((0.5 * k_limit * (σH + σr)) > _fs) Then TextBox102.Text = "(σH + σr) too high   "
+        If ((0.5 * k_limit * (σH + σθ)) > _fs) Then TextBox102.AppendText("(σH + σθ) too high")
+
+        TextBox238.BackColor = CType(IIf(σH_OK, Color.LightGreen, Color.Red), Color)    'Flange stress
+        TextBox242.BackColor = CType(IIf(σr_OK, Color.LightGreen, Color.Red), Color)    'Flange stress
+        TextBox243.BackColor = CType(IIf(σθ_OK, Color.LightGreen, Color.Red), Color)    'Flange stress
 
         '----- flange hub thickness, g0_must be smallet then g1_ -----
         NumericUpDown10.BackColor = CType(IIf((g0_ > g1_), Color.Red, Color.Yellow), Color)
@@ -1699,7 +1712,7 @@ Public Class Form1
             oTable.Cell(row, 3).Range.Text = "[Nm]"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Tangential Flange Stress"
-            oTable.Cell(row, 2).Range.Text = TextBox102.Text
+            'oTable.Cell(row, 2).Range.Text = TextBox102.Text
             oTable.Cell(row, 3).Range.Text = "[N/mm2]"
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
