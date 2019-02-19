@@ -65,19 +65,21 @@ Public Class Form1
    "1.4401 (316)   ;204;177;162;147;137;127;120;115;112;110;108; max 550c;ss",
    "1.4404 (316L)  ;200;166;152;137;127;118;113;108;103;100; 98; max 550c;ss"}
 
-    'EN 1993-1-8 Bolts (Eurocode 3)
+    'EN 1993-1-8 Bolts (Eurocode 3), ISO 3506-1 table2
     Public Shared Bolt() As String = {
-   "Bolt class-----;  ultimate;yield 0.2",
-   "Bolt class 4.6 ;  400;240",
-   "Bolt class 5.6 ;  500;300",
-   "Bolt class 8.8 ;  800;640",
-   "Bolt class 10.9; 1000;900",
-   "Bolt class A2-60; 600;210",
-   "Bolt class A2-70; 700;450",
-   "Bolt class A2-80; 800;600",
-   "Bolt class A4-60; 600;210",
-   "Bolt class A4-70; 700;450",
-   "Bolt class A4-80; 800;600"}
+   "Bolt class-----;  ultimate;yield 0.2;cs",
+   "Bolt class 4.6 ;  400;240;cs",
+   "Bolt class 5.6 ;  500;300;cs",
+   "Bolt class 8.8 ;  800;640;cs",
+   "Bolt class 10.9; 1000;900;cs",
+   "Bolt class A2-50; 500;210;ss",
+   "Bolt class A2-60; 600;210;ss",
+   "Bolt class A2-70; 700;450;ss",
+   "Bolt class A2-80; 800;600;ss",
+   "Bolt class A4-50; 500;210;ss",
+   "Bolt class A4-60; 600;210;ss",
+   "Bolt class A4-70; 700;450;ss",
+   "Bolt class A4-80; 800;600;ss"}
 
     Public Shared joint_eff() As String = {"  0.7", "  0.85", "  1.0"}
 
@@ -1069,6 +1071,8 @@ Public Class Form1
         Dim h_ As Double            'hub length
         Dim db, dn, n As Double
         Dim fB As Double
+        Dim Rp02_Bolt As Double     'Rp02 bolt
+        Dim Rp02_Flange As Double     'Rp02 flange
         Dim W, w_, b_gasket, b0_gasket As Double
         Dim m As Double             'Gasket factor
         Dim y, Wa, Wop As Double
@@ -1084,7 +1088,7 @@ Public Class Form1
         Dim CF, K, I0 As Double
         Dim δb As Double        'Distance bolts on bolt circle
         Dim M1, M2, σθ As Double
-        Dim temp As Double
+        Dim temperary As Double
         Dim Ab As Double        'Area selected bolt
 
         Dim Aa_, Cc_ As Double
@@ -1101,26 +1105,38 @@ Public Class Form1
         Dim σH As Double
         Dim σr As Double
 
+        Dim σH_OK, σr_OK, σθ_OK As Boolean
+
         'TextBox237.Clear()
 
-        If (ComboBox4.SelectedIndex > -1) Then          'Prevent exceptions
+        If (ComboBox4.SelectedIndex > -1) Then       'Prevent exceptions
             words = gaskets(ComboBox4.SelectedIndex).Split(separators, StringSplitOptions.None)
-            Double.TryParse(words(1), temp)    'Gasket factor m
-            NumericUpDown30.Value = CDec(temp)
-            Double.TryParse(words(2), temp)    'Gasket seat pressure y
-            NumericUpDown31.Value = CDec(temp)
+            Double.TryParse(words(1), temperary)    'Gasket factor m
+            NumericUpDown30.Value = CDec(temperary)
+            Double.TryParse(words(2), temperary)    'Gasket seat pressure y
+            NumericUpDown31.Value = CDec(temperary)
         End If
 
         If (ComboBox6.SelectedIndex > -1) Then          'Prevent exceptions
             words = Bolt(ComboBox6.SelectedIndex + 1).Split(separators, StringSplitOptions.None)
 
-            Double.TryParse(words(1), temp)    'Bolt stress
-            NumericUpDown27.Value = CDec(temp / 3)
+            Double.TryParse(words(1), Rp02_Bolt)    'Bolt stress (11.4-1)
+
+            If CBool(String.Compare(words(3), "cs", False)) Then
+
+                NumericUpDown27.Value = CDec(Rp02_Bolt / 4)
+                'Label716.Text = "ss"
+            Else
+                NumericUpDown27.Value = CDec(Rp02_Bolt / 3)
+                'Label716.Text = "cs"
+            End If
         End If
 
+        Double.TryParse(TextBox133.Text, Rp02_Flange)   'Flange Rp02
+
         A_OD = NumericUpDown34.Value        'OD Flange 
-        n = NumericUpDown25.Value           'Is No Bolts  
-        C_Bolt = NumericUpDown28.Value      'Bolt circle
+        n = NumericUpDown25.Value           'Number of Bolts  
+        C_bolt = NumericUpDown28.Value      'Bolt circle
         w_ = NumericUpDown24.Value          'Gasket width
         B_ID = NumericUpDown23.Value        'ID Flange
         gt = NumericUpDown29.Value          'OD Gasket
@@ -1129,7 +1145,7 @@ Public Class Form1
         db = NumericUpDown26.Value          'Dia bolt selected
         Ab = PI / 2 * db ^ 2                'Area selected bolt
         dn = db                             'Dia bolt nominal (niet af)
-        fB = NumericUpDown27.Value          'Bolt design stress at oper-temp (Rp02/3)
+        fB = NumericUpDown27.Value          'Bolt design stress at oper-temp (Rp02/3 or Rp02/4)
         e = NumericUpDown32.Value           'Slip on flangethickness
         g0_ = NumericUpDown56.Value         'thickness of hub at small end
         g1_ = NumericUpDown10.Value         'thickness of hub at back of flange
@@ -1321,7 +1337,6 @@ Public Class Form1
         'TextBox237.AppendText("σr= " & σr.ToString & vbCrLf)
         'TextBox237.AppendText("σθ= " & σθ.ToString & vbCrLf)
 
-
         '-------- Stress limits ----- 
         Dim k_limit As Double
 
@@ -1333,7 +1348,6 @@ Public Class Form1
             Case (B_ID > 2000)
                 k_limit = 1.33
         End Select
-
 
         '==================================================
         '----------- Loose flange method (Consists od 2 parts)  ----
@@ -1358,10 +1372,10 @@ Public Class Form1
         TextBox79.Text = (HD / 1000).ToString("0.0")     '[kN]
         TextBox75.Text = (HT / 1000).ToString("0.0")     '[kN]
 
-        TextBox80.Text = hD_.ToString("0.0")        '[mm]
-        TextBox86.Text = hG_.ToString("0.0")        '[mm]
-        TextBox88.Text = hT_.ToString("0.0")        '[mm]
-        TextBox89.Text = W.ToString("0.0")          '[mm]
+        TextBox80.Text = hD_.ToString("0.0")            '[mm]
+        TextBox86.Text = hG_.ToString("0.0")            '[mm]
+        TextBox88.Text = hT_.ToString("0.0")            '[mm]
+        TextBox89.Text = (W / 1000).ToString("0.0")     '[kN]
 
         TextBox91.Text = (Ma * 10 ^ -3).ToString("0")   '[mm]
         TextBox90.Text = (Mop * 10 ^ -3).ToString("0")  '[mm]
@@ -1384,20 +1398,20 @@ Public Class Form1
         TextBox243.Text = σθ.ToString("0.0")
 
         TextBox244.Text = k_limit.ToString("0.0")   'Stress limit
-        '-------------- checks --------------------
+
+        '================== checks =========================
         NumericUpDown28.BackColor = CType(IIf(C_bolt <= B_ID, Color.Red, Color.Yellow), Color)    'Bolt diameter
         NumericUpDown34.BackColor = CType(IIf(A_OD <= C_bolt, Color.Red, Color.Yellow), Color)    'Flange OD
         NumericUpDown24.BackColor = CType(IIf(w_ > (A_OD - B_ID) / 2, Color.Red, Color.Yellow), Color)    'Gasket width
         '----- bolts ---------
         NumericUpDown26.BackColor = CType(IIf(dia_bolt > db, Color.Red, Color.Yellow), Color) 'Bolt dia
         TextBox95.BackColor = CType(IIf(dia_bolt > db, Color.Red, Color.LightGreen), Color)   'Bolt dia
+        'Table 11.4-1 PN series 2.5 to 16, minimum LOW strength bolts (no action required)
 
         '------ gasket outside diameter --------
         NumericUpDown29.BackColor = CType(IIf(gt > A_OD, Color.Red, Color.Yellow), Color) 'Bolt dia
 
         '----- flange stress -----
-        Dim σH_OK, σr_OK, σθ_OK As Boolean
-
         σH_OK = CBool(IIf((k_limit * σH > _fs), False, True))
         σr_OK = CBool(IIf(k_limit * σr > _fs, False, True))
         σθ_OK = CBool(IIf(k_limit * σθ > _fs, False, True))
@@ -1419,8 +1433,11 @@ Public Class Form1
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Dim oWord As Word.Application
+        Print_11_5()
+    End Sub
 
+    Private Sub Print_11_5()
+        Dim oWord As Word.Application
         Dim oDoc As Word.Document
         Dim oTable As Word.Table
         Dim oPara1, oPara2 As Word.Paragraph
@@ -1432,7 +1449,7 @@ Public Class Form1
             oWord = New Word.Application()
 
             'Start Word and open the document template. 
-            font_sizze = 9
+            font_sizze = 8
             oWord = CType(CreateObject("Word.Application"), Word.Application)
             oWord.Visible = True
             oDoc = oWord.Documents.Add
@@ -1454,7 +1471,7 @@ Public Class Form1
             oPara2.Range.Font.Size = font_sizze + 1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
-            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445" & vbCrLf
+            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445, Chapter 11.5" & vbCrLf
             oPara2.Range.InsertParagraphAfter()
 
             '----------------------------------------------
@@ -1499,7 +1516,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Flange Input Data"
+            oTable.Cell(row, 1).Range.Text = "Narrow Face Flange input data"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Internal Pressure"
             oTable.Cell(row, 2).Range.Text = TextBox77.Text
@@ -1537,11 +1554,11 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = ComboBox4.Text.Substring(0, 24)
             oTable.Cell(row, 3).Range.Text = ""
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Gasket factor m"
+            oTable.Cell(row, 1).Range.Text = "Gasket factor, m"
             oTable.Cell(row, 2).Range.Text = NumericUpDown30.Value.ToString("0.0")
             oTable.Cell(row, 3).Range.Text = "[-]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Gasket factor y"
+            oTable.Cell(row, 1).Range.Text = "Gasket factor, y"
             oTable.Cell(row, 2).Range.Text = NumericUpDown31.Value.ToString("0.0")
             oTable.Cell(row, 3).Range.Text = "[-]"
 
@@ -1551,14 +1568,14 @@ Public Class Form1
             oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
 
             '---------"Bolting 11.4.1"---------------------------------------
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = CInt(False)
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Bolting 11.4.1"
+            oTable.Cell(row, 1).Range.Text = "Bolting 11.4.3"
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "Number of Bolts"
@@ -1577,10 +1594,9 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = NumericUpDown27.Value.ToString("0")
             oTable.Cell(row, 3).Range.Text = "[N/mm2]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Bolt required dia"
+            oTable.Cell(row, 1).Range.Text = "Min. required Bolt diameter"
             oTable.Cell(row, 2).Range.Text = TextBox95.Text
             oTable.Cell(row, 3).Range.Text = "[mm]"
-
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
@@ -1596,29 +1612,32 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
             oTable.Cell(row, 1).Range.Text = "Bolt Loads and area's 11.5.2"
-
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Effective Gasket width"
+            oTable.Cell(row, 1).Range.Text = "Basic Gasket width, b0"
+            oTable.Cell(row, 2).Range.Text = TextBox72.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Effective Gasket width, b"
             oTable.Cell(row, 2).Range.Text = TextBox81.Text
-            oTable.Cell(row, 3).Range.Text = "[N]"
+            oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Diameter Gasket load reaction"
+            oTable.Cell(row, 1).Range.Text = "Diameter Gasket load reaction, G"
             oTable.Cell(row, 2).Range.Text = TextBox93.Text
             oTable.Cell(row, 3).Range.Text = "[N]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Total Hydrostatic force"
+            oTable.Cell(row, 1).Range.Text = "Total Hydrostatic force, H"
             oTable.Cell(row, 2).Range.Text = TextBox85.Text
             oTable.Cell(row, 3).Range.Text = "[kN]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Compression load on Gasket"
+            oTable.Cell(row, 1).Range.Text = "Compression load on Gasket, Hg"
             oTable.Cell(row, 2).Range.Text = TextBox87.Text
             oTable.Cell(row, 3).Range.Text = "[kN]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Min bolt load for Assembly"
+            oTable.Cell(row, 1).Range.Text = "Min bolt load for Assembly, Wa"
             oTable.Cell(row, 2).Range.Text = TextBox82.Text
             oTable.Cell(row, 3).Range.Text = "[kN]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Min bolt load for Operating"
+            oTable.Cell(row, 1).Range.Text = "Min bolt load for Operating, Wop"
             oTable.Cell(row, 2).Range.Text = TextBox83.Text
             oTable.Cell(row, 3).Range.Text = "[kN]"
 
@@ -1638,35 +1657,35 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = "Flange moments 11.5.3"
 
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Hydrostic force via shell"
+            oTable.Cell(row, 1).Range.Text = "Hydrostatic force via shell, HD"
             oTable.Cell(row, 2).Range.Text = TextBox79.Text
-            oTable.Cell(row, 3).Range.Text = "[N]"
+            oTable.Cell(row, 3).Range.Text = "[kN]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Hydrostic force flange face"
+            oTable.Cell(row, 1).Range.Text = "Hydrostatic force flange face, HT"
             oTable.Cell(row, 2).Range.Text = TextBox75.Text
-            oTable.Cell(row, 3).Range.Text = "[N]"
+            oTable.Cell(row, 3).Range.Text = "[kN]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Radial distance bolt circle"
+            oTable.Cell(row, 1).Range.Text = "Radial distance bolt circle, hD"
             oTable.Cell(row, 2).Range.Text = TextBox80.Text
             oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Rad dist Bolt circle-HD"
+            oTable.Cell(row, 1).Range.Text = "Radial dist. Bolt circle, HD"
             oTable.Cell(row, 2).Range.Text = TextBox86.Text
             oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Dist gasket load to bolt circle"
+            oTable.Cell(row, 1).Range.Text = "Dist. gasket load to bolt circle, hT"
             oTable.Cell(row, 2).Range.Text = TextBox88.Text
             oTable.Cell(row, 3).Range.Text = "[-]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Design load assembly"
+            oTable.Cell(row, 1).Range.Text = "Design load assembly, W"
             oTable.Cell(row, 2).Range.Text = TextBox89.Text
-            oTable.Cell(row, 3).Range.Text = "[N]"
+            oTable.Cell(row, 3).Range.Text = "[kN]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Total moment assembly condition"
+            oTable.Cell(row, 1).Range.Text = "Total moment assembly condition, Ma"
             oTable.Cell(row, 2).Range.Text = TextBox91.Text
             oTable.Cell(row, 3).Range.Text = "[Nm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Total moment operating condition"
+            oTable.Cell(row, 1).Range.Text = "Total moment operating condition, Mop"
             oTable.Cell(row, 2).Range.Text = TextBox90.Text
             oTable.Cell(row, 3).Range.Text = "[Nm]"
 
@@ -1677,7 +1696,7 @@ Public Class Form1
 
 
             '---------"Flange stress 11.5.4"---------------------------------------
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 8, 3)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 13, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = CInt(False)
@@ -1685,35 +1704,54 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
             oTable.Cell(row, 1).Range.Text = "Flange stress 11.5.4"
-
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Distance bolts"
+            oTable.Cell(row, 1).Range.Text = "Distance bolts, δb"
             oTable.Cell(row, 2).Range.Text = TextBox103.Text
-            oTable.Cell(row, 3).Range.Text = "[-]"
+            oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Bolt pich factor"
+            oTable.Cell(row, 1).Range.Text = "Bolt pitch factor, CF"
             oTable.Cell(row, 2).Range.Text = TextBox92.Text
             oTable.Cell(row, 3).Range.Text = "[-]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Flange factors K, βT"
+            oTable.Cell(row, 1).Range.Text = "Flange factors, K, βT"
             oTable.Cell(row, 2).Range.Text = TextBox99.Text & " - " & TextBox98.Text
-            oTable.Cell(row, 3).Range.Text = "[-][-]"
+            oTable.Cell(row, 3).Range.Text = "[-]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Flange factors βU, βY"
+            oTable.Cell(row, 1).Range.Text = "Flange factors, βU, βY"
             oTable.Cell(row, 2).Range.Text = TextBox97.Text & " - " & TextBox96.Text
-            oTable.Cell(row, 3).Range.Text = "[-][-]"
+            oTable.Cell(row, 3).Range.Text = "[-]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Moment assembly"
+            oTable.Cell(row, 1).Range.Text = "Moment assembly, M"
             oTable.Cell(row, 2).Range.Text = TextBox100.Text
             oTable.Cell(row, 3).Range.Text = "[Nm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Moment operating"
+            oTable.Cell(row, 1).Range.Text = "Moment operating, M"
             oTable.Cell(row, 2).Range.Text = TextBox101.Text
             oTable.Cell(row, 3).Range.Text = "[Nm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Tangential Flange Stress"
-            'oTable.Cell(row, 2).Range.Text = TextBox102.Text
+            oTable.Cell(row, 1).Range.Text = "Factor (Integral), βF,  βv,  φ"
+            oTable.Cell(row, 2).Range.Text = TextBox239.Text & " - " & TextBox240.Text & " - " & TextBox241.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Stress limit factor, k"
+            oTable.Cell(row, 2).Range.Text = TextBox244.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Longitudinal Flange Stress, σH"
+            oTable.Cell(row, 2).Range.Text = TextBox238.Text
             oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Radial Flange Stress, σR"
+            oTable.Cell(row, 2).Range.Text = TextBox242.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Tangential Flange Stress, σθ"
+            oTable.Cell(row, 2).Range.Text = TextBox243.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Remarks"
+            oTable.Cell(row, 2).Range.Text = TextBox102.Text
+            oTable.Cell(row, 3).Range.Text = ""
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)

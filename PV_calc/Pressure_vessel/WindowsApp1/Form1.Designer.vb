@@ -736,6 +736,7 @@ Partial Class Form1
         Me.PictureBox20 = New System.Windows.Forms.PictureBox()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.GroupBox20 = New System.Windows.Forms.GroupBox()
+        Me.TextBox102 = New System.Windows.Forms.TextBox()
         Me.TextBox244 = New System.Windows.Forms.TextBox()
         Me.Label713 = New System.Windows.Forms.Label()
         Me.Label324 = New System.Windows.Forms.Label()
@@ -1151,7 +1152,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.TextBox102 = New System.Windows.Forms.TextBox()
+        Me.Label716 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -9192,6 +9193,15 @@ Partial Class Form1
         Me.GroupBox20.TabStop = False
         Me.GroupBox20.Text = "Flange stresses and stress limits 11.5.4"
         '
+        'TextBox102
+        '
+        Me.TextBox102.Enabled = False
+        Me.TextBox102.Location = New System.Drawing.Point(18, 255)
+        Me.TextBox102.Name = "TextBox102"
+        Me.TextBox102.Size = New System.Drawing.Size(453, 20)
+        Me.TextBox102.TabIndex = 258
+        Me.TextBox102.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'TextBox244
         '
         Me.TextBox244.Enabled = False
@@ -9640,6 +9650,7 @@ Partial Class Form1
         '
         'GroupBox19
         '
+        Me.GroupBox19.Controls.Add(Me.Label716)
         Me.GroupBox19.Controls.Add(Me.Label51)
         Me.GroupBox19.Controls.Add(Me.ComboBox6)
         Me.GroupBox19.Controls.Add(Me.Label20)
@@ -9670,7 +9681,7 @@ Partial Class Form1
         Me.GroupBox19.Size = New System.Drawing.Size(457, 175)
         Me.GroupBox19.TabIndex = 231
         Me.GroupBox19.TabStop = False
-        Me.GroupBox19.Text = "Bolting 11.4.1"
+        Me.GroupBox19.Text = "Bolting 11.4.3"
         '
         'Label51
         '
@@ -13698,14 +13709,14 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'TextBox102
+        'Label716
         '
-        Me.TextBox102.Enabled = False
-        Me.TextBox102.Location = New System.Drawing.Point(18, 255)
-        Me.TextBox102.Name = "TextBox102"
-        Me.TextBox102.Size = New System.Drawing.Size(453, 20)
-        Me.TextBox102.TabIndex = 258
-        Me.TextBox102.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Label716.AutoSize = True
+        Me.Label716.Location = New System.Drawing.Point(288, 100)
+        Me.Label716.Name = "Label716"
+        Me.Label716.Size = New System.Drawing.Size(59, 13)
+        Me.Label716.TabIndex = 251
+        Me.Label716.Text = "Label716"
         '
         'Form1
         '
@@ -15045,4 +15056,5 @@ Partial Class Form1
     Friend WithEvents Label325 As Label
     Friend WithEvents Label326 As Label
     Friend WithEvents TextBox102 As TextBox
+    Friend WithEvents Label716 As Label
 End Class
