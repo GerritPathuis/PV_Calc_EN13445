@@ -10,11 +10,11 @@ Imports Word = Microsoft.Office.Interop.Word
 'Unfired pressure vessels part 3
 '-------------------------------------------------------
 Public Class Form1
-    Public _ν As Double = 0.3    'Poisson ratio for steel
+    Public _ν As Double = 0.3   'Poisson ratio for steel
     Public _P As Double         'Calculation pressure [Mpa]
-    Public _fs As Double        'Allowable stress shell [N/mm2]
-    Public _f02 As Double       'Yield 0.2% stress shell [N/mm2]
-    Public _fym As Double       'Allowable stress reinforcement [N/mm2]
+    Public _fs As Double = 1    'Allowable stress shell [N/mm2]
+    Public _f02 As Double = 1   'Yield 0.2% stress shell [N/mm2]
+    Public _fym As Double = 1   'Allowable stress reinforcement [N/mm2]
 
     Public _De As Double        'Outside diameter shell
     Public _Di As Double        'Inside diameter shell
@@ -81,7 +81,7 @@ Public Class Form1
    "Bolt class A4-70; 700;450;ss",
    "Bolt class A4-80; 800;600;ss"}
 
-    Public Shared joint_eff() As String = {"  0.7", "  0.85", "  1.0"}
+    Public Shared joint_eff() As String = {"0.7", "0.85", "1.0"}
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim words() As String
@@ -143,6 +143,7 @@ Public Class Form1
         ComboBox6.SelectedIndex = CInt(IIf(ComboBox6.Items.Count > 0, 0, -1)) 'Select ..
 
         TextBox66.Text = "P" & Now.ToString("yy") & ".10"
+        Design_stress()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown18.ValueChanged
@@ -266,13 +267,10 @@ Public Class Form1
         Design_stress()
     End Sub
     Private Sub Design_stress()
-        Dim sf As Double
-        Dim temperature As Double  'temperature
+        Dim sf As Double = 1        'Safety factor init value
+        Dim temperature As Double   'temperature
         Dim words() As String
         Dim y50, y100, y150, y200, y250, y300, y350, y400 As Double
-        Dim yield_stress As Double = 99
-        Dim design_str As Double = 99
-        'Dim Δy As Double
         Dim ΔT As Double
 
 
@@ -300,28 +298,28 @@ Public Class Form1
             Select Case True
 
                 Case 50 >= temperature
-                    yield_stress = CDec(y50)
+                    _f02 = CDec(y50)
                 Case 100 >= temperature
                     ΔT = 50 - temperature
-                    yield_stress = Calc_design_stress(y50, y100, ΔT)
+                    _f02 = Calc_design_stress(y50, y100, ΔT)
                 Case 150 >= temperature
                     ΔT = 100 - temperature
-                    yield_stress = Calc_design_stress(y100, y150, ΔT)
+                    _f02 = Calc_design_stress(y100, y150, ΔT)
                 Case 200 >= temperature
                     ΔT = 150 - temperature
-                    yield_stress = Calc_design_stress(y150, y200, ΔT)
+                    _f02 = Calc_design_stress(y150, y200, ΔT)
                 Case 250 >= temperature
                     ΔT = 200 - temperature
-                    yield_stress = Calc_design_stress(y200, y250, ΔT)
+                    _f02 = Calc_design_stress(y200, y250, ΔT)
                 Case 300 >= temperature
                     ΔT = 250 - temperature
-                    yield_stress = Calc_design_stress(y250, y300, ΔT)
+                    _f02 = Calc_design_stress(y250, y300, ΔT)
                 Case 350 >= temperature
                     ΔT = 300 - temperature
-                    yield_stress = Calc_design_stress(y300, y350, ΔT)
+                    _f02 = Calc_design_stress(y300, y350, ΔT)
                 Case 400 >= temperature
                     ΔT = 350 - temperature
-                    yield_stress = Calc_design_stress(y350, y400, ΔT)
+                    _f02 = Calc_design_stress(y350, y400, ΔT)
                 Case temperature > 450
                     MessageBox.Show("Problem temperature too high")
             End Select
@@ -333,22 +331,18 @@ Public Class Form1
             words = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
             TextBox4.Text = sf.ToString                 'Safety factor
-            design_str = CDec(yield_stress / sf)
+            _fs = CDec(_f02 / sf)
 
             Select Case True
                 Case RadioButton4.Checked
-                    design_str = yield_stress / 1.25  'PED article 3.3 (NO calc required)
+                    _fs *= 1        'PED article 3.3 (NO calc required)
                 Case RadioButton1.Checked
-                    design_str = design_str       'PED I,II,III
+                    _fs *= 1        'PED I,II,III
                 Case RadioButton2.Checked
-                    design_str = design_str * 0.9 'PED IV
+                    _fs *= 0.9      'PED IV
                 Case RadioButton3.Checked
-                    design_str = yield_stress   'EN 14460 6.2.1 (Shock resistant)
+                    _fs = _f02      'EN 14460 6.2.1 (Shock resistant)
             End Select
-
-            _fs = design_str                    'allowable stress
-            '_fym = yield_stress * 1.5               'sigma02*1.5
-            '_f02 = yield_stress                     'Yield 0.2%
 
             If String.Equals(TextBox182.Text, "cs") Then
                 _E = (213.16 - 6.92 * temperature / 10 ^ 2 - 1.824 / 10 ^ 5 * temperature ^ 2) * 1000
@@ -358,15 +352,15 @@ Public Class Form1
 
             '-------- present -------------
             TextBox131.Text = (_P * 10 ^ 4).ToString    'Calculation pressure [mBar]
-            'TextBox133.Text = _fym.ToString             'Safety factor
+            TextBox133.Text = _fym.ToString             'Safety factor
             TextBox136.Text = _f02.ToString("0")        'Max allowed bend
-            TextBox137.Text = _fym.ToString("0")        'Max allowed bend+membrane
-            TextBox140.Text = _fym.ToString("0")        'Max allowed bend+membrane
+            TextBox137.Text = (_f02 * 1.5).ToString("0")    'Max allowed bend+membrane
+            TextBox140.Text = (_f02 * 1.5).ToString("0")    'Max allowed bend+membrane
 
-            NumericUpDown7.Value = CDec(design_str)     'Design stress
-            TextBox133.Text = yield_stress.ToString("0")  'Yield stress
-            TextBox178.Text = _E.ToString("0")          'Max allowed bend+membrane
-            TextBox209.Text = _ν.ToString("0.0")        'Poissons rate for steel
+            NumericUpDown7.Value = CDec(_fs)        'Design stress
+            TextBox133.Text = _f02.ToString("0")    'Yield stress
+            TextBox178.Text = _E.ToString("0")      'Max allowed bend+membrane
+            TextBox209.Text = _ν.ToString("0.0")    'Poissons rate for steel
         End If
     End Sub
     Public Function Calc_design_stress(stress_A As Double, stress_B As Double, ΔT As Double) As Double
@@ -414,7 +408,6 @@ Public Class Form1
     'Chapter 15.5 rectangle shell
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click, NumericUpDown9.ValueChanged, NumericUpDown8.ValueChanged, NumericUpDown17.ValueChanged, NumericUpDown11.ValueChanged, TabPage2.Enter
         Calc_square_15_5()
-
     End Sub
     Private Sub Calc_square_15_5()
         Dim a, ee, L, L1, I1 As Double
@@ -428,7 +421,6 @@ Public Class Form1
         ee = NumericUpDown11.Value  'wall thickness
         L = NumericUpDown8.Value    'Lenght
         L1 = NumericUpDown9.Value   'Lenght
-
 
         '-------- membrane stress----------------
         σmC = _P * (a + L) / ee                     'At C (eq 15.5.1.2-1) 
@@ -1785,7 +1777,129 @@ Public Class Form1
             MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
         End Try
     End Sub
+    Private Sub Print_7_4_2()
+        Dim oWord As Word.Application
+        Dim oDoc As Word.Document
+        Dim oTable As Word.Table
+        Dim oPara1, oPara2 As Word.Paragraph
+        Dim row, font_sizze As Integer
+        Dim ufilename As String
+        ufilename = "PV_calc_" & TextBox66.Text & "_" & TextBox69.Text & "_" & TextBox70.Text & DateTime.Now.ToString("yyyy_MM_dd") & ".docx"
 
+        Try
+            oWord = New Word.Application()
+
+            'Start Word and open the document template. 
+            font_sizze = 8
+            oWord = CType(CreateObject("Word.Application"), Word.Application)
+            oWord.Visible = True
+            oDoc = oWord.Documents.Add
+
+            oDoc.PageSetup.TopMargin = 35
+            oDoc.PageSetup.BottomMargin = 15
+
+            'Insert a paragraph at the beginning of the document. 
+            oPara1 = oDoc.Content.Paragraphs.Add
+
+            oPara1.Range.Text = "VTK Engineering"
+            oPara1.Range.Font.Name = "Arial"
+            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Bold = CInt(True)
+            oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
+            oPara1.Range.InsertParagraphAfter()
+
+            oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
+            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Format.SpaceAfter = 1
+            oPara2.Range.Font.Bold = CInt(False)
+            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445, Chapter 7.4.2" & vbCrLf
+            oPara2.Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 2)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 2).Range.Text = TextBox69.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Project number "
+            oTable.Cell(row, 2).Range.Text = TextBox66.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Pressure vessel id"
+            oTable.Cell(row, 2).Range.Text = TextBox70.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Author"
+            oTable.Cell(row, 2).Range.Text = Environment.UserName
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Date"
+            oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "File name"
+            oTable.Cell(row, 2).Range.Text = ufilename
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(4)
+
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 9, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "7.4.2 Cylindrical shells"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Internal Pressure"
+            oTable.Cell(row, 2).Range.Text = TextBox77.Text
+            oTable.Cell(row, 3).Range.Text = "[bar]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Allowed nominal design stress"
+            oTable.Cell(row, 2).Range.Text = TextBox76.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Outside diameter shell"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown15.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Joint Efficiency"
+            oTable.Cell(row, 2).Range.Text = ComboBox2.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Required wall thickness"
+            oTable.Cell(row, 2).Range.Text = TextBox2.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Actual wall thickness"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown16.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Maximum allowed pressure"
+            oTable.Cell(row, 2).Range.Text = TextBox8.Text
+            oTable.Cell(row, 3).Range.Text = "[bar]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Validity check e/De <0.16"
+            oTable.Cell(row, 2).Range.Text = TextBox5.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+        Catch ex As Exception
+            MessageBox.Show(ufilename & vbCrLf & ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
         Save_tofile()
     End Sub
@@ -3355,5 +3469,7 @@ Public Class Form1
         Form6.Show()
     End Sub
 
-
+    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+        Print_7_4_2()
+    End Sub
 End Class
