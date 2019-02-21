@@ -97,6 +97,7 @@ Partial Class Form1
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.Label643 = New System.Windows.Forms.Label()
         Me.GroupBox43 = New System.Windows.Forms.GroupBox()
         Me.Label696 = New System.Windows.Forms.Label()
@@ -1154,7 +1155,6 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Button19 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -2114,6 +2114,15 @@ Partial Class Form1
         Me.TabPage3.Text = "7.4 Cylinder + 7.6 Cone "
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'Button19
+        '
+        Me.Button19.Location = New System.Drawing.Point(171, 389)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(115, 36)
+        Me.Button19.TabIndex = 151
+        Me.Button19.Text = "Print to Word"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
         'Label643
         '
         Me.Label643.AutoSize = True
@@ -2804,7 +2813,7 @@ Partial Class Form1
         'NumericUpDown16
         '
         Me.NumericUpDown16.BackColor = System.Drawing.Color.Yellow
-        Me.NumericUpDown16.DecimalPlaces = 1
+        Me.NumericUpDown16.DecimalPlaces = 2
         Me.NumericUpDown16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NumericUpDown16.ImeMode = System.Windows.Forms.ImeMode.Off
         Me.NumericUpDown16.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
@@ -13731,15 +13740,6 @@ Partial Class Form1
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'Button19
-        '
-        Me.Button19.Location = New System.Drawing.Point(171, 389)
-        Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(115, 36)
-        Me.Button19.TabIndex = 151
-        Me.Button19.Text = "Print to Word"
-        Me.Button19.UseVisualStyleBackColor = True
         '
         'Form1
         '
