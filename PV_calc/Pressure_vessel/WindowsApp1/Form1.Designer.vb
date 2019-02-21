@@ -10688,7 +10688,7 @@ Partial Class Form1
         Me.GroupBox16.Size = New System.Drawing.Size(457, 359)
         Me.GroupBox16.TabIndex = 144
         Me.GroupBox16.TabStop = False
-        Me.GroupBox16.Text = "Flange moments 11.5.3 ()"
+        Me.GroupBox16.Text = "Flange moments (11.5.3)"
         '
         'Label701
         '

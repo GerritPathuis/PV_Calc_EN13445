@@ -1646,7 +1646,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Flange moments 11.5.3"
+            oTable.Cell(row, 1).Range.Text = "Flange moments (11.5.3)"
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "Hydrostatic force via shell, HD"
