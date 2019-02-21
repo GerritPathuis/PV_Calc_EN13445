@@ -896,9 +896,9 @@ Public Class Form1
     Private Sub Calc_flat_end()
         'Flat ends welded  directly to the shell 10.4.4 
         Dim De, Di As Double
-        Dim E_flat1 As Double       'End plate thicknes
-        Dim E_flat2 As Double       'End plate thicknes
-        Dim E_flat As Double        'Required end plate thicknes
+        Dim E_flat1 As Double       'End plate thickness
+        Dim E_flat2 As Double       'End plate thickness
+        Dim E_flat As Double        'Required end plate thickness
         Dim es As Double            'Wall shell
         Dim A1, B1 As Double
         Dim C1a, C1b, C1 As Double  ' Equation (10.4-4) 
@@ -1530,7 +1530,7 @@ Public Class Form1
             oTable.Cell(row, 2).Range.Text = NumericUpDown28.Value.ToString("0")
             oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
-            oTable.Cell(row, 1).Range.Text = "Slip on flange thicknes"
+            oTable.Cell(row, 1).Range.Text = "Slip on flange thickness"
             oTable.Cell(row, 2).Range.Text = NumericUpDown32.Value.ToString("0")
             oTable.Cell(row, 3).Range.Text = "[mm]"
             row += 1
