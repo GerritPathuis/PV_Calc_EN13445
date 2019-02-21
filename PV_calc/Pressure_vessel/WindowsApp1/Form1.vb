@@ -3510,7 +3510,7 @@ Public Class Form1
             oPara2.Range.Font.Size = font_sizze + 1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
-            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445, Chapter 7.4.2" & vbCrLf
+            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445, Chapter 9.4" & vbCrLf
             oPara2.Range.InsertParagraphAfter()
 
             '----------------------------------------------
