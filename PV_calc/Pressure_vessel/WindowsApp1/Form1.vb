@@ -258,6 +258,7 @@ Public Class Form1
         TextBox169.Text = qz.ToString("0")
 
         '----------- checks--------
+        TextBox237.Text = CType(IIf(eq_left > eq_right, "OK", "NOK"), String)
         TextBox16.BackColor = CType(IIf(eq_left < eq_right, Color.Red, Color.LightGreen), Color)
         TextBox17.BackColor = TextBox16.BackColor
         TextBox169.BackColor = CType(IIf(qz > ls, Color.Red, Color.LightGreen), Color)
@@ -3472,4 +3473,245 @@ Public Class Form1
     Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
         Print_7_4_2()
     End Sub
+
+    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+        Print_9_4_5()
+    End Sub
+
+    Private Sub Print_9_4_5()
+        Dim oWord As Word.Application
+        Dim oDoc As Word.Document
+        Dim oTable As Word.Table
+        Dim oPara1, oPara2 As Word.Paragraph
+        Dim row, font_sizze As Integer
+        Try
+            oWord = New Word.Application()
+
+            'Start Word and open the document template. 
+            font_sizze = 8
+            oWord = CType(CreateObject("Word.Application"), Word.Application)
+            oWord.Visible = True
+            oDoc = oWord.Documents.Add
+
+            oDoc.PageSetup.TopMargin = 35
+            oDoc.PageSetup.BottomMargin = 15
+
+            'Insert a paragraph at the beginning of the document. 
+            oPara1 = oDoc.Content.Paragraphs.Add
+
+            oPara1.Range.Text = "VTK Engineering"
+            oPara1.Range.Font.Name = "Arial"
+            oPara1.Range.Font.Size = font_sizze + 3
+            oPara1.Range.Font.Bold = CInt(True)
+            oPara1.Format.SpaceAfter = 1                '24 pt spacing after paragraph. 
+            oPara1.Range.InsertParagraphAfter()
+
+            oPara2 = oDoc.Content.Paragraphs.Add(oDoc.Bookmarks.Item("\endofdoc").Range)
+            oPara2.Range.Font.Size = font_sizze + 1
+            oPara2.Format.SpaceAfter = 1
+            oPara2.Range.Font.Bold = CInt(False)
+            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445, Chapter 7.4.2" & vbCrLf
+            oPara2.Range.InsertParagraphAfter()
+
+            '----------------------------------------------
+            'Insert a table, fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 2)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Project Name"
+            oTable.Cell(row, 2).Range.Text = TextBox69.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Project number "
+            oTable.Cell(row, 2).Range.Text = TextBox66.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Pressure vessel id"
+            oTable.Cell(row, 2).Range.Text = TextBox70.Text
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Author"
+            oTable.Cell(row, 2).Range.Text = Environment.UserName
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Date"
+            oTable.Cell(row, 2).Range.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(4)
+
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '-------------shell data ---------------------------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 6, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Set-in nozzle (9.4)"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Internal Pressure"
+            oTable.Cell(row, 2).Range.Text = TextBox77.Text
+            oTable.Cell(row, 3).Range.Text = "[bar]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Allowed nominal design stress"
+            oTable.Cell(row, 2).Range.Text = TextBox76.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Outside diameter shell"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown18.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Shell wall"
+            oTable.Cell(row, 2).Range.Text = NumericUpDown41.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Shell inside diameter"
+            oTable.Cell(row, 2).Range.Text = TextBox163.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '--------- nozzle data --------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 4, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Nozzle in shell dimensions"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label43.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown14.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[bar]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label38.Text
+            oTable.Cell(row, 2).Range.Text = NumericUpDown12.Value.ToString("0.0")
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label41.Text
+            oTable.Cell(row, 2).Range.Text = TextBox144.Text
+            oTable.Cell(row, 3).Range.Text = "[-]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+
+            '--------- Opening in shell --------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 5, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Opening in shell (9.4.8)"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Minimum distance Ln1"
+            oTable.Cell(row, 2).Range.Text = TextBox164.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Minimum distance Ln2"
+            oTable.Cell(row, 2).Range.Text = TextBox168.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Min. dist. CL nozzle-butt weld"
+            oTable.Cell(row, 2).Range.Text = TextBox20.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Min. dist. shell edge opening-weld"
+            oTable.Cell(row, 2).Range.Text = TextBox169.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '--------- minumum distance to discontinuity --------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 2, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Min. dist. to discontinuity (9.7.2.1)"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label83.Text
+            oTable.Cell(row, 2).Range.Text = TextBox19.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+            '--------- Pressure loaded aread (9.4-9) --------------
+            'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 10, 3)
+            oTable.Range.ParagraphFormat.SpaceAfter = 1
+            oTable.Range.Font.Size = font_sizze
+            oTable.Range.Font.Bold = CInt(False)
+            oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
+            oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
+            row = 1
+            oTable.Cell(row, 1).Range.Text = "Pressure loaded area's (9.4-9)"
+            oTable.Cell(row, 2).Range.Text = ""
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label72.Text
+            oTable.Cell(row, 2).Range.Text = TextBox14.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label70.Text
+            oTable.Cell(row, 2).Range.Text = TextBox15.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label58.Text
+            oTable.Cell(row, 2).Range.Text = TextBox9.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label60.Text
+            oTable.Cell(row, 2).Range.Text = TextBox10.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label64.Text
+            oTable.Cell(row, 2).Range.Text = TextBox11.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label489.Text
+            oTable.Cell(row, 2).Range.Text = TextBox12.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label66.Text
+            oTable.Cell(row, 2).Range.Text = TextBox13.Text
+            oTable.Cell(row, 3).Range.Text = "[mm]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label73.Text
+            oTable.Cell(row, 2).Range.Text = TextBox16.Text & ">" & TextBox17.Text
+            oTable.Cell(row, 3).Range.Text = TextBox237.Text
+
+            oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
+            oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
+            oTable.Columns(3).Width = oWord.InchesToPoints(1.3)
+            oDoc.Bookmarks.Item("\endofdoc").Range.InsertParagraphAfter()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)  ' Show the exception's message.
+        End Try
+    End Sub
+
 End Class

@@ -557,6 +557,7 @@ Partial Class Form1
         Me.Label639 = New System.Windows.Forms.Label()
         Me.Label640 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Button20 = New System.Windows.Forms.Button()
         Me.GroupBox34 = New System.Windows.Forms.GroupBox()
         Me.PictureBox17 = New System.Windows.Forms.PictureBox()
         Me.PictureBox16 = New System.Windows.Forms.PictureBox()
@@ -1155,6 +1156,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.TextBox237 = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -7151,6 +7153,7 @@ Partial Class Form1
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.Button20)
         Me.TabPage4.Controls.Add(Me.GroupBox34)
         Me.TabPage4.Controls.Add(Me.Label448)
         Me.TabPage4.Controls.Add(Me.GroupBox32)
@@ -7168,6 +7171,15 @@ Partial Class Form1
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "9.4 Set-in Nozzles "
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Button20
+        '
+        Me.Button20.Location = New System.Drawing.Point(673, 486)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(114, 36)
+        Me.Button20.TabIndex = 188
+        Me.Button20.Text = "Print to Word"
+        Me.Button20.UseVisualStyleBackColor = True
         '
         'GroupBox34
         '
@@ -7523,6 +7535,7 @@ Partial Class Form1
         '
         'GroupBox6
         '
+        Me.GroupBox6.Controls.Add(Me.TextBox237)
         Me.GroupBox6.Controls.Add(Me.Label489)
         Me.GroupBox6.Controls.Add(Me.Label67)
         Me.GroupBox6.Controls.Add(Me.Label78)
@@ -13741,6 +13754,15 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'TextBox237
+        '
+        Me.TextBox237.Enabled = False
+        Me.TextBox237.Location = New System.Drawing.Point(381, 208)
+        Me.TextBox237.Name = "TextBox237"
+        Me.TextBox237.Size = New System.Drawing.Size(64, 20)
+        Me.TextBox237.TabIndex = 179
+        Me.TextBox237.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -15082,4 +15104,6 @@ Partial Class Form1
     Friend WithEvents Label716 As Label
     Friend WithEvents Label717 As Label
     Friend WithEvents Button19 As Button
+    Friend WithEvents Button20 As Button
+    Friend WithEvents TextBox237 As TextBox
 End Class
