@@ -1508,7 +1508,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Narrow Face Flange input data"
+            oTable.Cell(row, 1).Range.Text = "Narrow Face Flange input data (11.5)"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Internal Pressure"
             oTable.Cell(row, 2).Range.Text = TextBox77.Text
@@ -1567,7 +1567,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Bolting 11.4.3"
+            oTable.Cell(row, 1).Range.Text = "Bolting (11.4.3)"
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "Number of Bolts"
@@ -1603,7 +1603,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Bolt Loads and area's 11.5.2"
+            oTable.Cell(row, 1).Range.Text = "Bolt Loads and area's (11.5.2)"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Basic Gasket width, b0"
             oTable.Cell(row, 2).Range.Text = TextBox72.Text
@@ -1695,7 +1695,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Flange stress 11.5.4"
+            oTable.Cell(row, 1).Range.Text = "Flange stress (11.5.4)"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Distance bolts, δb"
             oTable.Cell(row, 2).Range.Text = TextBox103.Text
@@ -1857,7 +1857,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "7.4.2 Cylindrical shells"
+            oTable.Cell(row, 1).Range.Text = "Cylindrical shells(7.4.2)"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Internal Pressure"
             oTable.Cell(row, 2).Range.Text = TextBox77.Text
@@ -2190,7 +2190,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Material Ddata"
+            oTable.Cell(row, 1).Range.Text = "Material data"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Material"
             oTable.Cell(row, 2).Range.Text = ComboBox5.Text
@@ -2269,7 +2269,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Wall stress unsupported zone 15.6.4"
+            oTable.Cell(row, 1).Range.Text = "Wall stress unsupported zone(15.6.4)"
             row += 1
             oTable.Cell(row, 1).Range.Text = "Inside long side"
             oTable.Cell(row, 2).Range.Text = NumericUpDown36.Value.ToString("0")
@@ -2301,7 +2301,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Reinforments stitch welded 15.6.2.3"
+            oTable.Cell(row, 1).Range.Text = "Reinforments stitch welded(15.6.2.3)"
 
             row += 1
             oTable.Cell(row, 1).Range.Text = Label415.Text
@@ -2333,7 +2333,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Stress transverse section 11.5.3"
+            oTable.Cell(row, 1).Range.Text = "Stress transverse section(11.5.3)"
 
             row += 1
             oTable.Cell(row, 1).Range.Text = "σ Membrane short side"
@@ -2374,7 +2374,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "τ in Reinforcement web 15.6.2.4"
+            oTable.Cell(row, 1).Range.Text = "τ in Reinforcement web (15.6.2.4)"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label362.Text
             oTable.Cell(row, 2).Range.Text = TextBox116.Text
@@ -3094,7 +3094,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Cylinder shells under External pressure 8.4"
+            oTable.Cell(row, 1).Range.Text = "Cylinder shells under External pressure(8.4)"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label459.Text
             oTable.Cell(row, 2).Range.Text = TextBox162.Text
@@ -3141,7 +3141,7 @@ Public Class Form1
             oTable.Rows.Item(1).Range.Font.Bold = CInt(True)
             oTable.Rows.Item(1).Range.Font.Size = font_sizze + 2
             row = 1
-            oTable.Cell(row, 1).Range.Text = "Nominal elastic limit σ  8.4.3 "
+            oTable.Cell(row, 1).Range.Text = "Nominal elastic limit σ (8.4.3) "
 
             row += 1
             oTable.Cell(row, 1).Range.Text = Label492.Text
