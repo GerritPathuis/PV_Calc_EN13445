@@ -22,7 +22,6 @@ Public Class Form1
 
     Public _deb As Double       'Outside diameter nozzle fitted in shell
     Public _dib As Double       'Inside diameter nozzle fitted in shell
-    Public _eb As Double        'Effective thickness nozzle thickness
     Public _E As Double         'Modulus of elasticity 
     Dim separators() As String = {";"}
 
@@ -146,16 +145,25 @@ Public Class Form1
         Design_stress()
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown18.ValueChanged
-        Calc_nozzle_fig949()
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click, NumericUpDown14.ValueChanged, TabPage4.Enter, NumericUpDown12.ValueChanged, NumericUpDown1.ValueChanged, NumericUpDown41.ValueChanged, NumericUpDown18.ValueChanged, NumericUpDown58.ValueChanged
+        Calc_nozzle_fig947()
     End Sub
-    Private Sub Calc_nozzle_fig949()
-        Dim nozzle_wall As Double
-        Dim fob, fop As Double
-        Dim Afs, Afw As Double
-        Dim Ls As Double
-        Dim Lso, eas, ris As Double   'Max length shell contibuting to reinforcement
-        Dim Lbo, eab, rib As Double   'Max length nozzle contibuting to reinforcement
+    Private Sub Calc_nozzle_fig947()
+        Dim eab As Double   'Thickess nozzle wall
+        Dim eb As Double    'Effective tickness nozzle wall
+        Dim fop As Double   'Design stress
+        Dim fob As Double   'Design stress
+        Dim Afs As Double   'Shell wall area
+        Dim Afw As Double   'Weld area 
+        Dim Ls As Double    'Actual Distance shell-edge-opening to discontinuity
+        Dim Ls_min As Double    '(9.5-82)
+        Dim Lso As Double   'Max length shell contibuting to reinforcement
+        Dim eas As Double   'Shell Analysis thickness of shell wall 
+        Dim ris As Double   'Inside radius shell
+        Dim rib As Double   'Inside radius nozzle
+        Dim Lb As Double    'Nozzle length extending out of shell
+        Dim Lbo As Double   'Max length nozzle contributing to reinforcement
+        Dim Lb_min As Double    '(9.5-83)
 
         Dim Aps As Double       'Figure 9.4-7 — Cylindrical shell with isolated opening and set-on nozzle 
         Dim Apb As Double       'Figure 9.4-7  
@@ -167,56 +175,54 @@ Public Class Form1
         Dim D_small_opening As Double
         Dim W_min, W_min1, W_min2 As Double
         Dim qz As Double
+        Dim a, ecs As Double
 
-        Ls = NumericUpDown1.Value           'Actual Distance shell-edge-opening to discontinuity
-        _De = NumericUpDown18.Value         'Shell OD 
-        _eb = NumericUpDown41.Value         'Shell Wall 
-        _Di = _De - 2 * _eb                 'Shell ID 
-        _deb = NumericUpDown14.Value        'Outside diameter nozzle fitted in shell
-        eas = _eb                           'Shell Analysis thickness of shell wall 
 
-        If _deb >= _De Then       'Nozzle dia can not be bigger then shell diameter
-            _deb = _De
-            NumericUpDown14.Value = CDec(_deb)
-        End If
+        Ls = NumericUpDown1.Value       'Actual Distance shell-edge-opening to discontinuity
+        '------------ shell ------------
+        _De = NumericUpDown18.Value     'Shell OD 
+        _ecs = NumericUpDown41.Value    'Shell Wall 
+        eas = NumericUpDown41.Value     'Shell thickness for analysis 
+        _Di = _De - (2 * _ecs)          'Shell ID 
 
-        nozzle_wall = NumericUpDown12.Value
-        _dib = _deb - 2 * nozzle_wall
-        If _dib < 10 Then _dib = 10
-        TextBox144.Text = _dib.ToString("0.0")
+        '----------- nozzle -----------
+        _deb = NumericUpDown14.Value    'Nozzle Outside diameter 
+        eab = NumericUpDown12.Value     'Nozzle Wall thickness for analysis 
+        eb = NumericUpDown12.Value      'Nozzle Wall thickness 
+        _dib = _deb - (2 * eab)         'Nozzle Inside diameter
+        Lb = NumericUpDown58.Value      'Nozzle length extending out shell
 
-        '--------- Small opening 9.5.2.2
-        D_small_opening = 0.15 * Sqrt((_Di + _eb) * _eb)        '(9.5-18) 
+        '--------- Small opening 9.5.2.2------------------
+        D_small_opening = 0.15 * Sqrt((_Di + _ecs) * _ecs)        '(9.5-18) 
         Label77.Text = "D= " & D_small_opening.ToString("0.0") & " [mm]"
 
         '------- reinforment materials is identical to shell material----
-        fob = _fs
-        fop = _fs
+        '------ use the lowest stress number ----------------------------
+        fob = _fs                   '(9.5-8)
+        fop = _fs                   '(9.5-9)
 
         '---------formula 9.5-2 Nozzle-----
-        eab = nozzle_wall               '(9.5-2) 
-        rib = _dib / 2
-        Lbo = Sqrt((2 * rib + eab) + eab)
+        rib = _dib / 2                              'Inside radius nozzle
+        Lbo = Sqrt((_deb - eb) * eb)                '(9.5-76) max contributing length 
 
         '----Chapter 9.5.2.4.4.3 Nozzle in cylindrical shell
-        Dim a, ls_min, ecs As Double
         ecs = eas                                   'assumed shell thickness for calculation
-        a = _deb / 2                                'equation (9.5-90) (page 107)
-        ris = (_De / 2) - eas                       'equation (9.5-91)
-        Lso = Sqrt(((_De - 2 * eas) + ecs) * ecs)   'equation (9.5-92)
-        ls_min = CDbl(IIf(Lso < Ls, Lso, Ls))       'equation (9.5-93)
-        Aps = ris * (ls_min + a)                    'equation (9.5-94)
+        a = _deb / 2                                '(9.5-90) (page 107)
+        ris = (_De / 2) - eas                       '(9.5-91)
+        Lso = Sqrt(((_De - 2 * eas) + ecs) * ecs)   '(9.5-92)
 
-        '--------------- formula (9.5-7) (page 99) --------------------
+
+        '-------- for SET-ON nozzles ----------------
+        Lb_min = CDbl(IIf(Lbo < Lb, Lbo, Lb))       '(9.5-82)
+        Ls_min = CDbl(IIf(Lso < Ls, Lso, Ls))       '(9.5-83)
+        Aps = ris * (Ls_min + a)                    '(9.5-94)
+
         'Af = Stress loaded cross-sectional area effective as reinforcement
-        Afw = 0                              'Weld area in neglected
-        Afb = nozzle_wall * (Lbo + _eb)      'Nozzle wall
-        Afp = 0                              'reinforcement ring NOT present
-        Afs = Lso * _eb                      'Shell wall area
-
-        'Ap = Pressure loaded area. 
-        Apb = _dib / 2 * (Lbo + _eb)         'Nozzle Pressure loaded area
-        Ap_phi = 0                           'Oblique nozzles
+        Afb = eb * Lb_min                   '(9.5-80) Nozzle wall
+        Afs = (Ls_min + eb) * ecs           '(9.5-81) Shell wall area
+        Apb = 0.5 * _dib * (Lb_min + eas)   '(9.5-84) Nozzle Pressure loaded area
+        Afp = 0                             '(9.5-86) reinforcement ring NOT present
+        Ap_phi = 0                          '(9.5-122)Oblique nozzles
 
         eq_left = (Afs + Afw) * (_fs - 0.5 * _P)    'left side(9.5-7)
         eq_left += Afp * (fop - 0.5 * _P)
@@ -226,30 +232,31 @@ Public Class Form1
         eq_ratio = eq_left / eq_right
 
         '----- 9.4.8 Minimum Distance between nozle and shell butt-weld
-        Ln1 = 0.5 * _deb + 2 * nozzle_wall      'Equation 9.4-4 (page 90)
+        Ln1 = 0.5 * _deb + 2 * eab              '(9.4-4) (page 90)
         Ln2 = 0.5 * _deb + 40
         Ln = CDbl(IIf(Ln1 > Ln2, Ln1, Ln2))     'Find biggest
 
-
         qz = Ln - _deb / 2      'Distance shell edge opening-weld
 
-        '-------- Figure 9.7-5          
-        W_min1 = 0.2 * Sqrt((2 * _Di * 0.5 + ecs) * ecs)    'equation 9.7-5
-        W_min2 = 3 * eas                                    'equation 9.7-5
+        '-------- Figure 9.7-5--------------------          
+        W_min1 = 0.2 * Sqrt((2 * _Di * 0.5 + ecs) * ecs)    '(9.7-1)
+        W_min2 = 3 * eas
         W_min = CDbl(IIf(W_min1 > W_min2, W_min1, W_min2))  'Find biggest
 
         '----- present--------
         TextBox164.Text = Ln1.ToString("0")     'Distance [mm2]
         TextBox168.Text = Ln2.ToString("0")     'Distance [mm2]
 
+        TextBox144.Text = _dib.ToString("0.0")
         TextBox163.Text = _Di.ToString("0")     'Shell Inside Diameter
         TextBox9.Text = Afs.ToString("0")       'Shell area reinforcement [mm2]
         TextBox10.Text = Afw.ToString("0")      'Weld area reinforcement [mm2]
+        TextBox247.Text = Afp.ToString("0")     'Reinforcement pad area[mm2]
         TextBox11.Text = Afb.ToString("0")      'reinforcement [mm2]
         TextBox12.Text = Aps.ToString("0")      'Pressure loaded area [mm2]
         TextBox13.Text = Apb.ToString("0")      'Pressure loaded area [mm2]
-        TextBox14.Text = Lso.ToString("0.0")
-        TextBox15.Text = lbo.ToString("0.0")
+        TextBox14.Text = Lso.ToString("0.0")    'Effective Shell length
+        TextBox15.Text = Lbo.ToString("0.0")    'Effective Nozzle length
 
         TextBox16.Text = eq_left.ToString("0")
         TextBox17.Text = eq_right.ToString("0")
@@ -257,11 +264,23 @@ Public Class Form1
         TextBox20.Text = Ln.ToString("0")
         TextBox169.Text = qz.ToString("0")
 
+        TextBox246.Text = Ls_min.ToString("0")
+        TextBox245.Text = Lb_min.ToString("0")
+
+        TextBox249.Text = fob.ToString("0") 'Design stress nozzle material
+        TextBox248.Text = fop.ToString("0") 'Design stress shell material
+
         '----------- checks--------
+        '----------Nozzle dia can not be bigger then shell diameter-----
+        If _deb >= _De Then
+            _deb = _De
+            NumericUpDown14.Value = CDec(_deb)
+        End If
+
         TextBox237.Text = CType(IIf(eq_left > eq_right, "OK", "NOK"), String)
         TextBox16.BackColor = CType(IIf(eq_left < eq_right, Color.Red, Color.LightGreen), Color)
         TextBox17.BackColor = TextBox16.BackColor
-        TextBox169.BackColor = CType(IIf(qz > ls, Color.Red, Color.LightGreen), Color)
+        TextBox169.BackColor = CType(IIf(qz > Ls, Color.Red, Color.LightGreen), Color)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, ComboBox1.TextChanged, NumericUpDown5.ValueChanged, NumericUpDown4.ValueChanged, ComboBox5.SelectedIndexChanged, RadioButton3.CheckedChanged, RadioButton2.CheckedChanged, RadioButton1.CheckedChanged, RadioButton4.CheckedChanged
@@ -3510,7 +3529,7 @@ Public Class Form1
             oPara2.Range.Font.Size = font_sizze + 1
             oPara2.Format.SpaceAfter = 1
             oPara2.Range.Font.Bold = CInt(False)
-            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445, Chapter 9.4" & vbCrLf
+            oPara2.Range.Text = "Pressure Vessel calculation acc. EN13445, Chapter 9.4.5.4" & vbCrLf
             oPara2.Range.InsertParagraphAfter()
 
             '----------------------------------------------
@@ -3662,7 +3681,7 @@ Public Class Form1
 
             '--------- Pressure loaded aread (9.4-9) --------------
             'Insert a 18 (row) x 3 table (column), fill it with data and change the column widths.
-            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 10, 3)
+            oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 15, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 1
             oTable.Range.Font.Size = font_sizze
             oTable.Range.Font.Bold = CInt(False)
@@ -3679,30 +3698,51 @@ Public Class Form1
             oTable.Cell(row, 1).Range.Text = Label70.Text
             oTable.Cell(row, 2).Range.Text = TextBox15.Text
             oTable.Cell(row, 3).Range.Text = "[mm]"
+
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label725.Text
+            oTable.Cell(row, 2).Range.Text = TextBox246.Text
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label727.Text
+            oTable.Cell(row, 2).Range.Text = TextBox245.Text
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label58.Text
             oTable.Cell(row, 2).Range.Text = TextBox9.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label60.Text
             oTable.Cell(row, 2).Range.Text = TextBox10.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label64.Text
             oTable.Cell(row, 2).Range.Text = TextBox11.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label489.Text
             oTable.Cell(row, 2).Range.Text = TextBox12.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label66.Text
             oTable.Cell(row, 2).Range.Text = TextBox13.Text
-            oTable.Cell(row, 3).Range.Text = "[mm]"
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label730.Text
+            oTable.Cell(row, 2).Range.Text = TextBox249.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = Label732.Text
+            oTable.Cell(row, 2).Range.Text = TextBox248.Text
+            oTable.Cell(row, 3).Range.Text = "[N/mm2]"
             row += 1
             oTable.Cell(row, 1).Range.Text = Label73.Text
             oTable.Cell(row, 2).Range.Text = TextBox16.Text & ">" & TextBox17.Text
-            oTable.Cell(row, 3).Range.Text = TextBox237.Text
+            oTable.Cell(row, 3).Range.Text = "[mm2]"
+            row += 1
+            oTable.Cell(row, 1).Range.Text = "Calculation result"
+            oTable.Cell(row, 2).Range.Text = TextBox237.Text
+            oTable.Cell(row, 3).Range.Text = ""
 
             oTable.Columns(1).Width = oWord.InchesToPoints(2.91)   'Change width of columns 1 & 2.
             oTable.Columns(2).Width = oWord.InchesToPoints(1.5)
@@ -3713,5 +3753,6 @@ Public Class Form1
             MessageBox.Show(ex.Message)  ' Show the exception's message.
         End Try
     End Sub
+
 
 End Class
