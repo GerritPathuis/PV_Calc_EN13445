@@ -1087,7 +1087,8 @@ Public Class Form1
         Dim Rp02_Flange As Double     'Rp02 flange
         Dim W, w_, b_gasket, b0_gasket As Double
         Dim m As Double             'Gasket factor
-        Dim y, Wa, Wop As Double
+        Dim y_seat As Double
+        Dim Wa, Wop As Double
         Dim AB_min1, AB_min2, AB_min, dia_bolt As Double
 
         Dim HD, HT As Double
@@ -1152,7 +1153,7 @@ Public Class Form1
         w_ = NumericUpDown24.Value          'Gasket width
         B_ID = NumericUpDown23.Value        'ID Flange
         gt = NumericUpDown29.Value          'OD Gasket
-        y = NumericUpDown31.Value           'Min seat stress
+        y_seat = NumericUpDown31.Value           'Min seat stress
         m = NumericUpDown30.Value           'Gasket factor
         db = NumericUpDown26.Value          'Dia bolt selected
         Ab = PI / 2 * db ^ 2                'Area selected bolt
@@ -1178,7 +1179,7 @@ Public Class Form1
         H = PI / 4 * (G ^ 2 * _P)              '(11.5-5) Hydrostatic end force
         HG = 2 * PI * G * b_gasket * m * _P    '(11.5-6)
         '--- assembly condition
-        Wa = PI * b0_gasket * G * y            '(11.5-7) Min req. bolt load
+        Wa = PI * b0_gasket * G * y_seat       '(11.5-7) Min req. bolt load
         '--- operating condition
         Wop = H + HG                           '(11.5-8)
 
@@ -3754,5 +3755,86 @@ Public Class Form1
         End Try
     End Sub
 
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click, NumericUpDown70.ValueChanged, NumericUpDown69.ValueChanged, NumericUpDown68.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown65.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown63.ValueChanged, NumericUpDown62.ValueChanged, NumericUpDown61.ValueChanged, NumericUpDown60.ValueChanged, TabPage15.Enter
+        '11.6 Full face flanges with soft ring type gaskets
+        Dim B As Double    'Bolt circle
+        Dim C As Double    'Bolt circle
+        Dim A1 As Double   'inside diameter of gasket contact face
+        Dim b_ef As Double    'effective assembly width
+        Dim _2b As Double   'effective gasket pressure width, taken as 5 mm;
+        Dim b0 As Double   'basic assembly width effective under initial tightening up;
+        Dim db As Double   'bolt outside diameter
+        'Dim dn As Double   'bolt nominal diameter
+        Dim dh As Double   'diameter Of bolt holes
+        Dim g1 As Double
+        Dim G As Double    'diameter at location of gasket load reaction
+        Dim G0 As Double   'outside diameter of gasket or outside diameter of flange
+        Dim H As Double    'total hydrostatic end force;
+        Dim Hg As Double   'compression load on gasket to ensure tight joint
+        Dim Hr As Double   'balancing reaction force outside bolt circle in opposition
+        'Dim hr_ As Double  'radial distance from bolt circle to circle on which HR acts
+        Dim Hd As Double
+        Dim hd_ As Double
+        Dim m As Double
+        Dim Wa As Double
+        Dim Wop As Double
 
+        Dim ht As Double  'radial distance from bolt circle to circle on which HT acts
+        Dim hg_ As Double  'radial distance from bolt circle to circle on which HG acts;
+        Dim Mr As Double   'balancing radial moment in flange along line of bolt holes
+        Dim n As Double    'number of bolts
+        Dim δb As Double    'bolt spacing.
+        Dim t1, t2 As Double
+        Dim f As Double
+        Dim e_, e1, e2, e3 As Double    'Flange thickness
+        Dim y_seat As Double             'Minimum seat stress
+
+        C = NumericUpDown65.Value
+        B = NumericUpDown70.Value
+        g1 = NumericUpDown62.Value
+
+        _2b = 5                             '[mm] effective gasket width
+        t1 = G0 - c
+        t2 = c - A1
+
+        b0 = CDbl(IIf(t1 < t2, t1, t2))     '(11.6-1) find the smallest
+        b_ef = 4 * Sqrt(b0)                 '(11.6-2)
+        G = C - (dh - _2b)                  '(11.6-3)
+        H = PI / 4 * (C - dh) ^ 2 * _P      '(11.6-4)
+        Hd = PI / 4 * B ^ 2 * _P            '(11.6-5)
+        Hr = H - Hd                         '(11.6-6)
+        Hg = _2b * PI * G * m * _P          '(11.6-7)
+        hd_ = (C - B - g1) / 2              '(11.6-8)
+        ht = (C + dh + _2b - B) / 4         '(11.6-9)
+        Hg = (dh + _2b) / 2                 '(11.6-10)
+        Hr = (G0 - C + dh) / 4              '(11.6-11)
+        Mr = Hd * Hd + ht * ht + Hg * hg_   '(11.6-12)
+        Hr = Mr / Hr                        '(11.6-13)
+
+        '----- Bolt area's -------
+        Wa = PI * C * b_ef * y_seat         '(11.6-14)
+        Wop = H + Hg + Hr                   '(11.6-15)
+
+        '----- Flange design -------
+        e1 = Sqrt(6 * Mr / (f * (PI * C - n * dh))) '(11.6-16)
+        e2 = m + 0.5                                '(11.6-17)
+        e2 /= (_E / 200000) ^ 0.25
+        e2 *= (δb - 2 * db) / 6
+        e3 = (A1 + 2 * g1) * _P / (2 * f)           '(11.6-18)
+
+        Select Case (True)      'find the biggest
+            Case (e1 > e2 And e1 > e3)
+                e_ = e1
+            Case (e2 > e1 And e2 > e3)
+                e_ = e2
+            Case (e3 > e2 And e3 > e1)
+                e_ = e3
+        End Select
+
+        '------ present -----------
+        TextBox252.Text = (_P * 10).ToString("0.0")
+        TextBox251.Text = _P.ToString("0.00")
+        TextBox250.Text = _fs.ToString("0")
+
+    End Sub
 End Class
