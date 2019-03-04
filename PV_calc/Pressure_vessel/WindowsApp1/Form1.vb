@@ -3771,15 +3771,15 @@ Public Class Form1
         Dim G0 As Double   'outside diameter of gasket or outside diameter of flange
         Dim H As Double    'total hydrostatic end force;
         Dim Hg As Double   'compression load on gasket to ensure tight joint
-        Dim Hr As Double   'balancing reaction force outside bolt circle in opposition
-        'Dim hr_ As Double  'radial distance from bolt circle to circle on which HR acts
+        Dim Ht As Double   'balancing reaction force outside bolt circle in opposition
+        Dim ht_ As Double  'radial distance from bolt circle to circle on which HT acts
+        Dim Hr As Double
+        Dim hr_ As Double  'radial distance from bolt circle to circle on which HR acts
         Dim Hd As Double
         Dim hd_ As Double
         Dim m As Double
         Dim Wa As Double
         Dim Wop As Double
-
-        Dim ht As Double  'radial distance from bolt circle to circle on which HT acts
         Dim hg_ As Double  'radial distance from bolt circle to circle on which HG acts;
         Dim Mr As Double   'balancing radial moment in flange along line of bolt holes
         Dim n As Double    'number of bolts
@@ -3802,14 +3802,14 @@ Public Class Form1
         G = C - (dh - _2b)                  '(11.6-3)
         H = PI / 4 * (C - dh) ^ 2 * _P      '(11.6-4)
         Hd = PI / 4 * B ^ 2 * _P            '(11.6-5)
-        Hr = H - Hd                         '(11.6-6)
+        Ht = H - Hd                         '(11.6-6)
         Hg = _2b * PI * G * m * _P          '(11.6-7)
         hd_ = (C - B - g1) / 2              '(11.6-8)
-        ht = (C + dh + _2b - B) / 4         '(11.6-9)
+        ht_ = (C + dh + _2b - B) / 4         '(11.6-9)
         Hg = (dh + _2b) / 2                 '(11.6-10)
-        Hr = (G0 - C + dh) / 4              '(11.6-11)
-        Mr = Hd * Hd + ht * ht + Hg * hg_   '(11.6-12)
-        Hr = Mr / Hr                        '(11.6-13)
+        hr_ = (G0 - C + dh) / 4             '(11.6-11)
+        Mr = Hd * hd_ + Ht * ht_ + Hg * hg_ '(11.6-12)
+        Hr = Mr / hr_                       '(11.6-13)
 
         '----- Bolt area's -------
         Wa = PI * C * b_ef * y_seat         '(11.6-14)
