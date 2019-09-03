@@ -314,7 +314,7 @@ Public Class Form1
             Double.TryParse(words(7), y350)
             Double.TryParse(words(8), y400)
 
-            temperature = CDbl(NumericUpDown5.Value)
+            temperature = CDbl(NumericUpDown5.Value)        '[c]
             Select Case True
 
                 Case 50 >= temperature
@@ -365,21 +365,21 @@ Public Class Form1
             End Select
 
             If String.Equals(TextBox182.Text, "cs") Then
-                _E = (213.16 - 6.92 * temperature / 10 ^ 2 - 1.824 / 10 ^ 5 * temperature ^ 2) * 1000
+                _E = (213.16 - 6.92 * temperature / 10 ^ 2 - 1.824 / 10 ^ 5 * temperature ^ 2) * 1000 '[N/mm2]
             Else
-                _E = (201.66 - 8.48 * temperature / 10 ^ 2) * 1000
+                _E = (201.66 - 8.48 * temperature / 10 ^ 2) * 1000      '[N/mm2]
             End If
 
             '-------- present -------------
             TextBox131.Text = (_P * 10 ^ 4).ToString    'Calculation pressure [mBar]
             TextBox133.Text = _fym.ToString             'Safety factor
             TextBox136.Text = _f02.ToString("0")        'Max allowed bend
-            TextBox137.Text = (_f02 * 1.5).ToString("0")    'Max allowed bend+membrane
-            TextBox140.Text = (_f02 * 1.5).ToString("0")    'Max allowed bend+membrane
+            TextBox137.Text = (_f02 * 1.5).ToString("0")    '[N/mm2] Max allowed bend+membrane
+            TextBox140.Text = (_f02 * 1.5).ToString("0")    '[N/mm2] Max allowed bend+membrane
 
-            NumericUpDown7.Value = CDec(_fs)        'Design stress
-            TextBox133.Text = _f02.ToString("0")    'Yield stress
-            TextBox178.Text = _E.ToString("0")      'Max allowed bend+membrane
+            NumericUpDown7.Value = CDec(_fs)        '[N/mm2] Design stress
+            TextBox133.Text = _f02.ToString("0")    '[N/mm2] Yield stress
+            TextBox178.Text = _E.ToString("0")      '[N/mm2] Youngs modulus
             TextBox209.Text = _ν.ToString("0.0")    'Poissons rate for steel
         End If
     End Sub
@@ -402,9 +402,9 @@ Public Class Form1
             Double.TryParse(joint_eff(ComboBox2.SelectedIndex), z_joint)      'Joint efficiency
         End If
 
-        De = NumericUpDown15.Value  'OD
-        ea = NumericUpDown16.Value  'Wall thicknes
-        Di = De - 2 * ea            'ID
+        De = NumericUpDown15.Value  'OD [mm]
+        ea = NumericUpDown16.Value  'Wall thicknes [mm]
+        Di = De - 2 * ea            'ID [mm]
         TextBox160.Text = Di.ToString("0.0")
 
         Dm = (De + Di) / 2                          'Average Dia
@@ -414,12 +414,12 @@ Public Class Form1
         valid_check = Round(e_wall / De, 4)
 
         '--------- present results--------
-        TextBox2.Text = Round(e_wall, 4).ToString   'required wall [mm]
+        TextBox2.Text = Round(e_wall, 4).ToString       'required wall [mm]
         TextBox5.Text = valid_check.ToString
-        TextBox6.Text = _P.ToString("0.00")         '[MPa]
-        TextBox53.Text = (_P * 10).ToString("0.00") '[Bar]
+        TextBox6.Text = _P.ToString("0.00")             '[MPa]
+        TextBox53.Text = (_P * 10).ToString("0.00")     '[Bar]
         TextBox7.Text = _fs.ToString
-        TextBox8.Text = (Pmax * 10).ToString("0.00") '[Bar]
+        TextBox8.Text = (Pmax * 10).ToString("0.00")    '[Bar]
 
         '---------- Check-----
         TextBox5.BackColor = CType(IIf(valid_check > 0.16, Color.Red, Color.LightGreen), Color)
@@ -3837,4 +3837,6 @@ Public Class Form1
         TextBox250.Text = _fs.ToString("0")
 
     End Sub
+
+
 End Class

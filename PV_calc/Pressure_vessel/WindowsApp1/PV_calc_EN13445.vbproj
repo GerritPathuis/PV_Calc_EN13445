@@ -68,10 +68,11 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2BBD06BB32AE37D05ED8DD2C98BDF167E362CE21</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>45CFA7506E65EE0930D626BD8583D73C031F96B9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>PV_calculation_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
