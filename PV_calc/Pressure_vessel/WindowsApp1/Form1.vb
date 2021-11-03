@@ -23,12 +23,12 @@ Public Class Form1
     Public _deb As Double       'Outside diameter nozzle fitted in shell
     Public _dib As Double       'Inside diameter nozzle fitted in shell
     Public _E As Double         'Modulus of elasticity 
-    Dim separators() As String = {";"}
+    ReadOnly separators() As String = {";"}
 
     '----------- directory's-----------
-    Dim dirpath_Eng As String = "N:\Engineering\VBasic\PV_calc_input\"
-    Dim dirpath_Rap As String = "N:\Engineering\VBasic\PV_calc_rapport_copy\"
-    Dim dirpath_Home As String = "C:\Temp\"
+    ReadOnly dirpath_Eng As String = "N:\Engineering\VBasic\PV_calc_input\"
+    ReadOnly dirpath_Rap As String = "N:\Engineering\VBasic\PV_calc_rapport_copy\"
+    ReadOnly dirpath_Home As String = "C:\Temp\"
 
     'Chapter 6, Max allowed values for pressure parts
     Public Shared chap6() As String = {
@@ -87,6 +87,8 @@ Public Class Form1
 
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+
+        Me.Size = New Size(1200, 810)
 
         TextBox1.Text =
         "Based on " & vbCrLf &
@@ -850,7 +852,7 @@ Public Class Form1
         'Wall thickness  knuckle to avoid plastic buckling
         Eb = (Di / r_knuckle) ^ 0.825
         Eb *= (_P / (111 * _fs))
-        Eb = Eb ^ (1 / 1.5)
+        Eb ^= (1 / 1.5)
         Eb *= (0.75 * R_central + 0.2 * Di)
 
         'Find the thickest wall
@@ -1177,7 +1179,7 @@ Public Class Form1
         End If
 
         H = PI / 4 * (G ^ 2 * _P)              '(11.5-5) Hydrostatic end force
-        HG = 2 * PI * G * b_gasket * m * _P    '(11.5-6)
+        HG = 2 * PI * G * b_gasket * m * _P    '(11.5-6) Comp load
         '--- assembly condition
         Wa = PI * b0_gasket * G * y_seat       '(11.5-7) Min req. bolt load
         '--- operating condition
@@ -3757,85 +3759,84 @@ Public Class Form1
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click, NumericUpDown70.ValueChanged, NumericUpDown69.ValueChanged, NumericUpDown68.ValueChanged, NumericUpDown67.ValueChanged, NumericUpDown66.ValueChanged, NumericUpDown65.ValueChanged, NumericUpDown64.ValueChanged, NumericUpDown63.ValueChanged, NumericUpDown62.ValueChanged, NumericUpDown61.ValueChanged, NumericUpDown60.ValueChanged, TabPage15.Enter
         '11.6 Full face flanges with soft ring type gaskets
-        Dim B As Double    'Bolt circle
-        Dim C As Double    'Bolt circle
-        Dim A1 As Double   'inside diameter of gasket contact face
-        Dim b_ef As Double    'effective assembly width
-        Dim _2b As Double   'effective gasket pressure width, taken as 5 mm;
-        Dim b0 As Double   'basic assembly width effective under initial tightening up;
-        Dim db As Double   'bolt outside diameter
-        'Dim dn As Double   'bolt nominal diameter
-        Dim dh As Double   'diameter Of bolt holes
+        Dim B_flange As Double  'Bolt circle
+        Dim C_bolt As Double    'Bolt circle
+        Dim A1 As Double        'inside diameter of gasket contact face
+        Dim b_ef As Double      'effective assembly width
+        Dim _2b As Double       'effective gasket pressure width, taken as 5 mm;
+        Dim b0 As Double        'basic assembly width effective under initial tightening up;
+        Dim db As Double        'bolt outside diameter
+        'Dim dn As Double       'bolt nominal diameter
+        Dim dh As Double        'diameter Of bolt holes
         Dim g1 As Double
-        Dim G As Double    'diameter at location of gasket load reaction
-        Dim G0 As Double   'outside diameter of gasket or outside diameter of flange
-        Dim H As Double    'total hydrostatic end force;
-        Dim Hg As Double   'compression load on gasket to ensure tight joint
-        Dim Ht As Double   'balancing reaction force outside bolt circle in opposition
-        Dim ht_ As Double  'radial distance from bolt circle to circle on which HT acts
-        Dim Hr As Double
-        Dim hr_ As Double  'radial distance from bolt circle to circle on which HR acts
-        Dim Hd As Double
-        Dim hd_ As Double
+        Dim G As Double         'diameter at location of gasket load reaction
+        Dim G0 As Double        'outside diameter of gasket or outside diameter of flange
+        Dim H As Double         'Force, total hydrostatic end force;
+        Dim Ht As Double        'Force, balancing reaction force outside bolt circle in opposition
+        Dim ht_ As Double       'radial distance from bolt circle to circle on which HT acts
+        Dim Hr As Double        'Force force outside bolt circle
+        Dim hr_ As Double       'Distance radial,  from bolt circle to circle on which HR acts
+        Dim HD As Double
+        Dim hd_ As Double       'Distance
         Dim m As Double
         Dim Wa As Double
         Dim Wop As Double
-        Dim hg_ As Double  'radial distance from bolt circle to circle on which HG acts;
-        Dim Mr As Double   'balancing radial moment in flange along line of bolt holes
-        Dim n As Double    'number of bolts
-        Dim δb As Double    'bolt spacing.
+        Dim hg_ As Double       'is compression load on gasket to ensure tight joint
+        Dim hgg As Double       'Distance radial from bolt circle to circle on which HG acts;
+        Dim Mr As Double        'balancing radial moment in flange along line of bolt holes
+        Dim n As Double         'number of bolts
+        Dim δb As Double        'bolt spacing.
         Dim t1, t2 As Double
-        Dim f As Double
-        Dim e_, e1, e2, e3 As Double    'Flange thickness
-        Dim y_seat As Double             'Minimum seat stress
+        Dim e_biggest, e1, e2, e3 As Double         'Flange thickness
+        Dim y_seat As Double                        'Minimum seat stress
 
-        C = NumericUpDown65.Value
-        B = NumericUpDown70.Value
-        g1 = NumericUpDown62.Value
+        C_bolt = NumericUpDown65.Value              '[mm] bolt circle
+        B_flange = NumericUpDown70.Value            '[mm] inside diameter flange
+        g1 = NumericUpDown62.Value                  '[mm] flange wall 
+        _2b = 5                                     '[mm] effective gasket width (11.6-1)
 
-        _2b = 5                             '[mm] effective gasket width
-        t1 = G0 - c
-        t2 = c - A1
+        t1 = G0 - C_bolt
+        t2 = C_bolt - A1
 
-        b0 = CDbl(IIf(t1 < t2, t1, t2))     '(11.6-1) find the smallest
-        b_ef = 4 * Sqrt(b0)                 '(11.6-2)
-        G = C - (dh - _2b)                  '(11.6-3)
-        H = PI / 4 * (C - dh) ^ 2 * _P      '(11.6-4)
-        Hd = PI / 4 * B ^ 2 * _P            '(11.6-5)
-        Ht = H - Hd                         '(11.6-6)
-        Hg = _2b * PI * G * m * _P          '(11.6-7)
-        hd_ = (C - B - g1) / 2              '(11.6-8)
-        ht_ = (C + dh + _2b - B) / 4         '(11.6-9)
-        Hg = (dh + _2b) / 2                 '(11.6-10)
-        hr_ = (G0 - C + dh) / 4             '(11.6-11)
-        Mr = Hd * hd_ + Ht * ht_ + Hg * hg_ '(11.6-12)
-        Hr = Mr / hr_                       '(11.6-13)
+        b0 = CDbl(IIf(t1 < t2, t1, t2))             '(11.6-1) find the smallest
+        b_ef = 4 * Sqrt(b0)                         '(11.6-2)
+        G = C_bolt - (dh - _2b)                     '(11.6-3) Diameter gasket load
+        H = PI / 4 * (C_bolt - dh) ^ 2 * _P         '(11.6-4) Force
+        HD = PI / 4 * B_flange ^ 2 * _P             '(11.6-5)
+        Ht = H - HD                                 '(11.6-6)
+        hg_ = _2b * PI * G * m * _P                 '(11.6-7) is a load
+        hd_ = (C_bolt - B_flange - g1) / 2          '(11.6-8) distance
+        ht_ = (C_bolt + dh + _2b - B_flange) / 4    '(11.6-9) is radial distance
+        hgg = (dh + _2b) / 2                        '(11.6-10) is radial distance 
+        hr_ = (G0 - C_bolt + dh) / 4                '(11.6-11)
+        Mr = HD * hd_ + Ht * ht_ + hgg * hg_        '(11.6-12)
+        Hr = Mr / hr_                               '(11.6-13)
 
         '----- Bolt area's -------
-        Wa = PI * C * b_ef * y_seat         '(11.6-14)
-        Wop = H + Hg + Hr                   '(11.6-15)
+        Wa = PI * C_bolt * b_ef * y_seat            '(11.6-14)
+        Wop = H + hg_ + Hr                          '(11.6-15)
 
         '----- Flange design -------
-        e1 = Sqrt(6 * Mr / (f * (PI * C - n * dh))) '(11.6-16)
+        e1 = Sqrt(6 * Mr / (_fs * (PI * C_bolt - n * dh))) '(11.6-16)
         e2 = m + 0.5                                '(11.6-17)
         e2 /= (_E / 200000) ^ 0.25
         e2 *= (δb - 2 * db) / 6
-        e3 = (A1 + 2 * g1) * _P / (2 * f)           '(11.6-18)
+        e3 = (A1 + 2 * g1) * _P / (2 * _fs)           '(11.6-18)
 
-        Select Case (True)      'find the biggest
+        Select Case (True)                          'find the biggest thickness
             Case (e1 > e2 And e1 > e3)
-                e_ = e1
+                e_biggest = e1
             Case (e2 > e1 And e2 > e3)
-                e_ = e2
+                e_biggest = e2
             Case (e3 > e2 And e3 > e1)
-                e_ = e3
+                e_biggest = e3
         End Select
 
         '------ present -----------
-        TextBox252.Text = (_P * 10).ToString("0.0")
-        TextBox251.Text = _P.ToString("0.00")
-        TextBox250.Text = _fs.ToString("0")
-
+        TextBox252.Text = _P.ToString("0.00")           '[mPa] internal pressure
+        TextBox251.Text = (_P * 10).ToString("0.0")     '[bar] internal pressure
+        TextBox250.Text = _fs.ToString("0")             '[n/mm2] allowed stress
+        TextBox253.Text = e_biggest.ToString("F1")      '[mm] flange thickness
     End Sub
 
 

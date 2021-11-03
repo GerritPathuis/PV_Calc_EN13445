@@ -978,7 +978,6 @@ Partial Class Form1
         Me.NumericUpDown61 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown62 = New System.Windows.Forms.NumericUpDown()
         Me.Label751 = New System.Windows.Forms.Label()
-        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
         Me.Label752 = New System.Windows.Forms.Label()
         Me.NumericUpDown63 = New System.Windows.Forms.NumericUpDown()
         Me.Label753 = New System.Windows.Forms.Label()
@@ -1249,6 +1248,11 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Label784 = New System.Windows.Forms.Label()
+        Me.Label785 = New System.Windows.Forms.Label()
+        Me.Label786 = New System.Windows.Forms.Label()
+        Me.TextBox253 = New System.Windows.Forms.TextBox()
+        Me.Label787 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1718,7 +1722,7 @@ Partial Class Form1
         Me.TextBox22.Location = New System.Drawing.Point(6, 570)
         Me.TextBox22.Multiline = True
         Me.TextBox22.Name = "TextBox22"
-        Me.TextBox22.Size = New System.Drawing.Size(398, 126)
+        Me.TextBox22.Size = New System.Drawing.Size(398, 116)
         Me.TextBox22.TabIndex = 91
         Me.TextBox22.Text = "Note"
         '
@@ -11813,6 +11817,11 @@ Partial Class Form1
         '
         'GroupBox46
         '
+        Me.GroupBox46.Controls.Add(Me.Label787)
+        Me.GroupBox46.Controls.Add(Me.Label784)
+        Me.GroupBox46.Controls.Add(Me.Label785)
+        Me.GroupBox46.Controls.Add(Me.Label786)
+        Me.GroupBox46.Controls.Add(Me.TextBox253)
         Me.GroupBox46.Controls.Add(Me.Label745)
         Me.GroupBox46.Controls.Add(Me.Label746)
         Me.GroupBox46.Controls.Add(Me.Label747)
@@ -11823,7 +11832,6 @@ Partial Class Form1
         Me.GroupBox46.Controls.Add(Me.NumericUpDown61)
         Me.GroupBox46.Controls.Add(Me.NumericUpDown62)
         Me.GroupBox46.Controls.Add(Me.Label751)
-        Me.GroupBox46.Controls.Add(Me.ComboBox7)
         Me.GroupBox46.Controls.Add(Me.Label752)
         Me.GroupBox46.Controls.Add(Me.NumericUpDown63)
         Me.GroupBox46.Controls.Add(Me.Label753)
@@ -11869,7 +11877,7 @@ Partial Class Form1
         Me.GroupBox46.Controls.Add(Me.Label783)
         Me.GroupBox46.Location = New System.Drawing.Point(8, 6)
         Me.GroupBox46.Name = "GroupBox46"
-        Me.GroupBox46.Size = New System.Drawing.Size(537, 388)
+        Me.GroupBox46.Size = New System.Drawing.Size(537, 414)
         Me.GroupBox46.TabIndex = 0
         Me.GroupBox46.TabStop = False
         Me.GroupBox46.Text = "11.6 Full face flanges with soft ring type gaskets"
@@ -11985,15 +11993,6 @@ Partial Class Form1
         Me.Label751.Size = New System.Drawing.Size(102, 16)
         Me.Label751.TabIndex = 302
         Me.Label751.Text = "Gasket material"
-        '
-        'ComboBox7
-        '
-        Me.ComboBox7.BackColor = System.Drawing.Color.Yellow
-        Me.ComboBox7.FormattingEnabled = True
-        Me.ComboBox7.Location = New System.Drawing.Point(179, 298)
-        Me.ComboBox7.Name = "ComboBox7"
-        Me.ComboBox7.Size = New System.Drawing.Size(206, 24)
-        Me.ComboBox7.TabIndex = 288
         '
         'Label752
         '
@@ -14925,6 +14924,56 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'Label784
+        '
+        Me.Label784.AutoSize = True
+        Me.Label784.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label784.Location = New System.Drawing.Point(397, 375)
+        Me.Label784.Name = "Label784"
+        Me.Label784.Size = New System.Drawing.Size(38, 16)
+        Me.Label784.TabIndex = 315
+        Me.Label784.Text = "[mm]"
+        '
+        'Label785
+        '
+        Me.Label785.AutoSize = True
+        Me.Label785.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label785.Location = New System.Drawing.Point(266, 374)
+        Me.Label785.Name = "Label785"
+        Me.Label785.Size = New System.Drawing.Size(16, 16)
+        Me.Label785.TabIndex = 314
+        Me.Label785.Text = "e"
+        '
+        'Label786
+        '
+        Me.Label786.AutoSize = True
+        Me.Label786.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label786.Location = New System.Drawing.Point(17, 375)
+        Me.Label786.Name = "Label786"
+        Me.Label786.Size = New System.Drawing.Size(109, 16)
+        Me.Label786.TabIndex = 313
+        Me.Label786.Text = "Flange thickness"
+        '
+        'TextBox253
+        '
+        Me.TextBox253.Enabled = False
+        Me.TextBox253.Location = New System.Drawing.Point(300, 372)
+        Me.TextBox253.Name = "TextBox253"
+        Me.TextBox253.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox253.TabIndex = 312
+        Me.TextBox253.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label787
+        '
+        Me.Label787.AutoSize = True
+        Me.Label787.BackColor = System.Drawing.Color.LightGray
+        Me.Label787.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label787.Location = New System.Drawing.Point(266, 300)
+        Me.Label787.Name = "Label787"
+        Me.Label787.Size = New System.Drawing.Size(118, 16)
+        Me.Label787.TabIndex = 316
+        Me.Label787.Text = "Soft ring Gasket"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -16333,7 +16382,6 @@ Partial Class Form1
     Friend WithEvents NumericUpDown61 As NumericUpDown
     Friend WithEvents NumericUpDown62 As NumericUpDown
     Friend WithEvents Label751 As Label
-    Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents Label752 As Label
     Friend WithEvents NumericUpDown63 As NumericUpDown
     Friend WithEvents Label753 As Label
@@ -16377,4 +16425,9 @@ Partial Class Form1
     Friend WithEvents NumericUpDown70 As NumericUpDown
     Friend WithEvents Label782 As Label
     Friend WithEvents Label783 As Label
+    Friend WithEvents Label784 As Label
+    Friend WithEvents Label785 As Label
+    Friend WithEvents Label786 As Label
+    Friend WithEvents TextBox253 As TextBox
+    Friend WithEvents Label787 As Label
 End Class
