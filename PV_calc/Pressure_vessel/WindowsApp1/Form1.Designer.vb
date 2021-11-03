@@ -968,6 +968,11 @@ Partial Class Form1
         Me.Button21 = New System.Windows.Forms.Button()
         Me.PictureBox22 = New System.Windows.Forms.PictureBox()
         Me.GroupBox46 = New System.Windows.Forms.GroupBox()
+        Me.Label787 = New System.Windows.Forms.Label()
+        Me.Label784 = New System.Windows.Forms.Label()
+        Me.Label785 = New System.Windows.Forms.Label()
+        Me.Label786 = New System.Windows.Forms.Label()
+        Me.TextBox253 = New System.Windows.Forms.TextBox()
         Me.Label745 = New System.Windows.Forms.Label()
         Me.Label746 = New System.Windows.Forms.Label()
         Me.Label747 = New System.Windows.Forms.Label()
@@ -1248,11 +1253,6 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Label784 = New System.Windows.Forms.Label()
-        Me.Label785 = New System.Windows.Forms.Label()
-        Me.Label786 = New System.Windows.Forms.Label()
-        Me.TextBox253 = New System.Windows.Forms.TextBox()
-        Me.Label787 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -2000,22 +2000,22 @@ Partial Class Form1
         'RadioButton4
         '
         Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Checked = True
         Me.RadioButton4.Location = New System.Drawing.Point(16, 33)
         Me.RadioButton4.Name = "RadioButton4"
         Me.RadioButton4.Size = New System.Drawing.Size(91, 17)
         Me.RadioButton4.TabIndex = 140
+        Me.RadioButton4.TabStop = True
         Me.RadioButton4.Text = "PED art 3.3"
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
         'RadioButton3
         '
         Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Checked = True
         Me.RadioButton3.Location = New System.Drawing.Point(16, 96)
         Me.RadioButton3.Name = "RadioButton3"
         Me.RadioButton3.Size = New System.Drawing.Size(283, 17)
         Me.RadioButton3.TabIndex = 98
-        Me.RadioButton3.TabStop = True
         Me.RadioButton3.Text = "EN 14460:2006:6.2.1 Shock resistent design "
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
@@ -2085,7 +2085,7 @@ Partial Class Form1
         Me.NumericUpDown7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NumericUpDown7.Location = New System.Drawing.Point(348, 9)
         Me.NumericUpDown7.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.NumericUpDown7.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NumericUpDown7.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.NumericUpDown7.Name = "NumericUpDown7"
         Me.NumericUpDown7.Size = New System.Drawing.Size(85, 24)
         Me.NumericUpDown7.TabIndex = 78
@@ -2137,9 +2137,9 @@ Partial Class Form1
         Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label53.Location = New System.Drawing.Point(10, 107)
         Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(82, 16)
+        Me.Label53.Size = New System.Drawing.Size(148, 16)
         Me.Label53.TabIndex = 121
-        Me.Label53.Text = "Safety factor"
+        Me.Label53.Text = "Safety factor (chapter 6)"
         '
         'TextBox4
         '
@@ -11882,6 +11882,56 @@ Partial Class Form1
         Me.GroupBox46.TabStop = False
         Me.GroupBox46.Text = "11.6 Full face flanges with soft ring type gaskets"
         '
+        'Label787
+        '
+        Me.Label787.AutoSize = True
+        Me.Label787.BackColor = System.Drawing.Color.LightGray
+        Me.Label787.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label787.Location = New System.Drawing.Point(266, 300)
+        Me.Label787.Name = "Label787"
+        Me.Label787.Size = New System.Drawing.Size(118, 16)
+        Me.Label787.TabIndex = 316
+        Me.Label787.Text = "Soft ring Gasket"
+        '
+        'Label784
+        '
+        Me.Label784.AutoSize = True
+        Me.Label784.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label784.Location = New System.Drawing.Point(397, 375)
+        Me.Label784.Name = "Label784"
+        Me.Label784.Size = New System.Drawing.Size(38, 16)
+        Me.Label784.TabIndex = 315
+        Me.Label784.Text = "[mm]"
+        '
+        'Label785
+        '
+        Me.Label785.AutoSize = True
+        Me.Label785.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label785.Location = New System.Drawing.Point(266, 374)
+        Me.Label785.Name = "Label785"
+        Me.Label785.Size = New System.Drawing.Size(16, 16)
+        Me.Label785.TabIndex = 314
+        Me.Label785.Text = "e"
+        '
+        'Label786
+        '
+        Me.Label786.AutoSize = True
+        Me.Label786.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label786.Location = New System.Drawing.Point(17, 375)
+        Me.Label786.Name = "Label786"
+        Me.Label786.Size = New System.Drawing.Size(109, 16)
+        Me.Label786.TabIndex = 313
+        Me.Label786.Text = "Flange thickness"
+        '
+        'TextBox253
+        '
+        Me.TextBox253.Enabled = False
+        Me.TextBox253.Location = New System.Drawing.Point(300, 372)
+        Me.TextBox253.Name = "TextBox253"
+        Me.TextBox253.Size = New System.Drawing.Size(85, 22)
+        Me.TextBox253.TabIndex = 312
+        Me.TextBox253.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Label745
         '
         Me.Label745.AutoSize = True
@@ -14923,56 +14973,6 @@ Partial Class Form1
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'Label784
-        '
-        Me.Label784.AutoSize = True
-        Me.Label784.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label784.Location = New System.Drawing.Point(397, 375)
-        Me.Label784.Name = "Label784"
-        Me.Label784.Size = New System.Drawing.Size(38, 16)
-        Me.Label784.TabIndex = 315
-        Me.Label784.Text = "[mm]"
-        '
-        'Label785
-        '
-        Me.Label785.AutoSize = True
-        Me.Label785.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label785.Location = New System.Drawing.Point(266, 374)
-        Me.Label785.Name = "Label785"
-        Me.Label785.Size = New System.Drawing.Size(16, 16)
-        Me.Label785.TabIndex = 314
-        Me.Label785.Text = "e"
-        '
-        'Label786
-        '
-        Me.Label786.AutoSize = True
-        Me.Label786.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label786.Location = New System.Drawing.Point(17, 375)
-        Me.Label786.Name = "Label786"
-        Me.Label786.Size = New System.Drawing.Size(109, 16)
-        Me.Label786.TabIndex = 313
-        Me.Label786.Text = "Flange thickness"
-        '
-        'TextBox253
-        '
-        Me.TextBox253.Enabled = False
-        Me.TextBox253.Location = New System.Drawing.Point(300, 372)
-        Me.TextBox253.Name = "TextBox253"
-        Me.TextBox253.Size = New System.Drawing.Size(85, 22)
-        Me.TextBox253.TabIndex = 312
-        Me.TextBox253.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label787
-        '
-        Me.Label787.AutoSize = True
-        Me.Label787.BackColor = System.Drawing.Color.LightGray
-        Me.Label787.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label787.Location = New System.Drawing.Point(266, 300)
-        Me.Label787.Name = "Label787"
-        Me.Label787.Size = New System.Drawing.Size(118, 16)
-        Me.Label787.TabIndex = 316
-        Me.Label787.Text = "Soft ring Gasket"
         '
         'Form1
         '

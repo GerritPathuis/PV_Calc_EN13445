@@ -140,8 +140,8 @@ Public Class Form1
         ComboBox2.SelectedIndex = CInt(IIf(ComboBox2.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox3.SelectedIndex = CInt(IIf(ComboBox3.Items.Count > 0, 0, -1)) 'Select ..
         ComboBox4.SelectedIndex = CInt(IIf(ComboBox4.Items.Count > 0, 1, -1)) 'Select ..
-        ComboBox5.SelectedIndex = CInt(IIf(ComboBox5.Items.Count > 0, 0, -1)) 'Select ..
-        ComboBox6.SelectedIndex = CInt(IIf(ComboBox6.Items.Count > 0, 0, -1)) 'Select ..
+        ComboBox5.SelectedIndex = CInt(IIf(ComboBox5.Items.Count > 0, 3, -1)) 'Select steel 304
+        ComboBox6.SelectedIndex = CInt(IIf(ComboBox6.Items.Count > 0, 0, -1)) 'Select chapter 6, austi
 
         TextBox66.Text = "P" & Now.ToString("yy") & ".10"
         Design_stress()
@@ -289,7 +289,7 @@ Public Class Form1
         Design_stress()
     End Sub
     Private Sub Design_stress()
-        Dim sf As Double = 1        'Safety factor init value
+        Dim sf As Double             'Safety factor init value
         Dim temperature As Double   'temperature
         Dim words() As String
         Dim y50, y100, y150, y200, y250, y300, y350, y400 As Double
@@ -351,7 +351,6 @@ Public Class Form1
         If (ComboBox1.SelectedIndex > -1) Then          'Prevent exceptions
             words = chap6(ComboBox1.SelectedIndex).Split(separators, StringSplitOptions.None)
             Double.TryParse(words(1), sf)               'Safety factor
-            TextBox4.Text = sf.ToString                 'Safety factor
             _fs = CDec(_f02 / sf)
 
             Select Case True
@@ -372,11 +371,11 @@ Public Class Form1
             End If
 
             '-------- present -------------
-            TextBox131.Text = (_P * 10 ^ 4).ToString    'Calculation pressure [mBar]
-            TextBox133.Text = _fym.ToString             'Safety factor
-            TextBox136.Text = _f02.ToString("0")        'Max allowed bend
-            TextBox137.Text = (_f02 * 1.5).ToString("0")    '[N/mm2] Max allowed bend+membrane
-            TextBox140.Text = (_f02 * 1.5).ToString("0")    '[N/mm2] Max allowed bend+membrane
+            TextBox131.Text = (_P * 10 ^ 4).ToString("F0")      'Calculation pressure [mBar]
+            TextBox4.Text = sf.ToString                         'Safety factor
+            TextBox136.Text = _f02.ToString("F0")               'Max allowed bend
+            TextBox137.Text = (_f02 * 1.5).ToString("F0")       '[N/mm2] Max allowed bend+membrane
+            TextBox140.Text = (_f02 * 1.5).ToString("F0")       '[N/mm2] Max allowed bend+membrane
 
             NumericUpDown7.Value = CDec(_fs)        '[N/mm2] Design stress
             TextBox133.Text = _f02.ToString("0")    '[N/mm2] Yield stress
