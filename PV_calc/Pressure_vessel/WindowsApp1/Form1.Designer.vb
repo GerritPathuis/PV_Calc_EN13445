@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -1253,6 +1254,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TabControl1.SuspendLayout
         Me.TabPage1.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1522,7 +1524,7 @@ Partial Class Form1
         Me.Label194.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label194.Location = New System.Drawing.Point(13, 67)
         Me.Label194.Name = "Label194"
-        Me.Label194.Size = New System.Drawing.Size(66, 16)
+        Me.Label194.Size = New System.Drawing.Size(65, 16)
         Me.Label194.TabIndex = 144
         Me.Label194.Text = "Vessel ID"
         '
@@ -1532,7 +1534,7 @@ Partial Class Form1
         Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label54.Location = New System.Drawing.Point(13, 42)
         Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(87, 16)
+        Me.Label54.Size = New System.Drawing.Size(86, 16)
         Me.Label54.TabIndex = 143
         Me.Label54.Text = "Project name"
         '
@@ -1542,7 +1544,7 @@ Partial Class Form1
         Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label40.Location = New System.Drawing.Point(13, 16)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(101, 16)
+        Me.Label40.Size = New System.Drawing.Size(100, 16)
         Me.Label40.TabIndex = 142
         Me.Label40.Text = "Project Number"
         '
@@ -1578,7 +1580,7 @@ Partial Class Form1
         Me.Label332.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label332.Location = New System.Drawing.Point(95, 232)
         Me.Label332.Name = "Label332"
-        Me.Label332.Size = New System.Drawing.Size(39, 16)
+        Me.Label332.Size = New System.Drawing.Size(38, 16)
         Me.Label332.TabIndex = 162
         Me.Label332.Text = "400c "
         '
@@ -1588,7 +1590,7 @@ Partial Class Form1
         Me.Label333.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label333.Location = New System.Drawing.Point(95, 207)
         Me.Label333.Name = "Label333"
-        Me.Label333.Size = New System.Drawing.Size(39, 16)
+        Me.Label333.Size = New System.Drawing.Size(38, 16)
         Me.Label333.TabIndex = 161
         Me.Label333.Text = "350c "
         '
@@ -1598,7 +1600,7 @@ Partial Class Form1
         Me.Label335.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label335.Location = New System.Drawing.Point(95, 182)
         Me.Label335.Name = "Label335"
-        Me.Label335.Size = New System.Drawing.Size(39, 16)
+        Me.Label335.Size = New System.Drawing.Size(38, 16)
         Me.Label335.TabIndex = 160
         Me.Label335.Text = "300c "
         '
@@ -1608,7 +1610,7 @@ Partial Class Form1
         Me.Label337.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label337.Location = New System.Drawing.Point(95, 157)
         Me.Label337.Name = "Label337"
-        Me.Label337.Size = New System.Drawing.Size(39, 16)
+        Me.Label337.Size = New System.Drawing.Size(38, 16)
         Me.Label337.TabIndex = 159
         Me.Label337.Text = "250c "
         '
@@ -1682,7 +1684,7 @@ Partial Class Form1
         Me.Label334.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label334.Location = New System.Drawing.Point(95, 132)
         Me.Label334.Name = "Label334"
-        Me.Label334.Size = New System.Drawing.Size(39, 16)
+        Me.Label334.Size = New System.Drawing.Size(38, 16)
         Me.Label334.TabIndex = 153
         Me.Label334.Text = "200c "
         '
@@ -1692,7 +1694,7 @@ Partial Class Form1
         Me.Label342.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label342.Location = New System.Drawing.Point(95, 107)
         Me.Label342.Name = "Label342"
-        Me.Label342.Size = New System.Drawing.Size(39, 16)
+        Me.Label342.Size = New System.Drawing.Size(38, 16)
         Me.Label342.TabIndex = 151
         Me.Label342.Text = "150c "
         '
@@ -1702,7 +1704,7 @@ Partial Class Form1
         Me.Label339.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label339.Location = New System.Drawing.Point(95, 82)
         Me.Label339.Name = "Label339"
-        Me.Label339.Size = New System.Drawing.Size(39, 16)
+        Me.Label339.Size = New System.Drawing.Size(38, 16)
         Me.Label339.TabIndex = 147
         Me.Label339.Text = "100c "
         '
@@ -1712,7 +1714,7 @@ Partial Class Form1
         Me.Label336.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label336.Location = New System.Drawing.Point(95, 57)
         Me.Label336.Name = "Label336"
-        Me.Label336.Size = New System.Drawing.Size(32, 16)
+        Me.Label336.Size = New System.Drawing.Size(31, 16)
         Me.Label336.TabIndex = 144
         Me.Label336.Text = "50c "
         '
@@ -1760,7 +1762,7 @@ Partial Class Form1
         Me.Label677.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label677.Location = New System.Drawing.Point(220, 102)
         Me.Label677.Name = "Label677"
-        Me.Label677.Size = New System.Drawing.Size(24, 16)
+        Me.Label677.Size = New System.Drawing.Size(23, 16)
         Me.Label677.TabIndex = 164
         Me.Label677.Text = "_E"
         '
@@ -1770,7 +1772,7 @@ Partial Class Form1
         Me.Label622.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label622.Location = New System.Drawing.Point(220, 130)
         Me.Label622.Name = "Label622"
-        Me.Label622.Size = New System.Drawing.Size(15, 16)
+        Me.Label622.Size = New System.Drawing.Size(14, 16)
         Me.Label622.TabIndex = 163
         Me.Label622.Text = "ν"
         '
@@ -1780,7 +1782,7 @@ Partial Class Form1
         Me.Label623.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label623.Location = New System.Drawing.Point(365, 130)
         Me.Label623.Name = "Label623"
-        Me.Label623.Size = New System.Drawing.Size(20, 16)
+        Me.Label623.Size = New System.Drawing.Size(19, 16)
         Me.Label623.TabIndex = 162
         Me.Label623.Text = "[-]"
         '
@@ -1799,7 +1801,7 @@ Partial Class Form1
         Me.Label624.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label624.Location = New System.Drawing.Point(14, 130)
         Me.Label624.Name = "Label624"
-        Me.Label624.Size = New System.Drawing.Size(136, 16)
+        Me.Label624.Size = New System.Drawing.Size(135, 16)
         Me.Label624.TabIndex = 160
         Me.Label624.Text = "Poisson ratio for steel"
         '
@@ -1809,7 +1811,7 @@ Partial Class Form1
         Me.Label482.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label482.Location = New System.Drawing.Point(13, 102)
         Me.Label482.Name = "Label482"
-        Me.Label482.Size = New System.Drawing.Size(210, 16)
+        Me.Label482.Size = New System.Drawing.Size(209, 16)
         Me.Label482.TabIndex = 147
         Me.Label482.Text = "Modulus of elasticity E (page 827) "
         '
@@ -1819,7 +1821,7 @@ Partial Class Form1
         Me.Label481.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label481.Location = New System.Drawing.Point(364, 102)
         Me.Label481.Name = "Label481"
-        Me.Label481.Size = New System.Drawing.Size(59, 16)
+        Me.Label481.Size = New System.Drawing.Size(58, 16)
         Me.Label481.TabIndex = 146
         Me.Label481.Text = "[N/mm2]"
         '
@@ -1848,7 +1850,7 @@ Partial Class Form1
         Me.Label402.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label402.Location = New System.Drawing.Point(364, 49)
         Me.Label402.Name = "Label402"
-        Me.Label402.Size = New System.Drawing.Size(48, 16)
+        Me.Label402.Size = New System.Drawing.Size(47, 16)
         Me.Label402.TabIndex = 144
         Me.Label402.Text = "[mBar]"
         '
@@ -1867,7 +1869,7 @@ Partial Class Form1
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.Location = New System.Drawing.Point(364, 75)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(23, 16)
+        Me.Label22.Size = New System.Drawing.Size(22, 16)
         Me.Label22.TabIndex = 116
         Me.Label22.Text = "[c]"
         '
@@ -1877,7 +1879,7 @@ Partial Class Form1
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(13, 75)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(168, 16)
+        Me.Label18.Size = New System.Drawing.Size(167, 16)
         Me.Label18.TabIndex = 110
         Me.Label18.Text = "Max operating temperature"
         '
@@ -1900,7 +1902,7 @@ Partial Class Form1
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.Location = New System.Drawing.Point(215, 75)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(52, 16)
+        Me.Label19.Size = New System.Drawing.Size(51, 16)
         Me.Label19.TabIndex = 112
         Me.Label19.Text = "Ts max"
         '
@@ -1910,7 +1912,7 @@ Partial Class Form1
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(364, 23)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(44, 16)
+        Me.Label14.Size = New System.Drawing.Size(43, 16)
         Me.Label14.TabIndex = 106
         Me.Label14.Text = "[MPa]"
         '
@@ -1920,7 +1922,7 @@ Partial Class Form1
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(13, 25)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(131, 16)
+        Me.Label1.Size = New System.Drawing.Size(130, 16)
         Me.Label1.TabIndex = 94
         Me.Label1.Text = "Calculation Pressure"
         '
@@ -1944,7 +1946,7 @@ Partial Class Form1
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(215, 21)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(17, 16)
+        Me.Label9.Size = New System.Drawing.Size(16, 16)
         Me.Label9.TabIndex = 97
         Me.Label9.Text = "P"
         '
@@ -2025,7 +2027,7 @@ Partial Class Form1
         Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label30.Location = New System.Drawing.Point(13, 8)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(192, 16)
+        Me.Label30.Size = New System.Drawing.Size(191, 16)
         Me.Label30.TabIndex = 77
         Me.Label30.Text = "Allowed nominal design stress "
         '
@@ -2065,7 +2067,7 @@ Partial Class Form1
         Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label37.Location = New System.Drawing.Point(317, 13)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(25, 16)
+        Me.Label37.Size = New System.Drawing.Size(24, 16)
         Me.Label37.TabIndex = 81
         Me.Label37.Text = "_fs"
         '
@@ -2075,7 +2077,7 @@ Partial Class Form1
         Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label56.Location = New System.Drawing.Point(439, 11)
         Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(59, 16)
+        Me.Label56.Size = New System.Drawing.Size(58, 16)
         Me.Label56.TabIndex = 124
         Me.Label56.Text = "[N/mm2]"
         '
@@ -2107,7 +2109,7 @@ Partial Class Form1
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.Location = New System.Drawing.Point(568, 110)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(20, 16)
+        Me.Label21.Size = New System.Drawing.Size(19, 16)
         Me.Label21.TabIndex = 141
         Me.Label21.Text = "[-]"
         '
@@ -2127,7 +2129,7 @@ Partial Class Form1
         Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label55.Location = New System.Drawing.Point(565, 55)
         Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(59, 16)
+        Me.Label55.Size = New System.Drawing.Size(58, 16)
         Me.Label55.TabIndex = 123
         Me.Label55.Text = "[N/mm2]"
         '
@@ -2137,7 +2139,7 @@ Partial Class Form1
         Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label53.Location = New System.Drawing.Point(10, 107)
         Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(148, 16)
+        Me.Label53.Size = New System.Drawing.Size(147, 16)
         Me.Label53.TabIndex = 121
         Me.Label53.Text = "Safety factor (chapter 6)"
         '
@@ -2156,7 +2158,7 @@ Partial Class Form1
         Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label52.Location = New System.Drawing.Point(10, 80)
         Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(257, 16)
+        Me.Label52.Size = New System.Drawing.Size(256, 16)
         Me.Label52.TabIndex = 93
         Me.Label52.Text = "Chapter 6 Maximum allowed stress values"
         '
@@ -2175,7 +2177,7 @@ Partial Class Form1
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(10, 26)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(39, 16)
+        Me.Label17.Size = New System.Drawing.Size(38, 16)
         Me.Label17.TabIndex = 89
         Me.Label17.Text = "Steel"
         '
@@ -2185,7 +2187,7 @@ Partial Class Form1
         Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label34.Location = New System.Drawing.Point(10, 53)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(274, 16)
+        Me.Label34.Size = New System.Drawing.Size(273, 16)
         Me.Label34.TabIndex = 74
         Me.Label34.Text = "Yield 0.2% @ operating temp (Mill Certificate)"
         '
@@ -2195,7 +2197,7 @@ Partial Class Form1
         Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label33.Location = New System.Drawing.Point(431, 55)
         Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(32, 16)
+        Me.Label33.Size = New System.Drawing.Size(31, 16)
         Me.Label33.TabIndex = 76
         Me.Label33.Text = "_f02"
         '
@@ -2274,7 +2276,7 @@ Partial Class Form1
         Me.Label696.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label696.Location = New System.Drawing.Point(6, 104)
         Me.Label696.Name = "Label696"
-        Me.Label696.Size = New System.Drawing.Size(256, 16)
+        Me.Label696.Size = New System.Drawing.Size(255, 16)
         Me.Label696.TabIndex = 166
         Me.Label696.Text = "If colored RED then iteration not succesfull"
         '
@@ -2293,7 +2295,7 @@ Partial Class Form1
         Me.Label693.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label693.Location = New System.Drawing.Point(371, 42)
         Me.Label693.Name = "Label693"
-        Me.Label693.Size = New System.Drawing.Size(20, 16)
+        Me.Label693.Size = New System.Drawing.Size(19, 16)
         Me.Label693.TabIndex = 162
         Me.Label693.Text = "[-]"
         '
@@ -2303,7 +2305,7 @@ Partial Class Form1
         Me.Label694.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label694.Location = New System.Drawing.Point(16, 42)
         Me.Label694.Name = "Label694"
-        Me.Label694.Size = New System.Drawing.Size(155, 16)
+        Me.Label694.Size = New System.Drawing.Size(154, 16)
         Me.Label694.TabIndex = 163
         Me.Label694.Text = "factor β  equation (7.6-11)"
         '
@@ -2313,7 +2315,7 @@ Partial Class Form1
         Me.Label695.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label695.Location = New System.Drawing.Point(224, 43)
         Me.Label695.Name = "Label695"
-        Me.Label695.Size = New System.Drawing.Size(15, 16)
+        Me.Label695.Size = New System.Drawing.Size(14, 16)
         Me.Label695.TabIndex = 164
         Me.Label695.Text = "β"
         '
@@ -2333,7 +2335,7 @@ Partial Class Form1
         Me.Label450.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label450.Location = New System.Drawing.Point(371, 70)
         Me.Label450.Name = "Label450"
-        Me.Label450.Size = New System.Drawing.Size(60, 16)
+        Me.Label450.Size = New System.Drawing.Size(59, 16)
         Me.Label450.TabIndex = 158
         Me.Label450.Text = "[mm] <---"
         '
@@ -2343,7 +2345,7 @@ Partial Class Form1
         Me.Label692.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label692.Location = New System.Drawing.Point(16, 70)
         Me.Label692.Name = "Label692"
-        Me.Label692.Size = New System.Drawing.Size(204, 16)
+        Me.Label692.Size = New System.Drawing.Size(203, 16)
         Me.Label692.TabIndex = 159
         Me.Label692.Text = "Junction wall, large end of a cone"
         '
@@ -2353,7 +2355,7 @@ Partial Class Form1
         Me.Label483.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label483.Location = New System.Drawing.Point(224, 71)
         Me.Label483.Name = "Label483"
-        Me.Label483.Size = New System.Drawing.Size(19, 16)
+        Me.Label483.Size = New System.Drawing.Size(18, 16)
         Me.Label483.TabIndex = 160
         Me.Label483.Text = "ej"
         '
@@ -2409,7 +2411,7 @@ Partial Class Form1
         Me.Label454.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label454.Location = New System.Drawing.Point(16, 56)
         Me.Label454.Name = "Label454"
-        Me.Label454.Size = New System.Drawing.Size(66, 16)
+        Me.Label454.Size = New System.Drawing.Size(65, 16)
         Me.Label454.TabIndex = 159
         Me.Label454.Text = "Cone wall"
         '
@@ -2419,7 +2421,7 @@ Partial Class Form1
         Me.Label451.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label451.Location = New System.Drawing.Point(216, 114)
         Me.Label451.Name = "Label451"
-        Me.Label451.Size = New System.Drawing.Size(17, 16)
+        Me.Label451.Size = New System.Drawing.Size(16, 16)
         Me.Label451.TabIndex = 165
         Me.Label451.Text = "P"
         '
@@ -2444,7 +2446,7 @@ Partial Class Form1
         Me.Label455.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label455.Location = New System.Drawing.Point(215, 55)
         Me.Label455.Name = "Label455"
-        Me.Label455.Size = New System.Drawing.Size(24, 16)
+        Me.Label455.Size = New System.Drawing.Size(23, 16)
         Me.Label455.TabIndex = 161
         Me.Label455.Text = "ea"
         '
@@ -2454,7 +2456,7 @@ Partial Class Form1
         Me.Label452.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label452.Location = New System.Drawing.Point(351, 114)
         Me.Label452.Name = "Label452"
-        Me.Label452.Size = New System.Drawing.Size(36, 16)
+        Me.Label452.Size = New System.Drawing.Size(35, 16)
         Me.Label452.TabIndex = 164
         Me.Label452.Text = "[bar]"
         '
@@ -2464,7 +2466,7 @@ Partial Class Form1
         Me.Label456.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label456.Location = New System.Drawing.Point(354, 57)
         Me.Label456.Name = "Label456"
-        Me.Label456.Size = New System.Drawing.Size(38, 16)
+        Me.Label456.Size = New System.Drawing.Size(37, 16)
         Me.Label456.TabIndex = 158
         Me.Label456.Text = "[mm]"
         '
@@ -2483,7 +2485,7 @@ Partial Class Form1
         Me.Label453.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label453.Location = New System.Drawing.Point(16, 114)
         Me.Label453.Name = "Label453"
-        Me.Label453.Size = New System.Drawing.Size(189, 16)
+        Me.Label453.Size = New System.Drawing.Size(188, 16)
         Me.Label453.TabIndex = 162
         Me.Label453.Text = "Max allowed internal Pressure "
         '
@@ -2493,7 +2495,7 @@ Partial Class Form1
         Me.Label428.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label428.Location = New System.Drawing.Point(216, 84)
         Me.Label428.Name = "Label428"
-        Me.Label428.Size = New System.Drawing.Size(16, 16)
+        Me.Label428.Size = New System.Drawing.Size(15, 16)
         Me.Label428.TabIndex = 161
         Me.Label428.Text = "e"
         '
@@ -2516,7 +2518,7 @@ Partial Class Form1
         Me.Label429.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label429.Location = New System.Drawing.Point(351, 84)
         Me.Label429.Name = "Label429"
-        Me.Label429.Size = New System.Drawing.Size(68, 16)
+        Me.Label429.Size = New System.Drawing.Size(67, 16)
         Me.Label429.TabIndex = 160
         Me.Label429.Text = "[mm] <-----"
         '
@@ -2526,7 +2528,7 @@ Partial Class Form1
         Me.Label413.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label413.Location = New System.Drawing.Point(218, 27)
         Me.Label413.Name = "Label413"
-        Me.Label413.Size = New System.Drawing.Size(15, 16)
+        Me.Label413.Size = New System.Drawing.Size(14, 16)
         Me.Label413.TabIndex = 158
         Me.Label413.Text = "α"
         '
@@ -2546,7 +2548,7 @@ Partial Class Form1
         Me.Label446.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label446.Location = New System.Drawing.Point(16, 85)
         Me.Label446.Name = "Label446"
-        Me.Label446.Size = New System.Drawing.Size(182, 16)
+        Me.Label446.Size = New System.Drawing.Size(181, 16)
         Me.Label446.TabIndex = 158
         Me.Label446.Text = "Required cone wall thickness"
         '
@@ -2556,7 +2558,7 @@ Partial Class Form1
         Me.Label414.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label414.Location = New System.Drawing.Point(351, 27)
         Me.Label414.Name = "Label414"
-        Me.Label414.Size = New System.Drawing.Size(40, 16)
+        Me.Label414.Size = New System.Drawing.Size(39, 16)
         Me.Label414.TabIndex = 161
         Me.Label414.Text = "[deg]"
         '
@@ -2566,7 +2568,7 @@ Partial Class Form1
         Me.Label427.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label427.Location = New System.Drawing.Point(16, 27)
         Me.Label427.Name = "Label427"
-        Me.Label427.Size = New System.Drawing.Size(187, 16)
+        Me.Label427.Size = New System.Drawing.Size(186, 16)
         Me.Label427.TabIndex = 159
         Me.Label427.Text = "The 1/2 angle of cone at apex "
         '
@@ -2619,7 +2621,7 @@ Partial Class Form1
         Me.Label151.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label151.Location = New System.Drawing.Point(360, 60)
         Me.Label151.Name = "Label151"
-        Me.Label151.Size = New System.Drawing.Size(44, 16)
+        Me.Label151.Size = New System.Drawing.Size(43, 16)
         Me.Label151.TabIndex = 157
         Me.Label151.Text = "[barg]"
         '
@@ -2638,7 +2640,7 @@ Partial Class Form1
         Me.Label152.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label152.Location = New System.Drawing.Point(10, 60)
         Me.Label152.Name = "Label152"
-        Me.Label152.Size = New System.Drawing.Size(180, 16)
+        Me.Label152.Size = New System.Drawing.Size(179, 16)
         Me.Label152.TabIndex = 155
         Me.Label152.Text = "Calculation Internal Pressure "
         '
@@ -2648,7 +2650,7 @@ Partial Class Form1
         Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label36.Location = New System.Drawing.Point(214, 167)
         Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(38, 16)
+        Me.Label36.Size = New System.Drawing.Size(37, 16)
         Me.Label36.TabIndex = 153
         Me.Label36.Text = "e/De"
         '
@@ -2658,7 +2660,7 @@ Partial Class Form1
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label28.Location = New System.Drawing.Point(10, 111)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(165, 16)
+        Me.Label28.Size = New System.Drawing.Size(164, 16)
         Me.Label28.TabIndex = 152
         Me.Label28.Text = "Joint efficiency , table 5.6-1"
         '
@@ -2668,7 +2670,7 @@ Partial Class Form1
         Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.Location = New System.Drawing.Point(360, 116)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(20, 16)
+        Me.Label27.Size = New System.Drawing.Size(19, 16)
         Me.Label27.TabIndex = 151
         Me.Label27.Text = "[-]"
         '
@@ -2678,7 +2680,7 @@ Partial Class Form1
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(221, 112)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(14, 16)
+        Me.Label15.Size = New System.Drawing.Size(13, 16)
         Me.Label15.TabIndex = 150
         Me.Label15.Text = "z"
         '
@@ -2697,7 +2699,7 @@ Partial Class Form1
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.Location = New System.Drawing.Point(221, 142)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(16, 16)
+        Me.Label13.Size = New System.Drawing.Size(15, 16)
         Me.Label13.TabIndex = 148
         Me.Label13.Text = "e"
         '
@@ -2707,7 +2709,7 @@ Partial Class Form1
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.Location = New System.Drawing.Point(221, 89)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(11, 16)
+        Me.Label12.Size = New System.Drawing.Size(10, 16)
         Me.Label12.TabIndex = 147
         Me.Label12.Text = "f"
         '
@@ -2717,7 +2719,7 @@ Partial Class Form1
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(360, 86)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(59, 16)
+        Me.Label10.Size = New System.Drawing.Size(58, 16)
         Me.Label10.TabIndex = 146
         Me.Label10.Text = "[N/mm2]"
         '
@@ -2736,7 +2738,7 @@ Partial Class Form1
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.Location = New System.Drawing.Point(10, 86)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(145, 16)
+        Me.Label11.Size = New System.Drawing.Size(144, 16)
         Me.Label11.TabIndex = 144
         Me.Label11.Text = "Allowed nominal stress"
         '
@@ -2746,7 +2748,7 @@ Partial Class Form1
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(221, 37)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(24, 16)
+        Me.Label8.Size = New System.Drawing.Size(23, 16)
         Me.Label8.TabIndex = 137
         Me.Label8.Text = "_P"
         '
@@ -2756,7 +2758,7 @@ Partial Class Form1
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.Location = New System.Drawing.Point(360, 34)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(44, 16)
+        Me.Label6.Size = New System.Drawing.Size(43, 16)
         Me.Label6.TabIndex = 143
         Me.Label6.Text = "[MPa]"
         '
@@ -2775,7 +2777,7 @@ Partial Class Form1
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.Location = New System.Drawing.Point(10, 34)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(180, 16)
+        Me.Label7.Size = New System.Drawing.Size(179, 16)
         Me.Label7.TabIndex = 141
         Me.Label7.Text = "Calculation Internal Pressure "
         '
@@ -2785,7 +2787,7 @@ Partial Class Form1
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(360, 168)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 16)
+        Me.Label4.Size = New System.Drawing.Size(37, 16)
         Me.Label4.TabIndex = 140
         Me.Label4.Text = "[mm]"
         '
@@ -2804,7 +2806,7 @@ Partial Class Form1
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(10, 168)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(161, 16)
+        Me.Label5.Size = New System.Drawing.Size(160, 16)
         Me.Label5.TabIndex = 138
         Me.Label5.Text = "Check validity e/De < 0.16"
         '
@@ -2814,7 +2816,7 @@ Partial Class Form1
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(360, 142)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(68, 16)
+        Me.Label3.Size = New System.Drawing.Size(67, 16)
         Me.Label3.TabIndex = 137
         Me.Label3.Text = "[mm] <-----"
         '
@@ -2834,7 +2836,7 @@ Partial Class Form1
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(10, 142)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(149, 16)
+        Me.Label2.Size = New System.Drawing.Size(148, 16)
         Me.Label2.TabIndex = 121
         Me.Label2.Text = "Required wall thickness"
         '
@@ -2879,7 +2881,7 @@ Partial Class Form1
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label29.Location = New System.Drawing.Point(215, 111)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(17, 16)
+        Me.Label29.Size = New System.Drawing.Size(16, 16)
         Me.Label29.TabIndex = 153
         Me.Label29.Text = "P"
         '
@@ -2902,7 +2904,7 @@ Partial Class Form1
         Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label31.Location = New System.Drawing.Point(360, 108)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(36, 16)
+        Me.Label31.Size = New System.Drawing.Size(35, 16)
         Me.Label31.TabIndex = 156
         Me.Label31.Text = "[bar]"
         '
@@ -2912,7 +2914,7 @@ Partial Class Form1
         Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label45.Location = New System.Drawing.Point(7, 53)
         Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(64, 16)
+        Me.Label45.Size = New System.Drawing.Size(63, 16)
         Me.Label45.TabIndex = 134
         Me.Label45.Text = "Shell wall"
         '
@@ -2946,7 +2948,7 @@ Partial Class Form1
         Me.Label48.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label48.Location = New System.Drawing.Point(215, 54)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(24, 16)
+        Me.Label48.Size = New System.Drawing.Size(23, 16)
         Me.Label48.TabIndex = 136
         Me.Label48.Text = "ea"
         '
@@ -2956,7 +2958,7 @@ Partial Class Form1
         Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label35.Location = New System.Drawing.Point(7, 107)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(189, 16)
+        Me.Label35.Size = New System.Drawing.Size(188, 16)
         Me.Label35.TabIndex = 154
         Me.Label35.Text = "Max allowed internal Pressure "
         '
@@ -2966,7 +2968,7 @@ Partial Class Form1
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.Location = New System.Drawing.Point(360, 56)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(38, 16)
+        Me.Label25.Size = New System.Drawing.Size(37, 16)
         Me.Label25.TabIndex = 129
         Me.Label25.Text = "[mm]"
         '
@@ -2976,7 +2978,7 @@ Partial Class Form1
         Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label46.Location = New System.Drawing.Point(213, 26)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(26, 16)
+        Me.Label46.Size = New System.Drawing.Size(25, 16)
         Me.Label46.TabIndex = 130
         Me.Label46.Text = "De"
         '
@@ -2986,7 +2988,7 @@ Partial Class Form1
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.Location = New System.Drawing.Point(360, 81)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(38, 16)
+        Me.Label26.Size = New System.Drawing.Size(37, 16)
         Me.Label26.TabIndex = 128
         Me.Label26.Text = "[mm]"
         '
@@ -2996,7 +2998,7 @@ Partial Class Form1
         Me.Label32.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label32.Location = New System.Drawing.Point(360, 25)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(38, 16)
+        Me.Label32.Size = New System.Drawing.Size(37, 16)
         Me.Label32.TabIndex = 121
         Me.Label32.Text = "[mm]"
         '
@@ -3006,7 +3008,7 @@ Partial Class Form1
         Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label47.Location = New System.Drawing.Point(5, 25)
         Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(109, 16)
+        Me.Label47.Size = New System.Drawing.Size(108, 16)
         Me.Label47.TabIndex = 128
         Me.Label47.Text = "Shell Outside dia"
         '
@@ -3016,7 +3018,7 @@ Partial Class Form1
         Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label49.Location = New System.Drawing.Point(213, 82)
         Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(21, 16)
+        Me.Label49.Size = New System.Drawing.Size(20, 16)
         Me.Label49.TabIndex = 133
         Me.Label49.Text = "Di"
         '
@@ -3026,7 +3028,7 @@ Partial Class Form1
         Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label50.Location = New System.Drawing.Point(5, 81)
         Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(99, 16)
+        Me.Label50.Size = New System.Drawing.Size(98, 16)
         Me.Label50.TabIndex = 131
         Me.Label50.Text = "Shell inside dia"
         '
@@ -3153,7 +3155,7 @@ Partial Class Form1
         Me.Label146.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label146.Location = New System.Drawing.Point(450, 237)
         Me.Label146.Name = "Label146"
-        Me.Label146.Size = New System.Drawing.Size(20, 16)
+        Me.Label146.Size = New System.Drawing.Size(19, 16)
         Me.Label146.TabIndex = 211
         Me.Label146.Text = "[-]"
         '
@@ -3163,7 +3165,7 @@ Partial Class Form1
         Me.Label148.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label148.Location = New System.Drawing.Point(17, 237)
         Me.Label148.Name = "Label148"
-        Me.Label148.Size = New System.Drawing.Size(261, 16)
+        Me.Label148.Size = New System.Drawing.Size(260, 16)
         Me.Label148.TabIndex = 209
         Me.Label148.Text = "β Figure 7.5-1 for torispherical end – Design"
         '
@@ -3173,7 +3175,7 @@ Partial Class Form1
         Me.Label145.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label145.Location = New System.Drawing.Point(450, 52)
         Me.Label145.Name = "Label145"
-        Me.Label145.Size = New System.Drawing.Size(44, 16)
+        Me.Label145.Size = New System.Drawing.Size(43, 16)
         Me.Label145.TabIndex = 208
         Me.Label145.Text = "[barg]"
         '
@@ -3183,7 +3185,7 @@ Partial Class Form1
         Me.Label147.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label147.Location = New System.Drawing.Point(17, 50)
         Me.Label147.Name = "Label147"
-        Me.Label147.Size = New System.Drawing.Size(108, 16)
+        Me.Label147.Size = New System.Drawing.Size(107, 16)
         Me.Label147.TabIndex = 206
         Me.Label147.Text = "Internal Pressure"
         '
@@ -3202,7 +3204,7 @@ Partial Class Form1
         Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label144.Location = New System.Drawing.Point(450, 28)
         Me.Label144.Name = "Label144"
-        Me.Label144.Size = New System.Drawing.Size(44, 16)
+        Me.Label144.Size = New System.Drawing.Size(43, 16)
         Me.Label144.TabIndex = 204
         Me.Label144.Text = "[MPa]"
         '
@@ -3212,7 +3214,7 @@ Partial Class Form1
         Me.Label111.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label111.Location = New System.Drawing.Point(318, 24)
         Me.Label111.Name = "Label111"
-        Me.Label111.Size = New System.Drawing.Size(24, 16)
+        Me.Label111.Size = New System.Drawing.Size(23, 16)
         Me.Label111.TabIndex = 203
         Me.Label111.Text = "_P"
         '
@@ -3222,7 +3224,7 @@ Partial Class Form1
         Me.Label134.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label134.Location = New System.Drawing.Point(17, 24)
         Me.Label134.Name = "Label134"
-        Me.Label134.Size = New System.Drawing.Size(108, 16)
+        Me.Label134.Size = New System.Drawing.Size(107, 16)
         Me.Label134.TabIndex = 202
         Me.Label134.Text = "Internal Pressure"
         '
@@ -3241,7 +3243,7 @@ Partial Class Form1
         Me.Label141.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label141.Location = New System.Drawing.Point(17, 288)
         Me.Label141.Name = "Label141"
-        Me.Label141.Size = New System.Drawing.Size(165, 16)
+        Me.Label141.Size = New System.Drawing.Size(164, 16)
         Me.Label141.TabIndex = 200
         Me.Label141.Text = "Joint efficiency , table 5.6-1"
         '
@@ -3251,7 +3253,7 @@ Partial Class Form1
         Me.Label142.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label142.Location = New System.Drawing.Point(450, 289)
         Me.Label142.Name = "Label142"
-        Me.Label142.Size = New System.Drawing.Size(20, 16)
+        Me.Label142.Size = New System.Drawing.Size(19, 16)
         Me.Label142.TabIndex = 199
         Me.Label142.Text = "[-]"
         '
@@ -3261,7 +3263,7 @@ Partial Class Form1
         Me.Label143.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label143.Location = New System.Drawing.Point(318, 289)
         Me.Label143.Name = "Label143"
-        Me.Label143.Size = New System.Drawing.Size(14, 16)
+        Me.Label143.Size = New System.Drawing.Size(13, 16)
         Me.Label143.TabIndex = 198
         Me.Label143.Text = "z"
         '
@@ -3280,7 +3282,7 @@ Partial Class Form1
         Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label91.Location = New System.Drawing.Point(450, 263)
         Me.Label91.Name = "Label91"
-        Me.Label91.Size = New System.Drawing.Size(59, 16)
+        Me.Label91.Size = New System.Drawing.Size(58, 16)
         Me.Label91.TabIndex = 196
         Me.Label91.Text = "[N/mm2]"
         '
@@ -3299,7 +3301,7 @@ Partial Class Form1
         Me.Label139.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label139.Location = New System.Drawing.Point(318, 262)
         Me.Label139.Name = "Label139"
-        Me.Label139.Size = New System.Drawing.Size(11, 16)
+        Me.Label139.Size = New System.Drawing.Size(10, 16)
         Me.Label139.TabIndex = 194
         Me.Label139.Text = "f"
         '
@@ -3309,7 +3311,7 @@ Partial Class Form1
         Me.Label140.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label140.Location = New System.Drawing.Point(17, 262)
         Me.Label140.Name = "Label140"
-        Me.Label140.Size = New System.Drawing.Size(141, 16)
+        Me.Label140.Size = New System.Drawing.Size(140, 16)
         Me.Label140.TabIndex = 193
         Me.Label140.Text = "Nominal design stress"
         '
@@ -3319,7 +3321,7 @@ Partial Class Form1
         Me.Label136.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label136.Location = New System.Drawing.Point(450, 209)
         Me.Label136.Name = "Label136"
-        Me.Label136.Size = New System.Drawing.Size(38, 16)
+        Me.Label136.Size = New System.Drawing.Size(37, 16)
         Me.Label136.TabIndex = 192
         Me.Label136.Text = "[mm]"
         '
@@ -3338,7 +3340,7 @@ Partial Class Form1
         Me.Label137.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label137.Location = New System.Drawing.Point(318, 208)
         Me.Label137.Name = "Label137"
-        Me.Label137.Size = New System.Drawing.Size(18, 16)
+        Me.Label137.Size = New System.Drawing.Size(17, 16)
         Me.Label137.TabIndex = 190
         Me.Label137.Text = "R"
         '
@@ -3348,7 +3350,7 @@ Partial Class Form1
         Me.Label138.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label138.Location = New System.Drawing.Point(17, 208)
         Me.Label138.Name = "Label138"
-        Me.Label138.Size = New System.Drawing.Size(259, 16)
+        Me.Label138.Size = New System.Drawing.Size(258, 16)
         Me.Label138.TabIndex = 189
         Me.Label138.Text = "Inside radius of central part of dished head"
         '
@@ -3358,7 +3360,7 @@ Partial Class Form1
         Me.Label135.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label135.Location = New System.Drawing.Point(17, 340)
         Me.Label135.Name = "Label135"
-        Me.Label135.Size = New System.Drawing.Size(266, 16)
+        Me.Label135.Size = New System.Drawing.Size(265, 16)
         Me.Label135.TabIndex = 188
         Me.Label135.Text = "Wall knuckle to avoid axisymmetric yielding"
         '
@@ -3397,7 +3399,7 @@ Partial Class Form1
         Me.Label131.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label131.Location = New System.Drawing.Point(450, 183)
         Me.Label131.Name = "Label131"
-        Me.Label131.Size = New System.Drawing.Size(38, 16)
+        Me.Label131.Size = New System.Drawing.Size(37, 16)
         Me.Label131.TabIndex = 183
         Me.Label131.Text = "[mm]"
         '
@@ -3407,7 +3409,7 @@ Partial Class Form1
         Me.Label130.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label130.Location = New System.Drawing.Point(450, 158)
         Me.Label130.Name = "Label130"
-        Me.Label130.Size = New System.Drawing.Size(38, 16)
+        Me.Label130.Size = New System.Drawing.Size(37, 16)
         Me.Label130.TabIndex = 182
         Me.Label130.Text = "[mm]"
         '
@@ -3417,7 +3419,7 @@ Partial Class Form1
         Me.Label94.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label94.Location = New System.Drawing.Point(450, 130)
         Me.Label94.Name = "Label94"
-        Me.Label94.Size = New System.Drawing.Size(38, 16)
+        Me.Label94.Size = New System.Drawing.Size(37, 16)
         Me.Label94.TabIndex = 181
         Me.Label94.Text = "[mm]"
         '
@@ -3427,7 +3429,7 @@ Partial Class Form1
         Me.Label127.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label127.Location = New System.Drawing.Point(450, 77)
         Me.Label127.Name = "Label127"
-        Me.Label127.Size = New System.Drawing.Size(38, 16)
+        Me.Label127.Size = New System.Drawing.Size(37, 16)
         Me.Label127.TabIndex = 180
         Me.Label127.Text = "[mm]"
         '
@@ -3450,7 +3452,7 @@ Partial Class Form1
         Me.Label128.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label128.Location = New System.Drawing.Point(318, 77)
         Me.Label128.Name = "Label128"
-        Me.Label128.Size = New System.Drawing.Size(26, 16)
+        Me.Label128.Size = New System.Drawing.Size(25, 16)
         Me.Label128.TabIndex = 178
         Me.Label128.Text = "De"
         '
@@ -3460,7 +3462,7 @@ Partial Class Form1
         Me.Label129.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label129.Location = New System.Drawing.Point(17, 77)
         Me.Label129.Name = "Label129"
-        Me.Label129.Size = New System.Drawing.Size(141, 16)
+        Me.Label129.Size = New System.Drawing.Size(140, 16)
         Me.Label129.TabIndex = 177
         Me.Label129.Text = "Outside diameter shell"
         '
@@ -3470,7 +3472,7 @@ Partial Class Form1
         Me.Label93.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label93.Location = New System.Drawing.Point(450, 104)
         Me.Label93.Name = "Label93"
-        Me.Label93.Size = New System.Drawing.Size(38, 16)
+        Me.Label93.Size = New System.Drawing.Size(37, 16)
         Me.Label93.TabIndex = 176
         Me.Label93.Text = "[mm]"
         '
@@ -3512,7 +3514,7 @@ Partial Class Form1
         Me.Label100.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label100.Location = New System.Drawing.Point(17, 104)
         Me.Label100.Name = "Label100"
-        Me.Label100.Size = New System.Drawing.Size(206, 16)
+        Me.Label100.Size = New System.Drawing.Size(205, 16)
         Me.Label100.TabIndex = 172
         Me.Label100.Text = "Kloepper Wall thickness estimate"
         '
@@ -3522,7 +3524,7 @@ Partial Class Form1
         Me.Label101.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label101.Location = New System.Drawing.Point(318, 130)
         Me.Label101.Name = "Label101"
-        Me.Label101.Size = New System.Drawing.Size(21, 16)
+        Me.Label101.Size = New System.Drawing.Size(20, 16)
         Me.Label101.TabIndex = 170
         Me.Label101.Text = "Di"
         '
@@ -3532,7 +3534,7 @@ Partial Class Form1
         Me.Label102.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label102.Location = New System.Drawing.Point(17, 130)
         Me.Label102.Name = "Label102"
-        Me.Label102.Size = New System.Drawing.Size(131, 16)
+        Me.Label102.Size = New System.Drawing.Size(130, 16)
         Me.Label102.TabIndex = 169
         Me.Label102.Text = "Inside diameter shell"
         '
@@ -3551,7 +3553,7 @@ Partial Class Form1
         Me.Label108.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label108.Location = New System.Drawing.Point(318, 367)
         Me.Label108.Name = "Label108"
-        Me.Label108.Size = New System.Drawing.Size(24, 16)
+        Me.Label108.Size = New System.Drawing.Size(23, 16)
         Me.Label108.TabIndex = 167
         Me.Label108.Text = "eb"
         '
@@ -3561,7 +3563,7 @@ Partial Class Form1
         Me.Label109.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label109.Location = New System.Drawing.Point(17, 367)
         Me.Label109.Name = "Label109"
-        Me.Label109.Size = New System.Drawing.Size(292, 16)
+        Me.Label109.Size = New System.Drawing.Size(291, 16)
         Me.Label109.TabIndex = 166
         Me.Label109.Text = "Wall thickness  knuckle to avoid plastic buckling"
         '
@@ -3580,7 +3582,7 @@ Partial Class Form1
         Me.Label110.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label110.Location = New System.Drawing.Point(318, 341)
         Me.Label110.Name = "Label110"
-        Me.Label110.Size = New System.Drawing.Size(23, 16)
+        Me.Label110.Size = New System.Drawing.Size(22, 16)
         Me.Label110.TabIndex = 164
         Me.Label110.Text = "ey"
         '
@@ -3600,7 +3602,7 @@ Partial Class Form1
         Me.Label121.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label121.Location = New System.Drawing.Point(318, 315)
         Me.Label121.Name = "Label121"
-        Me.Label121.Size = New System.Drawing.Size(23, 16)
+        Me.Label121.Size = New System.Drawing.Size(22, 16)
         Me.Label121.TabIndex = 161
         Me.Label121.Text = "es"
         '
@@ -3610,7 +3612,7 @@ Partial Class Form1
         Me.Label122.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label122.Location = New System.Drawing.Point(17, 315)
         Me.Label122.Name = "Label122"
-        Me.Label122.Size = New System.Drawing.Size(286, 16)
+        Me.Label122.Size = New System.Drawing.Size(285, 16)
         Me.Label122.TabIndex = 160
         Me.Label122.Text = "Wall thickness  membrane stress in central part"
         '
@@ -3629,7 +3631,7 @@ Partial Class Form1
         Me.Label123.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label123.Location = New System.Drawing.Point(318, 182)
         Me.Label123.Name = "Label123"
-        Me.Label123.Size = New System.Drawing.Size(12, 16)
+        Me.Label123.Size = New System.Drawing.Size(11, 16)
         Me.Label123.TabIndex = 158
         Me.Label123.Text = "r"
         '
@@ -3639,7 +3641,7 @@ Partial Class Form1
         Me.Label124.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label124.Location = New System.Drawing.Point(17, 182)
         Me.Label124.Name = "Label124"
-        Me.Label124.Size = New System.Drawing.Size(237, 16)
+        Me.Label124.Size = New System.Drawing.Size(236, 16)
         Me.Label124.TabIndex = 157
         Me.Label124.Text = "Inside radius of curvature of a knuckcle"
         '
@@ -3658,7 +3660,7 @@ Partial Class Form1
         Me.Label125.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label125.Location = New System.Drawing.Point(318, 156)
         Me.Label125.Name = "Label125"
-        Me.Label125.Size = New System.Drawing.Size(29, 16)
+        Me.Label125.Size = New System.Drawing.Size(28, 16)
         Me.Label125.TabIndex = 132
         Me.Label125.Text = "Dm"
         '
@@ -3668,7 +3670,7 @@ Partial Class Form1
         Me.Label126.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label126.Location = New System.Drawing.Point(17, 156)
         Me.Label126.Name = "Label126"
-        Me.Label126.Size = New System.Drawing.Size(129, 16)
+        Me.Label126.Size = New System.Drawing.Size(128, 16)
         Me.Label126.TabIndex = 131
         Me.Label126.Text = "Mean diameter shell"
         '
@@ -3770,7 +3772,7 @@ Partial Class Form1
         Me.Label524.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label524.Location = New System.Drawing.Point(394, 243)
         Me.Label524.Name = "Label524"
-        Me.Label524.Size = New System.Drawing.Size(36, 16)
+        Me.Label524.Size = New System.Drawing.Size(35, 16)
         Me.Label524.TabIndex = 268
         Me.Label524.Text = "[bar]"
         '
@@ -3780,7 +3782,7 @@ Partial Class Form1
         Me.Label525.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label525.Location = New System.Drawing.Point(263, 243)
         Me.Label525.Name = "Label525"
-        Me.Label525.Size = New System.Drawing.Size(21, 16)
+        Me.Label525.Size = New System.Drawing.Size(20, 16)
         Me.Label525.TabIndex = 266
         Me.Label525.Text = "Pr"
         '
@@ -3799,7 +3801,7 @@ Partial Class Form1
         Me.Label526.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label526.Location = New System.Drawing.Point(6, 243)
         Me.Label526.Name = "Label526"
-        Me.Label526.Size = New System.Drawing.Size(199, 16)
+        Me.Label526.Size = New System.Drawing.Size(198, 16)
         Me.Label526.TabIndex = 265
         Me.Label526.Text = "Lower bound collapse pressure "
         '
@@ -3818,7 +3820,7 @@ Partial Class Form1
         Me.Label518.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label518.Location = New System.Drawing.Point(394, 187)
         Me.Label518.Name = "Label518"
-        Me.Label518.Size = New System.Drawing.Size(20, 16)
+        Me.Label518.Size = New System.Drawing.Size(19, 16)
         Me.Label518.TabIndex = 260
         Me.Label518.Text = "[-]"
         '
@@ -3837,7 +3839,7 @@ Partial Class Form1
         Me.Label520.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label520.Location = New System.Drawing.Point(6, 187)
         Me.Label520.Name = "Label520"
-        Me.Label520.Size = New System.Drawing.Size(180, 16)
+        Me.Label520.Size = New System.Drawing.Size(179, 16)
         Me.Label520.TabIndex = 257
         Me.Label520.Text = "Ratio's:  Pm/Py,  Pr/Py (8.5-5)"
         '
@@ -3847,7 +3849,7 @@ Partial Class Form1
         Me.Label493.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label493.Location = New System.Drawing.Point(263, 216)
         Me.Label493.Name = "Label493"
-        Me.Label493.Size = New System.Drawing.Size(17, 16)
+        Me.Label493.Size = New System.Drawing.Size(16, 16)
         Me.Label493.TabIndex = 155
         Me.Label493.Text = "S"
         '
@@ -3866,7 +3868,7 @@ Partial Class Form1
         Me.Label494.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label494.Location = New System.Drawing.Point(394, 214)
         Me.Label494.Name = "Label494"
-        Me.Label494.Size = New System.Drawing.Size(20, 16)
+        Me.Label494.Size = New System.Drawing.Size(19, 16)
         Me.Label494.TabIndex = 154
         Me.Label494.Text = "[-]"
         '
@@ -3876,7 +3878,7 @@ Partial Class Form1
         Me.Label509.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label509.Location = New System.Drawing.Point(394, 105)
         Me.Label509.Name = "Label509"
-        Me.Label509.Size = New System.Drawing.Size(20, 16)
+        Me.Label509.Size = New System.Drawing.Size(19, 16)
         Me.Label509.TabIndex = 243
         Me.Label509.Text = "[-]"
         '
@@ -3895,7 +3897,7 @@ Partial Class Form1
         Me.Label495.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label495.Location = New System.Drawing.Point(6, 216)
         Me.Label495.Name = "Label495"
-        Me.Label495.Size = New System.Drawing.Size(82, 16)
+        Me.Label495.Size = New System.Drawing.Size(81, 16)
         Me.Label495.TabIndex = 152
         Me.Label495.Text = "Safety factor"
         '
@@ -3905,7 +3907,7 @@ Partial Class Form1
         Me.Label510.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label510.Location = New System.Drawing.Point(262, 105)
         Me.Label510.Name = "Label510"
-        Me.Label510.Size = New System.Drawing.Size(35, 16)
+        Me.Label510.Size = New System.Drawing.Size(34, 16)
         Me.Label510.TabIndex = 241
         Me.Label510.Text = "Ncyl"
         '
@@ -3915,7 +3917,7 @@ Partial Class Form1
         Me.Label511.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label511.Location = New System.Drawing.Point(6, 105)
         Me.Label511.Name = "Label511"
-        Me.Label511.Size = New System.Drawing.Size(252, 16)
+        Me.Label511.Size = New System.Drawing.Size(251, 16)
         Me.Label511.TabIndex = 240
         Me.Label511.Text = "Number of circumf. waves (iterated value)"
         '
@@ -3925,7 +3927,7 @@ Partial Class Form1
         Me.Label503.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label503.Location = New System.Drawing.Point(394, 132)
         Me.Label503.Name = "Label503"
-        Me.Label503.Size = New System.Drawing.Size(38, 16)
+        Me.Label503.Size = New System.Drawing.Size(37, 16)
         Me.Label503.TabIndex = 239
         Me.Label503.Text = "[mm]"
         '
@@ -3935,7 +3937,7 @@ Partial Class Form1
         Me.Label504.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label504.Location = New System.Drawing.Point(262, 132)
         Me.Label504.Name = "Label504"
-        Me.Label504.Size = New System.Drawing.Size(15, 16)
+        Me.Label504.Size = New System.Drawing.Size(14, 16)
         Me.Label504.TabIndex = 237
         Me.Label504.Text = "ε"
         '
@@ -3954,7 +3956,7 @@ Partial Class Form1
         Me.Label505.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label505.Location = New System.Drawing.Point(6, 132)
         Me.Label505.Name = "Label505"
-        Me.Label505.Size = New System.Drawing.Size(167, 16)
+        Me.Label505.Size = New System.Drawing.Size(166, 16)
         Me.Label505.TabIndex = 236
         Me.Label505.Text = "Mean elastic circumf. strain"
         '
@@ -3964,7 +3966,7 @@ Partial Class Form1
         Me.Label500.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label500.Location = New System.Drawing.Point(394, 78)
         Me.Label500.Name = "Label500"
-        Me.Label500.Size = New System.Drawing.Size(38, 16)
+        Me.Label500.Size = New System.Drawing.Size(37, 16)
         Me.Label500.TabIndex = 235
         Me.Label500.Text = "[mm]"
         '
@@ -3974,7 +3976,7 @@ Partial Class Form1
         Me.Label501.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label501.Location = New System.Drawing.Point(262, 78)
         Me.Label501.Name = "Label501"
-        Me.Label501.Size = New System.Drawing.Size(16, 16)
+        Me.Label501.Size = New System.Drawing.Size(15, 16)
         Me.Label501.TabIndex = 233
         Me.Label501.Text = "Z"
         '
@@ -3993,7 +3995,7 @@ Partial Class Form1
         Me.Label502.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label502.Location = New System.Drawing.Point(6, 78)
         Me.Label502.Name = "Label502"
-        Me.Label502.Size = New System.Drawing.Size(115, 16)
+        Me.Label502.Size = New System.Drawing.Size(114, 16)
         Me.Label502.TabIndex = 232
         Me.Label502.Text = "Z formula (8.5.2-7) "
         '
@@ -4003,7 +4005,7 @@ Partial Class Form1
         Me.Label497.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label497.Location = New System.Drawing.Point(394, 159)
         Me.Label497.Name = "Label497"
-        Me.Label497.Size = New System.Drawing.Size(36, 16)
+        Me.Label497.Size = New System.Drawing.Size(35, 16)
         Me.Label497.TabIndex = 231
         Me.Label497.Text = "[bar]"
         '
@@ -4013,7 +4015,7 @@ Partial Class Form1
         Me.Label498.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label498.Location = New System.Drawing.Point(262, 159)
         Me.Label498.Name = "Label498"
-        Me.Label498.Size = New System.Drawing.Size(28, 16)
+        Me.Label498.Size = New System.Drawing.Size(27, 16)
         Me.Label498.TabIndex = 229
         Me.Label498.Text = "Pm"
         '
@@ -4032,7 +4034,7 @@ Partial Class Form1
         Me.Label499.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label499.Location = New System.Drawing.Point(6, 159)
         Me.Label499.Name = "Label499"
-        Me.Label499.Size = New System.Drawing.Size(216, 16)
+        Me.Label499.Size = New System.Drawing.Size(215, 16)
         Me.Label499.TabIndex = 228
         Me.Label499.Text = "Theoretical elastic instability press."
         '
@@ -4042,7 +4044,7 @@ Partial Class Form1
         Me.Label496.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label496.Location = New System.Drawing.Point(394, 50)
         Me.Label496.Name = "Label496"
-        Me.Label496.Size = New System.Drawing.Size(36, 16)
+        Me.Label496.Size = New System.Drawing.Size(35, 16)
         Me.Label496.TabIndex = 227
         Me.Label496.Text = "[bar]"
         '
@@ -4061,7 +4063,7 @@ Partial Class Form1
         Me.Label475.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label475.Location = New System.Drawing.Point(6, 21)
         Me.Label475.Name = "Label475"
-        Me.Label475.Size = New System.Drawing.Size(129, 16)
+        Me.Label475.Size = New System.Drawing.Size(128, 16)
         Me.Label475.TabIndex = 209
         Me.Label475.Text = "Unsupported Length"
         '
@@ -4071,7 +4073,7 @@ Partial Class Form1
         Me.Label474.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label474.Location = New System.Drawing.Point(262, 21)
         Me.Label474.Name = "Label474"
-        Me.Label474.Size = New System.Drawing.Size(15, 16)
+        Me.Label474.Size = New System.Drawing.Size(14, 16)
         Me.Label474.TabIndex = 210
         Me.Label474.Text = "L"
         '
@@ -4081,7 +4083,7 @@ Partial Class Form1
         Me.Label472.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label472.Location = New System.Drawing.Point(262, 47)
         Me.Label472.Name = "Label472"
-        Me.Label472.Size = New System.Drawing.Size(24, 16)
+        Me.Label472.Size = New System.Drawing.Size(23, 16)
         Me.Label472.TabIndex = 213
         Me.Label472.Text = "Py"
         '
@@ -4100,7 +4102,7 @@ Partial Class Form1
         Me.Label463.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label463.Location = New System.Drawing.Point(394, 23)
         Me.Label463.Name = "Label463"
-        Me.Label463.Size = New System.Drawing.Size(38, 16)
+        Me.Label463.Size = New System.Drawing.Size(37, 16)
         Me.Label463.TabIndex = 226
         Me.Label463.Text = "[mm]"
         '
@@ -4110,7 +4112,7 @@ Partial Class Form1
         Me.Label473.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label473.Location = New System.Drawing.Point(6, 50)
         Me.Label473.Name = "Label473"
-        Me.Label473.Size = New System.Drawing.Size(234, 16)
+        Me.Label473.Size = New System.Drawing.Size(233, 16)
         Me.Label473.TabIndex = 212
         Me.Label473.Text = "Yield Pressure at mean circumf. stress"
         '
@@ -4142,7 +4144,7 @@ Partial Class Form1
         Me.Label515.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label515.Location = New System.Drawing.Point(263, 76)
         Me.Label515.Name = "Label515"
-        Me.Label515.Size = New System.Drawing.Size(17, 16)
+        Me.Label515.Size = New System.Drawing.Size(16, 16)
         Me.Label515.TabIndex = 163
         Me.Label515.Text = "E"
         '
@@ -4152,7 +4154,7 @@ Partial Class Form1
         Me.Label516.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label516.Location = New System.Drawing.Point(394, 74)
         Me.Label516.Name = "Label516"
-        Me.Label516.Size = New System.Drawing.Size(59, 16)
+        Me.Label516.Size = New System.Drawing.Size(58, 16)
         Me.Label516.TabIndex = 162
         Me.Label516.Text = "[N/mm2]"
         '
@@ -4171,7 +4173,7 @@ Partial Class Form1
         Me.Label517.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label517.Location = New System.Drawing.Point(6, 76)
         Me.Label517.Name = "Label517"
-        Me.Label517.Size = New System.Drawing.Size(238, 16)
+        Me.Label517.Size = New System.Drawing.Size(237, 16)
         Me.Label517.TabIndex = 160
         Me.Label517.Text = "Modulus of elasticity at operating temp."
         '
@@ -4181,7 +4183,7 @@ Partial Class Form1
         Me.Label506.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label506.Location = New System.Drawing.Point(263, 48)
         Me.Label506.Name = "Label506"
-        Me.Label506.Size = New System.Drawing.Size(15, 16)
+        Me.Label506.Size = New System.Drawing.Size(14, 16)
         Me.Label506.TabIndex = 159
         Me.Label506.Text = "ν"
         '
@@ -4191,7 +4193,7 @@ Partial Class Form1
         Me.Label507.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label507.Location = New System.Drawing.Point(394, 48)
         Me.Label507.Name = "Label507"
-        Me.Label507.Size = New System.Drawing.Size(20, 16)
+        Me.Label507.Size = New System.Drawing.Size(19, 16)
         Me.Label507.TabIndex = 158
         Me.Label507.Text = "[-]"
         '
@@ -4210,7 +4212,7 @@ Partial Class Form1
         Me.Label508.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label508.Location = New System.Drawing.Point(6, 48)
         Me.Label508.Name = "Label508"
-        Me.Label508.Size = New System.Drawing.Size(86, 16)
+        Me.Label508.Size = New System.Drawing.Size(85, 16)
         Me.Label508.TabIndex = 156
         Me.Label508.Text = "Poisson ratio"
         '
@@ -4220,7 +4222,7 @@ Partial Class Form1
         Me.Label490.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label490.Location = New System.Drawing.Point(263, 22)
         Me.Label490.Name = "Label490"
-        Me.Label490.Size = New System.Drawing.Size(24, 16)
+        Me.Label490.Size = New System.Drawing.Size(23, 16)
         Me.Label490.TabIndex = 151
         Me.Label490.Text = "σe"
         '
@@ -4230,7 +4232,7 @@ Partial Class Form1
         Me.Label491.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label491.Location = New System.Drawing.Point(394, 20)
         Me.Label491.Name = "Label491"
-        Me.Label491.Size = New System.Drawing.Size(59, 16)
+        Me.Label491.Size = New System.Drawing.Size(58, 16)
         Me.Label491.TabIndex = 150
         Me.Label491.Text = "[N/mm2]"
         '
@@ -4249,7 +4251,7 @@ Partial Class Form1
         Me.Label492.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label492.Location = New System.Drawing.Point(6, 22)
         Me.Label492.Name = "Label492"
-        Me.Label492.Size = New System.Drawing.Size(165, 16)
+        Me.Label492.Size = New System.Drawing.Size(164, 16)
         Me.Label492.TabIndex = 148
         Me.Label492.Text = "Nominal elastic limit stress"
         '
@@ -4311,7 +4313,7 @@ Partial Class Form1
         Me.Label598.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label598.Location = New System.Drawing.Point(263, 161)
         Me.Label598.Name = "Label598"
-        Me.Label598.Size = New System.Drawing.Size(12, 16)
+        Me.Label598.Size = New System.Drawing.Size(11, 16)
         Me.Label598.TabIndex = 167
         Me.Label598.Text = "-"
         '
@@ -4335,7 +4337,7 @@ Partial Class Form1
         Me.Label599.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label599.Location = New System.Drawing.Point(394, 161)
         Me.Label599.Name = "Label599"
-        Me.Label599.Size = New System.Drawing.Size(28, 16)
+        Me.Label599.Size = New System.Drawing.Size(27, 16)
         Me.Label599.TabIndex = 166
         Me.Label599.Text = "[%]"
         '
@@ -4345,7 +4347,7 @@ Partial Class Form1
         Me.Label512.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label512.Location = New System.Drawing.Point(262, 218)
         Me.Label512.Name = "Label512"
-        Me.Label512.Size = New System.Drawing.Size(24, 16)
+        Me.Label512.Size = New System.Drawing.Size(23, 16)
         Me.Label512.TabIndex = 250
         Me.Label512.Text = "ea"
         '
@@ -4364,7 +4366,7 @@ Partial Class Form1
         Me.Label600.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label600.Location = New System.Drawing.Point(6, 161)
         Me.Label600.Name = "Label600"
-        Me.Label600.Size = New System.Drawing.Size(170, 16)
+        Me.Label600.Size = New System.Drawing.Size(169, 16)
         Me.Label600.TabIndex = 164
         Me.Label600.Text = "Vessel Circularity tolerance"
         '
@@ -4374,7 +4376,7 @@ Partial Class Form1
         Me.Label513.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label513.Location = New System.Drawing.Point(394, 218)
         Me.Label513.Name = "Label513"
-        Me.Label513.Size = New System.Drawing.Size(38, 16)
+        Me.Label513.Size = New System.Drawing.Size(37, 16)
         Me.Label513.TabIndex = 249
         Me.Label513.Text = "[mm]"
         '
@@ -4401,7 +4403,7 @@ Partial Class Form1
         Me.Label514.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label514.Location = New System.Drawing.Point(6, 218)
         Me.Label514.Name = "Label514"
-        Me.Label514.Size = New System.Drawing.Size(125, 16)
+        Me.Label514.Size = New System.Drawing.Size(124, 16)
         Me.Label514.TabIndex = 247
         Me.Label514.Text = "Wall thickness shell"
         '
@@ -4411,7 +4413,7 @@ Partial Class Form1
         Me.Label478.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label478.Location = New System.Drawing.Point(262, 133)
         Me.Label478.Name = "Label478"
-        Me.Label478.Size = New System.Drawing.Size(37, 16)
+        Me.Label478.Size = New System.Drawing.Size(36, 16)
         Me.Label478.TabIndex = 242
         Me.Label478.Text = "Lcon"
         '
@@ -4421,7 +4423,7 @@ Partial Class Form1
         Me.Label479.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label479.Location = New System.Drawing.Point(394, 133)
         Me.Label479.Name = "Label479"
-        Me.Label479.Size = New System.Drawing.Size(38, 16)
+        Me.Label479.Size = New System.Drawing.Size(37, 16)
         Me.Label479.TabIndex = 241
         Me.Label479.Text = "[mm]"
         '
@@ -4446,7 +4448,7 @@ Partial Class Form1
         Me.Label480.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label480.Location = New System.Drawing.Point(6, 133)
         Me.Label480.Name = "Label480"
-        Me.Label480.Size = New System.Drawing.Size(134, 16)
+        Me.Label480.Size = New System.Drawing.Size(133, 16)
         Me.Label480.TabIndex = 239
         Me.Label480.Text = "Axial length of a cone"
         '
@@ -4456,7 +4458,7 @@ Partial Class Form1
         Me.Label462.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label462.Location = New System.Drawing.Point(262, 105)
         Me.Label462.Name = "Label462"
-        Me.Label462.Size = New System.Drawing.Size(15, 16)
+        Me.Label462.Size = New System.Drawing.Size(14, 16)
         Me.Label462.TabIndex = 238
         Me.Label462.Text = "h"
         '
@@ -4466,7 +4468,7 @@ Partial Class Form1
         Me.Label476.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label476.Location = New System.Drawing.Point(394, 105)
         Me.Label476.Name = "Label476"
-        Me.Label476.Size = New System.Drawing.Size(38, 16)
+        Me.Label476.Size = New System.Drawing.Size(37, 16)
         Me.Label476.TabIndex = 237
         Me.Label476.Text = "[mm]"
         '
@@ -4489,7 +4491,7 @@ Partial Class Form1
         Me.Label477.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label477.Location = New System.Drawing.Point(6, 105)
         Me.Label477.Name = "Label477"
-        Me.Label477.Size = New System.Drawing.Size(165, 16)
+        Me.Label477.Size = New System.Drawing.Size(164, 16)
         Me.Label477.TabIndex = 235
         Me.Label477.Text = "External height dished end"
         '
@@ -4499,7 +4501,7 @@ Partial Class Form1
         Me.Label460.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label460.Location = New System.Drawing.Point(262, 77)
         Me.Label460.Name = "Label460"
-        Me.Label460.Size = New System.Drawing.Size(32, 16)
+        Me.Label460.Size = New System.Drawing.Size(31, 16)
         Me.Label460.TabIndex = 234
         Me.Label460.Text = "Lcyl"
         '
@@ -4509,7 +4511,7 @@ Partial Class Form1
         Me.Label458.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label458.Location = New System.Drawing.Point(394, 25)
         Me.Label458.Name = "Label458"
-        Me.Label458.Size = New System.Drawing.Size(44, 16)
+        Me.Label458.Size = New System.Drawing.Size(43, 16)
         Me.Label458.TabIndex = 233
         Me.Label458.Text = "[barg]"
         '
@@ -4519,7 +4521,7 @@ Partial Class Form1
         Me.Label459.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label459.Location = New System.Drawing.Point(6, 23)
         Me.Label459.Name = "Label459"
-        Me.Label459.Size = New System.Drawing.Size(113, 16)
+        Me.Label459.Size = New System.Drawing.Size(112, 16)
         Me.Label459.TabIndex = 232
         Me.Label459.Text = "External Pressure"
         '
@@ -4538,7 +4540,7 @@ Partial Class Form1
         Me.Label461.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label461.Location = New System.Drawing.Point(262, 23)
         Me.Label461.Name = "Label461"
-        Me.Label461.Size = New System.Drawing.Size(24, 16)
+        Me.Label461.Size = New System.Drawing.Size(23, 16)
         Me.Label461.TabIndex = 229
         Me.Label461.Text = "_P"
         '
@@ -4548,7 +4550,7 @@ Partial Class Form1
         Me.Label464.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label464.Location = New System.Drawing.Point(394, 188)
         Me.Label464.Name = "Label464"
-        Me.Label464.Size = New System.Drawing.Size(40, 16)
+        Me.Label464.Size = New System.Drawing.Size(39, 16)
         Me.Label464.TabIndex = 225
         Me.Label464.Text = "[deg]"
         '
@@ -4558,7 +4560,7 @@ Partial Class Form1
         Me.Label465.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label465.Location = New System.Drawing.Point(394, 50)
         Me.Label465.Name = "Label465"
-        Me.Label465.Size = New System.Drawing.Size(38, 16)
+        Me.Label465.Size = New System.Drawing.Size(37, 16)
         Me.Label465.TabIndex = 224
         Me.Label465.Text = "[mm]"
         '
@@ -4581,7 +4583,7 @@ Partial Class Form1
         Me.Label466.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label466.Location = New System.Drawing.Point(262, 50)
         Me.Label466.Name = "Label466"
-        Me.Label466.Size = New System.Drawing.Size(26, 16)
+        Me.Label466.Size = New System.Drawing.Size(25, 16)
         Me.Label466.TabIndex = 222
         Me.Label466.Text = "De"
         '
@@ -4591,7 +4593,7 @@ Partial Class Form1
         Me.Label467.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label467.Location = New System.Drawing.Point(6, 50)
         Me.Label467.Name = "Label467"
-        Me.Label467.Size = New System.Drawing.Size(141, 16)
+        Me.Label467.Size = New System.Drawing.Size(140, 16)
         Me.Label467.TabIndex = 221
         Me.Label467.Text = "Outside diameter shell"
         '
@@ -4601,7 +4603,7 @@ Partial Class Form1
         Me.Label468.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label468.Location = New System.Drawing.Point(394, 77)
         Me.Label468.Name = "Label468"
-        Me.Label468.Size = New System.Drawing.Size(38, 16)
+        Me.Label468.Size = New System.Drawing.Size(37, 16)
         Me.Label468.TabIndex = 220
         Me.Label468.Text = "[mm]"
         '
@@ -4626,7 +4628,7 @@ Partial Class Form1
         Me.Label469.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label469.Location = New System.Drawing.Point(6, 77)
         Me.Label469.Name = "Label469"
-        Me.Label469.Size = New System.Drawing.Size(228, 16)
+        Me.Label469.Size = New System.Drawing.Size(227, 16)
         Me.Label469.TabIndex = 217
         Me.Label469.Text = "Cylinder length between tangent lines"
         '
@@ -4636,7 +4638,7 @@ Partial Class Form1
         Me.Label470.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label470.Location = New System.Drawing.Point(262, 188)
         Me.Label470.Name = "Label470"
-        Me.Label470.Size = New System.Drawing.Size(15, 16)
+        Me.Label470.Size = New System.Drawing.Size(14, 16)
         Me.Label470.TabIndex = 216
         Me.Label470.Text = "α"
         '
@@ -4646,7 +4648,7 @@ Partial Class Form1
         Me.Label471.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label471.Location = New System.Drawing.Point(6, 188)
         Me.Label471.Name = "Label471"
-        Me.Label471.Size = New System.Drawing.Size(99, 16)
+        Me.Label471.Size = New System.Drawing.Size(98, 16)
         Me.Label471.TabIndex = 215
         Me.Label471.Text = "Half cone Apex"
         '
@@ -4766,7 +4768,7 @@ Partial Class Form1
         Me.Label584.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label584.Location = New System.Drawing.Point(267, 52)
         Me.Label584.Name = "Label584"
-        Me.Label584.Size = New System.Drawing.Size(28, 16)
+        Me.Label584.Size = New System.Drawing.Size(27, 16)
         Me.Label584.TabIndex = 254
         Me.Label584.Text = "L''s"
         '
@@ -4776,7 +4778,7 @@ Partial Class Form1
         Me.Label585.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label585.Location = New System.Drawing.Point(399, 52)
         Me.Label585.Name = "Label585"
-        Me.Label585.Size = New System.Drawing.Size(38, 16)
+        Me.Label585.Size = New System.Drawing.Size(37, 16)
         Me.Label585.TabIndex = 253
         Me.Label585.Text = "[mm]"
         '
@@ -4801,7 +4803,7 @@ Partial Class Form1
         Me.Label586.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label586.Location = New System.Drawing.Point(11, 52)
         Me.Label586.Name = "Label586"
-        Me.Label586.Size = New System.Drawing.Size(222, 16)
+        Me.Label586.Size = New System.Drawing.Size(221, 16)
         Me.Label586.TabIndex = 251
         Me.Label586.Text = "Light stiffener - light stiffener distance"
         '
@@ -4811,7 +4813,7 @@ Partial Class Form1
         Me.Label592.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label592.Location = New System.Drawing.Point(399, 135)
         Me.Label592.Name = "Label592"
-        Me.Label592.Size = New System.Drawing.Size(38, 16)
+        Me.Label592.Size = New System.Drawing.Size(37, 16)
         Me.Label592.TabIndex = 264
         Me.Label592.Text = "[mm]"
         '
@@ -4830,7 +4832,7 @@ Partial Class Form1
         Me.Label593.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label593.Location = New System.Drawing.Point(267, 135)
         Me.Label593.Name = "Label593"
-        Me.Label593.Size = New System.Drawing.Size(25, 16)
+        Me.Label593.Size = New System.Drawing.Size(24, 16)
         Me.Label593.TabIndex = 262
         Me.Label593.Text = "Rs"
         '
@@ -4840,7 +4842,7 @@ Partial Class Form1
         Me.Label594.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label594.Location = New System.Drawing.Point(11, 135)
         Me.Label594.Name = "Label594"
-        Me.Label594.Size = New System.Drawing.Size(149, 16)
+        Me.Label594.Size = New System.Drawing.Size(148, 16)
         Me.Label594.TabIndex = 261
         Me.Label594.Text = "Stiffener Centroid radius"
         '
@@ -4850,7 +4852,7 @@ Partial Class Form1
         Me.Label522.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label522.Location = New System.Drawing.Point(267, 24)
         Me.Label522.Name = "Label522"
-        Me.Label522.Size = New System.Drawing.Size(25, 16)
+        Me.Label522.Size = New System.Drawing.Size(24, 16)
         Me.Label522.TabIndex = 242
         Me.Label522.Text = "L's"
         '
@@ -4860,7 +4862,7 @@ Partial Class Form1
         Me.Label589.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label589.Location = New System.Drawing.Point(399, 107)
         Me.Label589.Name = "Label589"
-        Me.Label589.Size = New System.Drawing.Size(45, 16)
+        Me.Label589.Size = New System.Drawing.Size(44, 16)
         Me.Label589.TabIndex = 258
         Me.Label589.Text = "[mm2]"
         '
@@ -4870,7 +4872,7 @@ Partial Class Form1
         Me.Label523.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label523.Location = New System.Drawing.Point(399, 24)
         Me.Label523.Name = "Label523"
-        Me.Label523.Size = New System.Drawing.Size(38, 16)
+        Me.Label523.Size = New System.Drawing.Size(37, 16)
         Me.Label523.TabIndex = 241
         Me.Label523.Text = "[mm]"
         '
@@ -4880,7 +4882,7 @@ Partial Class Form1
         Me.Label588.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label588.Location = New System.Drawing.Point(320, 80)
         Me.Label588.Name = "Label588"
-        Me.Label588.Size = New System.Drawing.Size(14, 16)
+        Me.Label588.Size = New System.Drawing.Size(13, 16)
         Me.Label588.TabIndex = 260
         Me.Label588.Text = "x"
         '
@@ -4906,7 +4908,7 @@ Partial Class Form1
         Me.Label527.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label527.Location = New System.Drawing.Point(11, 24)
         Me.Label527.Name = "Label527"
-        Me.Label527.Size = New System.Drawing.Size(184, 16)
+        Me.Label527.Size = New System.Drawing.Size(183, 16)
         Me.Label527.TabIndex = 239
         Me.Label527.Text = "Light stiffener distance to weld"
         '
@@ -4925,7 +4927,7 @@ Partial Class Form1
         Me.Label590.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label590.Location = New System.Drawing.Point(267, 107)
         Me.Label590.Name = "Label590"
-        Me.Label590.Size = New System.Drawing.Size(24, 16)
+        Me.Label590.Size = New System.Drawing.Size(23, 16)
         Me.Label590.TabIndex = 256
         Me.Label590.Text = "As"
         '
@@ -4935,7 +4937,7 @@ Partial Class Form1
         Me.Label591.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label591.Location = New System.Drawing.Point(11, 107)
         Me.Label591.Name = "Label591"
-        Me.Label591.Size = New System.Drawing.Size(135, 16)
+        Me.Label591.Size = New System.Drawing.Size(134, 16)
         Me.Label591.TabIndex = 255
         Me.Label591.Text = "Stiffener Section area"
         '
@@ -4945,7 +4947,7 @@ Partial Class Form1
         Me.Label574.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label574.Location = New System.Drawing.Point(196, 80)
         Me.Label574.Name = "Label574"
-        Me.Label574.Size = New System.Drawing.Size(35, 16)
+        Me.Label574.Size = New System.Drawing.Size(34, 16)
         Me.Label574.TabIndex = 258
         Me.Label574.Text = "rh,rw"
         '
@@ -4955,7 +4957,7 @@ Partial Class Form1
         Me.Label576.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label576.Location = New System.Drawing.Point(399, 81)
         Me.Label576.Name = "Label576"
-        Me.Label576.Size = New System.Drawing.Size(38, 16)
+        Me.Label576.Size = New System.Drawing.Size(37, 16)
         Me.Label576.TabIndex = 257
         Me.Label576.Text = "[mm]"
         '
@@ -4965,7 +4967,7 @@ Partial Class Form1
         Me.Label587.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label587.Location = New System.Drawing.Point(11, 81)
         Me.Label587.Name = "Label587"
-        Me.Label587.Size = New System.Drawing.Size(117, 16)
+        Me.Label587.Size = New System.Drawing.Size(116, 16)
         Me.Label587.TabIndex = 255
         Me.Label587.Text = "Rib Height x Width"
         '
@@ -5006,7 +5008,7 @@ Partial Class Form1
         Me.Label552.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label552.Location = New System.Drawing.Point(394, 25)
         Me.Label552.Name = "Label552"
-        Me.Label552.Size = New System.Drawing.Size(38, 16)
+        Me.Label552.Size = New System.Drawing.Size(37, 16)
         Me.Label552.TabIndex = 238
         Me.Label552.Text = "[mm]"
         '
@@ -5016,7 +5018,7 @@ Partial Class Form1
         Me.Label553.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label553.Location = New System.Drawing.Point(262, 23)
         Me.Label553.Name = "Label553"
-        Me.Label553.Size = New System.Drawing.Size(22, 16)
+        Me.Label553.Size = New System.Drawing.Size(21, 16)
         Me.Label553.TabIndex = 236
         Me.Label553.Text = "L_"
         '
@@ -5026,7 +5028,7 @@ Partial Class Form1
         Me.Label554.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label554.Location = New System.Drawing.Point(6, 25)
         Me.Label554.Name = "Label554"
-        Me.Label554.Size = New System.Drawing.Size(170, 16)
+        Me.Label554.Size = New System.Drawing.Size(169, 16)
         Me.Label554.TabIndex = 235
         Me.Label554.Text = "Unsupported length of shell"
         '
@@ -5045,7 +5047,7 @@ Partial Class Form1
         Me.Label581.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label581.Location = New System.Drawing.Point(394, 80)
         Me.Label581.Name = "Label581"
-        Me.Label581.Size = New System.Drawing.Size(38, 16)
+        Me.Label581.Size = New System.Drawing.Size(37, 16)
         Me.Label581.TabIndex = 234
         Me.Label581.Text = "[mm]"
         '
@@ -5055,7 +5057,7 @@ Partial Class Form1
         Me.Label582.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label582.Location = New System.Drawing.Point(262, 78)
         Me.Label582.Name = "Label582"
-        Me.Label582.Size = New System.Drawing.Size(22, 16)
+        Me.Label582.Size = New System.Drawing.Size(21, 16)
         Me.Label582.TabIndex = 232
         Me.Label582.Text = "Lh"
         '
@@ -5065,7 +5067,7 @@ Partial Class Form1
         Me.Label583.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label583.Location = New System.Drawing.Point(6, 80)
         Me.Label583.Name = "Label583"
-        Me.Label583.Size = New System.Drawing.Size(163, 16)
+        Me.Label583.Size = New System.Drawing.Size(162, 16)
         Me.Label583.TabIndex = 231
         Me.Label583.Text = "For purpose of evaluating "
         '
@@ -5084,7 +5086,7 @@ Partial Class Form1
         Me.Label578.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label578.Location = New System.Drawing.Point(394, 52)
         Me.Label578.Name = "Label578"
-        Me.Label578.Size = New System.Drawing.Size(38, 16)
+        Me.Label578.Size = New System.Drawing.Size(37, 16)
         Me.Label578.TabIndex = 230
         Me.Label578.Text = "[mm]"
         '
@@ -5094,7 +5096,7 @@ Partial Class Form1
         Me.Label579.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label579.Location = New System.Drawing.Point(262, 50)
         Me.Label579.Name = "Label579"
-        Me.Label579.Size = New System.Drawing.Size(22, 16)
+        Me.Label579.Size = New System.Drawing.Size(21, 16)
         Me.Label579.TabIndex = 228
         Me.Label579.Text = "Ls"
         '
@@ -5104,7 +5106,7 @@ Partial Class Form1
         Me.Label580.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label580.Location = New System.Drawing.Point(6, 52)
         Me.Label580.Name = "Label580"
-        Me.Label580.Size = New System.Drawing.Size(204, 16)
+        Me.Label580.Size = New System.Drawing.Size(203, 16)
         Me.Label580.TabIndex = 227
         Me.Label580.Text = "For each light stiffener separately"
         '
@@ -5190,7 +5192,7 @@ Partial Class Form1
         Me.Label601.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label601.Location = New System.Drawing.Point(397, 382)
         Me.Label601.Name = "Label601"
-        Me.Label601.Size = New System.Drawing.Size(36, 16)
+        Me.Label601.Size = New System.Drawing.Size(35, 16)
         Me.Label601.TabIndex = 297
         Me.Label601.Text = "[bar]"
         '
@@ -5200,7 +5202,7 @@ Partial Class Form1
         Me.Label602.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label602.Location = New System.Drawing.Point(266, 382)
         Me.Label602.Name = "Label602"
-        Me.Label602.Size = New System.Drawing.Size(21, 16)
+        Me.Label602.Size = New System.Drawing.Size(20, 16)
         Me.Label602.TabIndex = 295
         Me.Label602.Text = "Pr"
         '
@@ -5219,7 +5221,7 @@ Partial Class Form1
         Me.Label603.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label603.Location = New System.Drawing.Point(9, 382)
         Me.Label603.Name = "Label603"
-        Me.Label603.Size = New System.Drawing.Size(199, 16)
+        Me.Label603.Size = New System.Drawing.Size(198, 16)
         Me.Label603.TabIndex = 294
         Me.Label603.Text = "Lower bound collapse pressure "
         '
@@ -5238,7 +5240,7 @@ Partial Class Form1
         Me.Label604.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label604.Location = New System.Drawing.Point(397, 326)
         Me.Label604.Name = "Label604"
-        Me.Label604.Size = New System.Drawing.Size(20, 16)
+        Me.Label604.Size = New System.Drawing.Size(19, 16)
         Me.Label604.TabIndex = 292
         Me.Label604.Text = "[-]"
         '
@@ -5257,7 +5259,7 @@ Partial Class Form1
         Me.Label605.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label605.Location = New System.Drawing.Point(9, 326)
         Me.Label605.Name = "Label605"
-        Me.Label605.Size = New System.Drawing.Size(180, 16)
+        Me.Label605.Size = New System.Drawing.Size(179, 16)
         Me.Label605.TabIndex = 290
         Me.Label605.Text = "Ratio's:  Pm/Py,  Pr/Py (8.5-5)"
         '
@@ -5267,7 +5269,7 @@ Partial Class Form1
         Me.Label606.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label606.Location = New System.Drawing.Point(266, 355)
         Me.Label606.Name = "Label606"
-        Me.Label606.Size = New System.Drawing.Size(17, 16)
+        Me.Label606.Size = New System.Drawing.Size(16, 16)
         Me.Label606.TabIndex = 273
         Me.Label606.Text = "S"
         '
@@ -5286,7 +5288,7 @@ Partial Class Form1
         Me.Label607.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label607.Location = New System.Drawing.Point(397, 353)
         Me.Label607.Name = "Label607"
-        Me.Label607.Size = New System.Drawing.Size(20, 16)
+        Me.Label607.Size = New System.Drawing.Size(19, 16)
         Me.Label607.TabIndex = 272
         Me.Label607.Text = "[-]"
         '
@@ -5296,7 +5298,7 @@ Partial Class Form1
         Me.Label608.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label608.Location = New System.Drawing.Point(397, 244)
         Me.Label608.Name = "Label608"
-        Me.Label608.Size = New System.Drawing.Size(20, 16)
+        Me.Label608.Size = New System.Drawing.Size(19, 16)
         Me.Label608.TabIndex = 288
         Me.Label608.Text = "[-]"
         '
@@ -5315,7 +5317,7 @@ Partial Class Form1
         Me.Label609.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label609.Location = New System.Drawing.Point(9, 355)
         Me.Label609.Name = "Label609"
-        Me.Label609.Size = New System.Drawing.Size(82, 16)
+        Me.Label609.Size = New System.Drawing.Size(81, 16)
         Me.Label609.TabIndex = 270
         Me.Label609.Text = "Safety factor"
         '
@@ -5325,7 +5327,7 @@ Partial Class Form1
         Me.Label610.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label610.Location = New System.Drawing.Point(265, 244)
         Me.Label610.Name = "Label610"
-        Me.Label610.Size = New System.Drawing.Size(35, 16)
+        Me.Label610.Size = New System.Drawing.Size(34, 16)
         Me.Label610.TabIndex = 287
         Me.Label610.Text = "Ncyl"
         '
@@ -5335,7 +5337,7 @@ Partial Class Form1
         Me.Label611.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label611.Location = New System.Drawing.Point(9, 244)
         Me.Label611.Name = "Label611"
-        Me.Label611.Size = New System.Drawing.Size(252, 16)
+        Me.Label611.Size = New System.Drawing.Size(251, 16)
         Me.Label611.TabIndex = 286
         Me.Label611.Text = "Number of circumf. waves (iterated value)"
         '
@@ -5345,7 +5347,7 @@ Partial Class Form1
         Me.Label612.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label612.Location = New System.Drawing.Point(397, 271)
         Me.Label612.Name = "Label612"
-        Me.Label612.Size = New System.Drawing.Size(38, 16)
+        Me.Label612.Size = New System.Drawing.Size(37, 16)
         Me.Label612.TabIndex = 285
         Me.Label612.Text = "[mm]"
         '
@@ -5355,7 +5357,7 @@ Partial Class Form1
         Me.Label613.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label613.Location = New System.Drawing.Point(265, 271)
         Me.Label613.Name = "Label613"
-        Me.Label613.Size = New System.Drawing.Size(15, 16)
+        Me.Label613.Size = New System.Drawing.Size(14, 16)
         Me.Label613.TabIndex = 283
         Me.Label613.Text = "ε"
         '
@@ -5374,7 +5376,7 @@ Partial Class Form1
         Me.Label614.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label614.Location = New System.Drawing.Point(9, 271)
         Me.Label614.Name = "Label614"
-        Me.Label614.Size = New System.Drawing.Size(167, 16)
+        Me.Label614.Size = New System.Drawing.Size(166, 16)
         Me.Label614.TabIndex = 282
         Me.Label614.Text = "Mean elastic circumf. strain"
         '
@@ -5384,7 +5386,7 @@ Partial Class Form1
         Me.Label615.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label615.Location = New System.Drawing.Point(397, 217)
         Me.Label615.Name = "Label615"
-        Me.Label615.Size = New System.Drawing.Size(38, 16)
+        Me.Label615.Size = New System.Drawing.Size(37, 16)
         Me.Label615.TabIndex = 281
         Me.Label615.Text = "[mm]"
         '
@@ -5394,7 +5396,7 @@ Partial Class Form1
         Me.Label616.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label616.Location = New System.Drawing.Point(265, 217)
         Me.Label616.Name = "Label616"
-        Me.Label616.Size = New System.Drawing.Size(16, 16)
+        Me.Label616.Size = New System.Drawing.Size(15, 16)
         Me.Label616.TabIndex = 279
         Me.Label616.Text = "Z"
         '
@@ -5413,7 +5415,7 @@ Partial Class Form1
         Me.Label617.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label617.Location = New System.Drawing.Point(9, 217)
         Me.Label617.Name = "Label617"
-        Me.Label617.Size = New System.Drawing.Size(109, 16)
+        Me.Label617.Size = New System.Drawing.Size(108, 16)
         Me.Label617.TabIndex = 278
         Me.Label617.Text = "Formula (8.5.2-7) "
         '
@@ -5423,7 +5425,7 @@ Partial Class Form1
         Me.Label618.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label618.Location = New System.Drawing.Point(397, 298)
         Me.Label618.Name = "Label618"
-        Me.Label618.Size = New System.Drawing.Size(36, 16)
+        Me.Label618.Size = New System.Drawing.Size(35, 16)
         Me.Label618.TabIndex = 277
         Me.Label618.Text = "[bar]"
         '
@@ -5433,7 +5435,7 @@ Partial Class Form1
         Me.Label619.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label619.Location = New System.Drawing.Point(265, 298)
         Me.Label619.Name = "Label619"
-        Me.Label619.Size = New System.Drawing.Size(28, 16)
+        Me.Label619.Size = New System.Drawing.Size(27, 16)
         Me.Label619.TabIndex = 275
         Me.Label619.Text = "Pm"
         '
@@ -5452,7 +5454,7 @@ Partial Class Form1
         Me.Label620.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label620.Location = New System.Drawing.Point(9, 298)
         Me.Label620.Name = "Label620"
-        Me.Label620.Size = New System.Drawing.Size(216, 16)
+        Me.Label620.Size = New System.Drawing.Size(215, 16)
         Me.Label620.TabIndex = 274
         Me.Label620.Text = "Theoretical elastic instability press."
         '
@@ -5462,7 +5464,7 @@ Partial Class Form1
         Me.Label573.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label573.Location = New System.Drawing.Point(265, 164)
         Me.Label573.Name = "Label573"
-        Me.Label573.Size = New System.Drawing.Size(18, 16)
+        Me.Label573.Size = New System.Drawing.Size(17, 16)
         Me.Label573.TabIndex = 269
         Me.Label573.Text = "Ν"
         '
@@ -5481,7 +5483,7 @@ Partial Class Form1
         Me.Label555.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label555.Location = New System.Drawing.Point(397, 161)
         Me.Label555.Name = "Label555"
-        Me.Label555.Size = New System.Drawing.Size(20, 16)
+        Me.Label555.Size = New System.Drawing.Size(19, 16)
         Me.Label555.TabIndex = 260
         Me.Label555.Text = "[-]"
         '
@@ -5491,7 +5493,7 @@ Partial Class Form1
         Me.Label556.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label556.Location = New System.Drawing.Point(9, 161)
         Me.Label556.Name = "Label556"
-        Me.Label556.Size = New System.Drawing.Size(116, 16)
+        Me.Label556.Size = New System.Drawing.Size(115, 16)
         Me.Label556.TabIndex = 257
         Me.Label556.Text = "Formula (8.5.3-21) "
         '
@@ -5501,7 +5503,7 @@ Partial Class Form1
         Me.Label557.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label557.Location = New System.Drawing.Point(266, 190)
         Me.Label557.Name = "Label557"
-        Me.Label557.Size = New System.Drawing.Size(18, 16)
+        Me.Label557.Size = New System.Drawing.Size(17, 16)
         Me.Label557.TabIndex = 155
         Me.Label557.Text = "G"
         '
@@ -5520,7 +5522,7 @@ Partial Class Form1
         Me.Label558.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label558.Location = New System.Drawing.Point(397, 188)
         Me.Label558.Name = "Label558"
-        Me.Label558.Size = New System.Drawing.Size(20, 16)
+        Me.Label558.Size = New System.Drawing.Size(19, 16)
         Me.Label558.TabIndex = 154
         Me.Label558.Text = "[-]"
         '
@@ -5530,7 +5532,7 @@ Partial Class Form1
         Me.Label559.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label559.Location = New System.Drawing.Point(397, 79)
         Me.Label559.Name = "Label559"
-        Me.Label559.Size = New System.Drawing.Size(45, 16)
+        Me.Label559.Size = New System.Drawing.Size(44, 16)
         Me.Label559.TabIndex = 243
         Me.Label559.Text = "[mm2]"
         '
@@ -5549,7 +5551,7 @@ Partial Class Form1
         Me.Label560.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label560.Location = New System.Drawing.Point(9, 190)
         Me.Label560.Name = "Label560"
-        Me.Label560.Size = New System.Drawing.Size(116, 16)
+        Me.Label560.Size = New System.Drawing.Size(115, 16)
         Me.Label560.TabIndex = 152
         Me.Label560.Text = "Formula (8.5.3-22) "
         '
@@ -5559,7 +5561,7 @@ Partial Class Form1
         Me.Label561.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label561.Location = New System.Drawing.Point(265, 79)
         Me.Label561.Name = "Label561"
-        Me.Label561.Size = New System.Drawing.Size(28, 16)
+        Me.Label561.Size = New System.Drawing.Size(27, 16)
         Me.Label561.TabIndex = 241
         Me.Label561.Text = "Am"
         '
@@ -5569,7 +5571,7 @@ Partial Class Form1
         Me.Label562.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label562.Location = New System.Drawing.Point(9, 79)
         Me.Label562.Name = "Label562"
-        Me.Label562.Size = New System.Drawing.Size(116, 16)
+        Me.Label562.Size = New System.Drawing.Size(115, 16)
         Me.Label562.TabIndex = 240
         Me.Label562.Text = "Formula (8.5.3-17) "
         '
@@ -5579,7 +5581,7 @@ Partial Class Form1
         Me.Label563.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label563.Location = New System.Drawing.Point(397, 106)
         Me.Label563.Name = "Label563"
-        Me.Label563.Size = New System.Drawing.Size(20, 16)
+        Me.Label563.Size = New System.Drawing.Size(19, 16)
         Me.Label563.TabIndex = 239
         Me.Label563.Text = "[-]"
         '
@@ -5589,7 +5591,7 @@ Partial Class Form1
         Me.Label564.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label564.Location = New System.Drawing.Point(265, 106)
         Me.Label564.Name = "Label564"
-        Me.Label564.Size = New System.Drawing.Size(17, 16)
+        Me.Label564.Size = New System.Drawing.Size(16, 16)
         Me.Label564.TabIndex = 237
         Me.Label564.Text = "B"
         '
@@ -5608,7 +5610,7 @@ Partial Class Form1
         Me.Label565.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label565.Location = New System.Drawing.Point(9, 106)
         Me.Label565.Name = "Label565"
-        Me.Label565.Size = New System.Drawing.Size(116, 16)
+        Me.Label565.Size = New System.Drawing.Size(115, 16)
         Me.Label565.TabIndex = 236
         Me.Label565.Text = "Formula (8.5.3-18) "
         '
@@ -5618,7 +5620,7 @@ Partial Class Form1
         Me.Label566.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label566.Location = New System.Drawing.Point(397, 52)
         Me.Label566.Name = "Label566"
-        Me.Label566.Size = New System.Drawing.Size(20, 16)
+        Me.Label566.Size = New System.Drawing.Size(19, 16)
         Me.Label566.TabIndex = 235
         Me.Label566.Text = "[-]"
         '
@@ -5628,7 +5630,7 @@ Partial Class Form1
         Me.Label567.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label567.Location = New System.Drawing.Point(265, 52)
         Me.Label567.Name = "Label567"
-        Me.Label567.Size = New System.Drawing.Size(15, 16)
+        Me.Label567.Size = New System.Drawing.Size(14, 16)
         Me.Label567.TabIndex = 233
         Me.Label567.Text = "γ"
         '
@@ -5647,7 +5649,7 @@ Partial Class Form1
         Me.Label568.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label568.Location = New System.Drawing.Point(9, 52)
         Me.Label568.Name = "Label568"
-        Me.Label568.Size = New System.Drawing.Size(116, 16)
+        Me.Label568.Size = New System.Drawing.Size(115, 16)
         Me.Label568.TabIndex = 232
         Me.Label568.Text = "Formula (8.5.3-16) "
         '
@@ -5657,7 +5659,7 @@ Partial Class Form1
         Me.Label569.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label569.Location = New System.Drawing.Point(397, 133)
         Me.Label569.Name = "Label569"
-        Me.Label569.Size = New System.Drawing.Size(20, 16)
+        Me.Label569.Size = New System.Drawing.Size(19, 16)
         Me.Label569.TabIndex = 231
         Me.Label569.Text = "[-]"
         '
@@ -5667,7 +5669,7 @@ Partial Class Form1
         Me.Label570.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label570.Location = New System.Drawing.Point(265, 133)
         Me.Label570.Name = "Label570"
-        Me.Label570.Size = New System.Drawing.Size(15, 16)
+        Me.Label570.Size = New System.Drawing.Size(14, 16)
         Me.Label570.TabIndex = 229
         Me.Label570.Text = "δ"
         '
@@ -5686,7 +5688,7 @@ Partial Class Form1
         Me.Label571.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label571.Location = New System.Drawing.Point(9, 133)
         Me.Label571.Name = "Label571"
-        Me.Label571.Size = New System.Drawing.Size(116, 16)
+        Me.Label571.Size = New System.Drawing.Size(115, 16)
         Me.Label571.TabIndex = 228
         Me.Label571.Text = "Formula (8.5.3-19) "
         '
@@ -5696,7 +5698,7 @@ Partial Class Form1
         Me.Label572.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label572.Location = New System.Drawing.Point(397, 24)
         Me.Label572.Name = "Label572"
-        Me.Label572.Size = New System.Drawing.Size(36, 16)
+        Me.Label572.Size = New System.Drawing.Size(35, 16)
         Me.Label572.TabIndex = 227
         Me.Label572.Text = "[bar]"
         '
@@ -5706,7 +5708,7 @@ Partial Class Form1
         Me.Label575.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label575.Location = New System.Drawing.Point(265, 21)
         Me.Label575.Name = "Label575"
-        Me.Label575.Size = New System.Drawing.Size(24, 16)
+        Me.Label575.Size = New System.Drawing.Size(23, 16)
         Me.Label575.TabIndex = 213
         Me.Label575.Text = "Py"
         '
@@ -5725,7 +5727,7 @@ Partial Class Form1
         Me.Label577.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label577.Location = New System.Drawing.Point(9, 24)
         Me.Label577.Name = "Label577"
-        Me.Label577.Size = New System.Drawing.Size(234, 16)
+        Me.Label577.Size = New System.Drawing.Size(233, 16)
         Me.Label577.TabIndex = 212
         Me.Label577.Text = "Yield Pressure at mean circumf. stress"
         '
@@ -5757,7 +5759,7 @@ Partial Class Form1
         Me.Label543.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label543.Location = New System.Drawing.Point(263, 76)
         Me.Label543.Name = "Label543"
-        Me.Label543.Size = New System.Drawing.Size(17, 16)
+        Me.Label543.Size = New System.Drawing.Size(16, 16)
         Me.Label543.TabIndex = 163
         Me.Label543.Text = "E"
         '
@@ -5767,7 +5769,7 @@ Partial Class Form1
         Me.Label544.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label544.Location = New System.Drawing.Point(394, 74)
         Me.Label544.Name = "Label544"
-        Me.Label544.Size = New System.Drawing.Size(59, 16)
+        Me.Label544.Size = New System.Drawing.Size(58, 16)
         Me.Label544.TabIndex = 162
         Me.Label544.Text = "[N/mm2]"
         '
@@ -5786,7 +5788,7 @@ Partial Class Form1
         Me.Label545.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label545.Location = New System.Drawing.Point(6, 76)
         Me.Label545.Name = "Label545"
-        Me.Label545.Size = New System.Drawing.Size(238, 16)
+        Me.Label545.Size = New System.Drawing.Size(237, 16)
         Me.Label545.TabIndex = 160
         Me.Label545.Text = "Modulus of elasticity at operating temp."
         '
@@ -5796,7 +5798,7 @@ Partial Class Form1
         Me.Label546.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label546.Location = New System.Drawing.Point(263, 48)
         Me.Label546.Name = "Label546"
-        Me.Label546.Size = New System.Drawing.Size(15, 16)
+        Me.Label546.Size = New System.Drawing.Size(14, 16)
         Me.Label546.TabIndex = 159
         Me.Label546.Text = "ν"
         '
@@ -5806,7 +5808,7 @@ Partial Class Form1
         Me.Label547.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label547.Location = New System.Drawing.Point(394, 48)
         Me.Label547.Name = "Label547"
-        Me.Label547.Size = New System.Drawing.Size(20, 16)
+        Me.Label547.Size = New System.Drawing.Size(19, 16)
         Me.Label547.TabIndex = 158
         Me.Label547.Text = "[-]"
         '
@@ -5825,7 +5827,7 @@ Partial Class Form1
         Me.Label548.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label548.Location = New System.Drawing.Point(6, 48)
         Me.Label548.Name = "Label548"
-        Me.Label548.Size = New System.Drawing.Size(86, 16)
+        Me.Label548.Size = New System.Drawing.Size(85, 16)
         Me.Label548.TabIndex = 156
         Me.Label548.Text = "Poisson ratio"
         '
@@ -5835,7 +5837,7 @@ Partial Class Form1
         Me.Label549.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label549.Location = New System.Drawing.Point(263, 22)
         Me.Label549.Name = "Label549"
-        Me.Label549.Size = New System.Drawing.Size(24, 16)
+        Me.Label549.Size = New System.Drawing.Size(23, 16)
         Me.Label549.TabIndex = 151
         Me.Label549.Text = "σe"
         '
@@ -5845,7 +5847,7 @@ Partial Class Form1
         Me.Label550.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label550.Location = New System.Drawing.Point(394, 20)
         Me.Label550.Name = "Label550"
-        Me.Label550.Size = New System.Drawing.Size(59, 16)
+        Me.Label550.Size = New System.Drawing.Size(58, 16)
         Me.Label550.TabIndex = 150
         Me.Label550.Text = "[N/mm2]"
         '
@@ -5864,7 +5866,7 @@ Partial Class Form1
         Me.Label551.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label551.Location = New System.Drawing.Point(6, 22)
         Me.Label551.Name = "Label551"
-        Me.Label551.Size = New System.Drawing.Size(165, 16)
+        Me.Label551.Size = New System.Drawing.Size(164, 16)
         Me.Label551.TabIndex = 148
         Me.Label551.Text = "Nominal elastic limit stress"
         '
@@ -5908,7 +5910,7 @@ Partial Class Form1
         Me.Label484.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label484.Location = New System.Drawing.Point(262, 161)
         Me.Label484.Name = "Label484"
-        Me.Label484.Size = New System.Drawing.Size(24, 16)
+        Me.Label484.Size = New System.Drawing.Size(23, 16)
         Me.Label484.TabIndex = 250
         Me.Label484.Text = "ea"
         '
@@ -5918,7 +5920,7 @@ Partial Class Form1
         Me.Label519.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label519.Location = New System.Drawing.Point(394, 161)
         Me.Label519.Name = "Label519"
-        Me.Label519.Size = New System.Drawing.Size(38, 16)
+        Me.Label519.Size = New System.Drawing.Size(37, 16)
         Me.Label519.TabIndex = 249
         Me.Label519.Text = "[mm]"
         '
@@ -5945,7 +5947,7 @@ Partial Class Form1
         Me.Label521.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label521.Location = New System.Drawing.Point(6, 161)
         Me.Label521.Name = "Label521"
-        Me.Label521.Size = New System.Drawing.Size(149, 16)
+        Me.Label521.Size = New System.Drawing.Size(148, 16)
         Me.Label521.TabIndex = 247
         Me.Label521.Text = "Cylinder Wall thickness "
         '
@@ -5955,7 +5957,7 @@ Partial Class Form1
         Me.Label528.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label528.Location = New System.Drawing.Point(262, 105)
         Me.Label528.Name = "Label528"
-        Me.Label528.Size = New System.Drawing.Size(38, 16)
+        Me.Label528.Size = New System.Drawing.Size(37, 16)
         Me.Label528.TabIndex = 238
         Me.Label528.Text = "h'=h''"
         '
@@ -5965,7 +5967,7 @@ Partial Class Form1
         Me.Label529.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label529.Location = New System.Drawing.Point(394, 105)
         Me.Label529.Name = "Label529"
-        Me.Label529.Size = New System.Drawing.Size(38, 16)
+        Me.Label529.Size = New System.Drawing.Size(37, 16)
         Me.Label529.TabIndex = 237
         Me.Label529.Text = "[mm]"
         '
@@ -5989,7 +5991,7 @@ Partial Class Form1
         Me.Label530.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label530.Location = New System.Drawing.Point(6, 105)
         Me.Label530.Name = "Label530"
-        Me.Label530.Size = New System.Drawing.Size(165, 16)
+        Me.Label530.Size = New System.Drawing.Size(164, 16)
         Me.Label530.TabIndex = 235
         Me.Label530.Text = "External height dished end"
         '
@@ -5999,7 +6001,7 @@ Partial Class Form1
         Me.Label531.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label531.Location = New System.Drawing.Point(262, 77)
         Me.Label531.Name = "Label531"
-        Me.Label531.Size = New System.Drawing.Size(32, 16)
+        Me.Label531.Size = New System.Drawing.Size(31, 16)
         Me.Label531.TabIndex = 234
         Me.Label531.Text = "Lcyl"
         '
@@ -6009,7 +6011,7 @@ Partial Class Form1
         Me.Label532.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label532.Location = New System.Drawing.Point(394, 25)
         Me.Label532.Name = "Label532"
-        Me.Label532.Size = New System.Drawing.Size(44, 16)
+        Me.Label532.Size = New System.Drawing.Size(43, 16)
         Me.Label532.TabIndex = 233
         Me.Label532.Text = "[barg]"
         '
@@ -6019,7 +6021,7 @@ Partial Class Form1
         Me.Label533.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label533.Location = New System.Drawing.Point(6, 23)
         Me.Label533.Name = "Label533"
-        Me.Label533.Size = New System.Drawing.Size(113, 16)
+        Me.Label533.Size = New System.Drawing.Size(112, 16)
         Me.Label533.TabIndex = 232
         Me.Label533.Text = "External Pressure"
         '
@@ -6038,7 +6040,7 @@ Partial Class Form1
         Me.Label534.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label534.Location = New System.Drawing.Point(262, 23)
         Me.Label534.Name = "Label534"
-        Me.Label534.Size = New System.Drawing.Size(24, 16)
+        Me.Label534.Size = New System.Drawing.Size(23, 16)
         Me.Label534.TabIndex = 229
         Me.Label534.Text = "_P"
         '
@@ -6048,7 +6050,7 @@ Partial Class Form1
         Me.Label535.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label535.Location = New System.Drawing.Point(394, 131)
         Me.Label535.Name = "Label535"
-        Me.Label535.Size = New System.Drawing.Size(28, 16)
+        Me.Label535.Size = New System.Drawing.Size(27, 16)
         Me.Label535.TabIndex = 225
         Me.Label535.Text = "[%]"
         '
@@ -6058,7 +6060,7 @@ Partial Class Form1
         Me.Label536.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label536.Location = New System.Drawing.Point(394, 50)
         Me.Label536.Name = "Label536"
-        Me.Label536.Size = New System.Drawing.Size(38, 16)
+        Me.Label536.Size = New System.Drawing.Size(37, 16)
         Me.Label536.TabIndex = 224
         Me.Label536.Text = "[mm]"
         '
@@ -6081,7 +6083,7 @@ Partial Class Form1
         Me.Label537.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label537.Location = New System.Drawing.Point(262, 50)
         Me.Label537.Name = "Label537"
-        Me.Label537.Size = New System.Drawing.Size(26, 16)
+        Me.Label537.Size = New System.Drawing.Size(25, 16)
         Me.Label537.TabIndex = 222
         Me.Label537.Text = "De"
         '
@@ -6091,7 +6093,7 @@ Partial Class Form1
         Me.Label538.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label538.Location = New System.Drawing.Point(6, 50)
         Me.Label538.Name = "Label538"
-        Me.Label538.Size = New System.Drawing.Size(160, 16)
+        Me.Label538.Size = New System.Drawing.Size(159, 16)
         Me.Label538.TabIndex = 221
         Me.Label538.Text = "Outside diameter cylinder"
         '
@@ -6101,7 +6103,7 @@ Partial Class Form1
         Me.Label539.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label539.Location = New System.Drawing.Point(394, 77)
         Me.Label539.Name = "Label539"
-        Me.Label539.Size = New System.Drawing.Size(38, 16)
+        Me.Label539.Size = New System.Drawing.Size(37, 16)
         Me.Label539.TabIndex = 220
         Me.Label539.Text = "[mm]"
         '
@@ -6135,7 +6137,7 @@ Partial Class Form1
         Me.Label540.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label540.Location = New System.Drawing.Point(6, 77)
         Me.Label540.Name = "Label540"
-        Me.Label540.Size = New System.Drawing.Size(228, 16)
+        Me.Label540.Size = New System.Drawing.Size(227, 16)
         Me.Label540.TabIndex = 217
         Me.Label540.Text = "Cylinder length between tangent lines"
         '
@@ -6145,7 +6147,7 @@ Partial Class Form1
         Me.Label541.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label541.Location = New System.Drawing.Point(262, 131)
         Me.Label541.Name = "Label541"
-        Me.Label541.Size = New System.Drawing.Size(12, 16)
+        Me.Label541.Size = New System.Drawing.Size(11, 16)
         Me.Label541.TabIndex = 216
         Me.Label541.Text = "-"
         '
@@ -6155,7 +6157,7 @@ Partial Class Form1
         Me.Label542.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label542.Location = New System.Drawing.Point(6, 131)
         Me.Label542.Name = "Label542"
-        Me.Label542.Size = New System.Drawing.Size(128, 16)
+        Me.Label542.Size = New System.Drawing.Size(127, 16)
         Me.Label542.TabIndex = 215
         Me.Label542.Text = "Circularity tolerance "
         '
@@ -6215,7 +6217,7 @@ Partial Class Form1
         Me.Label597.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label597.Location = New System.Drawing.Point(395, 24)
         Me.Label597.Name = "Label597"
-        Me.Label597.Size = New System.Drawing.Size(59, 16)
+        Me.Label597.Size = New System.Drawing.Size(58, 16)
         Me.Label597.TabIndex = 332
         Me.Label597.Text = "[N/mm2]"
         '
@@ -6235,7 +6237,7 @@ Partial Class Form1
         Me.Label690.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label690.Location = New System.Drawing.Point(268, 24)
         Me.Label690.Name = "Label690"
-        Me.Label690.Size = New System.Drawing.Size(23, 16)
+        Me.Label690.Size = New System.Drawing.Size(22, 16)
         Me.Label690.TabIndex = 331
         Me.Label690.Text = "σs"
         '
@@ -6245,7 +6247,7 @@ Partial Class Form1
         Me.Label691.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label691.Location = New System.Drawing.Point(12, 24)
         Me.Label691.Name = "Label691"
-        Me.Label691.Size = New System.Drawing.Size(241, 16)
+        Me.Label691.Size = New System.Drawing.Size(240, 16)
         Me.Label691.TabIndex = 330
         Me.Label691.Text = "Maximum stress in light stiffner (8.5.3-37)"
         '
@@ -6371,7 +6373,7 @@ Partial Class Form1
         Me.Label596.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label596.Location = New System.Drawing.Point(205, 408)
         Me.Label596.Name = "Label596"
-        Me.Label596.Size = New System.Drawing.Size(15, 16)
+        Me.Label596.Size = New System.Drawing.Size(14, 16)
         Me.Label596.TabIndex = 328
         Me.Label596.Text = "n"
         '
@@ -6390,7 +6392,7 @@ Partial Class Form1
         Me.Label687.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label687.Location = New System.Drawing.Point(399, 381)
         Me.Label687.Name = "Label687"
-        Me.Label687.Size = New System.Drawing.Size(38, 16)
+        Me.Label687.Size = New System.Drawing.Size(37, 16)
         Me.Label687.TabIndex = 326
         Me.Label687.Text = "[mm]"
         '
@@ -6400,7 +6402,7 @@ Partial Class Form1
         Me.Label688.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label688.Location = New System.Drawing.Point(267, 381)
         Me.Label688.Name = "Label688"
-        Me.Label688.Size = New System.Drawing.Size(24, 16)
+        Me.Label688.Size = New System.Drawing.Size(23, 16)
         Me.Label688.TabIndex = 325
         Me.Label688.Text = "Xe"
         '
@@ -6410,7 +6412,7 @@ Partial Class Form1
         Me.Label689.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label689.Location = New System.Drawing.Point(11, 381)
         Me.Label689.Name = "Label689"
-        Me.Label689.Size = New System.Drawing.Size(113, 16)
+        Me.Label689.Size = New System.Drawing.Size(112, 16)
         Me.Label689.TabIndex = 324
         Me.Label689.Text = "Formula (8.5.3-26)"
         '
@@ -6429,7 +6431,7 @@ Partial Class Form1
         Me.Label684.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label684.Location = New System.Drawing.Point(399, 329)
         Me.Label684.Name = "Label684"
-        Me.Label684.Size = New System.Drawing.Size(45, 16)
+        Me.Label684.Size = New System.Drawing.Size(44, 16)
         Me.Label684.TabIndex = 322
         Me.Label684.Text = "[mm4]"
         '
@@ -6439,7 +6441,7 @@ Partial Class Form1
         Me.Label685.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label685.Location = New System.Drawing.Point(267, 328)
         Me.Label685.Name = "Label685"
-        Me.Label685.Size = New System.Drawing.Size(18, 16)
+        Me.Label685.Size = New System.Drawing.Size(17, 16)
         Me.Label685.TabIndex = 321
         Me.Label685.Text = "Is"
         '
@@ -6449,7 +6451,7 @@ Partial Class Form1
         Me.Label686.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label686.Location = New System.Drawing.Point(11, 328)
         Me.Label686.Name = "Label686"
-        Me.Label686.Size = New System.Drawing.Size(177, 16)
+        Me.Label686.Size = New System.Drawing.Size(176, 16)
         Me.Label686.TabIndex = 320
         Me.Label686.Text = "Stiffener 2nd moment of area"
         '
@@ -6468,7 +6470,7 @@ Partial Class Form1
         Me.Label681.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label681.Location = New System.Drawing.Point(267, 55)
         Me.Label681.Name = "Label681"
-        Me.Label681.Size = New System.Drawing.Size(22, 16)
+        Me.Label681.Size = New System.Drawing.Size(21, 16)
         Me.Label681.TabIndex = 318
         Me.Label681.Text = "Lh"
         '
@@ -6478,7 +6480,7 @@ Partial Class Form1
         Me.Label682.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label682.Location = New System.Drawing.Point(399, 55)
         Me.Label682.Name = "Label682"
-        Me.Label682.Size = New System.Drawing.Size(38, 16)
+        Me.Label682.Size = New System.Drawing.Size(37, 16)
         Me.Label682.TabIndex = 317
         Me.Label682.Text = "[mm]"
         '
@@ -6488,7 +6490,7 @@ Partial Class Form1
         Me.Label683.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label683.Location = New System.Drawing.Point(11, 55)
         Me.Label683.Name = "Label683"
-        Me.Label683.Size = New System.Drawing.Size(174, 16)
+        Me.Label683.Size = New System.Drawing.Size(173, 16)
         Me.Label683.TabIndex = 316
         Me.Label683.Text = "Unsupported length (8.5.3-7)"
         '
@@ -6507,7 +6509,7 @@ Partial Class Form1
         Me.Label678.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label678.Location = New System.Drawing.Point(267, 30)
         Me.Label678.Name = "Label678"
-        Me.Label678.Size = New System.Drawing.Size(22, 16)
+        Me.Label678.Size = New System.Drawing.Size(21, 16)
         Me.Label678.TabIndex = 314
         Me.Label678.Text = "Ls"
         '
@@ -6517,7 +6519,7 @@ Partial Class Form1
         Me.Label679.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label679.Location = New System.Drawing.Point(399, 30)
         Me.Label679.Name = "Label679"
-        Me.Label679.Size = New System.Drawing.Size(38, 16)
+        Me.Label679.Size = New System.Drawing.Size(37, 16)
         Me.Label679.TabIndex = 313
         Me.Label679.Text = "[mm]"
         '
@@ -6527,7 +6529,7 @@ Partial Class Form1
         Me.Label680.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label680.Location = New System.Drawing.Point(11, 30)
         Me.Label680.Name = "Label680"
-        Me.Label680.Size = New System.Drawing.Size(174, 16)
+        Me.Label680.Size = New System.Drawing.Size(173, 16)
         Me.Label680.TabIndex = 312
         Me.Label680.Text = "Unsupported length (8.5.3-7)"
         '
@@ -6546,7 +6548,7 @@ Partial Class Form1
         Me.Label674.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label674.Location = New System.Drawing.Point(399, 219)
         Me.Label674.Name = "Label674"
-        Me.Label674.Size = New System.Drawing.Size(20, 16)
+        Me.Label674.Size = New System.Drawing.Size(19, 16)
         Me.Label674.TabIndex = 310
         Me.Label674.Text = "[-]"
         '
@@ -6556,7 +6558,7 @@ Partial Class Form1
         Me.Label675.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label675.Location = New System.Drawing.Point(264, 218)
         Me.Label675.Name = "Label675"
-        Me.Label675.Size = New System.Drawing.Size(38, 16)
+        Me.Label675.Size = New System.Drawing.Size(37, 16)
         Me.Label675.TabIndex = 309
         Me.Label675.Text = "ea/R"
         '
@@ -6566,7 +6568,7 @@ Partial Class Form1
         Me.Label676.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label676.Location = New System.Drawing.Point(11, 218)
         Me.Label676.Name = "Label676"
-        Me.Label676.Size = New System.Drawing.Size(113, 16)
+        Me.Label676.Size = New System.Drawing.Size(112, 16)
         Me.Label676.TabIndex = 308
         Me.Label676.Text = "Formula (8.5.3-34)"
         '
@@ -6576,7 +6578,7 @@ Partial Class Form1
         Me.Label673.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label673.Location = New System.Drawing.Point(399, 272)
         Me.Label673.Name = "Label673"
-        Me.Label673.Size = New System.Drawing.Size(20, 16)
+        Me.Label673.Size = New System.Drawing.Size(19, 16)
         Me.Label673.TabIndex = 307
         Me.Label673.Text = "[-]"
         '
@@ -6586,7 +6588,7 @@ Partial Class Form1
         Me.Label672.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label672.Location = New System.Drawing.Point(10, 273)
         Me.Label672.Name = "Label672"
-        Me.Label672.Size = New System.Drawing.Size(138, 16)
+        Me.Label672.Size = New System.Drawing.Size(137, 16)
         Me.Label672.TabIndex = 306
         Me.Label672.Text = "Table 8.5-3 Y1, Y2, Y3"
         '
@@ -6632,7 +6634,7 @@ Partial Class Form1
         Me.Label669.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label669.Location = New System.Drawing.Point(399, 245)
         Me.Label669.Name = "Label669"
-        Me.Label669.Size = New System.Drawing.Size(20, 16)
+        Me.Label669.Size = New System.Drawing.Size(19, 16)
         Me.Label669.TabIndex = 301
         Me.Label669.Text = "[-]"
         '
@@ -6642,7 +6644,7 @@ Partial Class Form1
         Me.Label670.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label670.Location = New System.Drawing.Point(267, 244)
         Me.Label670.Name = "Label670"
-        Me.Label670.Size = New System.Drawing.Size(15, 16)
+        Me.Label670.Size = New System.Drawing.Size(14, 16)
         Me.Label670.TabIndex = 300
         Me.Label670.Text = "u"
         '
@@ -6652,7 +6654,7 @@ Partial Class Form1
         Me.Label671.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label671.Location = New System.Drawing.Point(11, 244)
         Me.Label671.Name = "Label671"
-        Me.Label671.Size = New System.Drawing.Size(113, 16)
+        Me.Label671.Size = New System.Drawing.Size(112, 16)
         Me.Label671.TabIndex = 299
         Me.Label671.Text = "Formula (8.5.3-36)"
         '
@@ -6672,7 +6674,7 @@ Partial Class Form1
         Me.Label666.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label666.Location = New System.Drawing.Point(399, 354)
         Me.Label666.Name = "Label666"
-        Me.Label666.Size = New System.Drawing.Size(38, 16)
+        Me.Label666.Size = New System.Drawing.Size(37, 16)
         Me.Label666.TabIndex = 297
         Me.Label666.Text = "[mm]"
         '
@@ -6682,7 +6684,7 @@ Partial Class Form1
         Me.Label667.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label667.Location = New System.Drawing.Point(267, 354)
         Me.Label667.Name = "Label667"
-        Me.Label667.Size = New System.Drawing.Size(23, 16)
+        Me.Label667.Size = New System.Drawing.Size(22, 16)
         Me.Label667.TabIndex = 296
         Me.Label667.Text = "Le"
         '
@@ -6692,7 +6694,7 @@ Partial Class Form1
         Me.Label668.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label668.Location = New System.Drawing.Point(11, 354)
         Me.Label668.Name = "Label668"
-        Me.Label668.Size = New System.Drawing.Size(237, 16)
+        Me.Label668.Size = New System.Drawing.Size(236, 16)
         Me.Label668.TabIndex = 295
         Me.Label668.Text = "Eff. length of shell acting with a light stiff."
         '
@@ -6711,7 +6713,7 @@ Partial Class Form1
         Me.Label663.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label663.Location = New System.Drawing.Point(399, 436)
         Me.Label663.Name = "Label663"
-        Me.Label663.Size = New System.Drawing.Size(36, 16)
+        Me.Label663.Size = New System.Drawing.Size(35, 16)
         Me.Label663.TabIndex = 293
         Me.Label663.Text = "[bar]"
         '
@@ -6721,7 +6723,7 @@ Partial Class Form1
         Me.Label664.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label664.Location = New System.Drawing.Point(267, 436)
         Me.Label664.Name = "Label664"
-        Me.Label664.Size = New System.Drawing.Size(25, 16)
+        Me.Label664.Size = New System.Drawing.Size(24, 16)
         Me.Label664.TabIndex = 292
         Me.Label664.Text = "Pg"
         '
@@ -6731,7 +6733,7 @@ Partial Class Form1
         Me.Label665.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label665.Location = New System.Drawing.Point(11, 436)
         Me.Label665.Name = "Label665"
-        Me.Label665.Size = New System.Drawing.Size(174, 16)
+        Me.Label665.Size = New System.Drawing.Size(173, 16)
         Me.Label665.TabIndex = 291
         Me.Label665.Text = "Instability pressure of stiffner"
         '
@@ -6750,7 +6752,7 @@ Partial Class Form1
         Me.Label635.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label635.Location = New System.Drawing.Point(399, 408)
         Me.Label635.Name = "Label635"
-        Me.Label635.Size = New System.Drawing.Size(38, 16)
+        Me.Label635.Size = New System.Drawing.Size(37, 16)
         Me.Label635.TabIndex = 289
         Me.Label635.Text = "[mm]"
         '
@@ -6760,7 +6762,7 @@ Partial Class Form1
         Me.Label641.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label641.Location = New System.Drawing.Point(267, 408)
         Me.Label641.Name = "Label641"
-        Me.Label641.Size = New System.Drawing.Size(15, 16)
+        Me.Label641.Size = New System.Drawing.Size(14, 16)
         Me.Label641.TabIndex = 288
         Me.Label641.Text = "β"
         '
@@ -6770,7 +6772,7 @@ Partial Class Form1
         Me.Label642.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label642.Location = New System.Drawing.Point(11, 408)
         Me.Label642.Name = "Label642"
-        Me.Label642.Size = New System.Drawing.Size(113, 16)
+        Me.Label642.Size = New System.Drawing.Size(112, 16)
         Me.Label642.TabIndex = 287
         Me.Label642.Text = "Formula (8.5.3-25)"
         '
@@ -6825,7 +6827,7 @@ Partial Class Form1
         Me.Label644.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label644.Location = New System.Drawing.Point(267, 109)
         Me.Label644.Name = "Label644"
-        Me.Label644.Size = New System.Drawing.Size(28, 16)
+        Me.Label644.Size = New System.Drawing.Size(27, 16)
         Me.Label644.TabIndex = 254
         Me.Label644.Text = "L''s"
         '
@@ -6835,7 +6837,7 @@ Partial Class Form1
         Me.Label645.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label645.Location = New System.Drawing.Point(399, 301)
         Me.Label645.Name = "Label645"
-        Me.Label645.Size = New System.Drawing.Size(45, 16)
+        Me.Label645.Size = New System.Drawing.Size(44, 16)
         Me.Label645.TabIndex = 268
         Me.Label645.Text = "[mm4]"
         '
@@ -6845,7 +6847,7 @@ Partial Class Form1
         Me.Label646.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label646.Location = New System.Drawing.Point(399, 109)
         Me.Label646.Name = "Label646"
-        Me.Label646.Size = New System.Drawing.Size(38, 16)
+        Me.Label646.Size = New System.Drawing.Size(37, 16)
         Me.Label646.TabIndex = 253
         Me.Label646.Text = "[mm]"
         '
@@ -6855,7 +6857,7 @@ Partial Class Form1
         Me.Label647.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label647.Location = New System.Drawing.Point(267, 300)
         Me.Label647.Name = "Label647"
-        Me.Label647.Size = New System.Drawing.Size(19, 16)
+        Me.Label647.Size = New System.Drawing.Size(18, 16)
         Me.Label647.TabIndex = 266
         Me.Label647.Text = "Ie"
         '
@@ -6865,7 +6867,7 @@ Partial Class Form1
         Me.Label648.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label648.Location = New System.Drawing.Point(11, 109)
         Me.Label648.Name = "Label648"
-        Me.Label648.Size = New System.Drawing.Size(222, 16)
+        Me.Label648.Size = New System.Drawing.Size(221, 16)
         Me.Label648.TabIndex = 251
         Me.Label648.Text = "Light stiffener - light stiffener distance"
         '
@@ -6875,7 +6877,7 @@ Partial Class Form1
         Me.Label649.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label649.Location = New System.Drawing.Point(11, 300)
         Me.Label649.Name = "Label649"
-        Me.Label649.Size = New System.Drawing.Size(177, 16)
+        Me.Label649.Size = New System.Drawing.Size(176, 16)
         Me.Label649.TabIndex = 265
         Me.Label649.Text = "Stiffener 2nd moment of area"
         '
@@ -6885,7 +6887,7 @@ Partial Class Form1
         Me.Label650.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label650.Location = New System.Drawing.Point(399, 187)
         Me.Label650.Name = "Label650"
-        Me.Label650.Size = New System.Drawing.Size(38, 16)
+        Me.Label650.Size = New System.Drawing.Size(37, 16)
         Me.Label650.TabIndex = 264
         Me.Label650.Text = "[mm]"
         '
@@ -6895,7 +6897,7 @@ Partial Class Form1
         Me.Label651.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label651.Location = New System.Drawing.Point(267, 187)
         Me.Label651.Name = "Label651"
-        Me.Label651.Size = New System.Drawing.Size(25, 16)
+        Me.Label651.Size = New System.Drawing.Size(24, 16)
         Me.Label651.TabIndex = 262
         Me.Label651.Text = "Rs"
         '
@@ -6905,7 +6907,7 @@ Partial Class Form1
         Me.Label652.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label652.Location = New System.Drawing.Point(11, 187)
         Me.Label652.Name = "Label652"
-        Me.Label652.Size = New System.Drawing.Size(149, 16)
+        Me.Label652.Size = New System.Drawing.Size(148, 16)
         Me.Label652.TabIndex = 261
         Me.Label652.Text = "Stiffener Centroid radius"
         '
@@ -6915,7 +6917,7 @@ Partial Class Form1
         Me.Label653.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label653.Location = New System.Drawing.Point(267, 83)
         Me.Label653.Name = "Label653"
-        Me.Label653.Size = New System.Drawing.Size(25, 16)
+        Me.Label653.Size = New System.Drawing.Size(24, 16)
         Me.Label653.TabIndex = 242
         Me.Label653.Text = "L's"
         '
@@ -6925,7 +6927,7 @@ Partial Class Form1
         Me.Label654.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label654.Location = New System.Drawing.Point(399, 161)
         Me.Label654.Name = "Label654"
-        Me.Label654.Size = New System.Drawing.Size(45, 16)
+        Me.Label654.Size = New System.Drawing.Size(44, 16)
         Me.Label654.TabIndex = 258
         Me.Label654.Text = "[mm2]"
         '
@@ -6935,7 +6937,7 @@ Partial Class Form1
         Me.Label655.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label655.Location = New System.Drawing.Point(399, 83)
         Me.Label655.Name = "Label655"
-        Me.Label655.Size = New System.Drawing.Size(38, 16)
+        Me.Label655.Size = New System.Drawing.Size(37, 16)
         Me.Label655.TabIndex = 241
         Me.Label655.Text = "[mm]"
         '
@@ -6945,7 +6947,7 @@ Partial Class Form1
         Me.Label656.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label656.Location = New System.Drawing.Point(308, 137)
         Me.Label656.Name = "Label656"
-        Me.Label656.Size = New System.Drawing.Size(14, 16)
+        Me.Label656.Size = New System.Drawing.Size(13, 16)
         Me.Label656.TabIndex = 260
         Me.Label656.Text = "x"
         '
@@ -6955,7 +6957,7 @@ Partial Class Form1
         Me.Label657.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label657.Location = New System.Drawing.Point(11, 83)
         Me.Label657.Name = "Label657"
-        Me.Label657.Size = New System.Drawing.Size(184, 16)
+        Me.Label657.Size = New System.Drawing.Size(183, 16)
         Me.Label657.TabIndex = 239
         Me.Label657.Text = "Light stiffener distance to weld"
         '
@@ -6965,7 +6967,7 @@ Partial Class Form1
         Me.Label658.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label658.Location = New System.Drawing.Point(267, 161)
         Me.Label658.Name = "Label658"
-        Me.Label658.Size = New System.Drawing.Size(24, 16)
+        Me.Label658.Size = New System.Drawing.Size(23, 16)
         Me.Label658.TabIndex = 256
         Me.Label658.Text = "As"
         '
@@ -6975,7 +6977,7 @@ Partial Class Form1
         Me.Label659.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label659.Location = New System.Drawing.Point(11, 161)
         Me.Label659.Name = "Label659"
-        Me.Label659.Size = New System.Drawing.Size(135, 16)
+        Me.Label659.Size = New System.Drawing.Size(134, 16)
         Me.Label659.TabIndex = 255
         Me.Label659.Text = "Stiffener Section area"
         '
@@ -6985,7 +6987,7 @@ Partial Class Form1
         Me.Label660.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label660.Location = New System.Drawing.Point(215, 137)
         Me.Label660.Name = "Label660"
-        Me.Label660.Size = New System.Drawing.Size(35, 16)
+        Me.Label660.Size = New System.Drawing.Size(34, 16)
         Me.Label660.TabIndex = 258
         Me.Label660.Text = "rh,rw"
         '
@@ -6995,7 +6997,7 @@ Partial Class Form1
         Me.Label661.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label661.Location = New System.Drawing.Point(399, 138)
         Me.Label661.Name = "Label661"
-        Me.Label661.Size = New System.Drawing.Size(38, 16)
+        Me.Label661.Size = New System.Drawing.Size(37, 16)
         Me.Label661.TabIndex = 257
         Me.Label661.Text = "[mm]"
         '
@@ -7005,7 +7007,7 @@ Partial Class Form1
         Me.Label662.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label662.Location = New System.Drawing.Point(11, 138)
         Me.Label662.Name = "Label662"
-        Me.Label662.Size = New System.Drawing.Size(117, 16)
+        Me.Label662.Size = New System.Drawing.Size(116, 16)
         Me.Label662.TabIndex = 255
         Me.Label662.Text = "Rib Height x Width"
         '
@@ -7034,7 +7036,7 @@ Partial Class Form1
         Me.Label621.AutoSize = True
         Me.Label621.Location = New System.Drawing.Point(9, 6)
         Me.Label621.Name = "Label621"
-        Me.Label621.Size = New System.Drawing.Size(510, 16)
+        Me.Label621.Size = New System.Drawing.Size(509, 16)
         Me.Label621.TabIndex = 1
         Me.Label621.Text = "8.5.3.6 Design of light stiffeners for cylindrical vessels with external pressure" &
     " (page 57)"
@@ -7111,7 +7113,7 @@ Partial Class Form1
         Me.Label625.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label625.Location = New System.Drawing.Point(263, 130)
         Me.Label625.Name = "Label625"
-        Me.Label625.Size = New System.Drawing.Size(24, 16)
+        Me.Label625.Size = New System.Drawing.Size(23, 16)
         Me.Label625.TabIndex = 274
         Me.Label625.Text = "ea"
         '
@@ -7121,7 +7123,7 @@ Partial Class Form1
         Me.Label626.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label626.Location = New System.Drawing.Point(395, 127)
         Me.Label626.Name = "Label626"
-        Me.Label626.Size = New System.Drawing.Size(38, 16)
+        Me.Label626.Size = New System.Drawing.Size(37, 16)
         Me.Label626.TabIndex = 273
         Me.Label626.Text = "[mm]"
         '
@@ -7131,7 +7133,7 @@ Partial Class Form1
         Me.Label627.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label627.Location = New System.Drawing.Point(7, 124)
         Me.Label627.Name = "Label627"
-        Me.Label627.Size = New System.Drawing.Size(149, 16)
+        Me.Label627.Size = New System.Drawing.Size(148, 16)
         Me.Label627.TabIndex = 271
         Me.Label627.Text = "Cylinder Wall thickness "
         '
@@ -7141,7 +7143,7 @@ Partial Class Form1
         Me.Label628.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label628.Location = New System.Drawing.Point(263, 106)
         Me.Label628.Name = "Label628"
-        Me.Label628.Size = New System.Drawing.Size(38, 16)
+        Me.Label628.Size = New System.Drawing.Size(37, 16)
         Me.Label628.TabIndex = 270
         Me.Label628.Text = "h'=h''"
         '
@@ -7151,7 +7153,7 @@ Partial Class Form1
         Me.Label629.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label629.Location = New System.Drawing.Point(395, 102)
         Me.Label629.Name = "Label629"
-        Me.Label629.Size = New System.Drawing.Size(38, 16)
+        Me.Label629.Size = New System.Drawing.Size(37, 16)
         Me.Label629.TabIndex = 269
         Me.Label629.Text = "[mm]"
         '
@@ -7161,7 +7163,7 @@ Partial Class Form1
         Me.Label630.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label630.Location = New System.Drawing.Point(7, 99)
         Me.Label630.Name = "Label630"
-        Me.Label630.Size = New System.Drawing.Size(165, 16)
+        Me.Label630.Size = New System.Drawing.Size(164, 16)
         Me.Label630.TabIndex = 267
         Me.Label630.Text = "External height dished end"
         '
@@ -7171,7 +7173,7 @@ Partial Class Form1
         Me.Label631.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label631.Location = New System.Drawing.Point(263, 78)
         Me.Label631.Name = "Label631"
-        Me.Label631.Size = New System.Drawing.Size(32, 16)
+        Me.Label631.Size = New System.Drawing.Size(31, 16)
         Me.Label631.TabIndex = 266
         Me.Label631.Text = "Lcyl"
         '
@@ -7181,7 +7183,7 @@ Partial Class Form1
         Me.Label632.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label632.Location = New System.Drawing.Point(395, 26)
         Me.Label632.Name = "Label632"
-        Me.Label632.Size = New System.Drawing.Size(44, 16)
+        Me.Label632.Size = New System.Drawing.Size(43, 16)
         Me.Label632.TabIndex = 265
         Me.Label632.Text = "[barg]"
         '
@@ -7191,7 +7193,7 @@ Partial Class Form1
         Me.Label633.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label633.Location = New System.Drawing.Point(7, 24)
         Me.Label633.Name = "Label633"
-        Me.Label633.Size = New System.Drawing.Size(113, 16)
+        Me.Label633.Size = New System.Drawing.Size(112, 16)
         Me.Label633.TabIndex = 264
         Me.Label633.Text = "External Pressure"
         '
@@ -7210,7 +7212,7 @@ Partial Class Form1
         Me.Label634.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label634.Location = New System.Drawing.Point(263, 24)
         Me.Label634.Name = "Label634"
-        Me.Label634.Size = New System.Drawing.Size(24, 16)
+        Me.Label634.Size = New System.Drawing.Size(23, 16)
         Me.Label634.TabIndex = 262
         Me.Label634.Text = "_P"
         '
@@ -7220,7 +7222,7 @@ Partial Class Form1
         Me.Label636.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label636.Location = New System.Drawing.Point(395, 51)
         Me.Label636.Name = "Label636"
-        Me.Label636.Size = New System.Drawing.Size(38, 16)
+        Me.Label636.Size = New System.Drawing.Size(37, 16)
         Me.Label636.TabIndex = 260
         Me.Label636.Text = "[mm]"
         '
@@ -7230,7 +7232,7 @@ Partial Class Form1
         Me.Label637.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label637.Location = New System.Drawing.Point(263, 51)
         Me.Label637.Name = "Label637"
-        Me.Label637.Size = New System.Drawing.Size(26, 16)
+        Me.Label637.Size = New System.Drawing.Size(25, 16)
         Me.Label637.TabIndex = 258
         Me.Label637.Text = "De"
         '
@@ -7240,7 +7242,7 @@ Partial Class Form1
         Me.Label638.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label638.Location = New System.Drawing.Point(7, 49)
         Me.Label638.Name = "Label638"
-        Me.Label638.Size = New System.Drawing.Size(160, 16)
+        Me.Label638.Size = New System.Drawing.Size(159, 16)
         Me.Label638.TabIndex = 257
         Me.Label638.Text = "Outside diameter cylinder"
         '
@@ -7250,7 +7252,7 @@ Partial Class Form1
         Me.Label639.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label639.Location = New System.Drawing.Point(395, 75)
         Me.Label639.Name = "Label639"
-        Me.Label639.Size = New System.Drawing.Size(38, 16)
+        Me.Label639.Size = New System.Drawing.Size(37, 16)
         Me.Label639.TabIndex = 256
         Me.Label639.Text = "[mm]"
         '
@@ -7260,7 +7262,7 @@ Partial Class Form1
         Me.Label640.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label640.Location = New System.Drawing.Point(7, 74)
         Me.Label640.Name = "Label640"
-        Me.Label640.Size = New System.Drawing.Size(228, 16)
+        Me.Label640.Size = New System.Drawing.Size(227, 16)
         Me.Label640.TabIndex = 253
         Me.Label640.Text = "Cylinder length between tangent lines"
         '
@@ -7374,7 +7376,7 @@ Partial Class Form1
         Me.Label721.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label721.Location = New System.Drawing.Point(286, 44)
         Me.Label721.Name = "Label721"
-        Me.Label721.Size = New System.Drawing.Size(30, 16)
+        Me.Label721.Size = New System.Drawing.Size(29, 16)
         Me.Label721.TabIndex = 196
         Me.Label721.Text = "ecs"
         '
@@ -7384,7 +7386,7 @@ Partial Class Form1
         Me.Label720.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label720.Location = New System.Drawing.Point(287, 18)
         Me.Label720.Name = "Label720"
-        Me.Label720.Size = New System.Drawing.Size(26, 16)
+        Me.Label720.Size = New System.Drawing.Size(25, 16)
         Me.Label720.TabIndex = 195
         Me.Label720.Text = "De"
         '
@@ -7394,7 +7396,7 @@ Partial Class Form1
         Me.Label719.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label719.Location = New System.Drawing.Point(286, 71)
         Me.Label719.Name = "Label719"
-        Me.Label719.Size = New System.Drawing.Size(21, 16)
+        Me.Label719.Size = New System.Drawing.Size(20, 16)
         Me.Label719.TabIndex = 186
         Me.Label719.Text = "Di"
         '
@@ -7404,7 +7406,7 @@ Partial Class Form1
         Me.Label718.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label718.Location = New System.Drawing.Point(6, 42)
         Me.Label718.Name = "Label718"
-        Me.Label718.Size = New System.Drawing.Size(123, 16)
+        Me.Label718.Size = New System.Drawing.Size(122, 16)
         Me.Label718.TabIndex = 194
         Me.Label718.Text = "Shell wall thickness"
         '
@@ -7452,7 +7454,7 @@ Partial Class Form1
         Me.Label449.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label449.Location = New System.Drawing.Point(5, 71)
         Me.Label449.Name = "Label449"
-        Me.Label449.Size = New System.Drawing.Size(54, 16)
+        Me.Label449.Size = New System.Drawing.Size(53, 16)
         Me.Label449.TabIndex = 189
         Me.Label449.Text = "Shell ID"
         '
@@ -7462,7 +7464,7 @@ Partial Class Form1
         Me.Label447.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label447.Location = New System.Drawing.Point(6, 18)
         Me.Label447.Name = "Label447"
-        Me.Label447.Size = New System.Drawing.Size(145, 16)
+        Me.Label447.Size = New System.Drawing.Size(144, 16)
         Me.Label447.TabIndex = 186
         Me.Label447.Text = "Shell Outside Diameter"
         '
@@ -7486,7 +7488,7 @@ Partial Class Form1
         Me.Label84.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label84.Location = New System.Drawing.Point(427, 22)
         Me.Label84.Name = "Label84"
-        Me.Label84.Size = New System.Drawing.Size(36, 16)
+        Me.Label84.Size = New System.Drawing.Size(35, 16)
         Me.Label84.TabIndex = 185
         Me.Label84.Text = "9.7-5"
         '
@@ -7496,7 +7498,7 @@ Partial Class Form1
         Me.Label75.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label75.Location = New System.Drawing.Point(279, 22)
         Me.Label75.Name = "Label75"
-        Me.Label75.Size = New System.Drawing.Size(49, 16)
+        Me.Label75.Size = New System.Drawing.Size(48, 16)
         Me.Label75.TabIndex = 181
         Me.Label75.Text = "W_min"
         '
@@ -7516,7 +7518,7 @@ Partial Class Form1
         Me.Label83.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label83.Location = New System.Drawing.Point(12, 22)
         Me.Label83.Name = "Label83"
-        Me.Label83.Size = New System.Drawing.Size(222, 16)
+        Me.Label83.Size = New System.Drawing.Size(221, 16)
         Me.Label83.TabIndex = 180
         Me.Label83.Text = "Minimum distance Shell - End flange"
         '
@@ -7550,7 +7552,7 @@ Partial Class Form1
         Me.Label488.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label488.Location = New System.Drawing.Point(9, 76)
         Me.Label488.Name = "Label488"
-        Me.Label488.Size = New System.Drawing.Size(267, 16)
+        Me.Label488.Size = New System.Drawing.Size(266, 16)
         Me.Label488.TabIndex = 191
         Me.Label488.Text = "Minimum Distance shell edge opening-weld"
         '
@@ -7580,7 +7582,7 @@ Partial Class Form1
         Me.Label485.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label485.Location = New System.Drawing.Point(213, 22)
         Me.Label485.Name = "Label485"
-        Me.Label485.Size = New System.Drawing.Size(52, 16)
+        Me.Label485.Size = New System.Drawing.Size(51, 16)
         Me.Label485.TabIndex = 188
         Me.Label485.Text = "ln1, Ln2"
         '
@@ -7590,7 +7592,7 @@ Partial Class Form1
         Me.Label486.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label486.Location = New System.Drawing.Point(425, 22)
         Me.Label486.Name = "Label486"
-        Me.Label486.Size = New System.Drawing.Size(36, 16)
+        Me.Label486.Size = New System.Drawing.Size(35, 16)
         Me.Label486.TabIndex = 185
         Me.Label486.Text = "9.4-4"
         '
@@ -7610,7 +7612,7 @@ Partial Class Form1
         Me.Label487.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label487.Location = New System.Drawing.Point(9, 22)
         Me.Label487.Name = "Label487"
-        Me.Label487.Size = New System.Drawing.Size(118, 16)
+        Me.Label487.Size = New System.Drawing.Size(117, 16)
         Me.Label487.TabIndex = 187
         Me.Label487.Text = "Minimum distance "
         '
@@ -7620,7 +7622,7 @@ Partial Class Form1
         Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label82.Location = New System.Drawing.Point(297, 49)
         Me.Label82.Name = "Label82"
-        Me.Label82.Size = New System.Drawing.Size(18, 16)
+        Me.Label82.Size = New System.Drawing.Size(17, 16)
         Me.Label82.TabIndex = 184
         Me.Label82.Text = "ln"
         '
@@ -7630,7 +7632,7 @@ Partial Class Form1
         Me.Label81.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label81.Location = New System.Drawing.Point(425, 49)
         Me.Label81.Name = "Label81"
-        Me.Label81.Size = New System.Drawing.Size(36, 16)
+        Me.Label81.Size = New System.Drawing.Size(35, 16)
         Me.Label81.TabIndex = 179
         Me.Label81.Text = "9.4-4"
         '
@@ -7656,7 +7658,7 @@ Partial Class Form1
         Me.Label79.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label79.Location = New System.Drawing.Point(297, 106)
         Me.Label79.Name = "Label79"
-        Me.Label79.Size = New System.Drawing.Size(18, 16)
+        Me.Label79.Size = New System.Drawing.Size(17, 16)
         Me.Label79.TabIndex = 181
         Me.Label79.Text = "ls"
         '
@@ -7676,7 +7678,7 @@ Partial Class Form1
         Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label80.Location = New System.Drawing.Point(9, 106)
         Me.Label80.Name = "Label80"
-        Me.Label80.Size = New System.Drawing.Size(265, 16)
+        Me.Label80.Size = New System.Drawing.Size(264, 16)
         Me.Label80.TabIndex = 180
         Me.Label80.Text = "Actual Distance shell edge to opening-weld"
         '
@@ -7686,7 +7688,7 @@ Partial Class Form1
         Me.Label74.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label74.Location = New System.Drawing.Point(9, 49)
         Me.Label74.Name = "Label74"
-        Me.Label74.Size = New System.Drawing.Size(287, 16)
+        Me.Label74.Size = New System.Drawing.Size(286, 16)
         Me.Label74.TabIndex = 182
         Me.Label74.Text = "Minimum distance CL nozzle - CL shell butt weld"
         '
@@ -7761,7 +7763,7 @@ Partial Class Form1
         Me.Label744.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label744.Location = New System.Drawing.Point(382, 293)
         Me.Label744.Name = "Label744"
-        Me.Label744.Size = New System.Drawing.Size(59, 16)
+        Me.Label744.Size = New System.Drawing.Size(58, 16)
         Me.Label744.TabIndex = 235
         Me.Label744.Text = "[N/mm2]"
         '
@@ -7772,7 +7774,7 @@ Partial Class Form1
         Me.Label743.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label743.Location = New System.Drawing.Point(381, 268)
         Me.Label743.Name = "Label743"
-        Me.Label743.Size = New System.Drawing.Size(59, 16)
+        Me.Label743.Size = New System.Drawing.Size(58, 16)
         Me.Label743.TabIndex = 234
         Me.Label743.Text = "[N/mm2]"
         '
@@ -7783,7 +7785,7 @@ Partial Class Form1
         Me.Label742.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label742.Location = New System.Drawing.Point(382, 243)
         Me.Label742.Name = "Label742"
-        Me.Label742.Size = New System.Drawing.Size(45, 16)
+        Me.Label742.Size = New System.Drawing.Size(44, 16)
         Me.Label742.TabIndex = 233
         Me.Label742.Text = "[mm2]"
         '
@@ -7793,7 +7795,7 @@ Partial Class Form1
         Me.Label741.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label741.Location = New System.Drawing.Point(382, 193)
         Me.Label741.Name = "Label741"
-        Me.Label741.Size = New System.Drawing.Size(45, 16)
+        Me.Label741.Size = New System.Drawing.Size(44, 16)
         Me.Label741.TabIndex = 232
         Me.Label741.Text = "[mm2]"
         '
@@ -7803,7 +7805,7 @@ Partial Class Form1
         Me.Label740.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label740.Location = New System.Drawing.Point(382, 168)
         Me.Label740.Name = "Label740"
-        Me.Label740.Size = New System.Drawing.Size(45, 16)
+        Me.Label740.Size = New System.Drawing.Size(44, 16)
         Me.Label740.TabIndex = 231
         Me.Label740.Text = "[mm2]"
         '
@@ -7813,7 +7815,7 @@ Partial Class Form1
         Me.Label739.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label739.Location = New System.Drawing.Point(381, 144)
         Me.Label739.Name = "Label739"
-        Me.Label739.Size = New System.Drawing.Size(45, 16)
+        Me.Label739.Size = New System.Drawing.Size(44, 16)
         Me.Label739.TabIndex = 230
         Me.Label739.Text = "[mm2]"
         '
@@ -7823,7 +7825,7 @@ Partial Class Form1
         Me.Label738.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label738.Location = New System.Drawing.Point(382, 119)
         Me.Label738.Name = "Label738"
-        Me.Label738.Size = New System.Drawing.Size(45, 16)
+        Me.Label738.Size = New System.Drawing.Size(44, 16)
         Me.Label738.TabIndex = 229
         Me.Label738.Text = "[mm2]"
         '
@@ -7833,7 +7835,7 @@ Partial Class Form1
         Me.Label737.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label737.Location = New System.Drawing.Point(381, 94)
         Me.Label737.Name = "Label737"
-        Me.Label737.Size = New System.Drawing.Size(38, 16)
+        Me.Label737.Size = New System.Drawing.Size(37, 16)
         Me.Label737.TabIndex = 228
         Me.Label737.Text = "[mm]"
         '
@@ -7843,7 +7845,7 @@ Partial Class Form1
         Me.Label736.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label736.Location = New System.Drawing.Point(381, 69)
         Me.Label736.Name = "Label736"
-        Me.Label736.Size = New System.Drawing.Size(38, 16)
+        Me.Label736.Size = New System.Drawing.Size(37, 16)
         Me.Label736.TabIndex = 227
         Me.Label736.Text = "[mm]"
         '
@@ -7853,7 +7855,7 @@ Partial Class Form1
         Me.Label735.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label735.Location = New System.Drawing.Point(382, 44)
         Me.Label735.Name = "Label735"
-        Me.Label735.Size = New System.Drawing.Size(38, 16)
+        Me.Label735.Size = New System.Drawing.Size(37, 16)
         Me.Label735.TabIndex = 226
         Me.Label735.Text = "[mm]"
         '
@@ -7863,7 +7865,7 @@ Partial Class Form1
         Me.Label734.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label734.Location = New System.Drawing.Point(381, 19)
         Me.Label734.Name = "Label734"
-        Me.Label734.Size = New System.Drawing.Size(38, 16)
+        Me.Label734.Size = New System.Drawing.Size(37, 16)
         Me.Label734.TabIndex = 225
         Me.Label734.Text = "[mm]"
         '
@@ -7873,7 +7875,7 @@ Partial Class Form1
         Me.Label730.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label730.Location = New System.Drawing.Point(12, 272)
         Me.Label730.Name = "Label730"
-        Me.Label730.Size = New System.Drawing.Size(182, 16)
+        Me.Label730.Size = New System.Drawing.Size(181, 16)
         Me.Label730.TabIndex = 194
         Me.Label730.Text = "Design stress nozzle material"
         '
@@ -7892,7 +7894,7 @@ Partial Class Form1
         Me.Label731.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label731.Location = New System.Drawing.Point(252, 293)
         Me.Label731.Name = "Label731"
-        Me.Label731.Size = New System.Drawing.Size(27, 16)
+        Me.Label731.Size = New System.Drawing.Size(26, 16)
         Me.Label731.TabIndex = 192
         Me.Label731.Text = "fop"
         '
@@ -7902,7 +7904,7 @@ Partial Class Form1
         Me.Label732.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label732.Location = New System.Drawing.Point(12, 295)
         Me.Label732.Name = "Label732"
-        Me.Label732.Size = New System.Drawing.Size(213, 16)
+        Me.Label732.Size = New System.Drawing.Size(212, 16)
         Me.Label732.TabIndex = 191
         Me.Label732.Text = "Design stress nozzle shell material"
         '
@@ -7912,7 +7914,7 @@ Partial Class Form1
         Me.Label733.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label733.Location = New System.Drawing.Point(252, 268)
         Me.Label733.Name = "Label733"
-        Me.Label733.Size = New System.Drawing.Size(27, 16)
+        Me.Label733.Size = New System.Drawing.Size(26, 16)
         Me.Label733.TabIndex = 190
         Me.Label733.Text = "fob"
         '
@@ -7931,7 +7933,7 @@ Partial Class Form1
         Me.Label729.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label729.Location = New System.Drawing.Point(12, 180)
         Me.Label729.Name = "Label729"
-        Me.Label729.Size = New System.Drawing.Size(148, 16)
+        Me.Label729.Size = New System.Drawing.Size(147, 16)
         Me.Label729.TabIndex = 188
         Me.Label729.Text = "Area reinforcement pad"
         '
@@ -7950,7 +7952,7 @@ Partial Class Form1
         Me.Label728.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label728.Location = New System.Drawing.Point(252, 193)
         Me.Label728.Name = "Label728"
-        Me.Label728.Size = New System.Drawing.Size(28, 16)
+        Me.Label728.Size = New System.Drawing.Size(27, 16)
         Me.Label728.TabIndex = 186
         Me.Label728.Text = "Afp"
         '
@@ -7969,7 +7971,7 @@ Partial Class Form1
         Me.Label724.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label724.Location = New System.Drawing.Point(252, 68)
         Me.Label724.Name = "Label724"
-        Me.Label724.Size = New System.Drawing.Size(26, 16)
+        Me.Label724.Size = New System.Drawing.Size(25, 16)
         Me.Label724.TabIndex = 184
         Me.Label724.Text = "L'b"
         '
@@ -7979,7 +7981,7 @@ Partial Class Form1
         Me.Label725.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label725.Location = New System.Drawing.Point(12, 65)
         Me.Label725.Name = "Label725"
-        Me.Label725.Size = New System.Drawing.Size(142, 16)
+        Me.Label725.Size = New System.Drawing.Size(141, 16)
         Me.Label725.TabIndex = 183
         Me.Label725.Text = "Effective Nozzle length"
         '
@@ -7998,7 +8000,7 @@ Partial Class Form1
         Me.Label726.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label726.Location = New System.Drawing.Point(252, 93)
         Me.Label726.Name = "Label726"
-        Me.Label726.Size = New System.Drawing.Size(25, 16)
+        Me.Label726.Size = New System.Drawing.Size(24, 16)
         Me.Label726.TabIndex = 181
         Me.Label726.Text = "L's"
         '
@@ -8008,7 +8010,7 @@ Partial Class Form1
         Me.Label727.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label727.Location = New System.Drawing.Point(12, 88)
         Me.Label727.Name = "Label727"
-        Me.Label727.Size = New System.Drawing.Size(129, 16)
+        Me.Label727.Size = New System.Drawing.Size(128, 16)
         Me.Label727.TabIndex = 180
         Me.Label727.Text = "Effective shell length"
         '
@@ -8027,7 +8029,7 @@ Partial Class Form1
         Me.Label489.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label489.Location = New System.Drawing.Point(12, 203)
         Me.Label489.Name = "Label489"
-        Me.Label489.Size = New System.Drawing.Size(139, 16)
+        Me.Label489.Size = New System.Drawing.Size(138, 16)
         Me.Label489.TabIndex = 178
         Me.Label489.Text = "Pressure loaded area"
         '
@@ -8037,7 +8039,7 @@ Partial Class Form1
         Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label67.Location = New System.Drawing.Point(18, 357)
         Me.Label67.Name = "Label67"
-        Me.Label67.Size = New System.Drawing.Size(258, 16)
+        Me.Label67.Size = New System.Drawing.Size(257, 16)
         Me.Label67.TabIndex = 137
         Me.Label67.Text = "Set on Nozzle, ground FLUSH inside"
         '
@@ -8048,7 +8050,7 @@ Partial Class Form1
         Me.Label78.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label78.Location = New System.Drawing.Point(382, 218)
         Me.Label78.Name = "Label78"
-        Me.Label78.Size = New System.Drawing.Size(45, 16)
+        Me.Label78.Size = New System.Drawing.Size(44, 16)
         Me.Label78.TabIndex = 141
         Me.Label78.Text = "[mm2]"
         '
@@ -8067,7 +8069,7 @@ Partial Class Form1
         Me.Label73.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label73.Location = New System.Drawing.Point(12, 318)
         Me.Label73.Name = "Label73"
-        Me.Label73.Size = New System.Drawing.Size(187, 16)
+        Me.Label73.Size = New System.Drawing.Size(186, 16)
         Me.Label73.TabIndex = 176
         Me.Label73.Text = "Equation 9.5-7 (left > right side)"
         '
@@ -8095,7 +8097,7 @@ Partial Class Form1
         Me.Label71.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label71.Location = New System.Drawing.Point(252, 18)
         Me.Label71.Name = "Label71"
-        Me.Label71.Size = New System.Drawing.Size(30, 16)
+        Me.Label71.Size = New System.Drawing.Size(29, 16)
         Me.Label71.TabIndex = 173
         Me.Label71.Text = "Lso"
         '
@@ -8105,7 +8107,7 @@ Partial Class Form1
         Me.Label72.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label72.Location = New System.Drawing.Point(12, 19)
         Me.Label72.Name = "Label72"
-        Me.Label72.Size = New System.Drawing.Size(165, 16)
+        Me.Label72.Size = New System.Drawing.Size(164, 16)
         Me.Label72.TabIndex = 172
         Me.Label72.Text = "Length reinforcement Shell"
         '
@@ -8124,7 +8126,7 @@ Partial Class Form1
         Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label69.Location = New System.Drawing.Point(252, 43)
         Me.Label69.Name = "Label69"
-        Me.Label69.Size = New System.Drawing.Size(31, 16)
+        Me.Label69.Size = New System.Drawing.Size(30, 16)
         Me.Label69.TabIndex = 170
         Me.Label69.Text = "Lbo"
         '
@@ -8134,7 +8136,7 @@ Partial Class Form1
         Me.Label70.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label70.Location = New System.Drawing.Point(12, 42)
         Me.Label70.Name = "Label70"
-        Me.Label70.Size = New System.Drawing.Size(176, 16)
+        Me.Label70.Size = New System.Drawing.Size(175, 16)
         Me.Label70.TabIndex = 169
         Me.Label70.Text = "Length reinforcement Nozzle"
         '
@@ -8153,7 +8155,7 @@ Partial Class Form1
         Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label65.Location = New System.Drawing.Point(252, 243)
         Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(33, 16)
+        Me.Label65.Size = New System.Drawing.Size(32, 16)
         Me.Label65.TabIndex = 167
         Me.Label65.Text = "Apb"
         '
@@ -8163,7 +8165,7 @@ Partial Class Form1
         Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label66.Location = New System.Drawing.Point(12, 226)
         Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(186, 16)
+        Me.Label66.Size = New System.Drawing.Size(185, 16)
         Me.Label66.TabIndex = 166
         Me.Label66.Text = "Pressure loaded Nozzle body"
         '
@@ -8182,7 +8184,7 @@ Partial Class Form1
         Me.Label61.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label61.Location = New System.Drawing.Point(252, 218)
         Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(32, 16)
+        Me.Label61.Size = New System.Drawing.Size(31, 16)
         Me.Label61.TabIndex = 164
         Me.Label61.Text = "Aps"
         '
@@ -8192,7 +8194,7 @@ Partial Class Form1
         Me.Label62.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label62.Location = New System.Drawing.Point(12, 249)
         Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(72, 16)
+        Me.Label62.Size = New System.Drawing.Size(71, 16)
         Me.Label62.TabIndex = 163
         Me.Label62.Text = "Shell body"
         '
@@ -8211,7 +8213,7 @@ Partial Class Form1
         Me.Label63.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label63.Location = New System.Drawing.Point(252, 168)
         Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(28, 16)
+        Me.Label63.Size = New System.Drawing.Size(27, 16)
         Me.Label63.TabIndex = 161
         Me.Label63.Text = "Afb"
         '
@@ -8221,7 +8223,7 @@ Partial Class Form1
         Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label64.Location = New System.Drawing.Point(12, 157)
         Me.Label64.Name = "Label64"
-        Me.Label64.Size = New System.Drawing.Size(191, 16)
+        Me.Label64.Size = New System.Drawing.Size(190, 16)
         Me.Label64.TabIndex = 160
         Me.Label64.Text = "Area reinforcement Nozzle wall"
         '
@@ -8240,7 +8242,7 @@ Partial Class Form1
         Me.Label59.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label59.Location = New System.Drawing.Point(252, 143)
         Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(29, 16)
+        Me.Label59.Size = New System.Drawing.Size(28, 16)
         Me.Label59.TabIndex = 158
         Me.Label59.Text = "Afw"
         '
@@ -8250,7 +8252,7 @@ Partial Class Form1
         Me.Label60.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label60.Location = New System.Drawing.Point(12, 134)
         Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(156, 16)
+        Me.Label60.Size = New System.Drawing.Size(155, 16)
         Me.Label60.TabIndex = 157
         Me.Label60.Text = "Area reinforcement Weld"
         '
@@ -8269,7 +8271,7 @@ Partial Class Form1
         Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label57.Location = New System.Drawing.Point(252, 118)
         Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(27, 16)
+        Me.Label57.Size = New System.Drawing.Size(26, 16)
         Me.Label57.TabIndex = 132
         Me.Label57.Text = "Afs"
         '
@@ -8279,7 +8281,7 @@ Partial Class Form1
         Me.Label58.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label58.Location = New System.Drawing.Point(12, 111)
         Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(180, 16)
+        Me.Label58.Size = New System.Drawing.Size(179, 16)
         Me.Label58.TabIndex = 131
         Me.Label58.Text = "Area reinforcement Shell wall"
         '
@@ -8323,7 +8325,7 @@ Partial Class Form1
         Me.Label722.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label722.Location = New System.Drawing.Point(7, 99)
         Me.Label722.Name = "Label722"
-        Me.Label722.Size = New System.Drawing.Size(158, 16)
+        Me.Label722.Size = New System.Drawing.Size(157, 16)
         Me.Label722.TabIndex = 186
         Me.Label722.Text = "Nozzle extend out of shell"
         '
@@ -8347,7 +8349,7 @@ Partial Class Form1
         Me.Label723.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label723.Location = New System.Drawing.Point(286, 103)
         Me.Label723.Name = "Label723"
-        Me.Label723.Size = New System.Drawing.Size(23, 16)
+        Me.Label723.Size = New System.Drawing.Size(22, 16)
         Me.Label723.TabIndex = 188
         Me.Label723.Text = "Lb"
         '
@@ -8366,7 +8368,7 @@ Partial Class Form1
         Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label76.Location = New System.Drawing.Point(6, 124)
         Me.Label76.Name = "Label76"
-        Me.Label76.Size = New System.Drawing.Size(142, 16)
+        Me.Label76.Size = New System.Drawing.Size(141, 16)
         Me.Label76.TabIndex = 139
         Me.Label76.Text = "Small opening (9.5.2.2)"
         '
@@ -8376,7 +8378,7 @@ Partial Class Form1
         Me.Label77.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label77.Location = New System.Drawing.Point(337, 132)
         Me.Label77.Name = "Label77"
-        Me.Label77.Size = New System.Drawing.Size(20, 16)
+        Me.Label77.Size = New System.Drawing.Size(19, 16)
         Me.Label77.TabIndex = 140
         Me.Label77.Text = "---"
         '
@@ -8399,7 +8401,7 @@ Partial Class Form1
         Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label38.Location = New System.Drawing.Point(9, 48)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(79, 16)
+        Me.Label38.Size = New System.Drawing.Size(78, 16)
         Me.Label38.TabIndex = 134
         Me.Label38.Text = "Nozzle Wall"
         '
@@ -8409,7 +8411,7 @@ Partial Class Form1
         Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label44.Location = New System.Drawing.Point(285, 23)
         Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(32, 16)
+        Me.Label44.Size = New System.Drawing.Size(31, 16)
         Me.Label44.TabIndex = 130
         Me.Label44.Text = "deb"
         '
@@ -8419,7 +8421,7 @@ Partial Class Form1
         Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label41.Location = New System.Drawing.Point(5, 75)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(144, 16)
+        Me.Label41.Size = New System.Drawing.Size(143, 16)
         Me.Label41.TabIndex = 131
         Me.Label41.Text = "Nozzle Inside diameter"
         '
@@ -8444,7 +8446,7 @@ Partial Class Form1
         Me.Label42.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label42.Location = New System.Drawing.Point(285, 75)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(27, 16)
+        Me.Label42.Size = New System.Drawing.Size(26, 16)
         Me.Label42.TabIndex = 133
         Me.Label42.Text = "dib"
         '
@@ -8454,7 +8456,7 @@ Partial Class Form1
         Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label43.Location = New System.Drawing.Point(5, 20)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(120, 16)
+        Me.Label43.Size = New System.Drawing.Size(119, 16)
         Me.Label43.TabIndex = 128
         Me.Label43.Text = "Nozzle Outside dia"
         '
@@ -8464,7 +8466,7 @@ Partial Class Form1
         Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label39.Location = New System.Drawing.Point(286, 48)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(32, 16)
+        Me.Label39.Size = New System.Drawing.Size(31, 16)
         Me.Label39.TabIndex = 136
         Me.Label39.Text = "eab"
         '
@@ -8502,7 +8504,7 @@ Partial Class Form1
         Me.Label183.AutoSize = True
         Me.Label183.Location = New System.Drawing.Point(28, 336)
         Me.Label183.Name = "Label183"
-        Me.Label183.Size = New System.Drawing.Size(195, 16)
+        Me.Label183.Size = New System.Drawing.Size(194, 16)
         Me.Label183.TabIndex = 150
         Me.Label183.Text = " 1.0 [MPa] = 1.0 [N/mm2]=10 bar"
         '
@@ -8527,7 +8529,7 @@ Partial Class Form1
         Me.Label185.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label185.Location = New System.Drawing.Point(209, 45)
         Me.Label185.Name = "Label185"
-        Me.Label185.Size = New System.Drawing.Size(55, 16)
+        Me.Label185.Size = New System.Drawing.Size(54, 16)
         Me.Label185.TabIndex = 225
         Me.Label185.Text = " _P/fmin"
         '
@@ -8537,7 +8539,7 @@ Partial Class Form1
         Me.Label184.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label184.Location = New System.Drawing.Point(224, 21)
         Me.Label184.Name = "Label184"
-        Me.Label184.Size = New System.Drawing.Size(40, 16)
+        Me.Label184.Size = New System.Drawing.Size(39, 16)
         Me.Label184.TabIndex = 224
         Me.Label184.Text = "es/Di"
         '
@@ -8556,7 +8558,7 @@ Partial Class Form1
         Me.Label171.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label171.Location = New System.Drawing.Point(15, 45)
         Me.Label171.Name = "Label171"
-        Me.Label171.Size = New System.Drawing.Size(71, 16)
+        Me.Label171.Size = New System.Drawing.Size(70, 16)
         Me.Label171.TabIndex = 221
         Me.Label171.Text = "Horizontal "
         '
@@ -8575,7 +8577,7 @@ Partial Class Form1
         Me.Label169.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label169.Location = New System.Drawing.Point(17, 21)
         Me.Label169.Name = "Label169"
-        Me.Label169.Size = New System.Drawing.Size(43, 16)
+        Me.Label169.Size = New System.Drawing.Size(42, 16)
         Me.Label169.TabIndex = 218
         Me.Label169.Text = "Curve"
         '
@@ -8688,7 +8690,7 @@ Partial Class Form1
         Me.Label179.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label179.Location = New System.Drawing.Point(241, 74)
         Me.Label179.Name = "Label179"
-        Me.Label179.Size = New System.Drawing.Size(32, 16)
+        Me.Label179.Size = New System.Drawing.Size(31, 16)
         Me.Label179.TabIndex = 221
         Me.Label179.Text = "fmin"
         '
@@ -8698,7 +8700,7 @@ Partial Class Form1
         Me.Label162.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label162.Location = New System.Drawing.Point(373, 77)
         Me.Label162.Name = "Label162"
-        Me.Label162.Size = New System.Drawing.Size(43, 16)
+        Me.Label162.Size = New System.Drawing.Size(42, 16)
         Me.Label162.TabIndex = 220
         Me.Label162.Text = "[Mpa]"
         '
@@ -8708,7 +8710,7 @@ Partial Class Form1
         Me.Label170.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label170.Location = New System.Drawing.Point(17, 76)
         Me.Label170.Name = "Label170"
-        Me.Label170.Size = New System.Drawing.Size(192, 16)
+        Me.Label170.Size = New System.Drawing.Size(191, 16)
         Me.Label170.TabIndex = 219
         Me.Label170.Text = "Allowed nominal design stress "
         '
@@ -8727,7 +8729,7 @@ Partial Class Form1
         Me.Label161.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label161.Location = New System.Drawing.Point(239, 130)
         Me.Label161.Name = "Label161"
-        Me.Label161.Size = New System.Drawing.Size(23, 16)
+        Me.Label161.Size = New System.Drawing.Size(22, 16)
         Me.Label161.TabIndex = 217
         Me.Label161.Text = "es"
         '
@@ -8737,7 +8739,7 @@ Partial Class Form1
         Me.Label153.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label153.Location = New System.Drawing.Point(373, 208)
         Me.Label153.Name = "Label153"
-        Me.Label153.Size = New System.Drawing.Size(84, 16)
+        Me.Label153.Size = New System.Drawing.Size(83, 16)
         Me.Label153.TabIndex = 216
         Me.Label153.Text = "Figure 10.4-5"
         '
@@ -8756,7 +8758,7 @@ Partial Class Form1
         Me.Label154.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label154.Location = New System.Drawing.Point(241, 207)
         Me.Label154.Name = "Label154"
-        Me.Label154.Size = New System.Drawing.Size(24, 16)
+        Me.Label154.Size = New System.Drawing.Size(23, 16)
         Me.Label154.TabIndex = 214
         Me.Label154.Text = "C2"
         '
@@ -8766,7 +8768,7 @@ Partial Class Form1
         Me.Label160.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label160.Location = New System.Drawing.Point(17, 208)
         Me.Label160.Name = "Label160"
-        Me.Label160.Size = New System.Drawing.Size(190, 16)
+        Me.Label160.Size = New System.Drawing.Size(189, 16)
         Me.Label160.TabIndex = 213
         Me.Label160.Text = "Shape factor of circular flat end"
         '
@@ -8776,7 +8778,7 @@ Partial Class Form1
         Me.Label155.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label155.Location = New System.Drawing.Point(373, 51)
         Me.Label155.Name = "Label155"
-        Me.Label155.Size = New System.Drawing.Size(44, 16)
+        Me.Label155.Size = New System.Drawing.Size(43, 16)
         Me.Label155.TabIndex = 208
         Me.Label155.Text = "[barg]"
         '
@@ -8786,7 +8788,7 @@ Partial Class Form1
         Me.Label156.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label156.Location = New System.Drawing.Point(17, 50)
         Me.Label156.Name = "Label156"
-        Me.Label156.Size = New System.Drawing.Size(108, 16)
+        Me.Label156.Size = New System.Drawing.Size(107, 16)
         Me.Label156.TabIndex = 206
         Me.Label156.Text = "Internal Pressure"
         '
@@ -8805,7 +8807,7 @@ Partial Class Form1
         Me.Label157.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label157.Location = New System.Drawing.Point(373, 27)
         Me.Label157.Name = "Label157"
-        Me.Label157.Size = New System.Drawing.Size(44, 16)
+        Me.Label157.Size = New System.Drawing.Size(43, 16)
         Me.Label157.TabIndex = 204
         Me.Label157.Text = "[MPa]"
         '
@@ -8815,7 +8817,7 @@ Partial Class Form1
         Me.Label158.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label158.Location = New System.Drawing.Point(241, 23)
         Me.Label158.Name = "Label158"
-        Me.Label158.Size = New System.Drawing.Size(24, 16)
+        Me.Label158.Size = New System.Drawing.Size(23, 16)
         Me.Label158.TabIndex = 203
         Me.Label158.Text = "_P"
         '
@@ -8825,7 +8827,7 @@ Partial Class Form1
         Me.Label159.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label159.Location = New System.Drawing.Point(17, 24)
         Me.Label159.Name = "Label159"
-        Me.Label159.Size = New System.Drawing.Size(108, 16)
+        Me.Label159.Size = New System.Drawing.Size(107, 16)
         Me.Label159.TabIndex = 202
         Me.Label159.Text = "Internal Pressure"
         '
@@ -8844,7 +8846,7 @@ Partial Class Form1
         Me.Label163.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label163.Location = New System.Drawing.Point(373, 182)
         Me.Label163.Name = "Label163"
-        Me.Label163.Size = New System.Drawing.Size(84, 16)
+        Me.Label163.Size = New System.Drawing.Size(83, 16)
         Me.Label163.TabIndex = 196
         Me.Label163.Text = "Figure 10.4-4"
         '
@@ -8863,7 +8865,7 @@ Partial Class Form1
         Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label164.Location = New System.Drawing.Point(241, 181)
         Me.Label164.Name = "Label164"
-        Me.Label164.Size = New System.Drawing.Size(24, 16)
+        Me.Label164.Size = New System.Drawing.Size(23, 16)
         Me.Label164.TabIndex = 194
         Me.Label164.Text = "C1"
         '
@@ -8873,7 +8875,7 @@ Partial Class Form1
         Me.Label165.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label165.Location = New System.Drawing.Point(17, 182)
         Me.Label165.Name = "Label165"
-        Me.Label165.Size = New System.Drawing.Size(190, 16)
+        Me.Label165.Size = New System.Drawing.Size(189, 16)
         Me.Label165.TabIndex = 193
         Me.Label165.Text = "Shape factor of circular flat end"
         '
@@ -8923,7 +8925,7 @@ Partial Class Form1
         Me.Label172.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label172.Location = New System.Drawing.Point(373, 260)
         Me.Label172.Name = "Label172"
-        Me.Label172.Size = New System.Drawing.Size(38, 16)
+        Me.Label172.Size = New System.Drawing.Size(37, 16)
         Me.Label172.TabIndex = 183
         Me.Label172.Text = "[mm]"
         '
@@ -8933,7 +8935,7 @@ Partial Class Form1
         Me.Label173.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label173.Location = New System.Drawing.Point(373, 235)
         Me.Label173.Name = "Label173"
-        Me.Label173.Size = New System.Drawing.Size(38, 16)
+        Me.Label173.Size = New System.Drawing.Size(37, 16)
         Me.Label173.TabIndex = 182
         Me.Label173.Text = "[mm]"
         '
@@ -8943,7 +8945,7 @@ Partial Class Form1
         Me.Label174.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label174.Location = New System.Drawing.Point(373, 156)
         Me.Label174.Name = "Label174"
-        Me.Label174.Size = New System.Drawing.Size(38, 16)
+        Me.Label174.Size = New System.Drawing.Size(37, 16)
         Me.Label174.TabIndex = 181
         Me.Label174.Text = "[mm]"
         '
@@ -8953,7 +8955,7 @@ Partial Class Form1
         Me.Label175.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label175.Location = New System.Drawing.Point(373, 103)
         Me.Label175.Name = "Label175"
-        Me.Label175.Size = New System.Drawing.Size(38, 16)
+        Me.Label175.Size = New System.Drawing.Size(37, 16)
         Me.Label175.TabIndex = 180
         Me.Label175.Text = "[mm]"
         '
@@ -8976,7 +8978,7 @@ Partial Class Form1
         Me.Label176.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label176.Location = New System.Drawing.Point(241, 103)
         Me.Label176.Name = "Label176"
-        Me.Label176.Size = New System.Drawing.Size(26, 16)
+        Me.Label176.Size = New System.Drawing.Size(25, 16)
         Me.Label176.TabIndex = 178
         Me.Label176.Text = "De"
         '
@@ -8986,7 +8988,7 @@ Partial Class Form1
         Me.Label177.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label177.Location = New System.Drawing.Point(17, 104)
         Me.Label177.Name = "Label177"
-        Me.Label177.Size = New System.Drawing.Size(141, 16)
+        Me.Label177.Size = New System.Drawing.Size(140, 16)
         Me.Label177.TabIndex = 177
         Me.Label177.Text = "Outside diameter shell"
         '
@@ -8996,7 +8998,7 @@ Partial Class Form1
         Me.Label178.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label178.Location = New System.Drawing.Point(373, 130)
         Me.Label178.Name = "Label178"
-        Me.Label178.Size = New System.Drawing.Size(38, 16)
+        Me.Label178.Size = New System.Drawing.Size(37, 16)
         Me.Label178.TabIndex = 176
         Me.Label178.Text = "[mm]"
         '
@@ -9030,7 +9032,7 @@ Partial Class Form1
         Me.Label180.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label180.Location = New System.Drawing.Point(17, 131)
         Me.Label180.Name = "Label180"
-        Me.Label180.Size = New System.Drawing.Size(97, 16)
+        Me.Label180.Size = New System.Drawing.Size(96, 16)
         Me.Label180.TabIndex = 172
         Me.Label180.Text = "Shell thickness"
         '
@@ -9040,7 +9042,7 @@ Partial Class Form1
         Me.Label181.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label181.Location = New System.Drawing.Point(241, 156)
         Me.Label181.Name = "Label181"
-        Me.Label181.Size = New System.Drawing.Size(21, 16)
+        Me.Label181.Size = New System.Drawing.Size(20, 16)
         Me.Label181.TabIndex = 170
         Me.Label181.Text = "Di"
         '
@@ -9050,7 +9052,7 @@ Partial Class Form1
         Me.Label182.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label182.Location = New System.Drawing.Point(17, 157)
         Me.Label182.Name = "Label182"
-        Me.Label182.Size = New System.Drawing.Size(131, 16)
+        Me.Label182.Size = New System.Drawing.Size(130, 16)
         Me.Label182.TabIndex = 169
         Me.Label182.Text = "Inside diameter shell"
         '
@@ -9069,7 +9071,7 @@ Partial Class Form1
         Me.Label188.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label188.Location = New System.Drawing.Point(241, 259)
         Me.Label188.Name = "Label188"
-        Me.Label188.Size = New System.Drawing.Size(23, 16)
+        Me.Label188.Size = New System.Drawing.Size(22, 16)
         Me.Label188.TabIndex = 158
         Me.Label188.Text = "e2"
         '
@@ -9079,7 +9081,7 @@ Partial Class Form1
         Me.Label189.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label189.Location = New System.Drawing.Point(17, 260)
         Me.Label189.Name = "Label189"
-        Me.Label189.Size = New System.Drawing.Size(131, 16)
+        Me.Label189.Size = New System.Drawing.Size(130, 16)
         Me.Label189.TabIndex = 157
         Me.Label189.Text = "Endplate thickness 2"
         '
@@ -9098,7 +9100,7 @@ Partial Class Form1
         Me.Label190.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label190.Location = New System.Drawing.Point(241, 233)
         Me.Label190.Name = "Label190"
-        Me.Label190.Size = New System.Drawing.Size(23, 16)
+        Me.Label190.Size = New System.Drawing.Size(22, 16)
         Me.Label190.TabIndex = 132
         Me.Label190.Text = "e1"
         '
@@ -9108,7 +9110,7 @@ Partial Class Form1
         Me.Label191.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label191.Location = New System.Drawing.Point(17, 234)
         Me.Label191.Name = "Label191"
-        Me.Label191.Size = New System.Drawing.Size(131, 16)
+        Me.Label191.Size = New System.Drawing.Size(130, 16)
         Me.Label191.TabIndex = 131
         Me.Label191.Text = "Endplate thickness 1"
         '
@@ -9157,7 +9159,7 @@ Partial Class Form1
         Me.Label222.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label222.Location = New System.Drawing.Point(253, 74)
         Me.Label222.Name = "Label222"
-        Me.Label222.Size = New System.Drawing.Size(24, 16)
+        Me.Label222.Size = New System.Drawing.Size(23, 16)
         Me.Label222.TabIndex = 234
         Me.Label222.Text = "Y2"
         '
@@ -9167,7 +9169,7 @@ Partial Class Form1
         Me.Label220.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label220.Location = New System.Drawing.Point(19, 74)
         Me.Label220.Name = "Label220"
-        Me.Label220.Size = New System.Drawing.Size(138, 16)
+        Me.Label220.Size = New System.Drawing.Size(137, 16)
         Me.Label220.TabIndex = 233
         Me.Label220.Text = "Pierced bottom factor "
         '
@@ -9177,7 +9179,7 @@ Partial Class Form1
         Me.Label221.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label221.Location = New System.Drawing.Point(382, 74)
         Me.Label221.Name = "Label221"
-        Me.Label221.Size = New System.Drawing.Size(20, 16)
+        Me.Label221.Size = New System.Drawing.Size(19, 16)
         Me.Label221.TabIndex = 232
         Me.Label221.Text = "[-]"
         '
@@ -9206,7 +9208,7 @@ Partial Class Form1
         Me.Label208.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label208.Location = New System.Drawing.Point(19, 50)
         Me.Label208.Name = "Label208"
-        Me.Label208.Size = New System.Drawing.Size(152, 16)
+        Me.Label208.Size = New System.Drawing.Size(151, 16)
         Me.Label208.TabIndex = 230
         Me.Label208.Text = "Circular bottom opening "
         '
@@ -9226,7 +9228,7 @@ Partial Class Form1
         Me.Label210.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label210.Location = New System.Drawing.Point(250, 102)
         Me.Label210.Name = "Label210"
-        Me.Label210.Size = New System.Drawing.Size(25, 16)
+        Me.Label210.Size = New System.Drawing.Size(24, 16)
         Me.Label210.TabIndex = 227
         Me.Label210.Text = "e2"
         '
@@ -9236,7 +9238,7 @@ Partial Class Form1
         Me.Label207.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label207.Location = New System.Drawing.Point(382, 49)
         Me.Label207.Name = "Label207"
-        Me.Label207.Size = New System.Drawing.Size(38, 16)
+        Me.Label207.Size = New System.Drawing.Size(37, 16)
         Me.Label207.TabIndex = 227
         Me.Label207.Text = "[mm]"
         '
@@ -9256,7 +9258,7 @@ Partial Class Form1
         Me.Label204.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label204.Location = New System.Drawing.Point(382, 23)
         Me.Label204.Name = "Label204"
-        Me.Label204.Size = New System.Drawing.Size(28, 16)
+        Me.Label204.Size = New System.Drawing.Size(27, 16)
         Me.Label204.TabIndex = 229
         Me.Label204.Text = "[%]"
         '
@@ -9289,7 +9291,7 @@ Partial Class Form1
         Me.Label206.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label206.Location = New System.Drawing.Point(17, 26)
         Me.Label206.Name = "Label206"
-        Me.Label206.Size = New System.Drawing.Size(190, 16)
+        Me.Label206.Size = New System.Drawing.Size(189, 16)
         Me.Label206.TabIndex = 226
         Me.Label206.Text = "Circular bottom opening % of C"
         '
@@ -9299,7 +9301,7 @@ Partial Class Form1
         Me.Label205.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label205.Location = New System.Drawing.Point(250, 25)
         Me.Label205.Name = "Label205"
-        Me.Label205.Size = New System.Drawing.Size(16, 16)
+        Me.Label205.Size = New System.Drawing.Size(15, 16)
         Me.Label205.TabIndex = 227
         Me.Label205.Text = "d"
         '
@@ -9352,7 +9354,7 @@ Partial Class Form1
         Me.Label193.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label193.Location = New System.Drawing.Point(382, 160)
         Me.Label193.Name = "Label193"
-        Me.Label193.Size = New System.Drawing.Size(38, 16)
+        Me.Label193.Size = New System.Drawing.Size(37, 16)
         Me.Label193.TabIndex = 225
         Me.Label193.Text = "[mm]"
         '
@@ -9371,7 +9373,7 @@ Partial Class Form1
         Me.Label215.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label215.Location = New System.Drawing.Point(250, 163)
         Me.Label215.Name = "Label215"
-        Me.Label215.Size = New System.Drawing.Size(23, 16)
+        Me.Label215.Size = New System.Drawing.Size(22, 16)
         Me.Label215.TabIndex = 223
         Me.Label215.Text = "e1"
         '
@@ -9381,7 +9383,7 @@ Partial Class Form1
         Me.Label216.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label216.Location = New System.Drawing.Point(17, 162)
         Me.Label216.Name = "Label216"
-        Me.Label216.Size = New System.Drawing.Size(207, 16)
+        Me.Label216.Size = New System.Drawing.Size(206, 16)
         Me.Label216.TabIndex = 222
         Me.Label216.Text = "Flange outside thickness (> e*0.8)"
         '
@@ -9391,7 +9393,7 @@ Partial Class Form1
         Me.Label186.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label186.Location = New System.Drawing.Point(250, 74)
         Me.Label186.Name = "Label186"
-        Me.Label186.Size = New System.Drawing.Size(32, 16)
+        Me.Label186.Size = New System.Drawing.Size(31, 16)
         Me.Label186.TabIndex = 221
         Me.Label186.Text = "fmin"
         '
@@ -9401,7 +9403,7 @@ Partial Class Form1
         Me.Label187.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label187.Location = New System.Drawing.Point(382, 79)
         Me.Label187.Name = "Label187"
-        Me.Label187.Size = New System.Drawing.Size(59, 16)
+        Me.Label187.Size = New System.Drawing.Size(58, 16)
         Me.Label187.TabIndex = 220
         Me.Label187.Text = "[N/mm2]"
         '
@@ -9411,7 +9413,7 @@ Partial Class Form1
         Me.Label192.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label192.Location = New System.Drawing.Point(17, 76)
         Me.Label192.Name = "Label192"
-        Me.Label192.Size = New System.Drawing.Size(192, 16)
+        Me.Label192.Size = New System.Drawing.Size(191, 16)
         Me.Label192.TabIndex = 219
         Me.Label192.Text = "Allowed nominal design stress "
         '
@@ -9431,7 +9433,7 @@ Partial Class Form1
         Me.Label198.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label198.Location = New System.Drawing.Point(382, 53)
         Me.Label198.Name = "Label198"
-        Me.Label198.Size = New System.Drawing.Size(44, 16)
+        Me.Label198.Size = New System.Drawing.Size(43, 16)
         Me.Label198.TabIndex = 208
         Me.Label198.Text = "[barg]"
         '
@@ -9441,7 +9443,7 @@ Partial Class Form1
         Me.Label199.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label199.Location = New System.Drawing.Point(17, 50)
         Me.Label199.Name = "Label199"
-        Me.Label199.Size = New System.Drawing.Size(108, 16)
+        Me.Label199.Size = New System.Drawing.Size(107, 16)
         Me.Label199.TabIndex = 206
         Me.Label199.Text = "Internal Pressure"
         '
@@ -9460,7 +9462,7 @@ Partial Class Form1
         Me.Label200.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label200.Location = New System.Drawing.Point(382, 27)
         Me.Label200.Name = "Label200"
-        Me.Label200.Size = New System.Drawing.Size(44, 16)
+        Me.Label200.Size = New System.Drawing.Size(43, 16)
         Me.Label200.TabIndex = 204
         Me.Label200.Text = "[MPa]"
         '
@@ -9470,7 +9472,7 @@ Partial Class Form1
         Me.Label201.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label201.Location = New System.Drawing.Point(250, 23)
         Me.Label201.Name = "Label201"
-        Me.Label201.Size = New System.Drawing.Size(24, 16)
+        Me.Label201.Size = New System.Drawing.Size(23, 16)
         Me.Label201.TabIndex = 203
         Me.Label201.Text = "_P"
         '
@@ -9480,7 +9482,7 @@ Partial Class Form1
         Me.Label202.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label202.Location = New System.Drawing.Point(17, 24)
         Me.Label202.Name = "Label202"
-        Me.Label202.Size = New System.Drawing.Size(108, 16)
+        Me.Label202.Size = New System.Drawing.Size(107, 16)
         Me.Label202.TabIndex = 202
         Me.Label202.Text = "Internal Pressure"
         '
@@ -9509,7 +9511,7 @@ Partial Class Form1
         Me.Label212.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label212.Location = New System.Drawing.Point(382, 105)
         Me.Label212.Name = "Label212"
-        Me.Label212.Size = New System.Drawing.Size(38, 16)
+        Me.Label212.Size = New System.Drawing.Size(37, 16)
         Me.Label212.TabIndex = 180
         Me.Label212.Text = "[mm]"
         '
@@ -9532,7 +9534,7 @@ Partial Class Form1
         Me.Label213.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label213.Location = New System.Drawing.Point(250, 103)
         Me.Label213.Name = "Label213"
-        Me.Label213.Size = New System.Drawing.Size(17, 16)
+        Me.Label213.Size = New System.Drawing.Size(16, 16)
         Me.Label213.TabIndex = 178
         Me.Label213.Text = "C"
         '
@@ -9542,7 +9544,7 @@ Partial Class Form1
         Me.Label214.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label214.Location = New System.Drawing.Point(17, 104)
         Me.Label214.Name = "Label214"
-        Me.Label214.Size = New System.Drawing.Size(166, 16)
+        Me.Label214.Size = New System.Drawing.Size(165, 16)
         Me.Label214.TabIndex = 177
         Me.Label214.Text = "Flange bolt circle diameter"
         '
@@ -9562,7 +9564,7 @@ Partial Class Form1
         Me.Label217.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label217.Location = New System.Drawing.Point(250, 129)
         Me.Label217.Name = "Label217"
-        Me.Label217.Size = New System.Drawing.Size(17, 16)
+        Me.Label217.Size = New System.Drawing.Size(16, 16)
         Me.Label217.TabIndex = 170
         Me.Label217.Text = "e"
         '
@@ -9729,7 +9731,7 @@ Partial Class Form1
         Me.Label713.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label713.Location = New System.Drawing.Point(416, 233)
         Me.Label713.Name = "Label713"
-        Me.Label713.Size = New System.Drawing.Size(59, 16)
+        Me.Label713.Size = New System.Drawing.Size(58, 16)
         Me.Label713.TabIndex = 288
         Me.Label713.Text = "[N/mm2]"
         '
@@ -9739,7 +9741,7 @@ Partial Class Form1
         Me.Label324.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label324.Location = New System.Drawing.Point(417, 164)
         Me.Label324.Name = "Label324"
-        Me.Label324.Size = New System.Drawing.Size(20, 16)
+        Me.Label324.Size = New System.Drawing.Size(19, 16)
         Me.Label324.TabIndex = 292
         Me.Label324.Text = "[-]"
         '
@@ -9749,7 +9751,7 @@ Partial Class Form1
         Me.Label714.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label714.Location = New System.Drawing.Point(14, 231)
         Me.Label714.Name = "Label714"
-        Me.Label714.Size = New System.Drawing.Size(158, 16)
+        Me.Label714.Size = New System.Drawing.Size(157, 16)
         Me.Label714.TabIndex = 291
         Me.Label714.Text = "Tangential Flange Stress"
         '
@@ -9759,7 +9761,7 @@ Partial Class Form1
         Me.Label325.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label325.Location = New System.Drawing.Point(15, 162)
         Me.Label325.Name = "Label325"
-        Me.Label325.Size = New System.Drawing.Size(72, 16)
+        Me.Label325.Size = New System.Drawing.Size(71, 16)
         Me.Label325.TabIndex = 295
         Me.Label325.Text = "Stress limit"
         '
@@ -9798,7 +9800,7 @@ Partial Class Form1
         Me.Label710.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label710.Location = New System.Drawing.Point(416, 208)
         Me.Label710.Name = "Label710"
-        Me.Label710.Size = New System.Drawing.Size(59, 16)
+        Me.Label710.Size = New System.Drawing.Size(58, 16)
         Me.Label710.TabIndex = 284
         Me.Label710.Text = "[N/mm2]"
         '
@@ -9808,7 +9810,7 @@ Partial Class Form1
         Me.Label711.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label711.Location = New System.Drawing.Point(14, 207)
         Me.Label711.Name = "Label711"
-        Me.Label711.Size = New System.Drawing.Size(137, 16)
+        Me.Label711.Size = New System.Drawing.Size(136, 16)
         Me.Label711.TabIndex = 287
         Me.Label711.Text = "Radial Flange Stress "
         '
@@ -9837,7 +9839,7 @@ Partial Class Form1
         Me.Label707.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label707.Location = New System.Drawing.Point(416, 186)
         Me.Label707.Name = "Label707"
-        Me.Label707.Size = New System.Drawing.Size(59, 16)
+        Me.Label707.Size = New System.Drawing.Size(58, 16)
         Me.Label707.TabIndex = 280
         Me.Label707.Text = "[N/mm2]"
         '
@@ -9847,7 +9849,7 @@ Partial Class Form1
         Me.Label708.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label708.Location = New System.Drawing.Point(14, 183)
         Me.Label708.Name = "Label708"
-        Me.Label708.Size = New System.Drawing.Size(144, 16)
+        Me.Label708.Size = New System.Drawing.Size(143, 16)
         Me.Label708.TabIndex = 283
         Me.Label708.Text = "Longitudinal hub stress"
         '
@@ -9894,7 +9896,7 @@ Partial Class Form1
         Me.Label704.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label704.Location = New System.Drawing.Point(14, 137)
         Me.Label704.Name = "Label704"
-        Me.Label704.Size = New System.Drawing.Size(137, 16)
+        Me.Label704.Size = New System.Drawing.Size(136, 16)
         Me.Label704.TabIndex = 277
         Me.Label704.Text = "Fact (integral method)"
         '
@@ -9913,7 +9915,7 @@ Partial Class Form1
         Me.Label705.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label705.Location = New System.Drawing.Point(416, 137)
         Me.Label705.Name = "Label705"
-        Me.Label705.Size = New System.Drawing.Size(20, 16)
+        Me.Label705.Size = New System.Drawing.Size(19, 16)
         Me.Label705.TabIndex = 276
         Me.Label705.Text = "[-]"
         '
@@ -9923,7 +9925,7 @@ Partial Class Form1
         Me.Label706.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label706.Location = New System.Drawing.Point(176, 139)
         Me.Label706.Name = "Label706"
-        Me.Label706.Size = New System.Drawing.Size(64, 16)
+        Me.Label706.Size = New System.Drawing.Size(63, 16)
         Me.Label706.TabIndex = 274
         Me.Label706.Text = "βF,  βv,  φ"
         '
@@ -9933,7 +9935,7 @@ Partial Class Form1
         Me.Label331.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label331.Location = New System.Drawing.Point(414, 114)
         Me.Label331.Name = "Label331"
-        Me.Label331.Size = New System.Drawing.Size(37, 16)
+        Me.Label331.Size = New System.Drawing.Size(36, 16)
         Me.Label331.TabIndex = 273
         Me.Label331.Text = "[Nm]"
         '
@@ -9943,7 +9945,7 @@ Partial Class Form1
         Me.Label330.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label330.Location = New System.Drawing.Point(414, 90)
         Me.Label330.Name = "Label330"
-        Me.Label330.Size = New System.Drawing.Size(37, 16)
+        Me.Label330.Size = New System.Drawing.Size(36, 16)
         Me.Label330.TabIndex = 272
         Me.Label330.Text = "[Nm]"
         '
@@ -9962,7 +9964,7 @@ Partial Class Form1
         Me.Label322.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label322.Location = New System.Drawing.Point(11, 113)
         Me.Label322.Name = "Label322"
-        Me.Label322.Size = New System.Drawing.Size(226, 16)
+        Me.Label322.Size = New System.Drawing.Size(225, 16)
         Me.Label322.TabIndex = 267
         Me.Label322.Text = "Moment operating condition (11.5-27)"
         '
@@ -9981,7 +9983,7 @@ Partial Class Form1
         Me.Label323.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label323.Location = New System.Drawing.Point(274, 113)
         Me.Label323.Name = "Label323"
-        Me.Label323.Size = New System.Drawing.Size(19, 16)
+        Me.Label323.Size = New System.Drawing.Size(18, 16)
         Me.Label323.TabIndex = 265
         Me.Label323.Text = "M"
         '
@@ -9991,7 +9993,7 @@ Partial Class Form1
         Me.Label320.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label320.Location = New System.Drawing.Point(11, 90)
         Me.Label320.Name = "Label320"
-        Me.Label320.Size = New System.Drawing.Size(171, 16)
+        Me.Label320.Size = New System.Drawing.Size(170, 16)
         Me.Label320.TabIndex = 264
         Me.Label320.Text = "Moment assembly (11.5-26)"
         '
@@ -10010,7 +10012,7 @@ Partial Class Form1
         Me.Label321.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label321.Location = New System.Drawing.Point(274, 90)
         Me.Label321.Name = "Label321"
-        Me.Label321.Size = New System.Drawing.Size(19, 16)
+        Me.Label321.Size = New System.Drawing.Size(18, 16)
         Me.Label321.TabIndex = 262
         Me.Label321.Text = "M"
         '
@@ -10047,7 +10049,7 @@ Partial Class Form1
         Me.Label317.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label317.Location = New System.Drawing.Point(12, 65)
         Me.Label317.Name = "Label317"
-        Me.Label317.Size = New System.Drawing.Size(53, 16)
+        Me.Label317.Size = New System.Drawing.Size(52, 16)
         Me.Label317.TabIndex = 258
         Me.Label317.Text = "Factors"
         '
@@ -10066,7 +10068,7 @@ Partial Class Form1
         Me.Label318.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label318.Location = New System.Drawing.Point(414, 65)
         Me.Label318.Name = "Label318"
-        Me.Label318.Size = New System.Drawing.Size(20, 16)
+        Me.Label318.Size = New System.Drawing.Size(19, 16)
         Me.Label318.TabIndex = 257
         Me.Label318.Text = "[-]"
         '
@@ -10076,7 +10078,7 @@ Partial Class Form1
         Me.Label319.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label319.Location = New System.Drawing.Point(101, 67)
         Me.Label319.Name = "Label319"
-        Me.Label319.Size = New System.Drawing.Size(89, 16)
+        Me.Label319.Size = New System.Drawing.Size(88, 16)
         Me.Label319.TabIndex = 255
         Me.Label319.Text = "K, βT,  βU,  βY"
         '
@@ -10086,7 +10088,7 @@ Partial Class Form1
         Me.Label309.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label309.Location = New System.Drawing.Point(414, 20)
         Me.Label309.Name = "Label309"
-        Me.Label309.Size = New System.Drawing.Size(38, 16)
+        Me.Label309.Size = New System.Drawing.Size(37, 16)
         Me.Label309.TabIndex = 241
         Me.Label309.Text = "[mm]"
         '
@@ -10096,7 +10098,7 @@ Partial Class Form1
         Me.Label300.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label300.Location = New System.Drawing.Point(12, 42)
         Me.Label300.Name = "Label300"
-        Me.Label300.Size = New System.Drawing.Size(98, 16)
+        Me.Label300.Size = New System.Drawing.Size(97, 16)
         Me.Label300.TabIndex = 254
         Me.Label300.Text = "Bolt pitch factor"
         '
@@ -10106,7 +10108,7 @@ Partial Class Form1
         Me.Label310.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label310.Location = New System.Drawing.Point(14, 17)
         Me.Label310.Name = "Label310"
-        Me.Label310.Size = New System.Drawing.Size(148, 16)
+        Me.Label310.Size = New System.Drawing.Size(147, 16)
         Me.Label310.TabIndex = 238
         Me.Label310.Text = "Distance adjacent bolts"
         '
@@ -10125,7 +10127,7 @@ Partial Class Form1
         Me.Label311.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label311.Location = New System.Drawing.Point(275, 19)
         Me.Label311.Name = "Label311"
-        Me.Label311.Size = New System.Drawing.Size(23, 16)
+        Me.Label311.Size = New System.Drawing.Size(22, 16)
         Me.Label311.TabIndex = 239
         Me.Label311.Text = "δb"
         '
@@ -10135,7 +10137,7 @@ Partial Class Form1
         Me.Label301.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label301.Location = New System.Drawing.Point(414, 42)
         Me.Label301.Name = "Label301"
-        Me.Label301.Size = New System.Drawing.Size(20, 16)
+        Me.Label301.Size = New System.Drawing.Size(19, 16)
         Me.Label301.TabIndex = 253
         Me.Label301.Text = "[-]"
         '
@@ -10145,7 +10147,7 @@ Partial Class Form1
         Me.Label302.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label302.Location = New System.Drawing.Point(275, 42)
         Me.Label302.Name = "Label302"
-        Me.Label302.Size = New System.Drawing.Size(25, 16)
+        Me.Label302.Size = New System.Drawing.Size(24, 16)
         Me.Label302.TabIndex = 251
         Me.Label302.Text = "CF"
         '
@@ -10210,7 +10212,7 @@ Partial Class Form1
         Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label51.Location = New System.Drawing.Point(392, 95)
         Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(20, 16)
+        Me.Label51.Size = New System.Drawing.Size(19, 16)
         Me.Label51.TabIndex = 250
         Me.Label51.Text = "[-]"
         '
@@ -10229,7 +10231,7 @@ Partial Class Form1
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.Location = New System.Drawing.Point(310, 150)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(19, 16)
+        Me.Label20.Size = New System.Drawing.Size(18, 16)
         Me.Label20.TabIndex = 243
         Me.Label20.Text = "->"
         '
@@ -10248,7 +10250,7 @@ Partial Class Form1
         Me.Label312.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label312.Location = New System.Drawing.Point(191, 149)
         Me.Label312.Name = "Label312"
-        Me.Label312.Size = New System.Drawing.Size(50, 16)
+        Me.Label312.Size = New System.Drawing.Size(49, 16)
         Me.Label312.TabIndex = 241
         Me.Label312.Text = "AB min"
         '
@@ -10258,7 +10260,7 @@ Partial Class Form1
         Me.Label313.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label313.Location = New System.Drawing.Point(386, 147)
         Me.Label313.Name = "Label313"
-        Me.Label313.Size = New System.Drawing.Size(70, 16)
+        Me.Label313.Size = New System.Drawing.Size(69, 16)
         Me.Label313.TabIndex = 240
         Me.Label313.Text = "[mm2,mm]"
         '
@@ -10268,7 +10270,7 @@ Partial Class Form1
         Me.Label314.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label314.Location = New System.Drawing.Point(11, 147)
         Me.Label314.Name = "Label314"
-        Me.Label314.Size = New System.Drawing.Size(149, 16)
+        Me.Label314.Size = New System.Drawing.Size(148, 16)
         Me.Label314.TabIndex = 239
         Me.Label314.Text = "Required total Bolt area"
         '
@@ -10287,7 +10289,7 @@ Partial Class Form1
         Me.Label267.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label267.Location = New System.Drawing.Point(258, 70)
         Me.Label267.Name = "Label267"
-        Me.Label267.Size = New System.Drawing.Size(23, 16)
+        Me.Label267.Size = New System.Drawing.Size(22, 16)
         Me.Label267.TabIndex = 229
         Me.Label267.Text = "dn"
         '
@@ -10297,7 +10299,7 @@ Partial Class Form1
         Me.Label264.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label264.Location = New System.Drawing.Point(389, 120)
         Me.Label264.Name = "Label264"
-        Me.Label264.Size = New System.Drawing.Size(59, 16)
+        Me.Label264.Size = New System.Drawing.Size(58, 16)
         Me.Label264.TabIndex = 237
         Me.Label264.Text = "[N/mm2]"
         '
@@ -10307,7 +10309,7 @@ Partial Class Form1
         Me.Label268.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label268.Location = New System.Drawing.Point(390, 68)
         Me.Label268.Name = "Label268"
-        Me.Label268.Size = New System.Drawing.Size(38, 16)
+        Me.Label268.Size = New System.Drawing.Size(37, 16)
         Me.Label268.TabIndex = 228
         Me.Label268.Text = "[mm]"
         '
@@ -10331,7 +10333,7 @@ Partial Class Form1
         Me.Label269.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label269.Location = New System.Drawing.Point(11, 68)
         Me.Label269.Name = "Label269"
-        Me.Label269.Size = New System.Drawing.Size(137, 16)
+        Me.Label269.Size = New System.Drawing.Size(136, 16)
         Me.Label269.TabIndex = 227
         Me.Label269.Text = "Bolt nominal diameter"
         '
@@ -10341,7 +10343,7 @@ Partial Class Form1
         Me.Label265.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label265.Location = New System.Drawing.Point(11, 120)
         Me.Label265.Name = "Label265"
-        Me.Label265.Size = New System.Drawing.Size(247, 16)
+        Me.Label265.Size = New System.Drawing.Size(246, 16)
         Me.Label265.TabIndex = 234
         Me.Label265.Text = "Bolt design stress at oper-temp (Rp02/3)"
         '
@@ -10360,7 +10362,7 @@ Partial Class Form1
         Me.Label266.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label266.Location = New System.Drawing.Point(260, 122)
         Me.Label266.Name = "Label266"
-        Me.Label266.Size = New System.Drawing.Size(20, 16)
+        Me.Label266.Size = New System.Drawing.Size(19, 16)
         Me.Label266.TabIndex = 235
         Me.Label266.Text = "fB"
         '
@@ -10370,7 +10372,7 @@ Partial Class Form1
         Me.Label260.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label260.Location = New System.Drawing.Point(392, 43)
         Me.Label260.Name = "Label260"
-        Me.Label260.Size = New System.Drawing.Size(38, 16)
+        Me.Label260.Size = New System.Drawing.Size(37, 16)
         Me.Label260.TabIndex = 233
         Me.Label260.Text = "[mm]"
         '
@@ -10394,7 +10396,7 @@ Partial Class Form1
         Me.Label262.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label262.Location = New System.Drawing.Point(11, 43)
         Me.Label262.Name = "Label262"
-        Me.Label262.Size = New System.Drawing.Size(144, 16)
+        Me.Label262.Size = New System.Drawing.Size(143, 16)
         Me.Label262.TabIndex = 230
         Me.Label262.Text = "Selected Bolt diameter"
         '
@@ -10404,7 +10406,7 @@ Partial Class Form1
         Me.Label263.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label263.Location = New System.Drawing.Point(257, 47)
         Me.Label263.Name = "Label263"
-        Me.Label263.Size = New System.Drawing.Size(24, 16)
+        Me.Label263.Size = New System.Drawing.Size(23, 16)
         Me.Label263.TabIndex = 231
         Me.Label263.Text = "db"
         '
@@ -10414,7 +10416,7 @@ Partial Class Form1
         Me.Label256.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label256.Location = New System.Drawing.Point(390, 18)
         Me.Label256.Name = "Label256"
-        Me.Label256.Size = New System.Drawing.Size(20, 16)
+        Me.Label256.Size = New System.Drawing.Size(19, 16)
         Me.Label256.TabIndex = 229
         Me.Label256.Text = "[-]"
         '
@@ -10437,7 +10439,7 @@ Partial Class Form1
         Me.Label259.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label259.Location = New System.Drawing.Point(11, 18)
         Me.Label259.Name = "Label259"
-        Me.Label259.Size = New System.Drawing.Size(180, 16)
+        Me.Label259.Size = New System.Drawing.Size(179, 16)
         Me.Label259.TabIndex = 226
         Me.Label259.Text = "Number evenly spaced bolts"
         '
@@ -10447,7 +10449,7 @@ Partial Class Form1
         Me.Label258.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label258.Location = New System.Drawing.Point(258, 22)
         Me.Label258.Name = "Label258"
-        Me.Label258.Size = New System.Drawing.Size(15, 16)
+        Me.Label258.Size = New System.Drawing.Size(14, 16)
         Me.Label258.TabIndex = 227
         Me.Label258.Text = "n"
         '
@@ -10499,7 +10501,7 @@ Partial Class Form1
         Me.Label294.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label294.Location = New System.Drawing.Point(12, 176)
         Me.Label294.Name = "Label294"
-        Me.Label294.Size = New System.Drawing.Size(244, 16)
+        Me.Label294.Size = New System.Drawing.Size(243, 16)
         Me.Label294.TabIndex = 250
         Me.Label294.Text = "Total moment flange for operating cond."
         '
@@ -10509,7 +10511,7 @@ Partial Class Form1
         Me.Label295.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label295.Location = New System.Drawing.Point(410, 179)
         Me.Label295.Name = "Label295"
-        Me.Label295.Size = New System.Drawing.Size(37, 16)
+        Me.Label295.Size = New System.Drawing.Size(36, 16)
         Me.Label295.TabIndex = 249
         Me.Label295.Text = "[Nm]"
         '
@@ -10528,7 +10530,7 @@ Partial Class Form1
         Me.Label296.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label296.Location = New System.Drawing.Point(275, 179)
         Me.Label296.Name = "Label296"
-        Me.Label296.Size = New System.Drawing.Size(35, 16)
+        Me.Label296.Size = New System.Drawing.Size(34, 16)
         Me.Label296.TabIndex = 247
         Me.Label296.Text = "Mop"
         '
@@ -10538,7 +10540,7 @@ Partial Class Form1
         Me.Label297.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label297.Location = New System.Drawing.Point(12, 154)
         Me.Label297.Name = "Label297"
-        Me.Label297.Size = New System.Drawing.Size(246, 16)
+        Me.Label297.Size = New System.Drawing.Size(245, 16)
         Me.Label297.TabIndex = 246
         Me.Label297.Text = "Total moment flange for assembly cond."
         '
@@ -10548,7 +10550,7 @@ Partial Class Form1
         Me.Label298.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label298.Location = New System.Drawing.Point(410, 156)
         Me.Label298.Name = "Label298"
-        Me.Label298.Size = New System.Drawing.Size(37, 16)
+        Me.Label298.Size = New System.Drawing.Size(36, 16)
         Me.Label298.TabIndex = 245
         Me.Label298.Text = "[Nm]"
         '
@@ -10567,7 +10569,7 @@ Partial Class Form1
         Me.Label299.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label299.Location = New System.Drawing.Point(276, 156)
         Me.Label299.Name = "Label299"
-        Me.Label299.Size = New System.Drawing.Size(27, 16)
+        Me.Label299.Size = New System.Drawing.Size(26, 16)
         Me.Label299.TabIndex = 243
         Me.Label299.Text = "Ma"
         '
@@ -10577,7 +10579,7 @@ Partial Class Form1
         Me.Label291.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label291.Location = New System.Drawing.Point(12, 132)
         Me.Label291.Name = "Label291"
-        Me.Label291.Size = New System.Drawing.Size(188, 16)
+        Me.Label291.Size = New System.Drawing.Size(187, 16)
         Me.Label291.TabIndex = 242
         Me.Label291.Text = "Design load for assy condition"
         '
@@ -10587,7 +10589,7 @@ Partial Class Form1
         Me.Label292.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label292.Location = New System.Drawing.Point(410, 133)
         Me.Label292.Name = "Label292"
-        Me.Label292.Size = New System.Drawing.Size(26, 16)
+        Me.Label292.Size = New System.Drawing.Size(25, 16)
         Me.Label292.TabIndex = 241
         Me.Label292.Text = "[N]"
         '
@@ -10606,7 +10608,7 @@ Partial Class Form1
         Me.Label293.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label293.Location = New System.Drawing.Point(275, 133)
         Me.Label293.Name = "Label293"
-        Me.Label293.Size = New System.Drawing.Size(21, 16)
+        Me.Label293.Size = New System.Drawing.Size(20, 16)
         Me.Label293.TabIndex = 239
         Me.Label293.Text = "W"
         '
@@ -10616,7 +10618,7 @@ Partial Class Form1
         Me.Label288.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label288.Location = New System.Drawing.Point(12, 110)
         Me.Label288.Name = "Label288"
-        Me.Label288.Size = New System.Drawing.Size(255, 16)
+        Me.Label288.Size = New System.Drawing.Size(254, 16)
         Me.Label288.TabIndex = 238
         Me.Label288.Text = "R, distance from Gasket load to Bolt circle"
         '
@@ -10626,7 +10628,7 @@ Partial Class Form1
         Me.Label289.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label289.Location = New System.Drawing.Point(410, 110)
         Me.Label289.Name = "Label289"
-        Me.Label289.Size = New System.Drawing.Size(38, 16)
+        Me.Label289.Size = New System.Drawing.Size(37, 16)
         Me.Label289.TabIndex = 237
         Me.Label289.Text = "[mm]"
         '
@@ -10645,7 +10647,7 @@ Partial Class Form1
         Me.Label290.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label290.Location = New System.Drawing.Point(275, 110)
         Me.Label290.Name = "Label290"
-        Me.Label290.Size = New System.Drawing.Size(31, 16)
+        Me.Label290.Size = New System.Drawing.Size(30, 16)
         Me.Label290.TabIndex = 235
         Me.Label290.Text = "hT_"
         '
@@ -10655,7 +10657,7 @@ Partial Class Form1
         Me.Label285.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label285.Location = New System.Drawing.Point(12, 88)
         Me.Label285.Name = "Label285"
-        Me.Label285.Size = New System.Drawing.Size(229, 16)
+        Me.Label285.Size = New System.Drawing.Size(228, 16)
         Me.Label285.TabIndex = 234
         Me.Label285.Text = "Radial distance from Bolt circle to HD"
         '
@@ -10665,7 +10667,7 @@ Partial Class Form1
         Me.Label286.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label286.Location = New System.Drawing.Point(410, 87)
         Me.Label286.Name = "Label286"
-        Me.Label286.Size = New System.Drawing.Size(38, 16)
+        Me.Label286.Size = New System.Drawing.Size(37, 16)
         Me.Label286.TabIndex = 233
         Me.Label286.Text = "[mm]"
         '
@@ -10684,7 +10686,7 @@ Partial Class Form1
         Me.Label287.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label287.Location = New System.Drawing.Point(275, 87)
         Me.Label287.Name = "Label287"
-        Me.Label287.Size = New System.Drawing.Size(32, 16)
+        Me.Label287.Size = New System.Drawing.Size(31, 16)
         Me.Label287.TabIndex = 231
         Me.Label287.Text = "hG_"
         '
@@ -10694,7 +10696,7 @@ Partial Class Form1
         Me.Label255.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label255.Location = New System.Drawing.Point(12, 66)
         Me.Label255.Name = "Label255"
-        Me.Label255.Size = New System.Drawing.Size(192, 16)
+        Me.Label255.Size = New System.Drawing.Size(191, 16)
         Me.Label255.TabIndex = 230
         Me.Label255.Text = "Radial distance from Bolt circle"
         '
@@ -10704,7 +10706,7 @@ Partial Class Form1
         Me.Label240.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label240.Location = New System.Drawing.Point(410, 64)
         Me.Label240.Name = "Label240"
-        Me.Label240.Size = New System.Drawing.Size(38, 16)
+        Me.Label240.Size = New System.Drawing.Size(37, 16)
         Me.Label240.TabIndex = 229
         Me.Label240.Text = "[mm]"
         '
@@ -10723,7 +10725,7 @@ Partial Class Form1
         Me.Label239.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label239.Location = New System.Drawing.Point(12, 22)
         Me.Label239.Name = "Label239"
-        Me.Label239.Size = New System.Drawing.Size(193, 16)
+        Me.Label239.Size = New System.Drawing.Size(192, 16)
         Me.Label239.TabIndex = 169
         Me.Label239.Text = "Hydrostatic End Force via shell"
         '
@@ -10733,7 +10735,7 @@ Partial Class Form1
         Me.Label241.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label241.Location = New System.Drawing.Point(275, 64)
         Me.Label241.Name = "Label241"
-        Me.Label241.Size = New System.Drawing.Size(32, 16)
+        Me.Label241.Size = New System.Drawing.Size(31, 16)
         Me.Label241.TabIndex = 227
         Me.Label241.Text = "hD_"
         '
@@ -10743,7 +10745,7 @@ Partial Class Form1
         Me.Label238.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label238.Location = New System.Drawing.Point(275, 18)
         Me.Label238.Name = "Label238"
-        Me.Label238.Size = New System.Drawing.Size(28, 16)
+        Me.Label238.Size = New System.Drawing.Size(27, 16)
         Me.Label238.TabIndex = 170
         Me.Label238.Text = "HD"
         '
@@ -10762,7 +10764,7 @@ Partial Class Form1
         Me.Label223.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label223.Location = New System.Drawing.Point(410, 41)
         Me.Label223.Name = "Label223"
-        Me.Label223.Size = New System.Drawing.Size(26, 16)
+        Me.Label223.Size = New System.Drawing.Size(25, 16)
         Me.Label223.TabIndex = 225
         Me.Label223.Text = "[N]"
         '
@@ -10772,7 +10774,7 @@ Partial Class Form1
         Me.Label234.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label234.Location = New System.Drawing.Point(410, 18)
         Me.Label234.Name = "Label234"
-        Me.Label234.Size = New System.Drawing.Size(26, 16)
+        Me.Label234.Size = New System.Drawing.Size(25, 16)
         Me.Label234.TabIndex = 181
         Me.Label234.Text = "[N]"
         '
@@ -10791,7 +10793,7 @@ Partial Class Form1
         Me.Label225.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label225.Location = New System.Drawing.Point(12, 44)
         Me.Label225.Name = "Label225"
-        Me.Label225.Size = New System.Drawing.Size(243, 16)
+        Me.Label225.Size = New System.Drawing.Size(242, 16)
         Me.Label225.TabIndex = 222
         Me.Label225.Text = "Hydrostatic End Force pres. flange face"
         '
@@ -10801,7 +10803,7 @@ Partial Class Form1
         Me.Label224.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label224.Location = New System.Drawing.Point(275, 41)
         Me.Label224.Name = "Label224"
-        Me.Label224.Size = New System.Drawing.Size(27, 16)
+        Me.Label224.Size = New System.Drawing.Size(26, 16)
         Me.Label224.TabIndex = 223
         Me.Label224.Text = "HT"
         '
@@ -10849,7 +10851,7 @@ Partial Class Form1
         Me.Label195.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label195.Location = New System.Drawing.Point(5, 21)
         Me.Label195.Name = "Label195"
-        Me.Label195.Size = New System.Drawing.Size(208, 16)
+        Me.Label195.Size = New System.Drawing.Size(207, 16)
         Me.Label195.TabIndex = 254
         Me.Label195.Text = "Basic gasket or joint seating width"
         '
@@ -10859,7 +10861,7 @@ Partial Class Form1
         Me.Label197.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label197.Location = New System.Drawing.Point(408, 18)
         Me.Label197.Name = "Label197"
-        Me.Label197.Size = New System.Drawing.Size(38, 16)
+        Me.Label197.Size = New System.Drawing.Size(37, 16)
         Me.Label197.TabIndex = 253
         Me.Label197.Text = "[mm]"
         '
@@ -10878,7 +10880,7 @@ Partial Class Form1
         Me.Label203.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label203.Location = New System.Drawing.Point(273, 18)
         Me.Label203.Name = "Label203"
-        Me.Label203.Size = New System.Drawing.Size(23, 16)
+        Me.Label203.Size = New System.Drawing.Size(22, 16)
         Me.Label203.TabIndex = 251
         Me.Label203.Text = "b0"
         '
@@ -10888,7 +10890,7 @@ Partial Class Form1
         Me.Label303.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label303.Location = New System.Drawing.Point(6, 68)
         Me.Label303.Name = "Label303"
-        Me.Label303.Size = New System.Drawing.Size(190, 16)
+        Me.Label303.Size = New System.Drawing.Size(189, 16)
         Me.Label303.TabIndex = 250
         Me.Label303.Text = "Diameter Gasket load reaction"
         '
@@ -10898,7 +10900,7 @@ Partial Class Form1
         Me.Label304.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label304.Location = New System.Drawing.Point(409, 65)
         Me.Label304.Name = "Label304"
-        Me.Label304.Size = New System.Drawing.Size(38, 16)
+        Me.Label304.Size = New System.Drawing.Size(37, 16)
         Me.Label304.TabIndex = 249
         Me.Label304.Text = "[mm]"
         '
@@ -10917,7 +10919,7 @@ Partial Class Form1
         Me.Label305.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label305.Location = New System.Drawing.Point(274, 65)
         Me.Label305.Name = "Label305"
-        Me.Label305.Size = New System.Drawing.Size(18, 16)
+        Me.Label305.Size = New System.Drawing.Size(17, 16)
         Me.Label305.TabIndex = 247
         Me.Label305.Text = "G"
         '
@@ -10927,7 +10929,7 @@ Partial Class Form1
         Me.Label282.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label282.Location = New System.Drawing.Point(6, 114)
         Me.Label282.Name = "Label282"
-        Me.Label282.Size = New System.Drawing.Size(180, 16)
+        Me.Label282.Size = New System.Drawing.Size(179, 16)
         Me.Label282.TabIndex = 246
         Me.Label282.Text = "Compressed load on Gasket"
         '
@@ -10937,7 +10939,7 @@ Partial Class Form1
         Me.Label283.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label283.Location = New System.Drawing.Point(409, 113)
         Me.Label283.Name = "Label283"
-        Me.Label283.Size = New System.Drawing.Size(33, 16)
+        Me.Label283.Size = New System.Drawing.Size(32, 16)
         Me.Label283.TabIndex = 245
         Me.Label283.Text = "[kN]"
         '
@@ -10956,7 +10958,7 @@ Partial Class Form1
         Me.Label284.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label284.Location = New System.Drawing.Point(274, 113)
         Me.Label284.Name = "Label284"
-        Me.Label284.Size = New System.Drawing.Size(26, 16)
+        Me.Label284.Size = New System.Drawing.Size(25, 16)
         Me.Label284.TabIndex = 243
         Me.Label284.Text = "Hg"
         '
@@ -10966,7 +10968,7 @@ Partial Class Form1
         Me.Label273.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label273.Location = New System.Drawing.Point(275, 89)
         Me.Label273.Name = "Label273"
-        Me.Label273.Size = New System.Drawing.Size(18, 16)
+        Me.Label273.Size = New System.Drawing.Size(17, 16)
         Me.Label273.TabIndex = 241
         Me.Label273.Text = "H"
         '
@@ -10976,7 +10978,7 @@ Partial Class Form1
         Me.Label270.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label270.Location = New System.Drawing.Point(6, 44)
         Me.Label270.Name = "Label270"
-        Me.Label270.Size = New System.Drawing.Size(136, 16)
+        Me.Label270.Size = New System.Drawing.Size(135, 16)
         Me.Label270.TabIndex = 242
         Me.Label270.Text = "Effective gasket width"
         '
@@ -10986,7 +10988,7 @@ Partial Class Form1
         Me.Label274.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label274.Location = New System.Drawing.Point(409, 89)
         Me.Label274.Name = "Label274"
-        Me.Label274.Size = New System.Drawing.Size(33, 16)
+        Me.Label274.Size = New System.Drawing.Size(32, 16)
         Me.Label274.TabIndex = 240
         Me.Label274.Text = "[kN]"
         '
@@ -10996,7 +10998,7 @@ Partial Class Form1
         Me.Label271.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label271.Location = New System.Drawing.Point(409, 41)
         Me.Label271.Name = "Label271"
-        Me.Label271.Size = New System.Drawing.Size(38, 16)
+        Me.Label271.Size = New System.Drawing.Size(37, 16)
         Me.Label271.TabIndex = 241
         Me.Label271.Text = "[mm]"
         '
@@ -11006,7 +11008,7 @@ Partial Class Form1
         Me.Label275.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label275.Location = New System.Drawing.Point(6, 91)
         Me.Label275.Name = "Label275"
-        Me.Label275.Size = New System.Drawing.Size(175, 16)
+        Me.Label275.Size = New System.Drawing.Size(174, 16)
         Me.Label275.TabIndex = 239
         Me.Label275.Text = "Total Hydrostatic End Force"
         '
@@ -11034,7 +11036,7 @@ Partial Class Form1
         Me.Label272.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label272.Location = New System.Drawing.Point(274, 41)
         Me.Label272.Name = "Label272"
-        Me.Label272.Size = New System.Drawing.Size(16, 16)
+        Me.Label272.Size = New System.Drawing.Size(15, 16)
         Me.Label272.TabIndex = 239
         Me.Label272.Text = "b"
         '
@@ -11044,7 +11046,7 @@ Partial Class Form1
         Me.Label249.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label249.Location = New System.Drawing.Point(409, 161)
         Me.Label249.Name = "Label249"
-        Me.Label249.Size = New System.Drawing.Size(33, 16)
+        Me.Label249.Size = New System.Drawing.Size(32, 16)
         Me.Label249.TabIndex = 233
         Me.Label249.Text = "[kN]"
         '
@@ -11063,7 +11065,7 @@ Partial Class Form1
         Me.Label250.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label250.Location = New System.Drawing.Point(269, 161)
         Me.Label250.Name = "Label250"
-        Me.Label250.Size = New System.Drawing.Size(37, 16)
+        Me.Label250.Size = New System.Drawing.Size(36, 16)
         Me.Label250.TabIndex = 231
         Me.Label250.Text = "Wop"
         '
@@ -11073,7 +11075,7 @@ Partial Class Form1
         Me.Label251.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label251.Location = New System.Drawing.Point(6, 160)
         Me.Label251.Name = "Label251"
-        Me.Label251.Size = New System.Drawing.Size(238, 16)
+        Me.Label251.Size = New System.Drawing.Size(237, 16)
         Me.Label251.TabIndex = 230
         Me.Label251.Text = "Min required bolt load, Operating cond."
         '
@@ -11083,7 +11085,7 @@ Partial Class Form1
         Me.Label246.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label246.Location = New System.Drawing.Point(409, 137)
         Me.Label246.Name = "Label246"
-        Me.Label246.Size = New System.Drawing.Size(33, 16)
+        Me.Label246.Size = New System.Drawing.Size(32, 16)
         Me.Label246.TabIndex = 225
         Me.Label246.Text = "[kN]"
         '
@@ -11102,7 +11104,7 @@ Partial Class Form1
         Me.Label247.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label247.Location = New System.Drawing.Point(272, 137)
         Me.Label247.Name = "Label247"
-        Me.Label247.Size = New System.Drawing.Size(29, 16)
+        Me.Label247.Size = New System.Drawing.Size(28, 16)
         Me.Label247.TabIndex = 223
         Me.Label247.Text = "Wa"
         '
@@ -11112,7 +11114,7 @@ Partial Class Form1
         Me.Label248.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label248.Location = New System.Drawing.Point(6, 137)
         Me.Label248.Name = "Label248"
-        Me.Label248.Size = New System.Drawing.Size(218, 16)
+        Me.Label248.Size = New System.Drawing.Size(217, 16)
         Me.Label248.TabIndex = 222
         Me.Label248.Text = "Min required bolt load for Assembly"
         '
@@ -11196,7 +11198,7 @@ Partial Class Form1
         Me.Label701.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label701.Location = New System.Drawing.Point(293, 258)
         Me.Label701.Name = "Label701"
-        Me.Label701.Size = New System.Drawing.Size(15, 16)
+        Me.Label701.Size = New System.Drawing.Size(14, 16)
         Me.Label701.TabIndex = 257
         Me.Label701.Text = "h"
         '
@@ -11206,7 +11208,7 @@ Partial Class Form1
         Me.Label702.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label702.Location = New System.Drawing.Point(393, 258)
         Me.Label702.Name = "Label702"
-        Me.Label702.Size = New System.Drawing.Size(38, 16)
+        Me.Label702.Size = New System.Drawing.Size(37, 16)
         Me.Label702.TabIndex = 256
         Me.Label702.Text = "[mm]"
         '
@@ -11216,7 +11218,7 @@ Partial Class Form1
         Me.Label703.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label703.Location = New System.Drawing.Point(13, 258)
         Me.Label703.Name = "Label703"
-        Me.Label703.Size = New System.Drawing.Size(169, 16)
+        Me.Label703.Size = New System.Drawing.Size(168, 16)
         Me.Label703.TabIndex = 255
         Me.Label703.Text = "Flange hub/weld thickness "
         '
@@ -11240,7 +11242,7 @@ Partial Class Form1
         Me.Label700.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label700.Location = New System.Drawing.Point(195, 231)
         Me.Label700.Name = "Label700"
-        Me.Label700.Size = New System.Drawing.Size(44, 16)
+        Me.Label700.Size = New System.Drawing.Size(43, 16)
         Me.Label700.TabIndex = 252
         Me.Label700.Text = "g0, g1"
         '
@@ -11250,7 +11252,7 @@ Partial Class Form1
         Me.Label405.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label405.Location = New System.Drawing.Point(393, 230)
         Me.Label405.Name = "Label405"
-        Me.Label405.Size = New System.Drawing.Size(38, 16)
+        Me.Label405.Size = New System.Drawing.Size(37, 16)
         Me.Label405.TabIndex = 251
         Me.Label405.Text = "[mm]"
         '
@@ -11260,7 +11262,7 @@ Partial Class Form1
         Me.Label404.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label404.Location = New System.Drawing.Point(13, 230)
         Me.Label404.Name = "Label404"
-        Me.Label404.Size = New System.Drawing.Size(137, 16)
+        Me.Label404.Size = New System.Drawing.Size(136, 16)
         Me.Label404.TabIndex = 250
         Me.Label404.Text = "Flange hub thickness "
         '
@@ -11298,7 +11300,7 @@ Partial Class Form1
         Me.Label329.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label329.Location = New System.Drawing.Point(11, 284)
         Me.Label329.Name = "Label329"
-        Me.Label329.Size = New System.Drawing.Size(102, 16)
+        Me.Label329.Size = New System.Drawing.Size(101, 16)
         Me.Label329.TabIndex = 247
         Me.Label329.Text = "Gasket material"
         '
@@ -11317,7 +11319,7 @@ Partial Class Form1
         Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label23.Location = New System.Drawing.Point(393, 90)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(38, 16)
+        Me.Label23.Size = New System.Drawing.Size(37, 16)
         Me.Label23.TabIndex = 246
         Me.Label23.Text = "[mm]"
         '
@@ -11340,7 +11342,7 @@ Partial Class Form1
         Me.Label315.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label315.Location = New System.Drawing.Point(260, 88)
         Me.Label315.Name = "Label315"
-        Me.Label315.Size = New System.Drawing.Size(17, 16)
+        Me.Label315.Size = New System.Drawing.Size(16, 16)
         Me.Label315.TabIndex = 244
         Me.Label315.Text = "A"
         '
@@ -11350,7 +11352,7 @@ Partial Class Form1
         Me.Label316.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label316.Location = New System.Drawing.Point(11, 90)
         Me.Label316.Name = "Label316"
-        Me.Label316.Size = New System.Drawing.Size(158, 16)
+        Me.Label316.Size = New System.Drawing.Size(157, 16)
         Me.Label316.TabIndex = 243
         Me.Label316.Text = "Outside diameter Flange "
         '
@@ -11360,7 +11362,7 @@ Partial Class Form1
         Me.Label306.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label306.Location = New System.Drawing.Point(393, 159)
         Me.Label306.Name = "Label306"
-        Me.Label306.Size = New System.Drawing.Size(38, 16)
+        Me.Label306.Size = New System.Drawing.Size(37, 16)
         Me.Label306.TabIndex = 242
         Me.Label306.Text = "[mm]"
         '
@@ -11384,7 +11386,7 @@ Partial Class Form1
         Me.Label243.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label243.Location = New System.Drawing.Point(393, 136)
         Me.Label243.Name = "Label243"
-        Me.Label243.Size = New System.Drawing.Size(38, 16)
+        Me.Label243.Size = New System.Drawing.Size(37, 16)
         Me.Label243.TabIndex = 229
         Me.Label243.Text = "[mm]"
         '
@@ -11394,7 +11396,7 @@ Partial Class Form1
         Me.Label307.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label307.Location = New System.Drawing.Point(260, 157)
         Me.Label307.Name = "Label307"
-        Me.Label307.Size = New System.Drawing.Size(16, 16)
+        Me.Label307.Size = New System.Drawing.Size(15, 16)
         Me.Label307.TabIndex = 240
         Me.Label307.Text = "e"
         '
@@ -11404,7 +11406,7 @@ Partial Class Form1
         Me.Label308.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label308.Location = New System.Drawing.Point(10, 159)
         Me.Label308.Name = "Label308"
-        Me.Label308.Size = New System.Drawing.Size(125, 16)
+        Me.Label308.Size = New System.Drawing.Size(124, 16)
         Me.Label308.TabIndex = 239
         Me.Label308.Text = "Flange thickness"
         '
@@ -11427,7 +11429,7 @@ Partial Class Form1
         Me.Label245.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label245.Location = New System.Drawing.Point(11, 136)
         Me.Label245.Name = "Label245"
-        Me.Label245.Size = New System.Drawing.Size(125, 16)
+        Me.Label245.Size = New System.Drawing.Size(124, 16)
         Me.Label245.TabIndex = 226
         Me.Label245.Text = "Bolt circle diameter "
         '
@@ -11452,7 +11454,7 @@ Partial Class Form1
         Me.Label244.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label244.Location = New System.Drawing.Point(260, 134)
         Me.Label244.Name = "Label244"
-        Me.Label244.Size = New System.Drawing.Size(17, 16)
+        Me.Label244.Size = New System.Drawing.Size(16, 16)
         Me.Label244.TabIndex = 227
         Me.Label244.Text = "C"
         '
@@ -11462,7 +11464,7 @@ Partial Class Form1
         Me.Label242.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label242.Location = New System.Drawing.Point(393, 333)
         Me.Label242.Name = "Label242"
-        Me.Label242.Size = New System.Drawing.Size(59, 16)
+        Me.Label242.Size = New System.Drawing.Size(58, 16)
         Me.Label242.TabIndex = 237
         Me.Label242.Text = "[N/mm2]"
         '
@@ -11472,7 +11474,7 @@ Partial Class Form1
         Me.Label257.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label257.Location = New System.Drawing.Point(260, 331)
         Me.Label257.Name = "Label257"
-        Me.Label257.Size = New System.Drawing.Size(15, 16)
+        Me.Label257.Size = New System.Drawing.Size(14, 16)
         Me.Label257.TabIndex = 236
         Me.Label257.Text = "y"
         '
@@ -11482,7 +11484,7 @@ Partial Class Form1
         Me.Label261.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label261.Location = New System.Drawing.Point(11, 333)
         Me.Label261.Name = "Label261"
-        Me.Label261.Size = New System.Drawing.Size(192, 16)
+        Me.Label261.Size = New System.Drawing.Size(191, 16)
         Me.Label261.TabIndex = 235
         Me.Label261.Text = "Minimum Seat stress (Annex H)"
         '
@@ -11508,7 +11510,7 @@ Partial Class Form1
         Me.Label279.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label279.Location = New System.Drawing.Point(393, 310)
         Me.Label279.Name = "Label279"
-        Me.Label279.Size = New System.Drawing.Size(20, 16)
+        Me.Label279.Size = New System.Drawing.Size(19, 16)
         Me.Label279.TabIndex = 233
         Me.Label279.Text = "[-]"
         '
@@ -11518,7 +11520,7 @@ Partial Class Form1
         Me.Label280.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label280.Location = New System.Drawing.Point(260, 308)
         Me.Label280.Name = "Label280"
-        Me.Label280.Size = New System.Drawing.Size(19, 16)
+        Me.Label280.Size = New System.Drawing.Size(18, 16)
         Me.Label280.TabIndex = 232
         Me.Label280.Text = "m"
         '
@@ -11528,7 +11530,7 @@ Partial Class Form1
         Me.Label281.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label281.Location = New System.Drawing.Point(11, 310)
         Me.Label281.Name = "Label281"
-        Me.Label281.Size = New System.Drawing.Size(148, 16)
+        Me.Label281.Size = New System.Drawing.Size(147, 16)
         Me.Label281.TabIndex = 231
         Me.Label281.Text = "Gasket factor (Annex H)"
         '
@@ -11551,7 +11553,7 @@ Partial Class Form1
         Me.Label276.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label276.Location = New System.Drawing.Point(393, 205)
         Me.Label276.Name = "Label276"
-        Me.Label276.Size = New System.Drawing.Size(38, 16)
+        Me.Label276.Size = New System.Drawing.Size(37, 16)
         Me.Label276.TabIndex = 229
         Me.Label276.Text = "[mm]"
         '
@@ -11561,7 +11563,7 @@ Partial Class Form1
         Me.Label277.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label277.Location = New System.Drawing.Point(260, 203)
         Me.Label277.Name = "Label277"
-        Me.Label277.Size = New System.Drawing.Size(19, 16)
+        Me.Label277.Size = New System.Drawing.Size(18, 16)
         Me.Label277.TabIndex = 227
         Me.Label277.Text = "gt"
         '
@@ -11571,7 +11573,7 @@ Partial Class Form1
         Me.Label278.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label278.Location = New System.Drawing.Point(11, 205)
         Me.Label278.Name = "Label278"
-        Me.Label278.Size = New System.Drawing.Size(158, 16)
+        Me.Label278.Size = New System.Drawing.Size(157, 16)
         Me.Label278.TabIndex = 226
         Me.Label278.Text = "Gasket Outside Diameter"
         '
@@ -11581,7 +11583,7 @@ Partial Class Form1
         Me.Label252.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label252.Location = New System.Drawing.Point(393, 182)
         Me.Label252.Name = "Label252"
-        Me.Label252.Size = New System.Drawing.Size(38, 16)
+        Me.Label252.Size = New System.Drawing.Size(37, 16)
         Me.Label252.TabIndex = 225
         Me.Label252.Text = "[mm]"
         '
@@ -11605,7 +11607,7 @@ Partial Class Form1
         Me.Label253.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label253.Location = New System.Drawing.Point(260, 180)
         Me.Label253.Name = "Label253"
-        Me.Label253.Size = New System.Drawing.Size(24, 16)
+        Me.Label253.Size = New System.Drawing.Size(23, 16)
         Me.Label253.TabIndex = 223
         Me.Label253.Text = "w_"
         '
@@ -11615,7 +11617,7 @@ Partial Class Form1
         Me.Label254.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label254.Location = New System.Drawing.Point(11, 182)
         Me.Label254.Name = "Label254"
-        Me.Label254.Size = New System.Drawing.Size(163, 16)
+        Me.Label254.Size = New System.Drawing.Size(162, 16)
         Me.Label254.TabIndex = 222
         Me.Label254.Text = "Gasket flange facing width"
         '
@@ -11625,7 +11627,7 @@ Partial Class Form1
         Me.Label226.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label226.Location = New System.Drawing.Point(260, 65)
         Me.Label226.Name = "Label226"
-        Me.Label226.Size = New System.Drawing.Size(32, 16)
+        Me.Label226.Size = New System.Drawing.Size(31, 16)
         Me.Label226.TabIndex = 221
         Me.Label226.Text = "fmin"
         '
@@ -11635,7 +11637,7 @@ Partial Class Form1
         Me.Label227.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label227.Location = New System.Drawing.Point(393, 67)
         Me.Label227.Name = "Label227"
-        Me.Label227.Size = New System.Drawing.Size(59, 16)
+        Me.Label227.Size = New System.Drawing.Size(58, 16)
         Me.Label227.TabIndex = 220
         Me.Label227.Text = "[N/mm2]"
         '
@@ -11645,7 +11647,7 @@ Partial Class Form1
         Me.Label228.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label228.Location = New System.Drawing.Point(13, 67)
         Me.Label228.Name = "Label228"
-        Me.Label228.Size = New System.Drawing.Size(237, 16)
+        Me.Label228.Size = New System.Drawing.Size(236, 16)
         Me.Label228.TabIndex = 219
         Me.Label228.Text = "Flange Allowed nominal design stress "
         '
@@ -11664,7 +11666,7 @@ Partial Class Form1
         Me.Label229.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label229.Location = New System.Drawing.Point(393, 44)
         Me.Label229.Name = "Label229"
-        Me.Label229.Size = New System.Drawing.Size(36, 16)
+        Me.Label229.Size = New System.Drawing.Size(35, 16)
         Me.Label229.TabIndex = 208
         Me.Label229.Text = "[bar]"
         '
@@ -11674,7 +11676,7 @@ Partial Class Form1
         Me.Label230.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label230.Location = New System.Drawing.Point(13, 44)
         Me.Label230.Name = "Label230"
-        Me.Label230.Size = New System.Drawing.Size(108, 16)
+        Me.Label230.Size = New System.Drawing.Size(107, 16)
         Me.Label230.TabIndex = 206
         Me.Label230.Text = "Internal Pressure"
         '
@@ -11693,7 +11695,7 @@ Partial Class Form1
         Me.Label231.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label231.Location = New System.Drawing.Point(393, 21)
         Me.Label231.Name = "Label231"
-        Me.Label231.Size = New System.Drawing.Size(44, 16)
+        Me.Label231.Size = New System.Drawing.Size(43, 16)
         Me.Label231.TabIndex = 204
         Me.Label231.Text = "[MPa]"
         '
@@ -11703,7 +11705,7 @@ Partial Class Form1
         Me.Label232.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label232.Location = New System.Drawing.Point(262, 17)
         Me.Label232.Name = "Label232"
-        Me.Label232.Size = New System.Drawing.Size(24, 16)
+        Me.Label232.Size = New System.Drawing.Size(23, 16)
         Me.Label232.TabIndex = 203
         Me.Label232.Text = "_P"
         '
@@ -11713,7 +11715,7 @@ Partial Class Form1
         Me.Label233.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label233.Location = New System.Drawing.Point(13, 21)
         Me.Label233.Name = "Label233"
-        Me.Label233.Size = New System.Drawing.Size(108, 16)
+        Me.Label233.Size = New System.Drawing.Size(107, 16)
         Me.Label233.TabIndex = 202
         Me.Label233.Text = "Internal Pressure"
         '
@@ -11732,7 +11734,7 @@ Partial Class Form1
         Me.Label235.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label235.Location = New System.Drawing.Point(393, 113)
         Me.Label235.Name = "Label235"
-        Me.Label235.Size = New System.Drawing.Size(38, 16)
+        Me.Label235.Size = New System.Drawing.Size(37, 16)
         Me.Label235.TabIndex = 180
         Me.Label235.Text = "[mm]"
         '
@@ -11755,7 +11757,7 @@ Partial Class Form1
         Me.Label236.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label236.Location = New System.Drawing.Point(260, 111)
         Me.Label236.Name = "Label236"
-        Me.Label236.Size = New System.Drawing.Size(17, 16)
+        Me.Label236.Size = New System.Drawing.Size(16, 16)
         Me.Label236.TabIndex = 178
         Me.Label236.Text = "B"
         '
@@ -11765,7 +11767,7 @@ Partial Class Form1
         Me.Label237.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label237.Location = New System.Drawing.Point(11, 113)
         Me.Label237.Name = "Label237"
-        Me.Label237.Size = New System.Drawing.Size(148, 16)
+        Me.Label237.Size = New System.Drawing.Size(147, 16)
         Me.Label237.TabIndex = 177
         Me.Label237.Text = "Inside diameter Flange "
         '
@@ -11889,7 +11891,7 @@ Partial Class Form1
         Me.Label787.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label787.Location = New System.Drawing.Point(266, 300)
         Me.Label787.Name = "Label787"
-        Me.Label787.Size = New System.Drawing.Size(118, 16)
+        Me.Label787.Size = New System.Drawing.Size(117, 16)
         Me.Label787.TabIndex = 316
         Me.Label787.Text = "Soft ring Gasket"
         '
@@ -11899,7 +11901,7 @@ Partial Class Form1
         Me.Label784.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label784.Location = New System.Drawing.Point(397, 375)
         Me.Label784.Name = "Label784"
-        Me.Label784.Size = New System.Drawing.Size(38, 16)
+        Me.Label784.Size = New System.Drawing.Size(37, 16)
         Me.Label784.TabIndex = 315
         Me.Label784.Text = "[mm]"
         '
@@ -11909,7 +11911,7 @@ Partial Class Form1
         Me.Label785.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label785.Location = New System.Drawing.Point(266, 374)
         Me.Label785.Name = "Label785"
-        Me.Label785.Size = New System.Drawing.Size(16, 16)
+        Me.Label785.Size = New System.Drawing.Size(15, 16)
         Me.Label785.TabIndex = 314
         Me.Label785.Text = "e"
         '
@@ -11919,7 +11921,7 @@ Partial Class Form1
         Me.Label786.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label786.Location = New System.Drawing.Point(17, 375)
         Me.Label786.Name = "Label786"
-        Me.Label786.Size = New System.Drawing.Size(109, 16)
+        Me.Label786.Size = New System.Drawing.Size(108, 16)
         Me.Label786.TabIndex = 313
         Me.Label786.Text = "Flange thickness"
         '
@@ -11938,7 +11940,7 @@ Partial Class Form1
         Me.Label745.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label745.Location = New System.Drawing.Point(297, 273)
         Me.Label745.Name = "Label745"
-        Me.Label745.Size = New System.Drawing.Size(15, 16)
+        Me.Label745.Size = New System.Drawing.Size(14, 16)
         Me.Label745.TabIndex = 311
         Me.Label745.Text = "h"
         '
@@ -11948,7 +11950,7 @@ Partial Class Form1
         Me.Label746.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label746.Location = New System.Drawing.Point(397, 273)
         Me.Label746.Name = "Label746"
-        Me.Label746.Size = New System.Drawing.Size(38, 16)
+        Me.Label746.Size = New System.Drawing.Size(37, 16)
         Me.Label746.TabIndex = 310
         Me.Label746.Text = "[mm]"
         '
@@ -11958,7 +11960,7 @@ Partial Class Form1
         Me.Label747.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label747.Location = New System.Drawing.Point(17, 273)
         Me.Label747.Name = "Label747"
-        Me.Label747.Size = New System.Drawing.Size(169, 16)
+        Me.Label747.Size = New System.Drawing.Size(168, 16)
         Me.Label747.TabIndex = 309
         Me.Label747.Text = "Flange hub/weld thickness "
         '
@@ -11982,7 +11984,7 @@ Partial Class Form1
         Me.Label748.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label748.Location = New System.Drawing.Point(199, 246)
         Me.Label748.Name = "Label748"
-        Me.Label748.Size = New System.Drawing.Size(44, 16)
+        Me.Label748.Size = New System.Drawing.Size(43, 16)
         Me.Label748.TabIndex = 307
         Me.Label748.Text = "g0, g1"
         '
@@ -11992,7 +11994,7 @@ Partial Class Form1
         Me.Label749.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label749.Location = New System.Drawing.Point(397, 245)
         Me.Label749.Name = "Label749"
-        Me.Label749.Size = New System.Drawing.Size(38, 16)
+        Me.Label749.Size = New System.Drawing.Size(37, 16)
         Me.Label749.TabIndex = 306
         Me.Label749.Text = "[mm]"
         '
@@ -12002,7 +12004,7 @@ Partial Class Form1
         Me.Label750.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label750.Location = New System.Drawing.Point(17, 245)
         Me.Label750.Name = "Label750"
-        Me.Label750.Size = New System.Drawing.Size(137, 16)
+        Me.Label750.Size = New System.Drawing.Size(136, 16)
         Me.Label750.TabIndex = 305
         Me.Label750.Text = "Flange hub thickness "
         '
@@ -12040,7 +12042,7 @@ Partial Class Form1
         Me.Label751.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label751.Location = New System.Drawing.Point(15, 299)
         Me.Label751.Name = "Label751"
-        Me.Label751.Size = New System.Drawing.Size(102, 16)
+        Me.Label751.Size = New System.Drawing.Size(101, 16)
         Me.Label751.TabIndex = 302
         Me.Label751.Text = "Gasket material"
         '
@@ -12050,7 +12052,7 @@ Partial Class Form1
         Me.Label752.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label752.Location = New System.Drawing.Point(397, 105)
         Me.Label752.Name = "Label752"
-        Me.Label752.Size = New System.Drawing.Size(38, 16)
+        Me.Label752.Size = New System.Drawing.Size(37, 16)
         Me.Label752.TabIndex = 301
         Me.Label752.Text = "[mm]"
         '
@@ -12073,7 +12075,7 @@ Partial Class Form1
         Me.Label753.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label753.Location = New System.Drawing.Point(264, 103)
         Me.Label753.Name = "Label753"
-        Me.Label753.Size = New System.Drawing.Size(17, 16)
+        Me.Label753.Size = New System.Drawing.Size(16, 16)
         Me.Label753.TabIndex = 299
         Me.Label753.Text = "A"
         '
@@ -12083,7 +12085,7 @@ Partial Class Form1
         Me.Label754.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label754.Location = New System.Drawing.Point(15, 105)
         Me.Label754.Name = "Label754"
-        Me.Label754.Size = New System.Drawing.Size(158, 16)
+        Me.Label754.Size = New System.Drawing.Size(157, 16)
         Me.Label754.TabIndex = 298
         Me.Label754.Text = "Outside diameter Flange "
         '
@@ -12093,7 +12095,7 @@ Partial Class Form1
         Me.Label755.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label755.Location = New System.Drawing.Point(397, 174)
         Me.Label755.Name = "Label755"
-        Me.Label755.Size = New System.Drawing.Size(38, 16)
+        Me.Label755.Size = New System.Drawing.Size(37, 16)
         Me.Label755.TabIndex = 297
         Me.Label755.Text = "[mm]"
         '
@@ -12117,7 +12119,7 @@ Partial Class Form1
         Me.Label756.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label756.Location = New System.Drawing.Point(397, 151)
         Me.Label756.Name = "Label756"
-        Me.Label756.Size = New System.Drawing.Size(38, 16)
+        Me.Label756.Size = New System.Drawing.Size(37, 16)
         Me.Label756.TabIndex = 282
         Me.Label756.Text = "[mm]"
         '
@@ -12127,7 +12129,7 @@ Partial Class Form1
         Me.Label757.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label757.Location = New System.Drawing.Point(264, 172)
         Me.Label757.Name = "Label757"
-        Me.Label757.Size = New System.Drawing.Size(16, 16)
+        Me.Label757.Size = New System.Drawing.Size(15, 16)
         Me.Label757.TabIndex = 295
         Me.Label757.Text = "e"
         '
@@ -12137,7 +12139,7 @@ Partial Class Form1
         Me.Label758.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label758.Location = New System.Drawing.Point(14, 174)
         Me.Label758.Name = "Label758"
-        Me.Label758.Size = New System.Drawing.Size(125, 16)
+        Me.Label758.Size = New System.Drawing.Size(124, 16)
         Me.Label758.TabIndex = 294
         Me.Label758.Text = "Flange thickness"
         '
@@ -12160,7 +12162,7 @@ Partial Class Form1
         Me.Label759.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label759.Location = New System.Drawing.Point(15, 151)
         Me.Label759.Name = "Label759"
-        Me.Label759.Size = New System.Drawing.Size(125, 16)
+        Me.Label759.Size = New System.Drawing.Size(124, 16)
         Me.Label759.TabIndex = 277
         Me.Label759.Text = "Bolt circle diameter "
         '
@@ -12185,7 +12187,7 @@ Partial Class Form1
         Me.Label760.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label760.Location = New System.Drawing.Point(264, 149)
         Me.Label760.Name = "Label760"
-        Me.Label760.Size = New System.Drawing.Size(17, 16)
+        Me.Label760.Size = New System.Drawing.Size(16, 16)
         Me.Label760.TabIndex = 279
         Me.Label760.Text = "C"
         '
@@ -12195,7 +12197,7 @@ Partial Class Form1
         Me.Label761.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label761.Location = New System.Drawing.Point(397, 348)
         Me.Label761.Name = "Label761"
-        Me.Label761.Size = New System.Drawing.Size(59, 16)
+        Me.Label761.Size = New System.Drawing.Size(58, 16)
         Me.Label761.TabIndex = 292
         Me.Label761.Text = "[N/mm2]"
         '
@@ -12205,7 +12207,7 @@ Partial Class Form1
         Me.Label762.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label762.Location = New System.Drawing.Point(264, 346)
         Me.Label762.Name = "Label762"
-        Me.Label762.Size = New System.Drawing.Size(15, 16)
+        Me.Label762.Size = New System.Drawing.Size(14, 16)
         Me.Label762.TabIndex = 291
         Me.Label762.Text = "y"
         '
@@ -12215,7 +12217,7 @@ Partial Class Form1
         Me.Label763.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label763.Location = New System.Drawing.Point(15, 348)
         Me.Label763.Name = "Label763"
-        Me.Label763.Size = New System.Drawing.Size(192, 16)
+        Me.Label763.Size = New System.Drawing.Size(191, 16)
         Me.Label763.TabIndex = 290
         Me.Label763.Text = "Minimum Seat stress (Annex H)"
         '
@@ -12241,7 +12243,7 @@ Partial Class Form1
         Me.Label764.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label764.Location = New System.Drawing.Point(397, 325)
         Me.Label764.Name = "Label764"
-        Me.Label764.Size = New System.Drawing.Size(20, 16)
+        Me.Label764.Size = New System.Drawing.Size(19, 16)
         Me.Label764.TabIndex = 287
         Me.Label764.Text = "[-]"
         '
@@ -12251,7 +12253,7 @@ Partial Class Form1
         Me.Label765.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label765.Location = New System.Drawing.Point(264, 323)
         Me.Label765.Name = "Label765"
-        Me.Label765.Size = New System.Drawing.Size(19, 16)
+        Me.Label765.Size = New System.Drawing.Size(18, 16)
         Me.Label765.TabIndex = 286
         Me.Label765.Text = "m"
         '
@@ -12261,7 +12263,7 @@ Partial Class Form1
         Me.Label766.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label766.Location = New System.Drawing.Point(15, 325)
         Me.Label766.Name = "Label766"
-        Me.Label766.Size = New System.Drawing.Size(148, 16)
+        Me.Label766.Size = New System.Drawing.Size(147, 16)
         Me.Label766.TabIndex = 285
         Me.Label766.Text = "Gasket factor (Annex H)"
         '
@@ -12284,7 +12286,7 @@ Partial Class Form1
         Me.Label767.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label767.Location = New System.Drawing.Point(397, 220)
         Me.Label767.Name = "Label767"
-        Me.Label767.Size = New System.Drawing.Size(38, 16)
+        Me.Label767.Size = New System.Drawing.Size(37, 16)
         Me.Label767.TabIndex = 283
         Me.Label767.Text = "[mm]"
         '
@@ -12294,7 +12296,7 @@ Partial Class Form1
         Me.Label768.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label768.Location = New System.Drawing.Point(264, 218)
         Me.Label768.Name = "Label768"
-        Me.Label768.Size = New System.Drawing.Size(19, 16)
+        Me.Label768.Size = New System.Drawing.Size(18, 16)
         Me.Label768.TabIndex = 280
         Me.Label768.Text = "gt"
         '
@@ -12304,7 +12306,7 @@ Partial Class Form1
         Me.Label769.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label769.Location = New System.Drawing.Point(15, 220)
         Me.Label769.Name = "Label769"
-        Me.Label769.Size = New System.Drawing.Size(158, 16)
+        Me.Label769.Size = New System.Drawing.Size(157, 16)
         Me.Label769.TabIndex = 278
         Me.Label769.Text = "Gasket Outside Diameter"
         '
@@ -12314,7 +12316,7 @@ Partial Class Form1
         Me.Label770.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label770.Location = New System.Drawing.Point(397, 197)
         Me.Label770.Name = "Label770"
-        Me.Label770.Size = New System.Drawing.Size(38, 16)
+        Me.Label770.Size = New System.Drawing.Size(37, 16)
         Me.Label770.TabIndex = 276
         Me.Label770.Text = "[mm]"
         '
@@ -12338,7 +12340,7 @@ Partial Class Form1
         Me.Label771.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label771.Location = New System.Drawing.Point(264, 195)
         Me.Label771.Name = "Label771"
-        Me.Label771.Size = New System.Drawing.Size(24, 16)
+        Me.Label771.Size = New System.Drawing.Size(23, 16)
         Me.Label771.TabIndex = 274
         Me.Label771.Text = "w_"
         '
@@ -12348,7 +12350,7 @@ Partial Class Form1
         Me.Label772.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label772.Location = New System.Drawing.Point(15, 197)
         Me.Label772.Name = "Label772"
-        Me.Label772.Size = New System.Drawing.Size(163, 16)
+        Me.Label772.Size = New System.Drawing.Size(162, 16)
         Me.Label772.TabIndex = 273
         Me.Label772.Text = "Gasket flange facing width"
         '
@@ -12358,7 +12360,7 @@ Partial Class Form1
         Me.Label773.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label773.Location = New System.Drawing.Point(264, 80)
         Me.Label773.Name = "Label773"
-        Me.Label773.Size = New System.Drawing.Size(32, 16)
+        Me.Label773.Size = New System.Drawing.Size(31, 16)
         Me.Label773.TabIndex = 272
         Me.Label773.Text = "fmin"
         '
@@ -12368,7 +12370,7 @@ Partial Class Form1
         Me.Label774.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label774.Location = New System.Drawing.Point(397, 82)
         Me.Label774.Name = "Label774"
-        Me.Label774.Size = New System.Drawing.Size(59, 16)
+        Me.Label774.Size = New System.Drawing.Size(58, 16)
         Me.Label774.TabIndex = 271
         Me.Label774.Text = "[N/mm2]"
         '
@@ -12378,7 +12380,7 @@ Partial Class Form1
         Me.Label775.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label775.Location = New System.Drawing.Point(17, 82)
         Me.Label775.Name = "Label775"
-        Me.Label775.Size = New System.Drawing.Size(237, 16)
+        Me.Label775.Size = New System.Drawing.Size(236, 16)
         Me.Label775.TabIndex = 270
         Me.Label775.Text = "Flange Allowed nominal design stress "
         '
@@ -12397,7 +12399,7 @@ Partial Class Form1
         Me.Label776.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label776.Location = New System.Drawing.Point(397, 59)
         Me.Label776.Name = "Label776"
-        Me.Label776.Size = New System.Drawing.Size(36, 16)
+        Me.Label776.Size = New System.Drawing.Size(35, 16)
         Me.Label776.TabIndex = 268
         Me.Label776.Text = "[bar]"
         '
@@ -12407,7 +12409,7 @@ Partial Class Form1
         Me.Label777.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label777.Location = New System.Drawing.Point(17, 59)
         Me.Label777.Name = "Label777"
-        Me.Label777.Size = New System.Drawing.Size(108, 16)
+        Me.Label777.Size = New System.Drawing.Size(107, 16)
         Me.Label777.TabIndex = 267
         Me.Label777.Text = "Internal Pressure"
         '
@@ -12426,7 +12428,7 @@ Partial Class Form1
         Me.Label778.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label778.Location = New System.Drawing.Point(397, 36)
         Me.Label778.Name = "Label778"
-        Me.Label778.Size = New System.Drawing.Size(44, 16)
+        Me.Label778.Size = New System.Drawing.Size(43, 16)
         Me.Label778.TabIndex = 265
         Me.Label778.Text = "[MPa]"
         '
@@ -12436,7 +12438,7 @@ Partial Class Form1
         Me.Label779.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label779.Location = New System.Drawing.Point(266, 32)
         Me.Label779.Name = "Label779"
-        Me.Label779.Size = New System.Drawing.Size(24, 16)
+        Me.Label779.Size = New System.Drawing.Size(23, 16)
         Me.Label779.TabIndex = 264
         Me.Label779.Text = "_P"
         '
@@ -12446,7 +12448,7 @@ Partial Class Form1
         Me.Label780.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label780.Location = New System.Drawing.Point(17, 36)
         Me.Label780.Name = "Label780"
-        Me.Label780.Size = New System.Drawing.Size(108, 16)
+        Me.Label780.Size = New System.Drawing.Size(107, 16)
         Me.Label780.TabIndex = 263
         Me.Label780.Text = "Internal Pressure"
         '
@@ -12465,7 +12467,7 @@ Partial Class Form1
         Me.Label781.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label781.Location = New System.Drawing.Point(397, 128)
         Me.Label781.Name = "Label781"
-        Me.Label781.Size = New System.Drawing.Size(38, 16)
+        Me.Label781.Size = New System.Drawing.Size(37, 16)
         Me.Label781.TabIndex = 261
         Me.Label781.Text = "[mm]"
         '
@@ -12488,7 +12490,7 @@ Partial Class Form1
         Me.Label782.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label782.Location = New System.Drawing.Point(264, 126)
         Me.Label782.Name = "Label782"
-        Me.Label782.Size = New System.Drawing.Size(17, 16)
+        Me.Label782.Size = New System.Drawing.Size(16, 16)
         Me.Label782.TabIndex = 259
         Me.Label782.Text = "B"
         '
@@ -12498,7 +12500,7 @@ Partial Class Form1
         Me.Label783.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label783.Location = New System.Drawing.Point(15, 128)
         Me.Label783.Name = "Label783"
-        Me.Label783.Size = New System.Drawing.Size(148, 16)
+        Me.Label783.Size = New System.Drawing.Size(147, 16)
         Me.Label783.TabIndex = 258
         Me.Label783.Text = "Inside diameter Flange "
         '
@@ -12604,7 +12606,7 @@ Partial Class Form1
         Me.Label371.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label371.Location = New System.Drawing.Point(12, 194)
         Me.Label371.Name = "Label371"
-        Me.Label371.Size = New System.Drawing.Size(170, 16)
+        Me.Label371.Size = New System.Drawing.Size(169, 16)
         Me.Label371.TabIndex = 215
         Me.Label371.Text = "Max allowed  σm+σb stress"
         '
@@ -12614,7 +12616,7 @@ Partial Class Form1
         Me.Label403.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label403.Location = New System.Drawing.Point(352, 65)
         Me.Label403.Name = "Label403"
-        Me.Label403.Size = New System.Drawing.Size(36, 16)
+        Me.Label403.Size = New System.Drawing.Size(35, 16)
         Me.Label403.TabIndex = 175
         Me.Label403.Text = "[bar]"
         '
@@ -12633,7 +12635,7 @@ Partial Class Form1
         Me.Label97.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label97.Location = New System.Drawing.Point(354, 159)
         Me.Label97.Name = "Label97"
-        Me.Label97.Size = New System.Drawing.Size(59, 16)
+        Me.Label97.Size = New System.Drawing.Size(58, 16)
         Me.Label97.TabIndex = 173
         Me.Label97.Text = "[N/mm2]"
         '
@@ -12688,7 +12690,7 @@ Partial Class Form1
         Me.Label99.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label99.Location = New System.Drawing.Point(11, 158)
         Me.Label99.Name = "Label99"
-        Me.Label99.Size = New System.Drawing.Size(35, 16)
+        Me.Label99.Size = New System.Drawing.Size(34, 16)
         Me.Label99.TabIndex = 167
         Me.Label99.Text = "Sum"
         '
@@ -12698,7 +12700,7 @@ Partial Class Form1
         Me.Label98.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label98.Location = New System.Drawing.Point(355, 133)
         Me.Label98.Name = "Label98"
-        Me.Label98.Size = New System.Drawing.Size(59, 16)
+        Me.Label98.Size = New System.Drawing.Size(58, 16)
         Me.Label98.TabIndex = 166
         Me.Label98.Text = "[N/mm2]"
         '
@@ -12726,7 +12728,7 @@ Partial Class Form1
         Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label89.Location = New System.Drawing.Point(9, 86)
         Me.Label89.Name = "Label89"
-        Me.Label89.Size = New System.Drawing.Size(96, 16)
+        Me.Label89.Size = New System.Drawing.Size(95, 16)
         Me.Label89.TabIndex = 163
         Me.Label89.Text = "Stress position"
         '
@@ -12736,7 +12738,7 @@ Partial Class Form1
         Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label86.Location = New System.Drawing.Point(128, 87)
         Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(218, 16)
+        Me.Label86.Size = New System.Drawing.Size(217, 16)
         Me.Label86.TabIndex = 162
         Me.Label86.Text = "A             B            C             D       corner"
         '
@@ -12782,7 +12784,7 @@ Partial Class Form1
         Me.Label85.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label85.Location = New System.Drawing.Point(12, 132)
         Me.Label85.Name = "Label85"
-        Me.Label85.Size = New System.Drawing.Size(43, 16)
+        Me.Label85.Size = New System.Drawing.Size(42, 16)
         Me.Label85.TabIndex = 157
         Me.Label85.Text = "Bend "
         '
@@ -12819,7 +12821,7 @@ Partial Class Form1
         Me.Label103.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label103.Location = New System.Drawing.Point(355, 109)
         Me.Label103.Name = "Label103"
-        Me.Label103.Size = New System.Drawing.Size(59, 16)
+        Me.Label103.Size = New System.Drawing.Size(58, 16)
         Me.Label103.TabIndex = 146
         Me.Label103.Text = "[N/mm2]"
         '
@@ -12838,7 +12840,7 @@ Partial Class Form1
         Me.Label104.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label104.Location = New System.Drawing.Point(12, 108)
         Me.Label104.Name = "Label104"
-        Me.Label104.Size = New System.Drawing.Size(73, 16)
+        Me.Label104.Size = New System.Drawing.Size(72, 16)
         Me.Label104.TabIndex = 144
         Me.Label104.Text = "Membrane"
         '
@@ -12848,7 +12850,7 @@ Partial Class Form1
         Me.Label105.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label105.Location = New System.Drawing.Point(237, 37)
         Me.Label105.Name = "Label105"
-        Me.Label105.Size = New System.Drawing.Size(17, 16)
+        Me.Label105.Size = New System.Drawing.Size(16, 16)
         Me.Label105.TabIndex = 137
         Me.Label105.Text = "P"
         '
@@ -12858,7 +12860,7 @@ Partial Class Form1
         Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label106.Location = New System.Drawing.Point(352, 37)
         Me.Label106.Name = "Label106"
-        Me.Label106.Size = New System.Drawing.Size(94, 16)
+        Me.Label106.Size = New System.Drawing.Size(93, 16)
         Me.Label106.TabIndex = 143
         Me.Label106.Text = "[MPa=N/mm2]"
         '
@@ -12877,7 +12879,7 @@ Partial Class Form1
         Me.Label107.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label107.Location = New System.Drawing.Point(6, 34)
         Me.Label107.Name = "Label107"
-        Me.Label107.Size = New System.Drawing.Size(134, 16)
+        Me.Label107.Size = New System.Drawing.Size(133, 16)
         Me.Label107.TabIndex = 141
         Me.Label107.Text = "Calculation Pressure "
         '
@@ -12917,7 +12919,7 @@ Partial Class Form1
         Me.Label88.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label88.Location = New System.Drawing.Point(363, 134)
         Me.Label88.Name = "Label88"
-        Me.Label88.Size = New System.Drawing.Size(38, 16)
+        Me.Label88.Size = New System.Drawing.Size(37, 16)
         Me.Label88.TabIndex = 176
         Me.Label88.Text = "[mm]"
         '
@@ -12947,7 +12949,7 @@ Partial Class Form1
         Me.Label87.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label87.Location = New System.Drawing.Point(8, 137)
         Me.Label87.Name = "Label87"
-        Me.Label87.Size = New System.Drawing.Size(101, 16)
+        Me.Label87.Size = New System.Drawing.Size(100, 16)
         Me.Label87.TabIndex = 169
         Me.Label87.Text = "Vessl size WxH"
         '
@@ -12957,7 +12959,7 @@ Partial Class Form1
         Me.Label118.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label118.Location = New System.Drawing.Point(8, 81)
         Me.Label118.Name = "Label118"
-        Me.Label118.Size = New System.Drawing.Size(125, 16)
+        Me.Label118.Size = New System.Drawing.Size(124, 16)
         Me.Label118.TabIndex = 166
         Me.Label118.Text = "Inside corner radius"
         '
@@ -12981,7 +12983,7 @@ Partial Class Form1
         Me.Label119.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label119.Location = New System.Drawing.Point(231, 78)
         Me.Label119.Name = "Label119"
-        Me.Label119.Size = New System.Drawing.Size(16, 16)
+        Me.Label119.Size = New System.Drawing.Size(15, 16)
         Me.Label119.TabIndex = 168
         Me.Label119.Text = "a"
         '
@@ -12991,7 +12993,7 @@ Partial Class Form1
         Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label120.Location = New System.Drawing.Point(364, 78)
         Me.Label120.Name = "Label120"
-        Me.Label120.Size = New System.Drawing.Size(38, 16)
+        Me.Label120.Size = New System.Drawing.Size(37, 16)
         Me.Label120.TabIndex = 165
         Me.Label120.Text = "[mm]"
         '
@@ -13001,7 +13003,7 @@ Partial Class Form1
         Me.Label115.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label115.Location = New System.Drawing.Point(7, 109)
         Me.Label115.Name = "Label115"
-        Me.Label115.Size = New System.Drawing.Size(94, 16)
+        Me.Label115.Size = New System.Drawing.Size(93, 16)
         Me.Label115.TabIndex = 162
         Me.Label115.Text = "Wall thickness"
         '
@@ -13026,7 +13028,7 @@ Partial Class Form1
         Me.Label116.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label116.Location = New System.Drawing.Point(231, 106)
         Me.Label116.Name = "Label116"
-        Me.Label116.Size = New System.Drawing.Size(16, 16)
+        Me.Label116.Size = New System.Drawing.Size(15, 16)
         Me.Label116.TabIndex = 164
         Me.Label116.Text = "e"
         '
@@ -13036,7 +13038,7 @@ Partial Class Form1
         Me.Label117.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label117.Location = New System.Drawing.Point(363, 107)
         Me.Label117.Name = "Label117"
-        Me.Label117.Size = New System.Drawing.Size(38, 16)
+        Me.Label117.Size = New System.Drawing.Size(37, 16)
         Me.Label117.TabIndex = 161
         Me.Label117.Text = "[mm]"
         '
@@ -13046,7 +13048,7 @@ Partial Class Form1
         Me.Label112.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label112.Location = New System.Drawing.Point(363, 49)
         Me.Label112.Name = "Label112"
-        Me.Label112.Size = New System.Drawing.Size(38, 16)
+        Me.Label112.Size = New System.Drawing.Size(37, 16)
         Me.Label112.TabIndex = 157
         Me.Label112.Text = "[mm]"
         '
@@ -13056,7 +13058,7 @@ Partial Class Form1
         Me.Label113.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label113.Location = New System.Drawing.Point(231, 49)
         Me.Label113.Name = "Label113"
-        Me.Label113.Size = New System.Drawing.Size(22, 16)
+        Me.Label113.Size = New System.Drawing.Size(21, 16)
         Me.Label113.TabIndex = 160
         Me.Label113.Text = "L1"
         '
@@ -13066,7 +13068,7 @@ Partial Class Form1
         Me.Label114.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label114.Location = New System.Drawing.Point(5, 50)
         Me.Label114.Name = "Label114"
-        Me.Label114.Size = New System.Drawing.Size(213, 16)
+        Me.Label114.Size = New System.Drawing.Size(212, 16)
         Me.Label114.TabIndex = 158
         Me.Label114.Text = "Straight length (half horizontal side)"
         '
@@ -13089,7 +13091,7 @@ Partial Class Form1
         Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label92.Location = New System.Drawing.Point(363, 21)
         Me.Label92.Name = "Label92"
-        Me.Label92.Size = New System.Drawing.Size(38, 16)
+        Me.Label92.Size = New System.Drawing.Size(37, 16)
         Me.Label92.TabIndex = 128
         Me.Label92.Text = "[mm]"
         '
@@ -13099,7 +13101,7 @@ Partial Class Form1
         Me.Label95.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label95.Location = New System.Drawing.Point(231, 22)
         Me.Label95.Name = "Label95"
-        Me.Label95.Size = New System.Drawing.Size(15, 16)
+        Me.Label95.Size = New System.Drawing.Size(14, 16)
         Me.Label95.TabIndex = 133
         Me.Label95.Text = "L"
         '
@@ -13109,7 +13111,7 @@ Partial Class Form1
         Me.Label96.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label96.Location = New System.Drawing.Point(5, 25)
         Me.Label96.Name = "Label96"
-        Me.Label96.Size = New System.Drawing.Size(199, 16)
+        Me.Label96.Size = New System.Drawing.Size(198, 16)
         Me.Label96.TabIndex = 131
         Me.Label96.Text = "Straight length (half vertical side)"
         '
@@ -13180,7 +13182,7 @@ Partial Class Form1
         Me.Label717.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label717.Location = New System.Drawing.Point(16, 22)
         Me.Label717.Name = "Label717"
-        Me.Label717.Size = New System.Drawing.Size(140, 16)
+        Me.Label717.Size = New System.Drawing.Size(139, 16)
         Me.Label717.TabIndex = 216
         Me.Label717.Text = "Joint coefficient Z = 1.0"
         '
@@ -13190,7 +13192,7 @@ Partial Class Form1
         Me.Label367.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label367.Location = New System.Drawing.Point(18, 43)
         Me.Label367.Name = "Label367"
-        Me.Label367.Size = New System.Drawing.Size(78, 16)
+        Me.Label367.Size = New System.Drawing.Size(77, 16)
         Me.Label367.TabIndex = 215
         Me.Label367.Text = "σm,  σm+σb"
         '
@@ -13320,7 +13322,7 @@ Partial Class Form1
         Me.Label445.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label445.Location = New System.Drawing.Point(22, 108)
         Me.Label445.Name = "Label445"
-        Me.Label445.Size = New System.Drawing.Size(103, 16)
+        Me.Label445.Size = New System.Drawing.Size(102, 16)
         Me.Label445.TabIndex = 260
         Me.Label445.Text = "σ Bend  A,B,C,D"
         '
@@ -13385,7 +13387,7 @@ Partial Class Form1
         Me.Label439.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label439.Location = New System.Drawing.Point(180, 52)
         Me.Label439.Name = "Label439"
-        Me.Label439.Size = New System.Drawing.Size(81, 16)
+        Me.Label439.Size = New System.Drawing.Size(80, 16)
         Me.Label439.TabIndex = 251
         Me.Label439.Text = "α1, κ, c_fibre"
         '
@@ -13395,7 +13397,7 @@ Partial Class Form1
         Me.Label440.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label440.Location = New System.Drawing.Point(22, 52)
         Me.Label440.Name = "Label440"
-        Me.Label440.Size = New System.Drawing.Size(53, 16)
+        Me.Label440.Size = New System.Drawing.Size(52, 16)
         Me.Label440.TabIndex = 252
         Me.Label440.Text = "Factors"
         '
@@ -13443,7 +13445,7 @@ Partial Class Form1
         Me.Label436.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label436.Location = New System.Drawing.Point(233, 24)
         Me.Label436.Name = "Label436"
-        Me.Label436.Size = New System.Drawing.Size(71, 16)
+        Me.Label436.Size = New System.Drawing.Size(70, 16)
         Me.Label436.TabIndex = 244
         Me.Label436.Text = "σmD, σmA"
         '
@@ -13462,7 +13464,7 @@ Partial Class Form1
         Me.Label437.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label437.Location = New System.Drawing.Point(22, 24)
         Me.Label437.Name = "Label437"
-        Me.Label437.Size = New System.Drawing.Size(205, 16)
+        Me.Label437.Size = New System.Drawing.Size(204, 16)
         Me.Label437.TabIndex = 245
         Me.Label437.Text = "Membrane stress short, long side"
         '
@@ -13472,7 +13474,7 @@ Partial Class Form1
         Me.Label433.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label433.Location = New System.Drawing.Point(22, 80)
         Me.Label433.Name = "Label433"
-        Me.Label433.Size = New System.Drawing.Size(105, 16)
+        Me.Label433.Size = New System.Drawing.Size(104, 16)
         Me.Label433.TabIndex = 248
         Me.Label433.Text = "Moment A,B,C,D"
         '
@@ -13578,7 +13580,7 @@ Partial Class Form1
         Me.Label411.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label411.Location = New System.Drawing.Point(183, 134)
         Me.Label411.Name = "Label411"
-        Me.Label411.Size = New System.Drawing.Size(41, 16)
+        Me.Label411.Size = New System.Drawing.Size(40, 16)
         Me.Label411.TabIndex = 232
         Me.Label411.Text = "ΔM, τ"
         '
@@ -13588,7 +13590,7 @@ Partial Class Form1
         Me.Label412.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label412.Location = New System.Drawing.Point(14, 134)
         Me.Label412.Name = "Label412"
-        Me.Label412.Size = New System.Drawing.Size(132, 16)
+        Me.Label412.Size = New System.Drawing.Size(131, 16)
         Me.Label412.TabIndex = 233
         Me.Label412.Text = "Short side sticht weld"
         '
@@ -13617,7 +13619,7 @@ Partial Class Form1
         Me.Label425.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label425.Location = New System.Drawing.Point(183, 106)
         Me.Label425.Name = "Label425"
-        Me.Label425.Size = New System.Drawing.Size(41, 16)
+        Me.Label425.Size = New System.Drawing.Size(40, 16)
         Me.Label425.TabIndex = 228
         Me.Label425.Text = "ΔM, τ"
         '
@@ -13627,7 +13629,7 @@ Partial Class Form1
         Me.Label426.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label426.Location = New System.Drawing.Point(14, 106)
         Me.Label426.Name = "Label426"
-        Me.Label426.Size = New System.Drawing.Size(128, 16)
+        Me.Label426.Size = New System.Drawing.Size(127, 16)
         Me.Label426.TabIndex = 229
         Me.Label426.Text = "Long side stich weld"
         '
@@ -13656,7 +13658,7 @@ Partial Class Form1
         Me.Label422.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label422.Location = New System.Drawing.Point(291, 77)
         Me.Label422.Name = "Label422"
-        Me.Label422.Size = New System.Drawing.Size(15, 16)
+        Me.Label422.Size = New System.Drawing.Size(14, 16)
         Me.Label422.TabIndex = 224
         Me.Label422.Text = "η"
         '
@@ -13666,7 +13668,7 @@ Partial Class Form1
         Me.Label423.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label423.Location = New System.Drawing.Point(14, 77)
         Me.Label423.Name = "Label423"
-        Me.Label423.Size = New System.Drawing.Size(270, 16)
+        Me.Label423.Size = New System.Drawing.Size(269, 16)
         Me.Label423.TabIndex = 225
         Me.Label423.Text = "Distance mid-vessel to mid  gap near corner"
         '
@@ -13676,7 +13678,7 @@ Partial Class Form1
         Me.Label418.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label418.Location = New System.Drawing.Point(14, 50)
         Me.Label418.Name = "Label418"
-        Me.Label418.Size = New System.Drawing.Size(110, 16)
+        Me.Label418.Size = New System.Drawing.Size(109, 16)
         Me.Label418.TabIndex = 221
         Me.Label418.Text = "Stitch weld length"
         '
@@ -13701,7 +13703,7 @@ Partial Class Form1
         Me.Label419.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label419.Location = New System.Drawing.Point(292, 50)
         Me.Label419.Name = "Label419"
-        Me.Label419.Size = New System.Drawing.Size(20, 16)
+        Me.Label419.Size = New System.Drawing.Size(19, 16)
         Me.Label419.TabIndex = 223
         Me.Label419.Text = "Iw"
         '
@@ -13721,7 +13723,7 @@ Partial Class Form1
         Me.Label415.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label415.Location = New System.Drawing.Point(14, 23)
         Me.Label415.Name = "Label415"
-        Me.Label415.Size = New System.Drawing.Size(216, 16)
+        Me.Label415.Size = New System.Drawing.Size(215, 16)
         Me.Label415.TabIndex = 216
         Me.Label415.Text = "Total weld throut of intermittent weld"
         '
@@ -13746,7 +13748,7 @@ Partial Class Form1
         Me.Label416.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label416.Location = New System.Drawing.Point(291, 23)
         Me.Label416.Name = "Label416"
-        Me.Label416.Size = New System.Drawing.Size(28, 16)
+        Me.Label416.Size = New System.Drawing.Size(27, 16)
         Me.Label416.TabIndex = 218
         Me.Label416.Text = "biw"
         '
@@ -13788,7 +13790,7 @@ Partial Class Form1
         Me.Label397.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label397.Location = New System.Drawing.Point(16, 26)
         Me.Label397.Name = "Label397"
-        Me.Label397.Size = New System.Drawing.Size(264, 16)
+        Me.Label397.Size = New System.Drawing.Size(263, 16)
         Me.Label397.TabIndex = 199
         Me.Label397.Text = "Reinforcement type C1, ratio dw/tw   (< 10*ε)"
         '
@@ -13798,7 +13800,7 @@ Partial Class Form1
         Me.Label399.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label399.Location = New System.Drawing.Point(417, 26)
         Me.Label399.Name = "Label399"
-        Me.Label399.Size = New System.Drawing.Size(20, 16)
+        Me.Label399.Size = New System.Drawing.Size(19, 16)
         Me.Label399.TabIndex = 201
         Me.Label399.Text = "[-]"
         '
@@ -13869,7 +13871,7 @@ Partial Class Form1
         Me.Label395.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label395.Location = New System.Drawing.Point(264, 19)
         Me.Label395.Name = "Label395"
-        Me.Label395.Size = New System.Drawing.Size(16, 16)
+        Me.Label395.Size = New System.Drawing.Size(15, 16)
         Me.Label395.TabIndex = 211
         Me.Label395.Text = "p"
         '
@@ -13879,7 +13881,7 @@ Partial Class Form1
         Me.Label370.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label370.Location = New System.Drawing.Point(16, 44)
         Me.Label370.Name = "Label370"
-        Me.Label370.Size = New System.Drawing.Size(137, 16)
+        Me.Label370.Size = New System.Drawing.Size(136, 16)
         Me.Label370.TabIndex = 203
         Me.Label370.Text = "Inside long, short side"
         '
@@ -13899,7 +13901,7 @@ Partial Class Form1
         Me.Label396.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label396.Location = New System.Drawing.Point(16, 20)
         Me.Label396.Name = "Label396"
-        Me.Label396.Size = New System.Drawing.Size(130, 16)
+        Me.Label396.Size = New System.Drawing.Size(129, 16)
         Me.Label396.TabIndex = 212
         Me.Label396.Text = "Calculation pressure"
         '
@@ -13933,7 +13935,7 @@ Partial Class Form1
         Me.Label368.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label368.Location = New System.Drawing.Point(197, 44)
         Me.Label368.Name = "Label368"
-        Me.Label368.Size = New System.Drawing.Size(31, 16)
+        Me.Label368.Size = New System.Drawing.Size(30, 16)
         Me.Label368.TabIndex = 209
         Me.Label368.Text = "h, H"
         '
@@ -13953,7 +13955,7 @@ Partial Class Form1
         Me.Label357.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label357.Location = New System.Drawing.Point(15, 100)
         Me.Label357.Name = "Label357"
-        Me.Label357.Size = New System.Drawing.Size(152, 16)
+        Me.Label357.Size = New System.Drawing.Size(151, 16)
         Me.Label357.TabIndex = 191
         Me.Label357.Text = "Reinforment rib distance"
         '
@@ -13963,7 +13965,7 @@ Partial Class Form1
         Me.Label373.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label373.Location = New System.Drawing.Point(15, 72)
         Me.Label373.Name = "Label373"
-        Me.Label373.Size = New System.Drawing.Size(139, 16)
+        Me.Label373.Size = New System.Drawing.Size(138, 16)
         Me.Label373.TabIndex = 210
         Me.Label373.Text = "Vessel Wall thickness"
         '
@@ -13988,7 +13990,7 @@ Partial Class Form1
         Me.Label358.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label358.Location = New System.Drawing.Point(262, 100)
         Me.Label358.Name = "Label358"
-        Me.Label358.Size = New System.Drawing.Size(20, 16)
+        Me.Label358.Size = New System.Drawing.Size(19, 16)
         Me.Label358.TabIndex = 193
         Me.Label358.Text = "br"
         '
@@ -13998,7 +14000,7 @@ Partial Class Form1
         Me.Label374.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label374.Location = New System.Drawing.Point(262, 72)
         Me.Label374.Name = "Label374"
-        Me.Label374.Size = New System.Drawing.Size(16, 16)
+        Me.Label374.Size = New System.Drawing.Size(15, 16)
         Me.Label374.TabIndex = 180
         Me.Label374.Text = "e"
         '
@@ -14107,7 +14109,7 @@ Partial Class Form1
         Me.Label441.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label441.Location = New System.Drawing.Point(17, 101)
         Me.Label441.Name = "Label441"
-        Me.Label441.Size = New System.Drawing.Size(205, 16)
+        Me.Label441.Size = New System.Drawing.Size(204, 16)
         Me.Label441.TabIndex = 211
         Me.Label441.Text = "Cross section Area reinforcement"
         '
@@ -14117,7 +14119,7 @@ Partial Class Form1
         Me.Label442.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label442.Location = New System.Drawing.Point(260, 101)
         Me.Label442.Name = "Label442"
-        Me.Label442.Size = New System.Drawing.Size(24, 16)
+        Me.Label442.Size = New System.Drawing.Size(23, 16)
         Me.Label442.TabIndex = 210
         Me.Label442.Text = "A1"
         '
@@ -14138,7 +14140,7 @@ Partial Class Form1
         Me.Label430.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label430.Location = New System.Drawing.Point(17, 129)
         Me.Label430.Name = "Label430"
-        Me.Label430.Size = New System.Drawing.Size(242, 16)
+        Me.Label430.Size = New System.Drawing.Size(241, 16)
         Me.Label430.TabIndex = 207
         Me.Label430.Text = "Distance inside vessel to neutral axis A'"
         '
@@ -14157,7 +14159,7 @@ Partial Class Form1
         Me.Label431.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label431.Location = New System.Drawing.Point(262, 128)
         Me.Label431.Name = "Label431"
-        Me.Label431.Size = New System.Drawing.Size(27, 16)
+        Me.Label431.Size = New System.Drawing.Size(26, 16)
         Me.Label431.TabIndex = 206
         Me.Label431.Text = "yzz"
         '
@@ -14187,7 +14189,7 @@ Partial Class Form1
         Me.Label408.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label408.Location = New System.Drawing.Point(17, 182)
         Me.Label408.Name = "Label408"
-        Me.Label408.Size = New System.Drawing.Size(212, 16)
+        Me.Label408.Size = New System.Drawing.Size(211, 16)
         Me.Label408.TabIndex = 199
         Me.Label408.Text = "1st moment of Area Reinforcement"
         '
@@ -14197,7 +14199,7 @@ Partial Class Form1
         Me.Label409.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label409.Location = New System.Drawing.Point(262, 182)
         Me.Label409.Name = "Label409"
-        Me.Label409.Size = New System.Drawing.Size(17, 16)
+        Me.Label409.Size = New System.Drawing.Size(16, 16)
         Me.Label409.TabIndex = 198
         Me.Label409.Text = "S"
         '
@@ -14226,7 +14228,7 @@ Partial Class Form1
         Me.Label387.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label387.Location = New System.Drawing.Point(17, 233)
         Me.Label387.Name = "Label387"
-        Me.Label387.Size = New System.Drawing.Size(196, 16)
+        Me.Label387.Size = New System.Drawing.Size(195, 16)
         Me.Label387.TabIndex = 195
         Me.Label387.Text = "2nd moment of Area vessel wall"
         '
@@ -14236,7 +14238,7 @@ Partial Class Form1
         Me.Label388.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label388.Location = New System.Drawing.Point(262, 236)
         Me.Label388.Name = "Label388"
-        Me.Label388.Size = New System.Drawing.Size(11, 16)
+        Me.Label388.Size = New System.Drawing.Size(10, 16)
         Me.Label388.TabIndex = 194
         Me.Label388.Text = "I"
         '
@@ -14265,7 +14267,7 @@ Partial Class Form1
         Me.Label384.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label384.Location = New System.Drawing.Point(17, 207)
         Me.Label384.Name = "Label384"
-        Me.Label384.Size = New System.Drawing.Size(217, 16)
+        Me.Label384.Size = New System.Drawing.Size(216, 16)
         Me.Label384.TabIndex = 191
         Me.Label384.Text = "2nd moment of Area Reinforcement"
         '
@@ -14275,7 +14277,7 @@ Partial Class Form1
         Me.Label385.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label385.Location = New System.Drawing.Point(262, 209)
         Me.Label385.Name = "Label385"
-        Me.Label385.Size = New System.Drawing.Size(11, 16)
+        Me.Label385.Size = New System.Drawing.Size(10, 16)
         Me.Label385.TabIndex = 190
         Me.Label385.Text = "I"
         '
@@ -14318,7 +14320,7 @@ Partial Class Form1
         Me.Label341.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label341.Location = New System.Drawing.Point(262, 47)
         Me.Label341.Name = "Label341"
-        Me.Label341.Size = New System.Drawing.Size(19, 16)
+        Me.Label341.Size = New System.Drawing.Size(18, 16)
         Me.Label341.TabIndex = 172
         Me.Label341.Text = "hr"
         '
@@ -14341,7 +14343,7 @@ Partial Class Form1
         Me.Label340.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label340.Location = New System.Drawing.Point(17, 47)
         Me.Label340.Name = "Label340"
-        Me.Label340.Size = New System.Drawing.Size(140, 16)
+        Me.Label340.Size = New System.Drawing.Size(139, 16)
         Me.Label340.TabIndex = 170
         Me.Label340.Text = "Reinforment rib height "
         '
@@ -14361,7 +14363,7 @@ Partial Class Form1
         Me.Label328.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label328.Location = New System.Drawing.Point(262, 20)
         Me.Label328.Name = "Label328"
-        Me.Label328.Size = New System.Drawing.Size(20, 16)
+        Me.Label328.Size = New System.Drawing.Size(19, 16)
         Me.Label328.TabIndex = 176
         Me.Label328.Text = "tw"
         '
@@ -14371,7 +14373,7 @@ Partial Class Form1
         Me.Label327.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label327.Location = New System.Drawing.Point(17, 20)
         Me.Label327.Name = "Label327"
-        Me.Label327.Size = New System.Drawing.Size(157, 16)
+        Me.Label327.Size = New System.Drawing.Size(156, 16)
         Me.Label327.TabIndex = 174
         Me.Label327.Text = "Reinforment rib thickness"
         '
@@ -14400,7 +14402,7 @@ Partial Class Form1
         Me.Label345.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label345.Location = New System.Drawing.Point(17, 74)
         Me.Label345.Name = "Label345"
-        Me.Label345.Size = New System.Drawing.Size(237, 16)
+        Me.Label345.Size = New System.Drawing.Size(236, 16)
         Me.Label345.TabIndex = 175
         Me.Label345.Text = "Cross section Area Composed section"
         '
@@ -14410,7 +14412,7 @@ Partial Class Form1
         Me.Label354.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label354.Location = New System.Drawing.Point(262, 290)
         Me.Label354.Name = "Label354"
-        Me.Label354.Size = New System.Drawing.Size(32, 16)
+        Me.Label354.Size = New System.Drawing.Size(31, 16)
         Me.Label354.TabIndex = 186
         Me.Label354.Text = "bcw"
         '
@@ -14420,7 +14422,7 @@ Partial Class Form1
         Me.Label344.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label344.Location = New System.Drawing.Point(262, 74)
         Me.Label344.Name = "Label344"
-        Me.Label344.Size = New System.Drawing.Size(20, 16)
+        Me.Label344.Size = New System.Drawing.Size(19, 16)
         Me.Label344.TabIndex = 174
         Me.Label344.Text = "A'"
         '
@@ -14441,7 +14443,7 @@ Partial Class Form1
         Me.Label349.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label349.Location = New System.Drawing.Point(17, 155)
         Me.Label349.Name = "Label349"
-        Me.Label349.Size = New System.Drawing.Size(248, 16)
+        Me.Label349.Size = New System.Drawing.Size(247, 16)
         Me.Label349.TabIndex = 179
         Me.Label349.Text = "Distance Weld to neutral axis Centroid A'"
         '
@@ -14460,7 +14462,7 @@ Partial Class Form1
         Me.Label355.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label355.Location = New System.Drawing.Point(17, 290)
         Me.Label355.Name = "Label355"
-        Me.Label355.Size = New System.Drawing.Size(140, 16)
+        Me.Label355.Size = New System.Drawing.Size(139, 16)
         Me.Label355.TabIndex = 187
         Me.Label355.Text = "Web Net section width"
         '
@@ -14479,7 +14481,7 @@ Partial Class Form1
         Me.Label348.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label348.Location = New System.Drawing.Point(262, 155)
         Me.Label348.Name = "Label348"
-        Me.Label348.Size = New System.Drawing.Size(22, 16)
+        Me.Label348.Size = New System.Drawing.Size(21, 16)
         Me.Label348.TabIndex = 178
         Me.Label348.Text = "yc"
         '
@@ -14509,7 +14511,7 @@ Partial Class Form1
         Me.Label352.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label352.Location = New System.Drawing.Point(17, 263)
         Me.Label352.Name = "Label352"
-        Me.Label352.Size = New System.Drawing.Size(209, 16)
+        Me.Label352.Size = New System.Drawing.Size(208, 16)
         Me.Label352.TabIndex = 183
         Me.Label352.Text = "2nd moment of Area of Composite"
         '
@@ -14519,7 +14521,7 @@ Partial Class Form1
         Me.Label351.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label351.Location = New System.Drawing.Point(246, 263)
         Me.Label351.Name = "Label351"
-        Me.Label351.Size = New System.Drawing.Size(48, 16)
+        Me.Label351.Size = New System.Drawing.Size(47, 16)
         Me.Label351.TabIndex = 182
         Me.Label351.Text = "I11, I12"
         '
@@ -14574,7 +14576,7 @@ Partial Class Form1
         Me.Label392.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label392.Location = New System.Drawing.Point(279, 101)
         Me.Label392.Name = "Label392"
-        Me.Label392.Size = New System.Drawing.Size(15, 16)
+        Me.Label392.Size = New System.Drawing.Size(14, 16)
         Me.Label392.TabIndex = 207
         Me.Label392.Text = "τ"
         '
@@ -14593,7 +14595,7 @@ Partial Class Form1
         Me.Label393.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label393.Location = New System.Drawing.Point(16, 102)
         Me.Label393.Name = "Label393"
-        Me.Label393.Size = New System.Drawing.Size(175, 16)
+        Me.Label393.Size = New System.Drawing.Size(174, 16)
         Me.Label393.TabIndex = 208
         Me.Label393.Text = "τ in the reinforcements webs"
         '
@@ -14631,7 +14633,7 @@ Partial Class Form1
         Me.Label391.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label391.Location = New System.Drawing.Point(17, 25)
         Me.Label391.Name = "Label391"
-        Me.Label391.Size = New System.Drawing.Size(203, 16)
+        Me.Label391.Size = New System.Drawing.Size(202, 16)
         Me.Label391.TabIndex = 203
         Me.Label391.Text = "Shear load near corner      Q1, Q2"
         '
@@ -14651,7 +14653,7 @@ Partial Class Form1
         Me.Label364.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label364.Location = New System.Drawing.Point(279, 73)
         Me.Label364.Name = "Label364"
-        Me.Label364.Size = New System.Drawing.Size(15, 16)
+        Me.Label364.Size = New System.Drawing.Size(14, 16)
         Me.Label364.TabIndex = 198
         Me.Label364.Text = "τ"
         '
@@ -14670,7 +14672,7 @@ Partial Class Form1
         Me.Label365.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label365.Location = New System.Drawing.Point(16, 76)
         Me.Label365.Name = "Label365"
-        Me.Label365.Size = New System.Drawing.Size(185, 16)
+        Me.Label365.Size = New System.Drawing.Size(184, 16)
         Me.Label365.TabIndex = 199
         Me.Label365.Text = "τ web-vessel continuous weld"
         '
@@ -14690,7 +14692,7 @@ Partial Class Form1
         Me.Label361.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label361.Location = New System.Drawing.Point(279, 47)
         Me.Label361.Name = "Label361"
-        Me.Label361.Size = New System.Drawing.Size(18, 16)
+        Me.Label361.Size = New System.Drawing.Size(17, 16)
         Me.Label361.TabIndex = 194
         Me.Label361.Text = "Q"
         '
@@ -14709,7 +14711,7 @@ Partial Class Form1
         Me.Label362.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label362.Location = New System.Drawing.Point(17, 51)
         Me.Label362.Name = "Label362"
-        Me.Label362.Size = New System.Drawing.Size(126, 16)
+        Me.Label362.Size = New System.Drawing.Size(125, 16)
         Me.Label362.TabIndex = 195
         Me.Label362.Text = "Biggest Shear load "
         '
@@ -14783,7 +14785,7 @@ Partial Class Form1
         Me.Label398.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label398.Location = New System.Drawing.Point(12, 27)
         Me.Label398.Name = "Label398"
-        Me.Label398.Size = New System.Drawing.Size(108, 16)
+        Me.Label398.Size = New System.Drawing.Size(107, 16)
         Me.Label398.TabIndex = 218
         Me.Label398.Text = "Inside long, short"
         '
@@ -14811,7 +14813,7 @@ Partial Class Form1
         Me.Label382.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label382.Location = New System.Drawing.Point(12, 52)
         Me.Label382.Name = "Label382"
-        Me.Label382.Size = New System.Drawing.Size(91, 16)
+        Me.Label382.Size = New System.Drawing.Size(90, 16)
         Me.Label382.TabIndex = 215
         Me.Label382.Text = "Ratio, C factor"
         '
@@ -14831,7 +14833,7 @@ Partial Class Form1
         Me.Label380.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label380.Location = New System.Drawing.Point(217, 101)
         Me.Label380.Name = "Label380"
-        Me.Label380.Size = New System.Drawing.Size(24, 16)
+        Me.Label380.Size = New System.Drawing.Size(23, 16)
         Me.Label380.TabIndex = 211
         Me.Label380.Text = "σb"
         '
@@ -14850,7 +14852,7 @@ Partial Class Form1
         Me.Label381.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label381.Location = New System.Drawing.Point(12, 101)
         Me.Label381.Name = "Label381"
-        Me.Label381.Size = New System.Drawing.Size(174, 16)
+        Me.Label381.Size = New System.Drawing.Size(173, 16)
         Me.Label381.TabIndex = 212
         Me.Label381.Text = "Longitudinal bending stress "
         '
@@ -14870,7 +14872,7 @@ Partial Class Form1
         Me.Label377.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label377.Location = New System.Drawing.Point(217, 77)
         Me.Label377.Name = "Label377"
-        Me.Label377.Size = New System.Drawing.Size(27, 16)
+        Me.Label377.Size = New System.Drawing.Size(26, 16)
         Me.Label377.TabIndex = 202
         Me.Label377.Text = "σm"
         '
@@ -14889,7 +14891,7 @@ Partial Class Form1
         Me.Label378.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label378.Location = New System.Drawing.Point(12, 77)
         Me.Label378.Name = "Label378"
-        Me.Label378.Size = New System.Drawing.Size(190, 16)
+        Me.Label378.Size = New System.Drawing.Size(189, 16)
         Me.Label378.TabIndex = 203
         Me.Label378.Text = "Longitudinal membrane stress "
         '
@@ -14935,7 +14937,7 @@ Partial Class Form1
         Me.Label356.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label356.Location = New System.Drawing.Point(129, 378)
         Me.Label356.Name = "Label356"
-        Me.Label356.Size = New System.Drawing.Size(83, 16)
+        Me.Label356.Size = New System.Drawing.Size(82, 16)
         Me.Label356.TabIndex = 199
         Me.Label356.Text = "Figure 15.6.2"
         '
@@ -16430,4 +16432,5 @@ Partial Class Form1
     Friend WithEvents Label786 As Label
     Friend WithEvents TextBox253 As TextBox
     Friend WithEvents Label787 As Label
+    Friend WithEvents Timer1 As Timer
 End Class

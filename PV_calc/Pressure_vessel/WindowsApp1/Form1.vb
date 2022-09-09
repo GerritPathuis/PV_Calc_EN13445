@@ -25,10 +25,22 @@ Public Class Form1
     Public _E As Double         'Modulus of elasticity 
     Private ReadOnly separators As String() = {";"}
 
+
+
+
     '----------- directory's-----------
-    Private ReadOnly dirpath_Eng As String = "N:\Engineering\VBasic\PV_calc_input\"
-    Private ReadOnly dirpath_Rap As String = "N:\Engineering\VBasic\PV_calc_rapport_copy\"
-    Private ReadOnly dirpath_Home As String = "C:\Temp\"
+    Private ReadOnly rootserver As String = "\\FILE14\data2\Engineering\VBasic\"  'UNC directory name
+    Private ReadOnly dirpath_Eng As String = rootserver & "PV_calc_input\"
+    Private ReadOnly dirpath_Rap As String = rootserver & "PV_calc_rapport_copy\"
+
+    '----------- local temp directory's-----------
+    Private ReadOnly ProcID As Integer = Process.GetCurrentProcess.Id
+    Private ReadOnly dirpath_Temp As String = "C:\Temp\" & ProcID.ToString
+
+
+
+
+
 
     'Chapter 6, Max allowed values for pressure parts
     Public Shared chap6 As String() = {
@@ -1786,12 +1798,14 @@ Public Class Form1
 
             If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
             If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
-            If (Not System.IO.Directory.Exists(dirpath_Home)) Then System.IO.Directory.CreateDirectory(dirpath_Home)
+            If (Not System.IO.Directory.Exists(dirpath_Temp)) Then System.IO.Directory.CreateDirectory(dirpath_Temp)
+
+
 
             If Directory.Exists(dirpath_Rap) Then
                 oWord.ActiveDocument.SaveAs(dirpath_Rap & ufilename)
             Else
-                oWord.ActiveDocument.SaveAs(dirpath_Home & ufilename)
+                oWord.ActiveDocument.SaveAs(dirpath_Temp & ufilename)
             End If
 
         Catch ex As Exception
@@ -3836,6 +3850,13 @@ Public Class Form1
         TextBox250.Text = _fs.ToString("0")             '[n/mm2] allowed stress
         TextBox253.Text = e_biggest.ToString("F1")      '[mm] flange thickness
     End Sub
+
+    Public Shared Function ValidFileName(s As String) As String
+        For Each invalidChar In IO.Path.GetInvalidFileNameChars
+            s = s.Replace(invalidChar, "_")
+        Next
+        Return Trim(s)
+    End Function
 
 
 End Class
