@@ -23,7 +23,7 @@ Public Class Form1
     Public _deb As Double       'Outside diameter nozzle fitted in shell
     Public _dib As Double       'Inside diameter nozzle fitted in shell
     Public _E As Double         'Modulus of elasticity 
-    Private ReadOnly separators() As String = {";"}
+    Private ReadOnly separators As String() = {";"}
 
     '----------- directory's-----------
     Private ReadOnly dirpath_Eng As String = "N:\Engineering\VBasic\PV_calc_input\"
@@ -31,14 +31,14 @@ Public Class Form1
     Private ReadOnly dirpath_Home As String = "C:\Temp\"
 
     'Chapter 6, Max allowed values for pressure parts
-    Public Shared chap6() As String = {
+    Public Shared chap6 As String() = {
    "Chap 6.2, Steel, safety, rupture < 30%; 1.5",
    "Chap 6.4, Austenitic steel, rupture 30-35%; 1.5",
    "Chap 6.5, Austenitic steel, rupture >35%; 3.0",
    "Chap 6.6, Cast steel; 1.9"}
 
     'EN13455-3 ANNEX H
-    Public Shared gaskets() As String = {
+    Public Shared gaskets As String() = {
    "Rubber without fabric < 75 IRH;0.50;0000;0",
    "Rubber without fabric > 75 IRH;1.00;1.40;0",
    "Asbestos with binder 3.2mm    ;2.00;11.0;0",
@@ -55,7 +55,7 @@ Public Class Form1
 
     'EN 10028-2 for steel
     'EN 10028-7 for stainless steel
-    Public Shared steel() As String = {
+    Public Shared steel As String() = {
    "Material-------;50c;100;150;200;250;300;350;400;450;500;550;remarks--;cs/ss",
    "1.0425 (P265GH);265;241;223;205;188;173;160;150;  0;  0;  0; max 400c;cs",
    "1.0473 (P355GH);343;323;299;275;252;232;214;202;  0;  0;  0; max 400c;cs",
@@ -65,7 +65,7 @@ Public Class Form1
    "1.4404 (316L)  ;200;166;152;137;127;118;113;108;103;100; 98; max 550c;ss"}
 
     'EN 1993-1-8 Bolts (Eurocode 3), ISO 3506-1 table2
-    Public Shared Bolt() As String = {
+    Public Shared Bolt As String() = {
    "Bolt class-----;  ultimate;yield 0.2;cs",
    "Bolt class 4.6 ;  400;240;cs",
    "Bolt class 5.6 ;  500;300;cs",
@@ -80,10 +80,10 @@ Public Class Form1
    "Bolt class A4-70; 700;450;ss",
    "Bolt class A4-80; 800;600;ss"}
 
-    Public Shared joint_eff() As String = {"0.7", "0.85", "1.0"}
+    Public Shared joint_eff As String() = {"0.7", "0.85", "1.0"}
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim words() As String
+        Dim words As String()
 
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
@@ -291,7 +291,7 @@ Public Class Form1
     Private Sub Design_stress()
         Dim sf As Double             'Safety factor init value
         Dim temperature As Double   'temperature
-        Dim words() As String
+        Dim words As String()
         Dim y50, y100, y150, y200, y250, y300, y350, y400 As Double
         Dim ΔT As Double
 
@@ -692,17 +692,17 @@ Public Class Form1
         ratio = g / b               'Ratio edge length
 
         Select Case True
-            Case (ratio >= 1 And ratio < 1.2)
+            Case (ratio >= 1 AndAlso ratio < 1.2)
                 Con = 0.3078
-            Case (ratio >= 1.2 And ratio < 1.4)
+            Case (ratio >= 1.2 AndAlso ratio < 1.4)
                 Con = 0.3834
-            Case (ratio >= 1.4 And ratio < 1.6)
+            Case (ratio >= 1.4 AndAlso ratio < 1.6)
                 Con = 0.4356
-            Case (ratio >= 1.6 And ratio < 1.8)
+            Case (ratio >= 1.6 AndAlso ratio < 1.8)
                 Con = 0.468
-            Case (ratio >= 1.8 And ratio < 2)
+            Case (ratio >= 1.8 AndAlso ratio < 2)
                 Con = 0.4872
-            Case (ratio >= 2 And ratio < 2.15)
+            Case (ratio >= 2 AndAlso ratio < 2.15)
                 Con = 0.4974
             Case (ratio >= 2.15)
                 Con = 0.5
@@ -1034,8 +1034,8 @@ Public Class Form1
         TextBox61.Text = (_P / _fs).ToString("0.0000")
 
         'Checks
-        TextBox57.BackColor = CType(IIf(C1 > 0.29 And C1 < 0.42, Color.LightGreen, Color.Red), Color)
-        TextBox54.BackColor = CType(IIf(C2 >= 0.3 And C2 < 1.0, Color.LightGreen, Color.Red), Color)
+        TextBox57.BackColor = CType(IIf(C1 > 0.29 AndAlso C1 < 0.42, Color.LightGreen, Color.Red), Color)
+        TextBox54.BackColor = CType(IIf(C2 >= 0.3 AndAlso C2 < 1.0, Color.LightGreen, Color.Red), Color)
 
     End Sub
 
@@ -1075,7 +1075,7 @@ Public Class Form1
     End Sub
 
     Public Sub Calc_flange_Moments_11_5_3()
-        Dim words() As String
+        Dim words As String()
         Dim e, G, gt, HG, H As Double
         Dim C_bolt As Double
         Dim A_OD As Double          'Outside diameter flange
@@ -1356,7 +1356,7 @@ Public Class Form1
         Select Case (True)
             Case (B_ID <= 1000)
                 k_limit = 1
-            Case (B_ID > 1000) And (B_ID <= 2000)
+            Case (B_ID > 1000) AndAlso (B_ID <= 2000)
                 k_limit = 2 / 3 * (1 + B_ID / 2000)
             Case (B_ID > 2000)
                 k_limit = 1.33
@@ -1926,56 +1926,56 @@ Public Class Form1
     End Sub
     'Save control settings and case_x_conditions to file
     Private Sub Save_tofile()
-        Dim temp_string As String
         Dim filename As String = "PV_Calc_" & TextBox66.Text & "_" & TextBox69.Text & "_" & TextBox70.Text & DateTime.Now.ToString("_yyyy_MM_dd") & ".vtk"
         Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
         Dim i As Integer
+        Dim sb As New StringBuilder
 
         If String.IsNullOrEmpty(TextBox8.Text) Then
             TextBox8.Text = "-"
         End If
 
-        temp_string = TextBox66.Text & ";" & TextBox69.Text & ";" & TextBox70.Text & ";"
-        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+        sb.Append(TextBox66.Text & ";" & TextBox69.Text & ";" & TextBox70.Text & ";")
+        sb.Append(vbCrLf & "BREAK" & vbCrLf & ";")
 
         '-------- find all numeric, combobox, checkbox and radiobutton controls -----------------
         FindControlRecursive(all_num, Me, GetType(NumericUpDown))   'Find the control
         all_num = all_num.OrderBy(Function(x) x.Name).ToList()      'Alphabetical order
         For i = 0 To all_num.Count - 1
             Dim grbx As NumericUpDown = CType(all_num(i), NumericUpDown)
-            temp_string &= grbx.Value.ToString & ";"
+            sb.Append(grbx.Value.ToString & ";")
         Next
-        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+        sb.Append(vbCrLf & "BREAK" & vbCrLf & ";")
 
         '-------- find all combobox controls and save
         FindControlRecursive(all_combo, Me, GetType(ComboBox))      'Find the control
         all_combo = all_combo.OrderBy(Function(x) x.Name).ToList()   'Alphabetical order
         For i = 0 To all_combo.Count - 1
             Dim grbx As ComboBox = CType(all_combo(i), ComboBox)
-            temp_string &= grbx.SelectedItem.ToString & ";"
+            sb.Append(grbx.SelectedItem.ToString & ";")
         Next
-        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+        sb.Append(vbCrLf & "BREAK" & vbCrLf & ";")
 
         '-------- find all checkbox controls and save
         FindControlRecursive(all_check, Me, GetType(CheckBox))      'Find the control
         all_check = all_check.OrderBy(Function(x) x.Name).ToList()  'Alphabetical order
         For i = 0 To all_check.Count - 1
             Dim grbx As CheckBox = CType(all_check(i), CheckBox)
-            temp_string &= grbx.Checked.ToString & ";"
+            sb.Append(grbx.Checked.ToString & ";")
         Next
-        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+        sb.Append(vbCrLf & "BREAK" & vbCrLf & ";")
 
         '-------- find all radio controls and save
         FindControlRecursive(all_radio, Me, GetType(RadioButton))   'Find the control
         all_radio = all_radio.OrderBy(Function(x) x.Name).ToList()  'Alphabetical order
         For i = 0 To all_radio.Count - 1
             Dim grbx As RadioButton = CType(all_radio(i), RadioButton)
-            temp_string &= grbx.Checked.ToString & ";"
+            sb.Append(grbx.Checked.ToString & ";")
         Next
-        temp_string &= vbCrLf & "BREAK" & vbCrLf & ";"
+        sb.Append(vbCrLf & "BREAK" & vbCrLf & ";")
 
         '--------- add notes -----
-        temp_string &= TextBox63.Text & ";"
+        sb.Append(TextBox63.Text & ";")
 
         '---- if path not exist then create one----------
         Try
@@ -1983,14 +1983,15 @@ Public Class Form1
             If (Not System.IO.Directory.Exists(dirpath_Eng)) Then System.IO.Directory.CreateDirectory(dirpath_Eng)
             If (Not System.IO.Directory.Exists(dirpath_Rap)) Then System.IO.Directory.CreateDirectory(dirpath_Rap)
         Catch ex As Exception
+            '
         End Try
 
         Try
-            If CInt(temp_string.Length.ToString) > 100 Then      'String may be empty
+            If CInt(sb.Length) > 100 Then      'String may be empty
                 If Directory.Exists(dirpath_Eng) Then
-                    File.WriteAllText(dirpath_Eng & filename, temp_string, Encoding.ASCII)      'used at VTK
+                    File.WriteAllText(dirpath_Eng & filename, sb.ToString, Encoding.ASCII)      'used at VTK
                 Else
-                    File.WriteAllText(dirpath_Home & filename, temp_string, Encoding.ASCII)     'used at home
+                    File.WriteAllText(dirpath_Home & filename, sb.ToString, Encoding.ASCII)     'used at home
                 End If
             End If
         Catch ex As Exception
@@ -2003,13 +2004,12 @@ Public Class Form1
     'Each string represents a control type (combobox, checkbox,..)
     'Then split up the secton string into part to read into the parameters
     Private Sub Read_file()
-        Dim control_words(), words() As String
+        Dim control_words, words As String()
         Dim i As Integer
         Dim ttt As Double
-        Dim k As Integer = 0
         Dim all_num, all_combo, all_check, all_radio As New List(Of Control)
-        Dim separators() As String = {";"}
-        Dim separators1() As String = {"BREAK"}
+        Dim separators As String() = {";"}
+        Dim separators1 As String() = {"BREAK"}
 
         OpenFileDialog1.FileName = "PV_Calc*"
         If Directory.Exists(dirpath_Eng) Then
@@ -2040,7 +2040,7 @@ Public Class Form1
                 '--- dit deel voorkomt problemen bij het uitbreiden van het aantal numeric controls--
                 If (i < words.Length - 1) Then
                     If Not (Double.TryParse(words(i + 1), ttt)) Then MessageBox.Show("Numeric controls conversion problem occured")
-                    If ttt <= grbx.Maximum And ttt >= grbx.Minimum Then
+                    If ttt <= grbx.Maximum AndAlso ttt >= grbx.Minimum Then
                         grbx.Value = CDec(ttt)          'OK
                     Else
                         grbx.Value = grbx.Minimum       'NOK
@@ -2867,19 +2867,19 @@ Public Class Form1
                 y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
                 y2 = 0
                 y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
-            Case (u > 1) And (u < 2.2)
+            Case (u > 1) AndAlso (u < 2.2)
                 y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
                 y2 = u - 1
                 y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
-            Case (u >= 2.2) And (u <= 2.9)
+            Case (u >= 2.2) AndAlso (u <= 2.9)
                 y1 = u / (1 / 1.098 + 0.03 * u ^ 3)
                 y2 = 1.2
                 y3 = 0.6 * (1 - 0.27 * u) * u ^ 2
-            Case (u > 2.9) And (u < 4.1)
+            Case (u > 2.9) AndAlso (u < 4.1)
                 y1 = 1.2 + 1.642 / u
                 y2 = 1.2
                 y3 = 0.75 + (1 / u)
-            Case (u >= 4.1) And (u < 5)
+            Case (u >= 4.1) AndAlso (u < 5)
                 y1 = 1.556 + 0.183 / u
                 y2 = 1.2
                 y3 = 0.75 + (1 / u)
@@ -2898,7 +2898,7 @@ Public Class Form1
         x = n_wave ^ 2 * (ea / R_)          '(8.5.3-35) 
 
         '----  (8.5.3-34) ------------
-        If ((ea / R_) <= 0.0346 And (ea / R_) >= 0.001095) Then
+        If ((ea / R_) <= 0.0346 AndAlso (ea / R_) >= 0.001095) Then
             Le = y1 * Sqrt(ea / R_)
             Le /= Sqrt(y3 * x + Sqrt(1 + y2 * x ^ 2))
             Le *= R_
@@ -3030,7 +3030,7 @@ Public Class Form1
 
         '---------- Check-----
         TextBox223.BackColor = CType(IIf(Pg < _P, Color.Red, Color.LightGreen), Color)
-        TextBox235.BackColor = CType(IIf(σes < σs Or σs <= 0, Color.Red, Color.LightGreen), Color) '(8.5.3-41) 
+        TextBox235.BackColor = CType(IIf(σes < σs OrElse σs <= 0, Color.Red, Color.LightGreen), Color) '(8.5.3-41) 
 
     End Sub
 
@@ -3822,11 +3822,11 @@ Public Class Form1
         e3 = (A1 + 2 * g1) * _P / (2 * _fs)           '(11.6-18)
 
         Select Case (True)                          'find the biggest thickness
-            Case (e1 > e2 And e1 > e3)
+            Case (e1 > e2 AndAlso e1 > e3)
                 e_biggest = e1
-            Case (e2 > e1 And e2 > e3)
+            Case (e2 > e1 AndAlso e2 > e3)
                 e_biggest = e2
-            Case (e3 > e2 And e3 > e1)
+            Case (e3 > e2 AndAlso e3 > e1)
                 e_biggest = e3
         End Select
 
